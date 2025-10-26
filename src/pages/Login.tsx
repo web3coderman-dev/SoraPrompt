@@ -19,10 +19,7 @@ export default function Login() {
       await signInWithGoogle();
     } catch (err) {
       console.error('Login error:', err);
-      setError(t.language === 'zh'
-        ? '登录失败，请重试'
-        : 'Login failed, please try again'
-      );
+      setError(t['auth.loginFailed'] || 'Login failed, please try again');
       setLoading(false);
     }
   };
@@ -31,7 +28,7 @@ export default function Login() {
     e.preventDefault();
 
     if (!email || !password) {
-      setError(t.invalidEmail || 'Please fill in all fields');
+      setError(t['auth.fillAllFields'] || 'Please fill in all fields');
       return;
     }
 
@@ -74,8 +71,8 @@ export default function Login() {
             </h1>
             <p className="text-gray-600">
               {isSignUp
-                ? (t.language === 'zh' ? '创建您的账号' : 'Create your account')
-                : (t.language === 'zh' ? '登录以继续' : 'Sign in to continue')
+                ? (t['auth.register.title'] || 'Create your account')
+                : (t['auth.login.title'] || 'Sign in to continue')
               }
             </p>
           </div>
@@ -135,7 +132,7 @@ export default function Login() {
               className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold py-3.5 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
-                <span>{t.language === 'zh' ? '处理中...' : 'Processing...'}</span>
+                <span>{t['auth.processing'] || 'Processing...'}</span>
               ) : (
                 <span>{isSignUp ? (t.signUp || 'Sign Up') : (t.signIn || 'Sign In')}</span>
               )}

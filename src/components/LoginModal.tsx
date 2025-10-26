@@ -24,10 +24,7 @@ export default function LoginModal({ onClose }: LoginModalProps) {
       onClose();
     } catch (err) {
       console.error('Login error:', err);
-      setError(language === 'zh'
-        ? '登录失败，请重试'
-        : 'Login failed, please try again'
-      );
+      setError(t['auth.loginFailed'] || 'Login failed, please try again');
       setLoading(false);
     }
   };
@@ -36,7 +33,7 @@ export default function LoginModal({ onClose }: LoginModalProps) {
     e.preventDefault();
 
     if (!email || !password) {
-      setError(t.invalidEmail || 'Please fill in all fields');
+      setError(t['auth.fillAllFields'] || 'Please fill in all fields');
       return;
     }
 
@@ -91,8 +88,8 @@ export default function LoginModal({ onClose }: LoginModalProps) {
           </h2>
           <p className="text-gray-600">
             {isSignUp
-              ? (language === 'zh' ? '创建您的账号' : 'Create your account')
-              : (language === 'zh' ? '登录以继续' : 'Sign in to continue')
+              ? (t['auth.register.title'] || 'Create your account')
+              : (t['auth.login.title'] || 'Sign in to continue')
             }
           </p>
         </div>
@@ -193,7 +190,7 @@ export default function LoginModal({ onClose }: LoginModalProps) {
             className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-3.5 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]"
           >
             {loading ? (
-              <span>{language === 'zh' ? '处理中...' : 'Processing...'}</span>
+              <span>{t['auth.processing'] || 'Processing...'}</span>
             ) : (
               <span>{isSignUp ? (t.signUp || 'Sign Up') : (t.signIn || 'Sign In')}</span>
             )}

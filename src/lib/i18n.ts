@@ -138,6 +138,12 @@ export const translations = {
     mode: '模式',
 
     closeModal: '关闭',
+
+    'auth.login.title': '登录以继续',
+    'auth.register.title': '创建您的账号',
+    'auth.loginFailed': '登录失败，请重试',
+    'auth.processing': '处理中...',
+    'auth.fillAllFields': '请填写所有字段',
   },
   en: {
     title: 'Sora Prompt Studio',
@@ -276,6 +282,12 @@ export const translations = {
     mode: 'Mode',
 
     closeModal: 'Close',
+
+    'auth.login.title': 'Sign in to continue',
+    'auth.register.title': 'Create your account',
+    'auth.loginFailed': 'Login failed, please try again',
+    'auth.processing': 'Processing...',
+    'auth.fillAllFields': 'Please fill in all fields',
   },
   ja: {
     title: 'Sora Prompt Studio',
@@ -387,6 +399,12 @@ export const translations = {
     quality: '品質',
     mode: 'モード',
     closeModal: '閉じる',
+
+    'auth.login.title': 'ログインして続行',
+    'auth.register.title': 'アカウントを作成',
+    'auth.loginFailed': 'ログインに失敗しました。もう一度お試しください',
+    'auth.processing': '処理中...',
+    'auth.fillAllFields': 'すべてのフィールドを入力してください',
   },
   es: {
     title: 'Sora Prompt Studio',
@@ -498,6 +516,12 @@ export const translations = {
     quality: 'Calidad',
     mode: 'Modo',
     closeModal: 'Cerrar',
+
+    'auth.login.title': 'Iniciar sesión para continuar',
+    'auth.register.title': 'Crea tu cuenta',
+    'auth.loginFailed': 'Error de inicio de sesión, por favor intente nuevamente',
+    'auth.processing': 'Procesando...',
+    'auth.fillAllFields': 'Por favor complete todos los campos',
   },
   fr: {
     title: 'Sora Prompt Studio',
@@ -609,6 +633,12 @@ export const translations = {
     quality: 'Qualité',
     mode: 'Mode',
     closeModal: 'Fermer',
+
+    'auth.login.title': 'Se connecter pour continuer',
+    'auth.register.title': 'Créer votre compte',
+    'auth.loginFailed': 'Échec de la connexion, veuillez réessayer',
+    'auth.processing': 'Traitement...',
+    'auth.fillAllFields': 'Veuillez remplir tous les champs',
   },
   de: {
     title: 'Sora Prompt Studio',
@@ -720,6 +750,12 @@ export const translations = {
     quality: 'Qualität',
     mode: 'Modus',
     closeModal: 'Schließen',
+
+    'auth.login.title': 'Anmelden um fortzufahren',
+    'auth.register.title': 'Erstellen Sie Ihr Konto',
+    'auth.loginFailed': 'Anmeldung fehlgeschlagen, bitte versuchen Sie es erneut',
+    'auth.processing': 'Wird verarbeitet...',
+    'auth.fillAllFields': 'Bitte füllen Sie alle Felder aus',
   },
   ko: {
     title: 'Sora Prompt Studio',
@@ -831,6 +867,12 @@ export const translations = {
     quality: '품질',
     mode: '모드',
     closeModal: '닫기',
+
+    'auth.login.title': '로그인하여 계속하기',
+    'auth.register.title': '계정 만들기',
+    'auth.loginFailed': '로그인 실패, 다시 시도해주세요',
+    'auth.processing': '처리 중...',
+    'auth.fillAllFields': '모든 필드를 입력해주세요',
   }
 };
 
