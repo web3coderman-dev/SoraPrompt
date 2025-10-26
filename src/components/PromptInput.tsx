@@ -90,11 +90,6 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
             fullWidth
           >
             {t.directorMode}
-            {!user && (
-              <span className="ml-2 text-xs opacity-90">
-                ({language === 'zh' ? '需要登录' : 'Login Required'})
-              </span>
-            )}
           </Button>
         </div>
       </CardFooter>
