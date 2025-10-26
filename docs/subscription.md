@@ -1,6 +1,6 @@
 # 📄 SoraPrompt Subscription System PRD
 
-**Version:** v2.2
+**Version:** v1.0
 **Owner:** Alex
 **Platform:** bolt.new
 **Goal:** 实现多层级订阅与次数计费系统，为 SoraPrompt 提供平权式 AI 生成体验。
