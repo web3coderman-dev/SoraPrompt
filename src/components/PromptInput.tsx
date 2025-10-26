@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { Sparkles, Film } from 'lucide-react';
 import { type SupportedLanguage, detectLanguageClient } from '../lib/openai';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -15,56 +15,18 @@ type PromptInputProps = {
 export default function PromptInput({ onGenerate, isLoading, initialValue }: PromptInputProps) {
   const { t } = useLanguage();
   const [input, setInput] = useState('');
-  const [detectedLanguage, setDetectedLanguage] = useState<SupportedLanguage>('en');
-  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (initialValue) {
       setInput(initialValue);
-      if (initialValue.trim()) {
-        detectLanguageClient(initialValue).then(detected => {
-          setDetectedLanguage(detected);
-        });
-      }
     }
   }, [initialValue]);
-
-  const detectLanguageDebounced = useCallback((value: string) => {
-    if (debounceTimerRef.current) {
-      clearTimeout(debounceTimerRef.current);
-    }
-
-    debounceTimerRef.current = setTimeout(async () => {
-      if (value.trim()) {
-        const detected = await detectLanguageClient(value);
-        setDetectedLanguage(detected);
-      }
-    }, 1000);
-  }, []);
-
-  const handleInputChange = (value: string) => {
-    setInput(value);
-
-    const outputLanguage = localStorage.getItem('output-language') as SupportedLanguage || 'auto';
-    if (outputLanguage === 'auto' && value.trim()) {
-      detectLanguageDebounced(value);
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      if (debounceTimerRef.current) {
-        clearTimeout(debounceTimerRef.current);
-      }
-    };
-  }, []);
 
   const handleSubmit = async (mode: 'quick' | 'director') => {
     if (input.trim() && !isLoading) {
       const outputLanguage = localStorage.getItem('output-language') as SupportedLanguage || 'auto';
 
       const detected = await detectLanguageClient(input);
-      setDetectedLanguage(detected);
 
       let language: SupportedLanguage;
       if (outputLanguage === 'auto') {
@@ -90,7 +52,7 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
         <Textarea
           label={t.inputLabel}
           value={input}
-          onChange={(e) => handleInputChange(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={t.inputPlaceholder}
           rows={3}
