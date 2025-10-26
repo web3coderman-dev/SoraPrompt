@@ -1,15 +1,14 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Clock, Trash2, Eye, Search, Filter, Cloud, HardDrive } from 'lucide-react';
+import { Clock, Trash2, Eye, Search, Filter, Cloud, AlertCircle, RefreshCw } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { PromptStorage } from '../lib/promptStorage';
 import type { Prompt } from '../lib/supabase';
-import type { LocalPrompt } from '../lib/promptStorage';
 import SortDropdown from './SortDropdown';
 import ConfirmModal from './ConfirmModal';
 
 type HistoryProps = {
-  onSelectPrompt: (prompt: Prompt | LocalPrompt) => void;
+  onSelectPrompt: (prompt: Prompt) => void;
 };
 
 type FilterMode = 'all' | 'quick' | 'director';
@@ -18,7 +17,7 @@ type SortOption = 'newest' | 'oldest' | 'score-high' | 'score-low';
 export default function History({ onSelectPrompt }: HistoryProps) {
   const { t, language } = useLanguage();
   const { user } = useAuth();
-  const [prompts, setPrompts] = useState<(Prompt | LocalPrompt)[]>([]);
+  const [prompts, setPrompts] = useState<Prompt[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,23 +28,25 @@ export default function History({ onSelectPrompt }: HistoryProps) {
 
   useEffect(() => {
     loadHistory();
-  }, []);
+  }, [user]);
 
   const loadHistory = async () => {
+    if (!user) {
+      setLoading(false);
+      setPrompts([]);
+      setError(null);
+      return;
+    }
+
     try {
       setLoading(true);
       setError(null);
 
-      if (user) {
-        const cloudPrompts = await PromptStorage.loadCloudPrompts(user.id);
-        setPrompts(cloudPrompts);
-      } else {
-        const localPrompts = PromptStorage.getLocalPrompts();
-        setPrompts(localPrompts);
-      }
+      const cloudPrompts = await PromptStorage.loadCloudPrompts(user.id);
+      setPrompts(cloudPrompts);
     } catch (err) {
       console.error('Error loading history:', err);
-      setError(t.historyLoadError);
+      setError(t.language === 'zh' ? '无法加载历史记录，请检查网络连接' : 'Unable to load history. Please check your network connection.');
     } finally {
       setLoading(false);
     }
@@ -60,19 +61,13 @@ export default function History({ onSelectPrompt }: HistoryProps) {
     if (!promptToDelete) return;
 
     try {
-      if (user) {
-        const success = await PromptStorage.deleteCloudPrompt(promptToDelete);
-        if (!success) throw new Error('Failed to delete');
-      } else {
-        PromptStorage.deleteLocalPrompt(promptToDelete);
-      }
-
+      await PromptStorage.deleteCloudPrompt(promptToDelete);
       setPrompts(prompts.filter(p => p.id !== promptToDelete));
       setDeleteModalOpen(false);
       setPromptToDelete(null);
     } catch (err) {
       console.error('Error deleting prompt:', err);
-      alert(t.historyLoadError);
+      alert(t.language === 'zh' ? '删除失败，请重试' : 'Delete failed, please try again');
     }
   };
 
@@ -137,6 +132,24 @@ export default function History({ onSelectPrompt }: HistoryProps) {
     return 'text-red-600 bg-red-50';
   };
 
+  if (!user) {
+    return (
+      <div className="max-w-7xl mx-auto">
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-12 text-center">
+          <Cloud className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+            {t.language === 'zh' ? '请先登录' : 'Please Sign In'}
+          </h3>
+          <p className="text-gray-600">
+            {t.language === 'zh'
+              ? '历史记录功能需要登录账号才能使用，所有数据将安全地保存在云端。'
+              : 'History feature requires sign in. All data will be securely saved in the cloud.'}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto">
@@ -154,11 +167,13 @@ export default function History({ onSelectPrompt }: HistoryProps) {
     return (
       <div className="max-w-7xl mx-auto">
         <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
+          <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
           <p className="text-red-800 mb-4">{error}</p>
           <button
             onClick={loadHistory}
-            className="px-5 py-2.5 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors"
           >
+            <RefreshCw className="w-4 h-4" />
             {t.language === 'zh' ? '重试' : 'Retry'}
           </button>
         </div>
@@ -173,13 +188,16 @@ export default function History({ onSelectPrompt }: HistoryProps) {
           <Clock className="w-16 h-16 text-gray-300 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-gray-900 mb-2">{t.historyEmpty}</h3>
           <p className="text-gray-600">{t.historyEmptyDesc}</p>
-          {!user && (
-            <div className="mt-6 p-4 bg-primary-50 border border-primary-200 rounded-lg">
-              <p className="text-sm text-primary-800">
-                {t.storageGuestTip}
+          <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div className="flex items-center justify-center gap-2 text-blue-800">
+              <Cloud className="w-5 h-5" />
+              <p className="text-sm font-medium">
+                {t.language === 'zh'
+                  ? '所有历史记录将自动同步至云端'
+                  : 'All history will be automatically synced to cloud'}
               </p>
             </div>
-          )}
+          </div>
         </div>
       </div>
     );
@@ -189,22 +207,11 @@ export default function History({ onSelectPrompt }: HistoryProps) {
     <div className="max-w-7xl mx-auto overflow-hidden">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{t.historyTitle}</h2>
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg text-sm">
-          {user ? (
-            <>
-              <Cloud className="w-4 h-4 text-primary-600" />
-              <span className="text-gray-700">
-                {t.storageCloud}
-              </span>
-            </>
-          ) : (
-            <>
-              <HardDrive className="w-4 h-4 text-gray-600" />
-              <span className="text-gray-700">
-                {t.storageLocalLimit.replace('{{count}}', String(prompts.length))}
-              </span>
-            </>
-          )}
+        <div className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 rounded-lg text-sm">
+          <Cloud className="w-4 h-4 text-blue-600" />
+          <span className="text-blue-800 font-medium">
+            {t.language === 'zh' ? '云端同步' : 'Cloud Synced'}
+          </span>
         </div>
       </div>
 
