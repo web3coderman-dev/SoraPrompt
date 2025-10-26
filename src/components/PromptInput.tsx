@@ -70,18 +70,20 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
       </CardBody>
 
       <CardFooter className="flex flex-col sm:flex-row gap-3">
-        <Button
-          variant="primary"
-          icon={Sparkles}
-          onClick={() => handleSubmit('quick')}
-          disabled={!input.trim() || isLoading}
-          loading={isLoading && !isLoading}
-          fullWidth
-        >
-          {t.quickGenerate}
-        </Button>
+        <div className="w-full sm:w-2/5">
+          <Button
+            variant="primary"
+            icon={Sparkles}
+            onClick={() => handleSubmit('quick')}
+            disabled={!input.trim() || isLoading}
+            loading={isLoading && !isLoading}
+            fullWidth
+          >
+            {t.quickGenerate}
+          </Button>
+        </div>
 
-        <div className="relative flex-1">
+        <div className="relative w-full sm:w-3/5">
           <Button
             variant="gradient"
             icon={user ? Film : Lock}
