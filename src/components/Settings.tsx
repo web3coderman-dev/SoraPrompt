@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Settings as SettingsIcon, Check, Shield, LogIn, Moon, Sun } from 'lucide-react';
+import { Settings as SettingsIcon, Check, Shield, LogIn, Moon, Sun, Crown, Cloud } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { useSubscription } from '../contexts/SubscriptionContext';
+import { LoginPrompt } from './LoginPrompt';
 import type { Language } from '../lib/i18n';
 import type { SupportedLanguage } from '../lib/openai';
 import { LANGUAGES } from '../lib/openai';
@@ -30,9 +32,11 @@ export default function Settings() {
   const { t, language, setLanguage } = useLanguage();
   const { user, profile, signInWithGoogle } = useAuth();
   const { theme, setTheme } = useTheme();
+  const { subscription } = useSubscription();
   const [outputLanguage, setOutputLanguage] = useState<SupportedLanguage>('auto');
   const [saved, setSaved] = useState(false);
   const [linking, setLinking] = useState(false);
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
 
   useEffect(() => {
     const savedOutputLang = localStorage.getItem('output-language') as SupportedLanguage;
@@ -175,6 +179,53 @@ export default function Settings() {
           </div>
         </div>
 
+        {!user && (
+          <div className="bg-gradient-to-r from-blue-50 to-primary-50 rounded-xl shadow-md border-2 border-primary-300 p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center">
+                  <Crown className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900">
+                    {language === 'zh' ? '解锁完整功能' : 'Unlock Full Features'}
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    {language === 'zh' ? '登录以享受更多功能' : 'Sign in to enjoy more features'}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+              <div className="flex items-center gap-2 text-sm text-gray-700 bg-white p-3 rounded-lg">
+                <Cloud className="w-4 h-4 text-blue-600" />
+                <span>{language === 'zh' ? '无限云端存储' : 'Unlimited cloud storage'}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-700 bg-white p-3 rounded-lg">
+                <Shield className="w-4 h-4 text-green-600" />
+                <span>{language === 'zh' ? '数据安全同步' : 'Secure data sync'}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-700 bg-white p-3 rounded-lg">
+                <Crown className="w-4 h-4 text-purple-600" />
+                <span>{language === 'zh' ? '高级功能访问' : 'Premium features'}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-700 bg-white p-3 rounded-lg">
+                <Check className="w-4 h-4 text-green-600" />
+                <span>{language === 'zh' ? '更多生成次数' : 'More generations'}</span>
+              </div>
+            </div>
+
+            <button
+              onClick={() => setShowLoginPrompt(true)}
+              className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+            >
+              <LogIn className="w-5 h-5" />
+              {language === 'zh' ? '立即登录' : 'Sign In Now'}
+            </button>
+          </div>
+        )}
+
         <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
           <div className="flex items-center gap-2 mb-4">
             <Shield className="w-5 h-5 text-gray-900" />
@@ -183,7 +234,8 @@ export default function Settings() {
             </h3>
           </div>
 
-          {user && profile?.google_id ? (
+          {user ? (
+            profile?.google_id ? (
             <div className="space-y-4">
               <div className="flex items-start gap-3 p-4 bg-green-50 border border-green-200 rounded-lg">
                 <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
@@ -223,18 +275,26 @@ export default function Settings() {
                 </span>
               </div>
             </div>
-          ) : (
-            <div className="space-y-4">
-              <p className="text-sm text-gray-600">
-                {language === 'zh'
-                  ? '关联 Google 账号以启用一键登录和云端数据同步'
-                  : 'Link your Google account for one-click sign-in and cloud sync'
-                }
-              </p>
-              <button
-                onClick={handleLinkGoogle}
-                disabled={linking}
-                className="w-full bg-white hover:bg-gray-50 text-gray-900 font-semibold py-3 px-6 rounded-lg border-2 border-gray-300 hover:border-gray-400 transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+            ) : (
+              <div className="space-y-4">
+                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <p className="text-sm font-medium text-blue-900 mb-1">
+                    {language === 'zh' ? '当前状态：邮箱登录' : 'Current Status: Email Login'}
+                  </p>
+                  <p className="text-xs text-blue-700">
+                    {user?.email}
+                  </p>
+                </div>
+                <p className="text-sm text-gray-600">
+                  {language === 'zh'
+                    ? '关联 Google 账号以启用一键登录和云端数据同步'
+                    : 'Link your Google account for one-click sign-in and cloud sync'
+                  }
+                </p>
+                <button
+                  onClick={handleLinkGoogle}
+                  disabled={linking}
+                  className="w-full bg-white hover:bg-gray-50 text-gray-900 font-semibold py-3 px-6 rounded-lg border-2 border-gray-300 hover:border-gray-400 transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
@@ -261,7 +321,18 @@ export default function Settings() {
                     {language === 'zh' ? '关联 Google 账号' : 'Link Google Account'}
                   </span>
                 )}
-              </button>
+                </button>
+              </div>
+            )
+          ) : (
+            <div className="text-center py-6">
+              <LogIn className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+              <p className="text-gray-600 mb-4">
+                {language === 'zh'
+                  ? '登录后查看账号信息'
+                  : 'Sign in to view account information'
+                }
+              </p>
             </div>
           )}
         </div>
@@ -283,6 +354,22 @@ export default function Settings() {
           </div>
         </div>
       </div>
+
+      {showLoginPrompt && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
+          <div className="relative max-w-md">
+            <button
+              onClick={() => setShowLoginPrompt(false)}
+              className="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-gray-900 z-10"
+            >
+              ×
+            </button>
+            <LoginPrompt
+              onLoginSuccess={() => setShowLoginPrompt(false)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

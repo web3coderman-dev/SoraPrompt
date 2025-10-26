@@ -4,6 +4,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import { SubscriptionProvider } from './contexts/SubscriptionContext';
 import AuthCallback from './pages/AuthCallback';
 import Dashboard from './pages/Dashboard';
+import { ToastContainer } from './components/Toast';
 import { Loader2 } from 'lucide-react';
 
 function AppRoutes() {
@@ -33,6 +34,7 @@ export default function App() {
         <AuthProvider>
           <SubscriptionProvider>
             <AppRoutes />
+            <ToastContainer />
           </SubscriptionProvider>
         </AuthProvider>
       </LanguageProvider>

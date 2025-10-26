@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Clock, Trash2, Eye, Search, Filter, Cloud, HardDrive } from 'lucide-react';
+import { Clock, Trash2, Eye, Search, Filter, Cloud, HardDrive, AlertCircle } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { PromptStorage } from '../lib/promptStorage';
@@ -7,6 +7,7 @@ import type { Prompt } from '../lib/supabase';
 import type { LocalPrompt } from '../lib/promptStorage';
 import SortDropdown from './SortDropdown';
 import ConfirmModal from './ConfirmModal';
+import { LoginPrompt } from './LoginPrompt';
 
 type HistoryProps = {
   onSelectPrompt: (prompt: Prompt | LocalPrompt) => void;
@@ -26,6 +27,10 @@ export default function History({ onSelectPrompt }: HistoryProps) {
   const [sortOption, setSortOption] = useState<SortOption>('newest');
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [promptToDelete, setPromptToDelete] = useState<string | null>(null);
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+
+  const isLocalNearLimit = !user && prompts.length >= 7;
+  const isLocalAtLimit = !user && prompts.length >= 10;
 
   useEffect(() => {
     loadHistory();
@@ -174,10 +179,12 @@ export default function History({ onSelectPrompt }: HistoryProps) {
           <h3 className="text-xl font-semibold text-gray-900 mb-2">{t.historyEmpty}</h3>
           <p className="text-gray-600">{t.historyEmptyDesc}</p>
           {!user && (
-            <div className="mt-6 p-4 bg-primary-50 border border-primary-200 rounded-lg">
-              <p className="text-sm text-primary-800">
-                {t.storageGuestTip}
-              </p>
+            <div className="mt-6">
+              <LoginPrompt
+                variant="compact"
+                message={t.storageGuestTip}
+                showBenefits={false}
+              />
             </div>
           )}
         </div>
@@ -187,6 +194,38 @@ export default function History({ onSelectPrompt }: HistoryProps) {
 
   return (
     <div className="max-w-7xl mx-auto overflow-hidden">
+      {(isLocalNearLimit || isLocalAtLimit) && (
+        <div className="mb-6 p-4 bg-orange-50 border-2 border-orange-300 rounded-xl">
+          <div className="flex items-start gap-3">
+            <AlertCircle className="w-6 h-6 text-orange-600 flex-shrink-0 mt-0.5" />
+            <div className="flex-1">
+              <h3 className="font-semibold text-orange-900 mb-1">
+                {isLocalAtLimit
+                  ? (language === 'zh' ? '本地存储已满！' : 'Local storage is full!')
+                  : (language === 'zh' ? '本地存储即将用尽' : 'Local storage almost full')
+                }
+              </h3>
+              <p className="text-sm text-orange-800 mb-3">
+                {isLocalAtLimit
+                  ? (language === 'zh'
+                      ? '您的本地存储已达上限（10条）。新记录将覆盖最旧的记录。登录以保存所有历史记录到云端！'
+                      : 'Your local storage has reached its limit (10 records). New records will overwrite the oldest ones. Sign in to save all history to the cloud!')
+                  : (language === 'zh'
+                      ? `您已使用 ${prompts.length}/10 条本地记录。登录后可享受无限云端存储！`
+                      : `You've used ${prompts.length}/10 local records. Sign in for unlimited cloud storage!`)
+                }
+              </p>
+              <button
+                onClick={() => setShowLoginPrompt(true)}
+                className="bg-orange-600 hover:bg-orange-700 text-white font-medium px-4 py-2 rounded-lg transition-colors text-sm"
+              >
+                {language === 'zh' ? '立即登录解锁' : 'Sign In to Unlock'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{t.historyTitle}</h2>
         <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg text-sm">
@@ -343,6 +382,22 @@ export default function History({ onSelectPrompt }: HistoryProps) {
         onCancel={handleDeleteCancel}
         variant="danger"
       />
+
+      {showLoginPrompt && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
+          <div className="relative max-w-md">
+            <button
+              onClick={() => setShowLoginPrompt(false)}
+              className="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-gray-900 z-10"
+            >
+              ×
+            </button>
+            <LoginPrompt
+              onLoginSuccess={() => setShowLoginPrompt(false)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

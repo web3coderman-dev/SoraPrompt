@@ -4,22 +4,16 @@ import { useAuth } from '../contexts/AuthContext';
 import { useSubscription, SubscriptionTier } from '../contexts/SubscriptionContext';
 import { Button } from './ui/Button';
 import { SubscriptionBadge } from './SubscriptionBadge';
-import LoginModal from './LoginModal';
+import { LoginPrompt } from './LoginPrompt';
 import { useState } from 'react';
 
 export function SubscriptionPlans() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { user } = useAuth();
   const { subscription, upgradeSubscription, loading } = useSubscription();
   const [upgrading, setUpgrading] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleUpgrade = async (tier: SubscriptionTier) => {
-    if (!user) {
-      setShowLoginModal(true);
-      return;
-    }
-
     setUpgrading(true);
     try {
       await upgradeSubscription(tier);
@@ -81,6 +75,52 @@ export function SubscriptionPlans() {
       textColor: 'text-white',
     },
   ];
+
+  if (!user) {
+    return (
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">{t.subscriptionTitle}</h2>
+          <p className="text-lg text-gray-600">
+            {language === 'zh'
+              ? '登录后查看和管理您的订阅套餐'
+              : 'Sign in to view and manage your subscription plans'
+            }
+          </p>
+        </div>
+
+        <LoginPrompt
+          title={language === 'zh' ? '登录以访问订阅功能' : 'Sign in to access subscriptions'}
+          message={language === 'zh'
+            ? '登录后您可以查看所有订阅套餐、管理您的订阅并升级到更高的等级'
+            : 'Sign in to view all subscription plans, manage your subscription, and upgrade to premium tiers'
+          }
+          benefits={[
+            language === 'zh' ? '🌟 查看所有订阅套餐和价格' : '🌟 View all subscription plans and pricing',
+            language === 'zh' ? '📊 管理您的当前订阅' : '📊 Manage your current subscription',
+            language === 'zh' ? '⚡ 升级到 Creator 或 Director 套餐' : '⚡ Upgrade to Creator or Director plans',
+            language === 'zh' ? '🎯 解锁更多生成次数和高级功能' : '🎯 Unlock more generations and premium features',
+          ]}
+        />
+
+        <div className="mt-8 grid md:grid-cols-3 gap-4 opacity-60 pointer-events-none">
+          {plans.map((plan) => (
+            <div
+              key={plan.tier}
+              className="bg-white rounded-xl border border-gray-200 p-6 text-center"
+            >
+              <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${plan.color} ${plan.textColor} mb-3`}>
+                {plan.icon}
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+              <div className="text-3xl font-bold text-gray-900 mb-2">{plan.price.split('/')[0]}</div>
+              <p className="text-sm text-gray-600">{plan.credits}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
@@ -175,10 +215,6 @@ export function SubscriptionPlans() {
         <p>{t.featureSameAI}</p>
         <p className="mt-2">{t.privacyPolicy}</p>
       </div>
-
-      {showLoginModal && (
-        <LoginModal onClose={() => setShowLoginModal(false)} />
-      )}
     </div>
   );
 }

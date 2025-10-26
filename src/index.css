@@ -7,6 +7,10 @@
     animation: fadeIn 0.5s ease-in-out;
   }
 
+  .animate-slide-in-right {
+    animation: slideInRight 0.3s ease-out;
+  }
+
   .overflow-wrap-anywhere {
     overflow-wrap: anywhere;
     word-break: break-word;
@@ -21,5 +25,16 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

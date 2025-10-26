@@ -77,6 +77,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
         if (migratedCount > 0) {
           window.dispatchEvent(new CustomEvent('prompts-migrated', { detail: { count: migratedCount } }));
+
+          const message = `Successfully synced ${migratedCount} ${migratedCount === 1 ? 'record' : 'records'} to cloud!`;
+          const messageZh = `已成功同步 ${migratedCount} 条记录到云端！`;
+
+          const userLang = localStorage.getItem('language') || 'en';
+          const displayMessage = userLang === 'zh' ? messageZh : message;
+
+          setTimeout(() => {
+            const event = new CustomEvent('show-toast', {
+              detail: {
+                message: displayMessage,
+                type: 'success'
+              }
+            });
+            window.dispatchEvent(event);
+          }, 500);
         }
       }
     } catch (error) {
