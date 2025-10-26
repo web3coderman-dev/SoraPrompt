@@ -7,11 +7,12 @@ import Settings from '../components/Settings';
 import { useLanguage } from '../contexts/LanguageContext';
 import type { PromptResult as PromptResultType } from '../lib/openai';
 
-type View = 'home' | 'history' | 'settings';
+type View = 'new' | 'history' | 'settings';
 
 export default function Dashboard() {
-  const [currentView, setCurrentView] = useState<View>('home');
+  const [currentView, setCurrentView] = useState<View>('new');
   const [result, setResult] = useState<PromptResultType | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const { t } = useLanguage();
 
   const handleResultGenerated = (newResult: PromptResultType) => {
@@ -70,8 +71,13 @@ export default function Dashboard() {
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
-      <Sidebar currentView={currentView} onViewChange={setCurrentView} />
-      <main className="flex-1 p-6 md:p-8 lg:p-12 ml-0 md:ml-64">
+      <Sidebar
+        isOpen={sidebarOpen}
+        onToggle={() => setSidebarOpen(!sidebarOpen)}
+        currentView={currentView}
+        onViewChange={setCurrentView}
+      />
+      <main className="flex-1 p-6 md:p-8 lg:p-12 ml-0 lg:ml-64">
         {renderContent()}
       </main>
     </div>

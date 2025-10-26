@@ -1,7 +1,8 @@
-import { Film, Sparkles, History, Settings, Menu, X, LogOut, User } from 'lucide-react';
+import { Film, Sparkles, History, Settings, Menu, X, LogOut, User, LogIn } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useState } from 'react';
+import LoginModal from './LoginModal';
 
 type ViewType = 'new' | 'history' | 'settings';
 
@@ -13,9 +14,10 @@ type SidebarProps = {
 };
 
 export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }: SidebarProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { user, profile, signOut } = useAuth();
   const [signingOut, setSigningOut] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleSignOut = async () => {
     try {
@@ -106,7 +108,7 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
 
         {/* User Profile & Footer */}
         <div className="border-t border-gray-200">
-          {user && (
+          {user ? (
             <div className="p-4 border-b border-gray-200">
               <div className="flex items-center gap-3 mb-3">
                 {profile?.avatar_url ? (
@@ -133,12 +135,27 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
                 className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
               >
                 <LogOut className="w-4 h-4" />
-                <span>{signingOut ? (t.language === 'zh' ? '退出中...' : 'Signing out...') : (t.language === 'zh' ? '退出登录' : 'Sign Out')}</span>
+                <span>{signingOut ? (language === 'zh' ? '退出中...' : 'Signing out...') : (language === 'zh' ? '退出登录' : 'Sign Out')}</span>
+              </button>
+            </div>
+          ) : (
+            <div className="p-4">
+              <button
+                onClick={() => setShowLoginModal(true)}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl font-semibold"
+              >
+                <LogIn className="w-5 h-5" />
+                <span>{language === 'zh' ? '登录 / 注册' : 'Sign In / Sign Up'}</span>
               </button>
             </div>
           )}
         </div>
       </aside>
+
+      {/* Login Modal */}
+      {showLoginModal && (
+        <LoginModal onClose={() => setShowLoginModal(false)} />
+      )}
     </>
   );
 }
