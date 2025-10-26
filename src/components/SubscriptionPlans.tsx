@@ -1,6 +1,5 @@
-import { Check, Sparkles, Zap, Film, LogIn } from 'lucide-react';
+import { Check, Sparkles, Zap, Film } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { useAuth } from '../contexts/AuthContext';
 import { useSubscription, SubscriptionTier } from '../contexts/SubscriptionContext';
 import { Button } from './ui/Button';
 import { SubscriptionBadge } from './SubscriptionBadge';
@@ -8,35 +7,13 @@ import { useState } from 'react';
 
 export function SubscriptionPlans() {
   const { t } = useLanguage();
-  const { user } = useAuth();
   const { subscription, upgradeSubscription, loading } = useSubscription();
   const [upgrading, setUpgrading] = useState(false);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   const handleUpgrade = async (tier: SubscriptionTier) => {
     setUpgrading(true);
-    setMessage(null);
     try {
-      const success = await upgradeSubscription(tier);
-      if (success) {
-        setMessage({
-          type: 'success',
-          text: t.language === 'zh'
-            ? `成功升级到 ${tier === 'creator' ? 'Creator' : tier === 'director' ? 'Director' : 'Free'}！`
-            : `Successfully upgraded to ${tier === 'creator' ? 'Creator' : tier === 'director' ? 'Director' : 'Free'}!`
-        });
-      } else {
-        setMessage({
-          type: 'error',
-          text: t.language === 'zh' ? '升级失败，请重试' : 'Upgrade failed, please try again'
-        });
-      }
-    } catch (error) {
-      console.error('Upgrade error:', error);
-      setMessage({
-        type: 'error',
-        text: t.language === 'zh' ? '升级失败，请重试' : 'Upgrade failed, please try again'
-      });
+      await upgradeSubscription(tier);
     } finally {
       setUpgrading(false);
     }
@@ -96,27 +73,6 @@ export function SubscriptionPlans() {
     },
   ];
 
-  if (!user) {
-    return (
-      <div className="max-w-2xl mx-auto text-center py-12">
-        <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
-          <LogIn className="w-16 h-16 mx-auto mb-4 text-primary-600" />
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            {t.language === 'zh' ? '请先登录' : 'Please Sign In'}
-          </h2>
-          <p className="text-gray-600 mb-6">
-            {t.language === 'zh'
-              ? '您需要登录才能查看和管理订阅计划'
-              : 'You need to sign in to view and manage subscription plans'}
-          </p>
-          <Button onClick={() => window.location.reload()}>
-            {t.signInSignUp}
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
@@ -137,18 +93,6 @@ export function SubscriptionPlans() {
             </span>
           )}
         </p>
-
-        {message && (
-          <div
-            className={`mt-4 p-4 rounded-lg ${
-              message.type === 'success'
-                ? 'bg-green-50 text-green-800 border border-green-200'
-                : 'bg-red-50 text-red-800 border border-red-200'
-            }`}
-          >
-            {message.text}
-          </div>
-        )}
       </div>
 
       <div className="grid md:grid-cols-3 gap-6">
