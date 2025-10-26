@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface ModalProps {
   isOpen: boolean;
@@ -26,6 +27,7 @@ export const Modal: React.FC<ModalProps> = ({
   maxWidth = 'md',
   showCloseButton = true,
 }) => {
+  const { t } = useLanguage();
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -74,7 +76,7 @@ export const Modal: React.FC<ModalProps> = ({
                 onClick={onClose}
                 className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100
                            rounded-lg transition-colors duration-200"
-                aria-label="Close modal"
+                aria-label={t['ui.modal.closeButton'] || 'Close modal'}
               >
                 <X className="w-5 h-5" />
               </button>

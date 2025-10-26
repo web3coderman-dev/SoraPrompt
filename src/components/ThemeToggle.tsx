@@ -1,8 +1,10 @@
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
+  const { t } = useLanguage();
 
   return (
     <button
@@ -10,7 +12,7 @@ export default function ThemeToggle() {
       className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700
                  text-gray-700 dark:text-gray-300 transition-all duration-200
                  active:scale-95"
-      aria-label="Toggle theme"
+      aria-label={t['ui.themeToggle'] || 'Toggle theme'}
     >
       {theme === 'light' ? (
         <Moon className="w-5 h-5" />

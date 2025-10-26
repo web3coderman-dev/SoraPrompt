@@ -144,6 +144,10 @@ export const translations = {
     'auth.loginFailed': '登录失败，请重试',
     'auth.processing': '处理中...',
     'auth.fillAllFields': '请填写所有字段',
+
+    'ui.modal.closeButton': '关闭弹窗',
+    'ui.modal.close': '关闭',
+    'ui.themeToggle': '切换主题',
   },
   en: {
     title: 'Sora Prompt Studio',
@@ -288,6 +292,10 @@ export const translations = {
     'auth.loginFailed': 'Login failed, please try again',
     'auth.processing': 'Processing...',
     'auth.fillAllFields': 'Please fill in all fields',
+
+    'ui.modal.closeButton': 'Close modal',
+    'ui.modal.close': 'Close',
+    'ui.themeToggle': 'Toggle theme',
   },
   ja: {
     title: 'Sora Prompt Studio',
@@ -405,6 +413,23 @@ export const translations = {
     'auth.loginFailed': 'ログインに失敗しました。もう一度お試しください',
     'auth.processing': '処理中...',
     'auth.fillAllFields': 'すべてのフィールドを入力してください',
+
+    'ui.modal.closeButton': 'モーダルを閉じる',
+    'ui.modal.close': '閉じる',
+    'ui.themeToggle': 'テーマを切り替え',
+
+    email: 'メールアドレス',
+    password: 'パスワード',
+    emailPlaceholder: 'メールアドレスを入力',
+    passwordPlaceholder: 'パスワードを入力',
+    passwordMinLength: 'パスワードは6文字以上である必要があります',
+    signIn: 'ログイン',
+    signUp: '新規登録',
+    alreadyHaveAccount: 'すでにアカウントをお持ちですか？',
+    dontHaveAccount: 'アカウントをお持ちでないですか？',
+    orContinueWith: 'または以下の方法で続行',
+    signInError: 'ログインに失敗しました。メールアドレスとパスワードを確認してください',
+    signUpError: '登録に失敗しました。このメールアドレスは既に登録されている可能性があります',
   },
   es: {
     title: 'Sora Prompt Studio',
@@ -522,6 +547,23 @@ export const translations = {
     'auth.loginFailed': 'Error de inicio de sesión, por favor intente nuevamente',
     'auth.processing': 'Procesando...',
     'auth.fillAllFields': 'Por favor complete todos los campos',
+
+    'ui.modal.closeButton': 'Cerrar modal',
+    'ui.modal.close': 'Cerrar',
+    'ui.themeToggle': 'Cambiar tema',
+
+    email: 'Correo electrónico',
+    password: 'Contraseña',
+    emailPlaceholder: 'Ingresa tu correo electrónico',
+    passwordPlaceholder: 'Ingresa tu contraseña',
+    passwordMinLength: 'La contraseña debe tener al menos 6 caracteres',
+    signIn: 'Iniciar Sesión',
+    signUp: 'Registrarse',
+    alreadyHaveAccount: '¿Ya tienes una cuenta?',
+    dontHaveAccount: '¿No tienes una cuenta?',
+    orContinueWith: 'O continuar con',
+    signInError: 'Error al iniciar sesión, verifica tu correo y contraseña',
+    signUpError: 'Error al registrarse, este correo puede estar ya registrado',
   },
   fr: {
     title: 'Sora Prompt Studio',
@@ -639,6 +681,23 @@ export const translations = {
     'auth.loginFailed': 'Échec de la connexion, veuillez réessayer',
     'auth.processing': 'Traitement...',
     'auth.fillAllFields': 'Veuillez remplir tous les champs',
+
+    'ui.modal.closeButton': 'Fermer la boîte de dialogue',
+    'ui.modal.close': 'Fermer',
+    'ui.themeToggle': 'Changer de thème',
+
+    email: 'E-mail',
+    password: 'Mot de passe',
+    emailPlaceholder: 'Entrez votre e-mail',
+    passwordPlaceholder: 'Entrez votre mot de passe',
+    passwordMinLength: 'Le mot de passe doit comporter au moins 6 caractères',
+    signIn: 'Se Connecter',
+    signUp: 'S\'inscrire',
+    alreadyHaveAccount: 'Vous avez déjà un compte ?',
+    dontHaveAccount: 'Vous n\'avez pas de compte ?',
+    orContinueWith: 'Ou continuer avec',
+    signInError: 'Échec de la connexion, vérifiez votre e-mail et votre mot de passe',
+    signUpError: 'Échec de l\'inscription, cet e-mail est peut-être déjà enregistré',
   },
   de: {
     title: 'Sora Prompt Studio',
@@ -756,6 +815,23 @@ export const translations = {
     'auth.loginFailed': 'Anmeldung fehlgeschlagen, bitte versuchen Sie es erneut',
     'auth.processing': 'Wird verarbeitet...',
     'auth.fillAllFields': 'Bitte füllen Sie alle Felder aus',
+
+    'ui.modal.closeButton': 'Modal schließen',
+    'ui.modal.close': 'Schließen',
+    'ui.themeToggle': 'Thema umschalten',
+
+    email: 'E-Mail',
+    password: 'Passwort',
+    emailPlaceholder: 'Geben Sie Ihre E-Mail ein',
+    passwordPlaceholder: 'Geben Sie Ihr Passwort ein',
+    passwordMinLength: 'Das Passwort muss mindestens 6 Zeichen lang sein',
+    signIn: 'Anmelden',
+    signUp: 'Registrieren',
+    alreadyHaveAccount: 'Haben Sie bereits ein Konto?',
+    dontHaveAccount: 'Haben Sie noch kein Konto?',
+    orContinueWith: 'Oder fortfahren mit',
+    signInError: 'Anmeldung fehlgeschlagen, überprüfen Sie Ihre E-Mail und Ihr Passwort',
+    signUpError: 'Registrierung fehlgeschlagen, diese E-Mail ist möglicherweise bereits registriert',
   },
   ko: {
     title: 'Sora Prompt Studio',
@@ -873,6 +949,23 @@ export const translations = {
     'auth.loginFailed': '로그인 실패, 다시 시도해주세요',
     'auth.processing': '처리 중...',
     'auth.fillAllFields': '모든 필드를 입력해주세요',
+
+    'ui.modal.closeButton': '모달 닫기',
+    'ui.modal.close': '닫기',
+    'ui.themeToggle': '테마 전환',
+
+    email: '이메일',
+    password: '비밀번호',
+    emailPlaceholder: '이메일을 입력하세요',
+    passwordPlaceholder: '비밀번호를 입력하세요',
+    passwordMinLength: '비밀번호는 6자 이상이어야 합니다',
+    signIn: '로그인',
+    signUp: '회원가입',
+    alreadyHaveAccount: '이미 계정이 있으신가요?',
+    dontHaveAccount: '계정이 없으신가요?',
+    orContinueWith: '또는 다음으로 계속',
+    signInError: '로그인 실패, 이메일과 비밀번호를 확인해주세요',
+    signUpError: '회원가입 실패, 이 이메일은 이미 등록되어 있을 수 있습니다',
   }
 };
 
