@@ -139,7 +139,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
 
   if (loading) {
     return (
-      <div className="w-full max-w-7xl mx-auto px-4">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
@@ -152,7 +152,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
 
   if (error) {
     return (
-      <div className="w-full max-w-7xl mx-auto px-4">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
         <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
           <p className="text-red-800">{error}</p>
           <button
@@ -168,7 +168,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
 
   if (prompts.length === 0) {
     return (
-      <div className="w-full max-w-7xl mx-auto px-4">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-12 text-center">
           <Clock className="w-16 h-16 text-gray-300 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-gray-900 mb-2">{t.historyEmpty}</h3>
@@ -186,7 +186,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4">
+    <div className="w-full max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{t.historyTitle}</h2>
         <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg text-sm">
