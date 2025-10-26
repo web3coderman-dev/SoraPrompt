@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Settings as SettingsIcon, Check, Shield, LogIn } from 'lucide-react';
+import { Settings as SettingsIcon, Check, Shield, LogIn, Moon, Sun } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
+import { useTheme } from '../contexts/ThemeContext';
 import type { Language } from '../lib/i18n';
 import type { SupportedLanguage } from '../lib/openai';
 import { LANGUAGES } from '../lib/openai';
@@ -28,6 +29,7 @@ const outputLanguages: { code: SupportedLanguage; name: string; nameEn: string }
 export default function Settings() {
   const { t, language, setLanguage } = useLanguage();
   const { user, profile, signInWithGoogle } = useAuth();
+  const { theme, setTheme } = useTheme();
   const [outputLanguage, setOutputLanguage] = useState<SupportedLanguage>('auto');
   const [saved, setSaved] = useState(false);
   const [linking, setLinking] = useState(false);
@@ -89,16 +91,61 @@ export default function Settings() {
                 onClick={() => handleLanguageChange(lang.code)}
                 className={`p-4 rounded-lg border-2 transition-all ${
                   language === lang.code
-                    ? 'border-blue-600 bg-blue-50 text-blue-900'
+                    ? 'border-primary-600 bg-primary-50 text-primary-900'
                     : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="font-medium">{lang.name}</span>
-                  {language === lang.code && <Check className="w-5 h-5 text-blue-600" />}
+                  {language === lang.code && <Check className="w-5 h-5 text-primary-600" />}
                 </div>
               </button>
             ))}
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            {language === 'zh' ? '主题外观' : 'Theme Appearance'}
+          </h3>
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              onClick={() => setTheme('light')}
+              className={`p-4 rounded-lg border-2 transition-all ${
+                theme === 'light'
+                  ? 'border-primary-600 bg-primary-50 text-primary-900'
+                  : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Sun className="w-5 h-5" />
+                  <span className="font-medium">
+                    {language === 'zh' ? '浅色模式' : 'Light Mode'}
+                  </span>
+                </div>
+                {theme === 'light' && <Check className="w-5 h-5 text-primary-600" />}
+              </div>
+            </button>
+
+            <button
+              onClick={() => setTheme('dark')}
+              className={`p-4 rounded-lg border-2 transition-all ${
+                theme === 'dark'
+                  ? 'border-primary-600 bg-primary-50 text-primary-900'
+                  : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Moon className="w-5 h-5" />
+                  <span className="font-medium">
+                    {language === 'zh' ? '深色模式' : 'Dark Mode'}
+                  </span>
+                </div>
+                {theme === 'dark' && <Check className="w-5 h-5 text-primary-600" />}
+              </div>
+            </button>
           </div>
         </div>
 
@@ -113,7 +160,7 @@ export default function Settings() {
                 onClick={() => handleOutputLanguageChange(lang.code)}
                 className={`p-3 rounded-lg border-2 transition-all text-left ${
                   outputLanguage === lang.code
-                    ? 'border-blue-600 bg-blue-50 text-blue-900'
+                    ? 'border-primary-600 bg-primary-50 text-primary-900'
                     : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -121,7 +168,7 @@ export default function Settings() {
                   <span className="font-medium text-sm truncate">
                     {lang.name}
                   </span>
-                  {outputLanguage === lang.code && <Check className="w-4 h-4 text-blue-600 flex-shrink-0" />}
+                  {outputLanguage === lang.code && <Check className="w-4 h-4 text-primary-600 flex-shrink-0" />}
                 </div>
               </button>
             ))}

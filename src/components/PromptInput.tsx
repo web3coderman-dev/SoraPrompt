@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { Sparkles, Film } from 'lucide-react';
 import { type SupportedLanguage, detectLanguageClient } from '../lib/openai';
 import { useLanguage } from '../contexts/LanguageContext';
+import { Textarea } from './ui/Input';
+import { Button } from './ui/Button';
+import { Card, CardBody, CardFooter } from './ui/Card';
 
 type PromptInputProps = {
   onGenerate: (input: string, mode: 'quick' | 'director', language: SupportedLanguage, detectedInputLanguage: SupportedLanguage) => void;
@@ -59,52 +62,50 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
   };
 
   return (
-    <div className="w-full">
-      <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
-        <div className="p-4 md:p-6">
-          <label className="block text-sm font-medium text-gray-700 mb-3">
-            {t.inputLabel}
-          </label>
-          <textarea
-            value={input}
-            onChange={(e) => handleInputChange(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder={t.inputPlaceholder}
-            className="w-full px-3 md:px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-gray-900 placeholder-gray-400 text-sm md:text-base"
-            rows={3}
-            disabled={isLoading}
-          />
-        </div>
+    <Card className="animate-fade-in">
+      <CardBody>
+        <Textarea
+          label={t.inputLabel}
+          value={input}
+          onChange={(e) => handleInputChange(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder={t.inputPlaceholder}
+          rows={3}
+          disabled={isLoading}
+        />
+      </CardBody>
 
-        <div className="px-4 md:px-6 pb-4 md:pb-6 flex flex-col sm:flex-row gap-2 md:gap-3">
-          <button
-            onClick={() => handleSubmit('quick')}
-            disabled={!input.trim() || isLoading}
-            className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 md:px-6 py-2.5 md:py-3 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-blue-500/30 text-sm md:text-base"
-          >
-            <Sparkles className="w-4 h-4 md:w-5 md:h-5" />
-            {t.quickGenerate}
-          </button>
+      <CardFooter className="flex flex-col sm:flex-row gap-3">
+        <Button
+          variant="primary"
+          icon={Sparkles}
+          onClick={() => handleSubmit('quick')}
+          disabled={!input.trim() || isLoading}
+          loading={isLoading && !isLoading}
+          fullWidth
+        >
+          {t.quickGenerate}
+        </Button>
 
-          <button
-            onClick={() => handleSubmit('director')}
-            disabled={!input.trim() || isLoading}
-            className="flex-1 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 md:px-6 py-2.5 md:py-3 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-purple-500/30 text-sm md:text-base"
-          >
-            <Film className="w-4 h-4 md:w-5 md:h-5" />
-            {t.directorMode}
-          </button>
-        </div>
+        <Button
+          variant="gradient"
+          icon={Film}
+          onClick={() => handleSubmit('director')}
+          disabled={!input.trim() || isLoading}
+          fullWidth
+        >
+          {t.directorMode}
+        </Button>
+      </CardFooter>
 
-        {isLoading && (
-          <div className="px-4 md:px-6 pb-4 md:pb-6">
-            <div className="flex items-center gap-3 text-xs md:text-sm text-gray-600">
-              <div className="animate-spin rounded-full h-4 w-4 border-2 border-blue-600 border-t-transparent" />
-              <span>{t.generating}</span>
-            </div>
+      {isLoading && (
+        <div className="px-6 pb-6">
+          <div className="flex items-center gap-3 text-sm text-gray-600 animate-fade-in">
+            <div className="animate-spin rounded-full h-4 w-4 border-2 border-primary-600 border-t-transparent" />
+            <span>{t.generating}</span>
           </div>
-        )}
-      </div>
-    </div>
+        </div>
+      )}
+    </Card>
   );
 }

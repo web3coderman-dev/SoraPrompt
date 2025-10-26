@@ -132,7 +132,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
 
   const getScoreColor = (score: number) => {
     if (score >= 90) return 'text-green-600 bg-green-50';
-    if (score >= 75) return 'text-blue-600 bg-blue-50';
+    if (score >= 75) return 'text-primary-600 bg-primary-50';
     if (score >= 60) return 'text-yellow-600 bg-yellow-50';
     return 'text-red-600 bg-red-50';
   };
@@ -141,7 +141,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
           <p className="text-gray-600">{t.historyLoading}</p>
         </div>
       </div>
@@ -172,8 +172,8 @@ export default function History({ onSelectPrompt }: HistoryProps) {
           <h3 className="text-xl font-semibold text-gray-900 mb-2">{t.historyEmpty}</h3>
           <p className="text-gray-600">{t.historyEmptyDesc}</p>
           {!user && (
-            <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="text-sm text-blue-800">
+            <div className="mt-6 p-4 bg-primary-50 border border-primary-200 rounded-lg">
+              <p className="text-sm text-primary-800">
                 {language === 'zh'
                   ? '💡 提示：未登录用户的历史记录保存在本地浏览器中，最多保存 10 条。'
                   : '💡 Tip: History for guest users is saved locally in your browser, limited to 10 items.'}
@@ -192,7 +192,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
         <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg text-sm">
           {user ? (
             <>
-              <Cloud className="w-4 h-4 text-blue-600" />
+              <Cloud className="w-4 h-4 text-primary-600" />
               <span className="text-gray-700">
                 {language === 'zh' ? '云端' : 'Cloud'}
               </span>
@@ -228,7 +228,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
                 onClick={() => setFilterMode('all')}
                 className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
                   filterMode === 'all'
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-primary-600 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -238,7 +238,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
                 onClick={() => setFilterMode('quick')}
                 className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
                   filterMode === 'quick'
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-primary-600 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -248,7 +248,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
                 onClick={() => setFilterMode('director')}
                 className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
                   filterMode === 'director'
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-primary-600 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -310,7 +310,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
               <div className="flex gap-2">
                 <button
                   onClick={() => onSelectPrompt(prompt)}
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-semibold rounded-lg transition-all duration-200 active:scale-[0.98]"
                 >
                   <Eye className="w-4 h-4" />
                   {t.view}
