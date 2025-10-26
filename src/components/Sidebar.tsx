@@ -14,7 +14,7 @@ type SidebarProps = {
 
 export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }: SidebarProps) {
   const { t } = useLanguage();
-  const { user, profile, signOut } = useAuth();
+  const { user, profile, isGuest, signOut } = useAuth();
   const [signingOut, setSigningOut] = useState(false);
 
   const handleSignOut = async () => {
@@ -106,7 +106,31 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
 
         {/* User Profile & Footer */}
         <div className="border-t border-gray-200">
-          {user && (
+          {isGuest ? (
+            <div className="p-4">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                  <User className="w-5 h-5 text-gray-600" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate">
+                    {t.language === 'zh' ? '游客' : 'Guest'}
+                  </p>
+                  <p className="text-xs text-gray-500 truncate">
+                    {t.language === 'zh' ? '临时访问' : 'Temporary access'}
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={handleSignOut}
+                disabled={signingOut}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>{t.language === 'zh' ? '退出游客模式' : 'Exit Guest Mode'}</span>
+              </button>
+            </div>
+          ) : user ? (
             <div className="p-4 border-b border-gray-200">
               <div className="flex items-center gap-3 mb-3">
                 {profile?.avatar_url ? (
@@ -136,7 +160,7 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
                 <span>{signingOut ? (t.language === 'zh' ? '退出中...' : 'Signing out...') : (t.language === 'zh' ? '退出登录' : 'Sign Out')}</span>
               </button>
             </div>
-          )}
+          ) : null}
         </div>
       </aside>
     </>

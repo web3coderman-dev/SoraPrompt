@@ -7,7 +7,7 @@ import Dashboard from './pages/Dashboard';
 import { Loader2 } from 'lucide-react';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { user, loading } = useAuth();
+  const { user, isGuest, loading } = useAuth();
 
   if (loading) {
     return (
@@ -17,7 +17,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
     );
   }
 
-  if (!user) {
+  if (!user && !isGuest) {
     return <Navigate to="/login" replace />;
   }
 
@@ -25,7 +25,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 }
 
 function AppRoutes() {
-  const { user, loading } = useAuth();
+  const { user, isGuest, loading } = useAuth();
 
   if (loading) {
     return (
@@ -37,7 +37,7 @@ function AppRoutes() {
 
   return (
     <Routes>
-      <Route path="/login" element={user ? <Navigate to="/" replace /> : <Login />} />
+      <Route path="/login" element={user || isGuest ? <Navigate to="/" replace /> : <Login />} />
       <Route path="/auth/callback" element={<AuthCallback />} />
       <Route
         path="/"
