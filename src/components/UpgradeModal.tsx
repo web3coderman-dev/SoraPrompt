@@ -1,8 +1,10 @@
 import { X, Check, Zap, Film } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 import { useSubscription, SubscriptionTier } from '../contexts/SubscriptionContext';
 import { Modal } from './ui/Modal';
 import { Button } from './ui/Button';
+import LoginModal from './LoginModal';
 import { useState } from 'react';
 
 interface UpgradeModalProps {
@@ -13,8 +15,10 @@ interface UpgradeModalProps {
 
 export function UpgradeModal({ isOpen, onClose, reason = 'credits_out' }: UpgradeModalProps) {
   const { t } = useLanguage();
+  const { user } = useAuth();
   const { subscription, upgradeSubscription } = useSubscription();
   const [upgrading, setUpgrading] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const getTitleMessage = () => {
     switch (reason) {
@@ -30,6 +34,11 @@ export function UpgradeModal({ isOpen, onClose, reason = 'credits_out' }: Upgrad
   };
 
   const handleUpgrade = async (tier: SubscriptionTier) => {
+    if (!user) {
+      setShowLoginModal(true);
+      return;
+    }
+
     setUpgrading(true);
     try {
       const success = await upgradeSubscription(tier);
@@ -146,6 +155,10 @@ export function UpgradeModal({ isOpen, onClose, reason = 'credits_out' }: Upgrad
           {t.privacyPolicy}
         </div>
       </div>
+
+      {showLoginModal && (
+        <LoginModal onClose={() => setShowLoginModal(false)} />
+      )}
     </Modal>
   );
 }

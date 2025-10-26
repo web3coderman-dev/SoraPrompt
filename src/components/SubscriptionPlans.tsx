@@ -1,16 +1,25 @@
 import { Check, Sparkles, Zap, Film } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 import { useSubscription, SubscriptionTier } from '../contexts/SubscriptionContext';
 import { Button } from './ui/Button';
 import { SubscriptionBadge } from './SubscriptionBadge';
+import LoginModal from './LoginModal';
 import { useState } from 'react';
 
 export function SubscriptionPlans() {
   const { t } = useLanguage();
+  const { user } = useAuth();
   const { subscription, upgradeSubscription, loading } = useSubscription();
   const [upgrading, setUpgrading] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleUpgrade = async (tier: SubscriptionTier) => {
+    if (!user) {
+      setShowLoginModal(true);
+      return;
+    }
+
     setUpgrading(true);
     try {
       await upgradeSubscription(tier);
@@ -166,6 +175,10 @@ export function SubscriptionPlans() {
         <p>{t.featureSameAI}</p>
         <p className="mt-2">{t.privacyPolicy}</p>
       </div>
+
+      {showLoginModal && (
+        <LoginModal onClose={() => setShowLoginModal(false)} />
+      )}
     </div>
   );
 }
