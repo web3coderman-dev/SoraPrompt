@@ -11,9 +11,13 @@ interface UpgradeModalProps {
   isOpen: boolean;
   onClose: () => void;
   reason?: 'credits_out' | 'frequent_use' | 'director_locked';
+  usageData?: {
+    used: number;
+    total: number;
+  };
 }
 
-export function UpgradeModal({ isOpen, onClose, reason = 'credits_out' }: UpgradeModalProps) {
+export function UpgradeModal({ isOpen, onClose, reason = 'credits_out', usageData }: UpgradeModalProps) {
   const { t } = useLanguage();
   const { user } = useAuth();
   const { subscription, upgradeSubscription } = useSubscription();
@@ -23,7 +27,12 @@ export function UpgradeModal({ isOpen, onClose, reason = 'credits_out' }: Upgrad
   const getTitleMessage = () => {
     switch (reason) {
       case 'credits_out':
-        return t.upgradeModalCreditsOut;
+        if (usageData) {
+          return (t.upgradeModalCreditsOut || 'Used {{used}}/{{total}} today')
+            .replace('{{used}}', String(usageData.used))
+            .replace('{{total}}', String(usageData.total));
+        }
+        return t.upgradeModalCreditsOutTitle || t.upgradeModalCreditsOut;
       case 'frequent_use':
         return t.upgradeModalFrequentUse;
       case 'director_locked':

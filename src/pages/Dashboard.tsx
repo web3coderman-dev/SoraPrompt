@@ -38,7 +38,7 @@ export default function Dashboard() {
   } | null>(null);
   const { t } = useLanguage();
   const { user } = useAuth();
-  const { hasCredits, canUseDirectorMode, deductCredits } = useSubscription();
+  const { subscription, hasCredits, canUseDirectorMode, deductCredits } = useSubscription();
 
   useEffect(() => {
     const handleConflict = (event: Event) => {
@@ -316,6 +316,14 @@ export default function Dashboard() {
         isOpen={showUpgradeModal}
         onClose={() => setShowUpgradeModal(false)}
         reason={upgradeReason}
+        usageData={
+          subscription
+            ? {
+                used: subscription.total_credits - subscription.remaining_credits,
+                total: subscription.total_credits,
+              }
+            : undefined
+        }
       />
 
       {conflictData && (

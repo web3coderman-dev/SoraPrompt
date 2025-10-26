@@ -181,7 +181,8 @@ export const translations = {
     featureBadge: '身份徽章',
 
     upgradeModalTitle: '升级以继续创作',
-    upgradeModalCreditsOut: '今日生成次数已用完',
+    upgradeModalCreditsOut: '今日已用 {{used}}/{{total}} 次',
+    upgradeModalCreditsOutTitle: '生成次数已达上限',
     upgradeModalFrequentUse: '你的创作势头太棒了！',
     upgradeModalDirectorLocked: '导演模式仅对订阅用户开放',
     upgradeModalBenefit1: '每月 {{count}} 次生成',
@@ -380,7 +381,8 @@ export const translations = {
     featureBadge: 'Identity Badge',
 
     upgradeModalTitle: 'Upgrade to Continue Creating',
-    upgradeModalCreditsOut: 'Daily generation credits exhausted',
+    upgradeModalCreditsOut: 'Used {{used}}/{{total}} today',
+    upgradeModalCreditsOutTitle: 'Generation limit reached',
     upgradeModalFrequentUse: 'Your creative momentum is amazing!',
     upgradeModalDirectorLocked: 'Director mode is exclusive to subscribers',
     upgradeModalBenefit1: '{{count}} generations per month',
@@ -1305,7 +1307,8 @@ export const translations = {
     featureBadge: '신분 배지',
 
     upgradeModalTitle: '업그레이드하여 계속 창작하기',
-    upgradeModalCreditsOut: '오늘의 생성 크레딧 소진',
+    upgradeModalCreditsOut: '오늘 {{used}}/{{total}}회 사용',
+    upgradeModalCreditsOutTitle: '생성 한도 도달',
     upgradeModalFrequentUse: '당신의 창작 열정이 대단합니다!',
     upgradeModalDirectorLocked: '디렉터 모드는 구독자 전용입니다',
     upgradeModalBenefit1: '월 {{count}}회 생성',
