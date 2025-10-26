@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
+import { PromptStorage } from '../lib/promptStorage';
 
 interface UserProfile {
   id: string;
@@ -66,6 +67,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         console.error('Error loading user profile:', error);
       } else {
         setProfile(data);
+      }
+
+      const localCount = PromptStorage.getLocalPromptCount();
+      if (localCount > 0) {
+        console.log(`Found ${localCount} local prompts, migrating to cloud...`);
+        const migratedCount = await PromptStorage.migrateLocalPromptsToCloud(userId);
+        console.log(`Successfully migrated ${migratedCount} prompts to cloud`);
+
+        if (migratedCount > 0) {
+          window.dispatchEvent(new CustomEvent('prompts-migrated', { detail: { count: migratedCount } }));
+        }
       }
     } catch (error) {
       console.error('Error loading user profile:', error);

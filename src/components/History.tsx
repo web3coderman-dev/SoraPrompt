@@ -1,21 +1,24 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Clock, Trash2, Eye, Search, Filter } from 'lucide-react';
+import { Clock, Trash2, Eye, Search, Filter, Cloud, HardDrive } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
+import { PromptStorage } from '../lib/promptStorage';
 import type { Prompt } from '../lib/supabase';
+import type { LocalPrompt } from '../lib/promptStorage';
 import SortDropdown from './SortDropdown';
 import ConfirmModal from './ConfirmModal';
 
 type HistoryProps = {
-  onSelectPrompt: (prompt: Prompt) => void;
+  onSelectPrompt: (prompt: Prompt | LocalPrompt) => void;
 };
 
 type FilterMode = 'all' | 'quick' | 'director';
 type SortOption = 'newest' | 'oldest' | 'score-high' | 'score-low';
 
 export default function History({ onSelectPrompt }: HistoryProps) {
-  const { t } = useLanguage();
-  const [prompts, setPrompts] = useState<Prompt[]>([]);
+  const { t, language } = useLanguage();
+  const { user } = useAuth();
+  const [prompts, setPrompts] = useState<(Prompt | LocalPrompt)[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -33,14 +36,13 @@ export default function History({ onSelectPrompt }: HistoryProps) {
       setLoading(true);
       setError(null);
 
-      const { data, error: fetchError } = await supabase
-        .from('prompts')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(100);
-
-      if (fetchError) throw fetchError;
-      setPrompts(data || []);
+      if (user) {
+        const cloudPrompts = await PromptStorage.loadCloudPrompts(user.id);
+        setPrompts(cloudPrompts);
+      } else {
+        const localPrompts = PromptStorage.getLocalPrompts();
+        setPrompts(localPrompts);
+      }
     } catch (err) {
       console.error('Error loading history:', err);
       setError(t.historyLoadError);
@@ -58,12 +60,12 @@ export default function History({ onSelectPrompt }: HistoryProps) {
     if (!promptToDelete) return;
 
     try {
-      const { error: deleteError } = await supabase
-        .from('prompts')
-        .delete()
-        .eq('id', promptToDelete);
-
-      if (deleteError) throw deleteError;
+      if (user) {
+        const success = await PromptStorage.deleteCloudPrompt(promptToDelete);
+        if (!success) throw new Error('Failed to delete');
+      } else {
+        PromptStorage.deleteLocalPrompt(promptToDelete);
+      }
 
       setPrompts(prompts.filter(p => p.id !== promptToDelete));
       setDeleteModalOpen(false);
@@ -169,6 +171,15 @@ export default function History({ onSelectPrompt }: HistoryProps) {
           <Clock className="w-16 h-16 text-gray-300 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-gray-900 mb-2">{t.historyEmpty}</h3>
           <p className="text-gray-600">{t.historyEmptyDesc}</p>
+          {!user && (
+            <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <p className="text-sm text-blue-800">
+                {language === 'zh'
+                  ? '💡 提示：未登录用户的历史记录保存在本地浏览器中，最多保存 10 条。'
+                  : '💡 Tip: History for guest users is saved locally in your browser, limited to 10 items.'}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -176,7 +187,26 @@ export default function History({ onSelectPrompt }: HistoryProps) {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">{t.historyTitle}</h2>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{t.historyTitle}</h2>
+        <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg text-sm">
+          {user ? (
+            <>
+              <Cloud className="w-4 h-4 text-blue-600" />
+              <span className="text-gray-700">
+                {language === 'zh' ? '云端' : 'Cloud'}
+              </span>
+            </>
+          ) : (
+            <>
+              <HardDrive className="w-4 h-4 text-gray-600" />
+              <span className="text-gray-700">
+                {language === 'zh' ? `本地 (${prompts.length}/10)` : `Local (${prompts.length}/10)`}
+              </span>
+            </>
+          )}
+        </div>
+      </div>
 
       <div className="bg-white rounded-xl shadow-md border border-gray-200 p-4 mb-6 space-y-4">
         <div className="relative">

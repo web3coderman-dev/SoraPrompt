@@ -5,28 +5,25 @@ import PromptResult from '../components/PromptResult';
 import History from '../components/History';
 import Settings from '../components/Settings';
 import { useLanguage } from '../contexts/LanguageContext';
-import type { PromptResult as PromptResultType } from '../lib/openai';
+import type { Prompt } from '../lib/supabase';
 
 type View = 'new' | 'history' | 'settings';
 
 export default function Dashboard() {
   const [currentView, setCurrentView] = useState<View>('new');
-  const [result, setResult] = useState<PromptResultType | null>(null);
+  const [selectedPrompt, setSelectedPrompt] = useState<Prompt | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { t } = useLanguage();
 
-  const handleResultGenerated = (newResult: PromptResultType) => {
-    setResult(newResult);
-  };
-
-  const handleResultUpdated = (updatedResult: PromptResultType) => {
-    setResult(updatedResult);
+  const handlePromptSelected = (prompt: Prompt) => {
+    setSelectedPrompt(prompt);
+    setCurrentView('new');
   };
 
   const renderContent = () => {
     switch (currentView) {
       case 'history':
-        return <History onViewPrompt={setResult} />;
+        return <History onSelectPrompt={handlePromptSelected} />;
       case 'settings':
         return <Settings />;
       default:
@@ -57,11 +54,11 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <PromptInput onResult={handleResultGenerated} />
+            <PromptInput initialPrompt={selectedPrompt} />
 
-            {result && (
+            {selectedPrompt && (
               <div className="mt-8">
-                <PromptResult result={result} onResultUpdated={handleResultUpdated} />
+                <PromptResult prompt={selectedPrompt} />
               </div>
             )}
           </div>

@@ -31,6 +31,8 @@ export type StyleData = {
 
 export type Prompt = {
   id: string;
+  user_id?: string;
+  session_id?: string;
   user_input: string;
   generated_prompt: string;
   intent_data: IntentData;
