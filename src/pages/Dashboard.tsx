@@ -1,24 +1,25 @@
 import { useState } from 'react';
-import { AlertCircle, UserCircle } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
-import PromptContainer from '../components/PromptContainer';
+import PromptInput from '../components/PromptInput';
+import PromptResult from '../components/PromptResult';
 import History from '../components/History';
 import Settings from '../components/Settings';
 import { useLanguage } from '../contexts/LanguageContext';
-import { useAuth } from '../contexts/AuthContext';
-import type { Prompt } from '../lib/supabase';
+import type { PromptResult as PromptResultType } from '../lib/openai';
 
 type View = 'home' | 'history' | 'settings';
 
 export default function Dashboard() {
   const [currentView, setCurrentView] = useState<View>('home');
-  const [result, setResult] = useState<Prompt | null>(null);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [result, setResult] = useState<PromptResultType | null>(null);
   const { t } = useLanguage();
-  const { isGuest } = useAuth();
 
-  const handleResultGenerated = (newResult: Prompt) => {
+  const handleResultGenerated = (newResult: PromptResultType) => {
     setResult(newResult);
+  };
+
+  const handleResultUpdated = (updatedResult: PromptResultType) => {
+    setResult(updatedResult);
   };
 
   const renderContent = () => {
@@ -30,30 +31,6 @@ export default function Dashboard() {
       default:
         return (
           <div className="max-w-4xl mx-auto">
-            {isGuest && (
-              <div className="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start gap-3">
-                <UserCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                <div className="flex-1">
-                  <p className="text-sm text-blue-900 font-medium">
-                    {t.language === 'zh' ? '游客模式' : 'Guest Mode'}
-                  </p>
-                  <p className="text-sm text-blue-700 mt-1">
-                    {t.language === 'zh'
-                      ? '您正在以游客身份使用。历史记录不会被保存。'
-                      : 'You are using as a guest. History will not be saved.'}
-                    <button
-                      onClick={() => {
-                        localStorage.removeItem('guestMode');
-                        window.location.reload();
-                      }}
-                      className="ml-2 text-blue-600 hover:text-blue-800 font-medium underline"
-                    >
-                      {t.language === 'zh' ? '注册保存历史' : 'Sign up to save history'}
-                    </button>
-                  </p>
-                </div>
-              </div>
-            )}
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
                 <span className="relative flex h-2 w-2">
@@ -79,7 +56,13 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <PromptContainer onResult={handleResultGenerated} />
+            <PromptInput onResult={handleResultGenerated} />
+
+            {result && (
+              <div className="mt-8">
+                <PromptResult result={result} onResultUpdated={handleResultUpdated} />
+              </div>
+            )}
           </div>
         );
     }
@@ -87,12 +70,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
-      <Sidebar
-        isOpen={sidebarOpen}
-        onToggle={() => setSidebarOpen(!sidebarOpen)}
-        currentView={currentView}
-        onViewChange={setCurrentView}
-      />
+      <Sidebar currentView={currentView} onViewChange={setCurrentView} />
       <main className="flex-1 p-6 md:p-8 lg:p-12 ml-0 md:ml-64">
         {renderContent()}
       </main>

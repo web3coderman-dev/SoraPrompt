@@ -14,11 +14,9 @@ interface AuthContextType {
   profile: UserProfile | null;
   session: Session | null;
   loading: boolean;
-  isGuest: boolean;
   signInWithGoogle: () => Promise<void>;
   signInWithEmail: (email: string, password: string) => Promise<void>;
   signUpWithEmail: (email: string, password: string) => Promise<void>;
-  continueAsGuest: () => void;
   signOut: () => Promise<void>;
 }
 
@@ -29,16 +27,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isGuest, setIsGuest] = useState(false);
 
   useEffect(() => {
-    const guestMode = localStorage.getItem('guestMode') === 'true';
-    if (guestMode) {
-      setIsGuest(true);
-      setLoading(false);
-      return;
-    }
-
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
@@ -141,23 +131,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const continueAsGuest = () => {
-    localStorage.setItem('guestMode', 'true');
-    setIsGuest(true);
-    setLoading(false);
-  };
-
   const signOut = async () => {
     try {
-      if (isGuest) {
-        localStorage.removeItem('guestMode');
-        setIsGuest(false);
-        setUser(null);
-        setProfile(null);
-        setSession(null);
-        return;
-      }
-
       const { error } = await supabase.auth.signOut();
       if (error) {
         console.error('Error signing out:', error);
@@ -177,11 +152,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     profile,
     session,
     loading,
-    isGuest,
     signInWithGoogle,
     signInWithEmail,
     signUpWithEmail,
-    continueAsGuest,
     signOut,
   };
 

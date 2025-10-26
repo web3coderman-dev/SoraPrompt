@@ -4,7 +4,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { Film, AlertCircle, Mail, Lock } from 'lucide-react';
 
 export default function Login() {
-  const { signInWithGoogle, signInWithEmail, signUpWithEmail, continueAsGuest } = useAuth();
+  const { signInWithGoogle, signInWithEmail, signUpWithEmail } = useAuth();
   const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -197,16 +197,6 @@ export default function Login() {
               }
             </button>
           </div>
-        </div>
-
-        <div className="mt-6">
-          <button
-            onClick={continueAsGuest}
-            disabled={loading}
-            className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-6 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {t.language === 'zh' ? '游客模式体验' : 'Continue as Guest'}
-          </button>
         </div>
 
         <div className="mt-6 text-center text-sm text-gray-600">
