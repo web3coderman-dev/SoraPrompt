@@ -28,20 +28,19 @@ export default function PromptResult({
   const [copied, setCopied] = useState(false);
   const [improvementFeedback, setImprovementFeedback] = useState('');
   const [showImprovementInput, setShowImprovementInput] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState<SupportedLanguage>(
-    (prompt.output_language as SupportedLanguage) || 'en'
-  );
+  const [selectedLanguage, setSelectedLanguage] = useState<SupportedLanguage>(() => {
+    return (localStorage.getItem('output-language') as SupportedLanguage) || 'en';
+  });
 
   useEffect(() => {
-    setSelectedLanguage((prompt.output_language as SupportedLanguage) || 'en');
-  }, [prompt.output_language]);
+    const lang = (localStorage.getItem('output-language') as SupportedLanguage) || 'en';
+    setSelectedLanguage(lang);
+  }, [prompt]);
 
   const handleLanguageChange = (lang: SupportedLanguage) => {
     setSelectedLanguage(lang);
-
-    if (lang !== prompt.output_language) {
-      onLanguageChange(lang);
-    }
+    localStorage.setItem('output-language', lang);
+    onLanguageChange(lang);
   };
 
   const handleCopy = () => {
@@ -78,7 +77,7 @@ export default function PromptResult({
               <LanguageSelector
                 value={selectedLanguage}
                 onChange={handleLanguageChange}
-                detectedLanguage={(prompt as any).detected_input_language as SupportedLanguage || prompt.output_language as SupportedLanguage}
+                detectedLanguage={selectedLanguage}
                 disabled={isImproving || isChangingLanguage}
               />
               <div className={`px-3 py-1 rounded-full font-semibold text-sm whitespace-nowrap ${getScoreColor(prompt.quality_score)}`}>

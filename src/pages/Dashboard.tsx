@@ -5,19 +5,144 @@ import PromptResult from '../components/PromptResult';
 import History from '../components/History';
 import Settings from '../components/Settings';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 import type { Prompt } from '../lib/supabase';
+import type { SupportedLanguage } from '../lib/openai';
+import { generateSoraPrompt } from '../lib/promptGenerator';
+import { improvePrompt, explainPrompt, generatePrompt } from '../lib/openai';
+import { PromptStorage } from '../lib/promptStorage';
 
 type View = 'new' | 'history' | 'settings';
 
 export default function Dashboard() {
   const [currentView, setCurrentView] = useState<View>('new');
-  const [selectedPrompt, setSelectedPrompt] = useState<Prompt | null>(null);
+  const [currentPrompt, setCurrentPrompt] = useState<Prompt | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [isImproving, setIsImproving] = useState(false);
+  const [isChangingLanguage, setIsChangingLanguage] = useState(false);
+  const [explanation, setExplanation] = useState<string | undefined>();
   const { t } = useLanguage();
+  const { user } = useAuth();
+
+  const handleGenerate = async (
+    input: string,
+    mode: 'quick' | 'director',
+    language: SupportedLanguage,
+    detectedInputLanguage: SupportedLanguage
+  ) => {
+    try {
+      setIsGenerating(true);
+      setExplanation(undefined);
+
+      const prompt = await generateSoraPrompt(
+        input,
+        mode,
+        language,
+        detectedInputLanguage,
+        user?.id
+      );
+
+      setCurrentPrompt(prompt);
+    } catch (error) {
+      console.error('Error generating prompt:', error);
+      alert(t.language === 'zh' ? '生成失败，请重试' : 'Generation failed, please retry');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const handleImprove = async (feedback: string) => {
+    if (!currentPrompt) return;
+
+    try {
+      setIsImproving(true);
+
+      const outputLang = localStorage.getItem('output-language') as SupportedLanguage || 'en';
+      const result = await improvePrompt(
+        currentPrompt.generated_prompt,
+        feedback,
+        outputLang
+      );
+
+      const updatedPrompt: Prompt = {
+        ...currentPrompt,
+        generated_prompt: result.prompt,
+        quality_score: result.qualityScore,
+        updated_at: new Date().toISOString(),
+      };
+
+      if (user?.id && currentPrompt.user_id) {
+        await PromptStorage.saveToCloud(updatedPrompt, user.id);
+      } else {
+        PromptStorage.saveLocalPrompt(updatedPrompt);
+      }
+
+      setCurrentPrompt(updatedPrompt);
+    } catch (error) {
+      console.error('Error improving prompt:', error);
+      alert(t.language === 'zh' ? '改进失败，请重试' : 'Improvement failed, please retry');
+    } finally {
+      setIsImproving(false);
+    }
+  };
+
+  const handleExplain = async () => {
+    if (!currentPrompt) return;
+
+    try {
+      const outputLang = localStorage.getItem('output-language') as SupportedLanguage || 'en';
+      const explanation = await explainPrompt(
+        currentPrompt.generated_prompt,
+        currentPrompt.intent_data,
+        outputLang
+      );
+      setExplanation(explanation);
+    } catch (error) {
+      console.error('Error explaining prompt:', error);
+      alert(t.language === 'zh' ? '解释失败，请重试' : 'Explanation failed, please retry');
+    }
+  };
+
+  const handleLanguageChange = async (language: SupportedLanguage) => {
+    if (!currentPrompt) return;
+
+    try {
+      setIsChangingLanguage(true);
+
+      const { prompt, qualityScore } = await generatePrompt(
+        currentPrompt.intent_data,
+        currentPrompt.style_data,
+        currentPrompt.mode,
+        language
+      );
+
+      const updatedPrompt: Prompt = {
+        ...currentPrompt,
+        generated_prompt: prompt,
+        quality_score: qualityScore,
+        updated_at: new Date().toISOString(),
+      };
+
+      if (user?.id && currentPrompt.user_id) {
+        await PromptStorage.saveToCloud(updatedPrompt, user.id);
+      } else {
+        PromptStorage.saveLocalPrompt(updatedPrompt);
+      }
+
+      setCurrentPrompt(updatedPrompt);
+    } catch (error) {
+      console.error('Error changing language:', error);
+      alert(t.language === 'zh' ? '语言切换失败，请重试' : 'Language change failed, please retry');
+    } finally {
+      setIsChangingLanguage(false);
+    }
+  };
 
   const handlePromptSelected = (prompt: Prompt) => {
-    setSelectedPrompt(prompt);
+    setCurrentPrompt(prompt);
     setCurrentView('new');
+    setExplanation(undefined);
   };
 
   const renderContent = () => {
@@ -54,11 +179,23 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <PromptInput initialPrompt={selectedPrompt} />
+            <PromptInput
+              onGenerate={handleGenerate}
+              isLoading={isGenerating}
+              initialValue={currentPrompt?.user_input}
+            />
 
-            {selectedPrompt && (
+            {currentPrompt && (
               <div className="mt-8">
-                <PromptResult prompt={selectedPrompt} />
+                <PromptResult
+                  prompt={currentPrompt}
+                  onImprove={handleImprove}
+                  onExplain={handleExplain}
+                  onLanguageChange={handleLanguageChange}
+                  isImproving={isImproving}
+                  isChangingLanguage={isChangingLanguage}
+                  explanation={explanation}
+                />
               </div>
             )}
           </div>
