@@ -1,7 +1,8 @@
-import { Film, Sparkles, History, Settings, Menu, X, LogOut, User } from 'lucide-react';
+import { Film, Sparkles, History, Settings, Menu, X, LogOut, User, LogIn } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useState } from 'react';
+import { supabase } from '../lib/supabase';
 
 type ViewType = 'new' | 'history' | 'settings';
 
@@ -16,6 +17,7 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
   const { t } = useLanguage();
   const { user, profile, signOut } = useAuth();
   const [signingOut, setSigningOut] = useState(false);
+  const [signingIn, setSigningIn] = useState(false);
 
   const handleSignOut = async () => {
     try {
@@ -24,6 +26,21 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
     } catch (error) {
       console.error('Error signing out:', error);
       setSigningOut(false);
+    }
+  };
+
+  const handleSignIn = async () => {
+    try {
+      setSigningIn(true);
+      await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+    } catch (error) {
+      console.error('Error signing in:', error);
+      setSigningIn(false);
     }
   };
 
@@ -106,8 +123,8 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
 
         {/* User Profile & Footer */}
         <div className="border-t border-gray-200">
-          {user && (
-            <div className="p-4 border-b border-gray-200">
+          {user ? (
+            <div className="p-4">
               <div className="flex items-center gap-3 mb-3">
                 {profile?.avatar_url ? (
                   <img
@@ -135,6 +152,20 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
                 <LogOut className="w-4 h-4" />
                 <span>{signingOut ? (t.language === 'zh' ? '退出中...' : 'Signing out...') : (t.language === 'zh' ? '退出登录' : 'Sign Out')}</span>
               </button>
+            </div>
+          ) : (
+            <div className="p-4">
+              <button
+                onClick={handleSignIn}
+                disabled={signingIn}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+              >
+                <LogIn className="w-5 h-5" />
+                <span>{signingIn ? (t.language === 'zh' ? '登录中...' : 'Signing in...') : (t.language === 'zh' ? '使用 Google 登录' : 'Sign in with Google')}</span>
+              </button>
+              <p className="text-xs text-gray-500 text-center mt-3">
+                {t.language === 'zh' ? '登录以保存和查看历史记录' : 'Sign in to save and view history'}
+              </p>
             </div>
           )}
         </div>
