@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Sparkles, Film } from 'lucide-react';
 import { type SupportedLanguage, detectLanguageClient } from '../lib/openai';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -16,6 +16,7 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
   const { t } = useLanguage();
   const [input, setInput] = useState('');
   const [detectedLanguage, setDetectedLanguage] = useState<SupportedLanguage>('en');
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (initialValue) {
@@ -28,13 +29,35 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
     }
   }, [initialValue]);
 
-  const handleInputChange = async (value: string) => {
+  const detectLanguageDebounced = useCallback((value: string) => {
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+
+    debounceTimerRef.current = setTimeout(async () => {
+      if (value.trim()) {
+        const detected = await detectLanguageClient(value);
+        setDetectedLanguage(detected);
+      }
+    }, 1000);
+  }, []);
+
+  const handleInputChange = (value: string) => {
     setInput(value);
-    if (value.trim()) {
-      const detected = await detectLanguageClient(value);
-      setDetectedLanguage(detected);
+
+    const outputLanguage = localStorage.getItem('output-language') as SupportedLanguage || 'auto';
+    if (outputLanguage === 'auto' && value.trim()) {
+      detectLanguageDebounced(value);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+    };
+  }, []);
 
   const handleSubmit = async (mode: 'quick' | 'director') => {
     if (input.trim() && !isLoading) {
