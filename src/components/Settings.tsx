@@ -66,7 +66,7 @@ export default function Settings() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-5xl mx-auto">
       <div className="flex items-center gap-3 mb-6">
         <SettingsIcon className="w-8 h-8 text-gray-900" />
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{t.settingsTitle}</h2>

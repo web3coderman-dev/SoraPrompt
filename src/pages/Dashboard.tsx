@@ -153,7 +153,7 @@ export default function Dashboard() {
         return <Settings />;
       default:
         return (
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
                 <span className="relative flex h-2 w-2">
@@ -211,7 +211,7 @@ export default function Dashboard() {
         currentView={currentView}
         onViewChange={setCurrentView}
       />
-      <main className="flex-1 p-6 md:p-8 lg:p-12 ml-0 lg:ml-64">
+      <main className="flex-1 p-6 md:p-8 lg:p-12">
         {renderContent()}
       </main>
     </div>

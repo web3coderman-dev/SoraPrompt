@@ -59,7 +59,7 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="w-full">
       <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
         <div className="p-4 md:p-6">
           <label className="block text-sm font-medium text-gray-700 mb-3">

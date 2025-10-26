@@ -65,7 +65,7 @@ export default function PromptResult({
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="w-full">
       <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
         <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">

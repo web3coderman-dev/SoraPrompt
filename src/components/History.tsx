@@ -150,7 +150,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
 
   if (error) {
     return (
-      <div className="max-w-4xl mx-auto">
+      <div>
         <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
           <p className="text-red-800">{error}</p>
           <button
@@ -166,7 +166,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
 
   if (prompts.length === 0) {
     return (
-      <div className="max-w-4xl mx-auto">
+      <div>
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-12 text-center">
           <Clock className="w-16 h-16 text-gray-300 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-gray-900 mb-2">{t.historyEmpty}</h3>
@@ -186,7 +186,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div>
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{t.historyTitle}</h2>
         <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg text-sm">
