@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import PromptInput from '../components/PromptInput';
 import PromptResult from '../components/PromptResult';
@@ -7,9 +7,11 @@ import Settings from '../components/Settings';
 import { SubscriptionPlans } from '../components/SubscriptionPlans';
 import { UsageCounter } from '../components/UsageCounter';
 import { UpgradeModal } from '../components/UpgradeModal';
+import { ConflictResolutionModal } from '../components/ConflictResolutionModal';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useSubscription } from '../contexts/SubscriptionContext';
+import { SettingsSync, type UserSettings } from '../lib/settingsSync';
 import type { Prompt } from '../lib/supabase';
 import type { SupportedLanguage } from '../lib/openai';
 import { generateSoraPrompt } from '../lib/promptGenerator';
@@ -28,9 +30,59 @@ export default function Dashboard() {
   const [explanation, setExplanation] = useState<string | undefined>();
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [upgradeReason, setUpgradeReason] = useState<'credits_out' | 'frequent_use' | 'director_locked'>('credits_out');
+  const [showConflictModal, setShowConflictModal] = useState(false);
+  const [conflictData, setConflictData] = useState<{
+    cloudSettings: Omit<UserSettings, 'user_id'>;
+    localSettings: Omit<UserSettings, 'user_id'>;
+    userId: string;
+  } | null>(null);
   const { t } = useLanguage();
   const { user } = useAuth();
   const { hasCredits, canUseDirectorMode, deductCredits } = useSubscription();
+
+  useEffect(() => {
+    const handleConflict = (event: Event) => {
+      const customEvent = event as CustomEvent<{
+        cloudSettings: Omit<UserSettings, 'user_id'>;
+        localSettings: Omit<UserSettings, 'user_id'>;
+        userId: string;
+      }>;
+      setConflictData(customEvent.detail);
+      setShowConflictModal(true);
+    };
+
+    window.addEventListener('settings-conflict', handleConflict);
+    return () => window.removeEventListener('settings-conflict', handleConflict);
+  }, []);
+
+  const handleConflictResolve = async (useCloud: boolean) => {
+    if (!conflictData) return;
+
+    const result = await SettingsSync.resolveConflict(
+      conflictData.userId,
+      useCloud,
+      conflictData.cloudSettings,
+      conflictData.localSettings
+    );
+
+    if (result.success) {
+      window.dispatchEvent(new CustomEvent('settings-synced', {
+        detail: result.settings
+      }));
+
+      const userLang = localStorage.getItem('language') || 'en';
+      const message = useCloud
+        ? (userLang === 'zh' ? '已采用云端设置' : 'Cloud settings applied')
+        : (userLang === 'zh' ? '已采用本地设置并同步' : 'Local settings applied and synced');
+
+      window.dispatchEvent(new CustomEvent('show-toast', {
+        detail: { message, type: 'success' }
+      }));
+    }
+
+    setShowConflictModal(false);
+    setConflictData(null);
+  };
 
   const handleGenerate = async (
     input: string,
@@ -265,6 +317,19 @@ export default function Dashboard() {
         onClose={() => setShowUpgradeModal(false)}
         reason={upgradeReason}
       />
+
+      {conflictData && (
+        <ConflictResolutionModal
+          isOpen={showConflictModal}
+          cloudSettings={conflictData.cloudSettings}
+          localSettings={conflictData.localSettings}
+          onResolve={handleConflictResolve}
+          onCancel={() => {
+            setShowConflictModal(false);
+            setConflictData(null);
+          }}
+        />
+      )}
     </div>
   );
 }

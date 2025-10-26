@@ -95,6 +95,51 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           }, 500);
         }
       }
+
+      const syncResult = await SettingsSync.syncOnLogin(userId, true);
+
+      if (syncResult.hasConflict && syncResult.cloudSettings && syncResult.localSettings) {
+        window.dispatchEvent(new CustomEvent('settings-conflict', {
+          detail: {
+            cloudSettings: syncResult.cloudSettings,
+            localSettings: syncResult.localSettings,
+            userId
+          }
+        }));
+      } else if (syncResult.synced) {
+        const userLang = localStorage.getItem('language') || 'en';
+        const syncMessage = syncResult.usedCloud
+          ? (userLang === 'zh' ? '设置已从云端恢复' : 'Settings restored from cloud')
+          : (userLang === 'zh' ? '本地设置已上传到云端' : 'Local settings uploaded to cloud');
+
+        setTimeout(() => {
+          const event = new CustomEvent('show-toast', {
+            detail: {
+              message: syncMessage,
+              type: syncResult.usedCloud ? 'info' : 'success'
+            }
+          });
+          window.dispatchEvent(event);
+
+          window.dispatchEvent(new CustomEvent('settings-synced', {
+            detail: syncResult.settings
+          }));
+        }, 1000);
+      } else if (syncResult.error) {
+        const userLang = localStorage.getItem('language') || 'en';
+        const errorMessage = userLang === 'zh'
+          ? '设置同步失败'
+          : 'Failed to sync settings';
+
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('show-toast', {
+            detail: {
+              message: errorMessage,
+              type: 'error'
+            }
+          }));
+        }, 1000);
+      }
     } catch (error) {
       console.error('Error loading user profile:', error);
     } finally {

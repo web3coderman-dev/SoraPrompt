@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Settings as SettingsIcon, Check, Shield, LogIn, Moon, Sun, Crown, Cloud } from 'lucide-react';
+import { Settings as SettingsIcon, Check, Shield, LogIn, Moon, Sun, Crown, Cloud, CloudOff, RefreshCw, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { useSubscription } from '../contexts/SubscriptionContext';
 import { LoginPrompt } from './LoginPrompt';
+import { SettingsSync, type SyncStatus } from '../lib/settingsSync';
 import type { Language } from '../lib/i18n';
 import type { SupportedLanguage } from '../lib/openai';
 import { LANGUAGES } from '../lib/openai';
@@ -37,23 +38,106 @@ export default function Settings() {
   const [saved, setSaved] = useState(false);
   const [linking, setLinking] = useState(false);
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+  const [syncStatus, setSyncStatus] = useState<SyncStatus>('idle');
+  const [lastSynced, setLastSynced] = useState<Date | null>(null);
+  const [syncing, setSyncing] = useState(false);
+  const [syncError, setSyncError] = useState<string | null>(null);
 
   useEffect(() => {
     const savedOutputLang = localStorage.getItem('output-language') as SupportedLanguage;
     if (savedOutputLang) {
       setOutputLanguage(savedOutputLang);
     }
-  }, []);
+
+    const initialStatus = SettingsSync.getSyncStatus();
+    setSyncStatus(initialStatus);
+
+    const lastSync = SettingsSync.getLastSyncTime();
+    setLastSynced(lastSync);
+
+    const handleStatusChange = (event: Event) => {
+      const customEvent = event as CustomEvent<{ status: SyncStatus }>;
+      setSyncStatus(customEvent.detail.status);
+      if (customEvent.detail.status === 'success') {
+        setLastSynced(new Date());
+        setSyncError(null);
+      }
+    };
+
+    const handleSettingsChanged = async (event: Event) => {
+      const customEvent = event as CustomEvent<{ type: string; value: any }>;
+      const { type, value } = customEvent.detail;
+
+      if (user) {
+        setSyncing(true);
+        let success = false;
+
+        if (type === 'language') {
+          success = await SettingsSync.updateSetting(user.id, 'interface_language', value);
+        } else if (type === 'theme') {
+          success = await SettingsSync.updateSetting(user.id, 'theme', value);
+        } else if (type === 'output-language') {
+          success = await SettingsSync.updateSetting(user.id, 'output_language', value);
+        }
+
+        if (!success) {
+          setSyncError(language === 'zh' ? '同步失败' : 'Sync failed');
+        }
+        setSyncing(false);
+      }
+    };
+
+    window.addEventListener('sync-status-changed', handleStatusChange);
+    window.addEventListener('settings-changed', handleSettingsChanged);
+
+    return () => {
+      window.removeEventListener('sync-status-changed', handleStatusChange);
+      window.removeEventListener('settings-changed', handleSettingsChanged);
+    };
+  }, [user, language]);
 
   const handleLanguageChange = (lang: Language) => {
     setLanguage(lang);
     showSavedMessage();
   };
 
-  const handleOutputLanguageChange = (lang: SupportedLanguage) => {
+  const handleOutputLanguageChange = async (lang: SupportedLanguage) => {
     setOutputLanguage(lang);
     localStorage.setItem('output-language', lang);
     showSavedMessage();
+
+    window.dispatchEvent(new CustomEvent('settings-changed', {
+      detail: { type: 'output-language', value: lang }
+    }));
+  };
+
+  const handleManualSync = async () => {
+    if (!user) return;
+
+    setSyncing(true);
+    setSyncError(null);
+
+    const result = await SettingsSync.manualSync(user.id);
+
+    if (result.success) {
+      setLastSynced(new Date());
+      window.dispatchEvent(new CustomEvent('show-toast', {
+        detail: {
+          message: language === 'zh' ? '设置已同步到云端' : 'Settings synced to cloud',
+          type: 'success'
+        }
+      }));
+    } else {
+      setSyncError(result.error || (language === 'zh' ? '同步失败' : 'Sync failed'));
+      window.dispatchEvent(new CustomEvent('show-toast', {
+        detail: {
+          message: language === 'zh' ? '同步失败，请稍后重试' : 'Sync failed, please try again',
+          type: 'error'
+        }
+      }));
+    }
+
+    setSyncing(false);
   };
 
   const showSavedMessage = () => {
@@ -82,6 +166,81 @@ export default function Settings() {
         <div className="mb-6 bg-green-50 border border-green-200 rounded-lg p-4 flex items-center gap-2 animate-fadeIn">
           <Check className="w-5 h-5 text-green-600" />
           <span className="text-green-800 font-medium">{t.settingsSaved}</span>
+        </div>
+      )}
+
+      {user && (
+        <div className={`mb-6 rounded-lg p-4 border-2 ${
+          syncStatus === 'success' ? 'bg-blue-50 border-blue-200' :
+          syncStatus === 'error' ? 'bg-red-50 border-red-200' :
+          syncStatus === 'syncing' ? 'bg-yellow-50 border-yellow-200' :
+          'bg-gray-50 border-gray-200'
+        }`}>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              {syncStatus === 'syncing' || syncing ? (
+                <div className="animate-spin rounded-full h-5 w-5 border-2 border-blue-600 border-t-transparent" />
+              ) : syncStatus === 'success' ? (
+                <CheckCircle className="w-5 h-5 text-green-600" />
+              ) : syncStatus === 'error' ? (
+                <XCircle className="w-5 h-5 text-red-600" />
+              ) : (
+                <Cloud className="w-5 h-5 text-gray-600" />
+              )}
+              <div>
+                <p className="text-sm font-medium text-gray-900">
+                  {syncStatus === 'syncing' || syncing
+                    ? (language === 'zh' ? '正在同步...' : 'Syncing...')
+                    : syncStatus === 'success'
+                    ? (language === 'zh' ? '云端同步已启用' : 'Cloud sync enabled')
+                    : syncStatus === 'error'
+                    ? (language === 'zh' ? '同步失败' : 'Sync failed')
+                    : (language === 'zh' ? '云端同步' : 'Cloud sync')
+                  }
+                </p>
+                {lastSynced && !syncing && syncStatus !== 'error' && (
+                  <p className="text-xs text-gray-600 mt-0.5">
+                    {language === 'zh' ? '上次同步: ' : 'Last synced: '}
+                    {lastSynced.toLocaleTimeString(language === 'zh' ? 'zh-CN' : 'en-US')}
+                  </p>
+                )}
+                {syncError && (
+                  <p className="text-xs text-red-600 mt-0.5">{syncError}</p>
+                )}
+              </div>
+            </div>
+            <button
+              onClick={handleManualSync}
+              disabled={syncing || syncStatus === 'syncing'}
+              className="flex items-center gap-2 px-4 py-2 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
+              {language === 'zh' ? '立即同步' : 'Sync Now'}
+            </button>
+          </div>
+          <p className="text-xs text-gray-600 mt-2">
+            {language === 'zh'
+              ? '设置修改后自动同步到云端，可跨设备访问'
+              : 'Settings are automatically synced to cloud and accessible across devices'
+            }
+          </p>
+        </div>
+      )}
+
+      {!user && (
+        <div className="mb-6 bg-orange-50 border-2 border-orange-200 rounded-lg p-4">
+          <div className="flex items-center gap-3 mb-2">
+            <CloudOff className="w-5 h-5 text-orange-600" />
+            <p className="text-sm font-medium text-orange-900">
+              {language === 'zh' ? '设置仅保存在本地' : 'Settings saved locally only'}
+            </p>
+          </div>
+          <p className="text-xs text-orange-700">
+            {language === 'zh'
+              ? '登录以启用云端同步，跨设备保持设置一致'
+              : 'Sign in to enable cloud sync and keep settings consistent across devices'
+            }
+          </p>
         </div>
       )}
 
