@@ -221,7 +221,7 @@ export default function Dashboard() {
         currentView={currentView}
         onViewChange={setCurrentView}
       />
-      <main className="flex-1">
+      <main className="flex-1 overflow-x-hidden">
         {renderContent()}
       </main>
     </div>

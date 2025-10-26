@@ -186,7 +186,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
   }
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto overflow-hidden">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{t.historyTitle}</h2>
         <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg text-sm">
@@ -286,7 +286,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
           {filteredAndSortedPrompts.map((prompt) => (
             <div
               key={prompt.id}
-              className="bg-white rounded-xl shadow-md border border-gray-200 p-5 hover:shadow-lg transition-shadow"
+              className="bg-white rounded-xl shadow-md border border-gray-200 p-5 hover:shadow-lg transition-shadow overflow-hidden"
             >
               <div className="flex items-start justify-between gap-4 mb-3">
                 <div className="flex-1 min-w-0">
@@ -295,8 +295,8 @@ export default function History({ onSelectPrompt }: HistoryProps) {
                   </p>
                   <div className="flex items-center gap-2 text-xs text-gray-500 flex-wrap">
                     <Clock className="w-3.5 h-3.5 flex-shrink-0" />
-                    <span>{formatDate(prompt.created_at)}</span>
-                    <span className="px-2 py-0.5 bg-gray-100 rounded text-gray-700">
+                    <span className="truncate">{formatDate(prompt.created_at)}</span>
+                    <span className="px-2 py-0.5 bg-gray-100 rounded text-gray-700 whitespace-nowrap">
                       {prompt.mode === 'quick' ? t.historyFilterQuick : t.historyFilterDirector}
                     </span>
                   </div>
@@ -306,7 +306,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
                 </div>
               </div>
 
-              <div className="mb-4 bg-gray-50 rounded-lg p-3 border border-gray-100">
+              <div className="mb-4 bg-gray-50 rounded-lg p-3 border border-gray-100 overflow-hidden">
                 <p className="text-gray-700 text-sm line-clamp-3 break-words overflow-wrap-anywhere">
                   {prompt.generated_prompt}
                 </p>
