@@ -1,10 +1,10 @@
-import { Film, Sparkles, History, Settings, Menu, X, LogOut, User, LogIn } from 'lucide-react';
+import { Film, Sparkles, History, Settings, Menu, X, LogOut, User, LogIn, CreditCard } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useState } from 'react';
 import LoginModal from './LoginModal';
 
-type ViewType = 'new' | 'history' | 'settings';
+type ViewType = 'new' | 'history' | 'settings' | 'subscription';
 
 type SidebarProps = {
   isOpen: boolean;
@@ -39,6 +39,11 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
       icon: History,
       label: t.sidebarHistory,
       view: 'history' as ViewType,
+    },
+    {
+      icon: CreditCard,
+      label: t.sidebarSubscription,
+      view: 'subscription' as ViewType,
     },
     {
       icon: Settings,

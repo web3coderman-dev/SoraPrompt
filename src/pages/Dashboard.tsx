@@ -4,15 +4,19 @@ import PromptInput from '../components/PromptInput';
 import PromptResult from '../components/PromptResult';
 import History from '../components/History';
 import Settings from '../components/Settings';
+import { SubscriptionPlans } from '../components/SubscriptionPlans';
+import { UsageCounter } from '../components/UsageCounter';
+import { UpgradeModal } from '../components/UpgradeModal';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
+import { useSubscription } from '../contexts/SubscriptionContext';
 import type { Prompt } from '../lib/supabase';
 import type { SupportedLanguage } from '../lib/openai';
 import { generateSoraPrompt } from '../lib/promptGenerator';
 import { improvePrompt, explainPrompt, generatePrompt } from '../lib/openai';
 import { PromptStorage } from '../lib/promptStorage';
 
-type View = 'new' | 'history' | 'settings';
+type View = 'new' | 'history' | 'settings' | 'subscription';
 
 export default function Dashboard() {
   const [currentView, setCurrentView] = useState<View>('new');
@@ -22,8 +26,11 @@ export default function Dashboard() {
   const [isImproving, setIsImproving] = useState(false);
   const [isChangingLanguage, setIsChangingLanguage] = useState(false);
   const [explanation, setExplanation] = useState<string | undefined>();
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  const [upgradeReason, setUpgradeReason] = useState<'credits_out' | 'frequent_use' | 'director_locked'>('credits_out');
   const { t } = useLanguage();
   const { user } = useAuth();
+  const { hasCredits, canUseDirectorMode, deductCredits } = useSubscription();
 
   const handleGenerate = async (
     input: string,
@@ -31,6 +38,18 @@ export default function Dashboard() {
     language: SupportedLanguage,
     detectedInputLanguage: SupportedLanguage
   ) => {
+    if (user && mode === 'director' && !canUseDirectorMode()) {
+      setUpgradeReason('director_locked');
+      setShowUpgradeModal(true);
+      return;
+    }
+
+    if (user && !hasCredits()) {
+      setUpgradeReason('credits_out');
+      setShowUpgradeModal(true);
+      return;
+    }
+
     try {
       setIsGenerating(true);
       setExplanation(undefined);
@@ -42,6 +61,10 @@ export default function Dashboard() {
         detectedInputLanguage,
         user?.id
       );
+
+      if (user && prompt.id) {
+        await deductCredits(prompt.id, mode);
+      }
 
       setCurrentPrompt(prompt);
     } catch (error) {
@@ -159,6 +182,12 @@ export default function Dashboard() {
             <Settings />
           </div>
         );
+      case 'subscription':
+        return (
+          <div className="p-6 md:p-8 lg:p-12">
+            <SubscriptionPlans />
+          </div>
+        );
       default:
         return (
           <div className="p-6 md:p-8 lg:p-12">
@@ -187,6 +216,12 @@ export default function Dashboard() {
                   </span>
                 </div>
               </div>
+
+              {user && (
+                <div className="mb-8">
+                  <UsageCounter />
+                </div>
+              )}
 
               <PromptInput
                 onGenerate={handleGenerate}
@@ -224,6 +259,12 @@ export default function Dashboard() {
       <main className="flex-1 overflow-x-hidden">
         {renderContent()}
       </main>
+
+      <UpgradeModal
+        isOpen={showUpgradeModal}
+        onClose={() => setShowUpgradeModal(false)}
+        reason={upgradeReason}
+      />
     </div>
   );
 }
