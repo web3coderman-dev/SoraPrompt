@@ -137,12 +137,6 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
               </button>
             </div>
           )}
-          <div className="p-4">
-            <div className="text-xs text-gray-500 text-center">
-              <p className="font-medium">{t.sidebarVersion}</p>
-              <p className="mt-1">{t.sidebarPowered}</p>
-            </div>
-          </div>
         </div>
       </aside>
     </>
