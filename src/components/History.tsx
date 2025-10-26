@@ -286,7 +286,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
           {filteredAndSortedPrompts.map((prompt) => (
             <div
               key={prompt.id}
-              className="bg-white rounded-lg sm:rounded-xl shadow-md border border-gray-200 p-4 sm:p-5 hover:shadow-lg transition-shadow"
+              className="bg-white rounded-lg sm:rounded-xl shadow-md border border-gray-200 p-4 sm:p-5 hover:shadow-lg transition-shadow overflow-hidden"
             >
               <div className="flex items-start justify-between gap-3 sm:gap-4 mb-2 sm:mb-3">
                 <div className="flex-1 min-w-0">
@@ -306,8 +306,8 @@ export default function History({ onSelectPrompt }: HistoryProps) {
                 </div>
               </div>
 
-              <div className="mb-3 sm:mb-4 bg-gray-50 rounded-lg p-2.5 sm:p-3 border border-gray-100">
-                <p className="text-gray-700 text-xs sm:text-sm line-clamp-2 sm:line-clamp-3">
+              <div className="mb-3 sm:mb-4 bg-gray-50 rounded-lg p-2.5 sm:p-3 border border-gray-100 overflow-hidden">
+                <p className="text-gray-700 text-xs sm:text-sm line-clamp-2 sm:line-clamp-3 break-words">
                   {prompt.generated_prompt}
                 </p>
               </div>
