@@ -3,7 +3,7 @@ export type Language = 'zh' | 'en' | 'ja' | 'es' | 'fr' | 'de' | 'ko';
 export const translations = {
   zh: {
     title: 'Sora Prompt Studio',
-    subtitle: '把一句话变成导演级 Prompt,让 Sora 输出真正的电影感',
+    subtitle: '把一句话变成导演级 Prompt，让 Sora 输出真正的电影感',
 
     email: '邮箱',
     password: '密码',

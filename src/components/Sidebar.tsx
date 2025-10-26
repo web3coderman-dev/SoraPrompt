@@ -84,7 +84,7 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center gap-2">
             <Film className="w-8 h-8 text-gray-900" />
-            <h2 className="text-xl font-bold text-gray-900">Sora Studio</h2>
+            <h2 className="text-xl font-bold text-gray-900">SoraPrompt</h2>
           </div>
         </div>
 
