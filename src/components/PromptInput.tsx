@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Sparkles, Film, Lock } from 'lucide-react';
+import { Sparkles, Clapperboard, Lock } from 'lucide-react';
 import { type SupportedLanguage, detectLanguageClient } from '../lib/openai';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -70,7 +70,7 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
       </CardBody>
 
       <CardFooter className="flex flex-col sm:flex-row gap-3">
-        <div className="w-full sm:w-2/5">
+        <div className="w-full sm:w-1/2">
           <Button
             variant="primary"
             icon={Sparkles}
@@ -83,10 +83,10 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
           </Button>
         </div>
 
-        <div className="relative w-full sm:w-3/5">
+        <div className="relative w-full sm:w-1/2">
           <Button
             variant="gradient"
-            icon={user ? Film : Lock}
+            icon={user ? Clapperboard : Lock}
             onClick={() => handleSubmit('director')}
             disabled={!input.trim() || isLoading}
             fullWidth
