@@ -78,11 +78,6 @@ export default function Dashboard() {
   const handleImprove = async (feedback: string) => {
     if (!currentPrompt) return;
 
-    if (!user?.id) {
-      alert(t.language === 'zh' ? '请先登录以保存改进结果' : 'Please sign in to save improvements');
-      return;
-    }
-
     try {
       setIsImproving(true);
 
@@ -93,16 +88,20 @@ export default function Dashboard() {
         outputLang
       );
 
-      const saved = await PromptStorage.updateCloudPrompt(currentPrompt.id, {
+      const updatedPrompt: Prompt = {
+        ...currentPrompt,
         generated_prompt: result.prompt,
         quality_score: result.qualityScore,
-      });
+        updated_at: new Date().toISOString(),
+      };
 
-      if (saved) {
-        setCurrentPrompt(saved);
+      if (user?.id && currentPrompt.user_id) {
+        await PromptStorage.saveToCloud(updatedPrompt, user.id);
       } else {
-        throw new Error('Failed to save improvements');
+        PromptStorage.saveLocalPrompt(updatedPrompt);
       }
+
+      setCurrentPrompt(updatedPrompt);
     } catch (error) {
       console.error('Error improving prompt:', error);
       alert(t.language === 'zh' ? '改进失败，请重试' : 'Improvement failed, please retry');
@@ -131,11 +130,6 @@ export default function Dashboard() {
   const handleLanguageChange = async (language: SupportedLanguage) => {
     if (!currentPrompt) return;
 
-    if (!user?.id) {
-      alert(t.language === 'zh' ? '请先登录以保存语言更改' : 'Please sign in to save language changes');
-      return;
-    }
-
     try {
       setIsChangingLanguage(true);
 
@@ -146,16 +140,20 @@ export default function Dashboard() {
         language
       );
 
-      const saved = await PromptStorage.updateCloudPrompt(currentPrompt.id, {
+      const updatedPrompt: Prompt = {
+        ...currentPrompt,
         generated_prompt: prompt,
         quality_score: qualityScore,
-      });
+        updated_at: new Date().toISOString(),
+      };
 
-      if (saved) {
-        setCurrentPrompt(saved);
+      if (user?.id && currentPrompt.user_id) {
+        await PromptStorage.saveToCloud(updatedPrompt, user.id);
       } else {
-        throw new Error('Failed to save language changes');
+        PromptStorage.saveLocalPrompt(updatedPrompt);
       }
+
+      setCurrentPrompt(updatedPrompt);
     } catch (error) {
       console.error('Error changing language:', error);
       alert(t.language === 'zh' ? '语言切换失败，请重试' : 'Language change failed, please retry');

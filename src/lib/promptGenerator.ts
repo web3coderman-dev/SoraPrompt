@@ -36,14 +36,10 @@ export async function generateSoraPrompt(
     updated_at: new Date().toISOString(),
   };
 
-  if (!userId) {
-    throw new Error('User must be signed in to generate prompts');
+  if (userId) {
+    const saved = await PromptStorage.saveToCloud(promptData, userId);
+    if (saved) return saved;
   }
 
-  const saved = await PromptStorage.saveToCloud(promptData, userId);
-  if (!saved) {
-    throw new Error('Failed to save prompt to cloud');
-  }
-
-  return saved;
+  return PromptStorage.saveLocalPrompt(promptData);
 }
