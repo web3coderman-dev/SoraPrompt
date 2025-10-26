@@ -99,20 +99,28 @@ export function SubscriptionProvider({ children }: { children: ReactNode }) {
   };
 
   const upgradeSubscription = async (newTier: SubscriptionTier): Promise<boolean> => {
-    if (!user || !subscription) return false;
+    if (!user || !subscription) {
+      console.log('No user or subscription found');
+      return false;
+    }
 
     try {
+      console.log('Upgrading subscription to:', newTier);
       const { data, error } = await supabase.rpc('upgrade_subscription', {
         p_user_id: user.id,
         p_new_tier: newTier,
       });
 
+      console.log('Upgrade response:', { data, error });
+
       if (error) throw error;
 
       if (data) {
+        console.log('Upgrade successful, refreshing subscription');
         await refreshSubscription();
         return true;
       }
+      console.log('Upgrade failed: no data returned');
       return false;
     } catch (err) {
       console.error('Error upgrading subscription:', err);
