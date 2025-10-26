@@ -139,7 +139,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
 
   if (loading) {
     return (
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
@@ -152,7 +152,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
 
   if (error) {
     return (
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto px-4">
         <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
           <p className="text-red-800">{error}</p>
           <button
@@ -168,7 +168,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
 
   if (prompts.length === 0) {
     return (
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto px-4">
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-12 text-center">
           <Clock className="w-16 h-16 text-gray-300 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-gray-900 mb-2">{t.historyEmpty}</h3>
@@ -186,8 +186,8 @@ export default function History({ onSelectPrompt }: HistoryProps) {
   }
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <div className="flex items-center justify-between mb-6">
+    <div className="w-full max-w-7xl mx-auto px-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{t.historyTitle}</h2>
         <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg text-sm">
           {user ? (
@@ -283,29 +283,31 @@ export default function History({ onSelectPrompt }: HistoryProps) {
           {filteredAndSortedPrompts.map((prompt) => (
             <div
               key={prompt.id}
-              className="bg-white rounded-xl shadow-md border border-gray-200 p-5 hover:shadow-lg transition-shadow overflow-hidden"
+              className="bg-white rounded-xl shadow-md border border-gray-200 p-5 hover:shadow-lg transition-shadow"
             >
-              <div className="flex items-start justify-between mb-3">
+              <div className="flex items-start justify-between gap-4 mb-3">
                 <div className="flex-1 min-w-0">
                   <p className="text-gray-900 font-medium text-sm mb-1 truncate">
                     {prompt.user_input}
                   </p>
-                  <div className="flex items-center gap-2 text-xs text-gray-500">
-                    <Clock className="w-3.5 h-3.5" />
-                    <span>{formatDate(prompt.created_at)}</span>
-                    <span className="px-2 py-0.5 bg-gray-100 rounded text-gray-700">
+                  <div className="flex items-center gap-2 text-xs text-gray-500 flex-wrap">
+                    <Clock className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span className="whitespace-nowrap">{formatDate(prompt.created_at)}</span>
+                    <span className="px-2 py-0.5 bg-gray-100 rounded text-gray-700 whitespace-nowrap">
                       {prompt.mode === 'quick' ? t.historyFilterQuick : t.historyFilterDirector}
                     </span>
                   </div>
                 </div>
-                <div className={`px-2.5 py-1 rounded-full text-xs font-semibold ml-3 whitespace-nowrap ${getScoreColor(prompt.quality_score)}`}>
+                <div className={`px-2.5 py-1 rounded-full text-xs font-semibold whitespace-nowrap flex-shrink-0 ${getScoreColor(prompt.quality_score)}`}>
                   {prompt.quality_score}
                 </div>
               </div>
 
-              <p className="text-gray-700 text-sm mb-4 line-clamp-2 overflow-hidden bg-gray-50 rounded-lg p-3 border border-gray-100">
-                {prompt.generated_prompt}
-              </p>
+              <div className="mb-4 bg-gray-50 rounded-lg p-3 border border-gray-100">
+                <p className="text-gray-700 text-sm line-clamp-3">
+                  {prompt.generated_prompt}
+                </p>
+              </div>
 
               <div className="flex gap-2">
                 <button
