@@ -195,6 +195,10 @@ export const translations = {
     usageMonth: '本月已用',
     usageRemaining: '剩余 {{count}} 次',
     usageUnlimited: '无限',
+
+    guestUsageTip: '温馨提示',
+    guestUsageTip1: '未登录或免费用户每日可生成 3 条Sora Prompt；',
+    guestUsageTip2: '导演模式提供完整版本 + 分镜头脚本，登录后即可使用。',
   },
   en: {
     title: 'Sora Prompt Studio',
@@ -390,6 +394,10 @@ export const translations = {
     usageMonth: 'Used This Month',
     usageRemaining: '{{count}} remaining',
     usageUnlimited: 'Unlimited',
+
+    guestUsageTip: 'Friendly Reminder',
+    guestUsageTip1: 'Guest or free users can generate 3 Sora Prompts daily;',
+    guestUsageTip2: 'Director mode provides full version + storyboard script. Sign in to unlock.',
   },
   ja: {
     title: 'Sora Prompt Studio',
@@ -558,6 +566,10 @@ export const translations = {
     usageMonth: '今月使用',
     usageRemaining: '残り{{count}}回',
     usageUnlimited: '無制限',
+
+    guestUsageTip: 'お知らせ',
+    guestUsageTip1: '未ログインまたは無料ユーザーは1日3回Soraプロンプトを生成できます；',
+    guestUsageTip2: 'ディレクターモードは完全版+絵コンテスクリプトを提供します。ログインしてご利用ください。',
 
     email: 'メールアドレス',
     password: 'パスワード',
@@ -752,6 +764,10 @@ export const translations = {
     usageMonth: 'Usado Este Mes',
     usageRemaining: '{{count}} restantes',
     usageUnlimited: 'Ilimitado',
+
+    guestUsageTip: 'Recordatorio',
+    guestUsageTip1: 'Los usuarios invitados o gratuitos pueden generar 3 Sora Prompts diarios;',
+    guestUsageTip2: 'El modo director proporciona versión completa + guión de storyboard. Inicie sesión para desbloquear.',
   },
   fr: {
     title: 'Sora Prompt Studio',
@@ -933,6 +949,10 @@ export const translations = {
     usageMonth: 'Utilisé Ce Mois',
     usageRemaining: '{{count}} restants',
     usageUnlimited: 'Illimité',
+
+    guestUsageTip: 'Rappel',
+    guestUsageTip1: 'Les utilisateurs invités ou gratuits peuvent générer 3 Sora Prompts par jour;',
+    guestUsageTip2: 'Le mode réalisateur fournit la version complète + script storyboard. Connectez-vous pour débloquer.',
   },
   de: {
     title: 'Sora Prompt Studio',
@@ -1114,6 +1134,10 @@ export const translations = {
     usageMonth: 'Diesen Monat Verwendet',
     usageRemaining: '{{count}} verbleibend',
     usageUnlimited: 'Unbegrenzt',
+
+    guestUsageTip: 'Hinweis',
+    guestUsageTip1: 'Gast- oder kostenlose Benutzer können täglich 3 Sora Prompts generieren;',
+    guestUsageTip2: 'Regisseur-Modus bietet Vollversion + Storyboard-Skript. Melden Sie sich an, um freizuschalten.',
   },
   ko: {
     title: 'Sora Prompt Studio',
@@ -1295,6 +1319,10 @@ export const translations = {
     usageMonth: '이번 달 사용',
     usageRemaining: '{{count}}회 남음',
     usageUnlimited: '무제한',
+
+    guestUsageTip: '안내',
+    guestUsageTip1: '비로그인 또는 무료 사용자는 하루에 3개Sora Prompt를 생성할 수 있습니다;',
+    guestUsageTip2: '디렉터 모드는 전체 버전 + 스토리보드 스크립트를 제공합니다. 로그인하여 사용하세요.',
   }
 };
 

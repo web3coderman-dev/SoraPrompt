@@ -107,16 +107,18 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
 
       {!user && (
         <div className="px-6 pb-6">
-          <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-sm">
-            <p className="text-blue-900 font-medium mb-1">
-              {language === 'zh' ? '🎬 Director 模式需要登录' : '🎬 Director Mode requires login'}
+          <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm">
+            <p className="text-blue-900 font-semibold mb-2">
+              {t.guestUsageTip}
             </p>
-            <p className="text-blue-700 text-xs">
-              {language === 'zh'
-                ? 'Director 模式提供完整版本 + 分镜头脚本，登录后即可使用'
-                : 'Director Mode provides full version + storyboard script. Sign in to unlock.'
-              }
-            </p>
+            <div className="space-y-1">
+              <p className="text-blue-800 text-xs leading-relaxed">
+                1. {t.guestUsageTip1}
+              </p>
+              <p className="text-blue-800 text-xs leading-relaxed">
+                2. {t.guestUsageTip2}
+              </p>
+            </div>
           </div>
         </div>
       )}
