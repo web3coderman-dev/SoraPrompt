@@ -149,7 +149,7 @@ export default function Dashboard() {
     switch (currentView) {
       case 'history':
         return (
-          <div className="py-6 md:py-8 lg:py-12">
+          <div className="p-6 md:p-8 lg:p-12">
             <History onSelectPrompt={handlePromptSelected} />
           </div>
         );
