@@ -87,7 +87,7 @@ export default function PromptResult({
             <div className="flex flex-col items-center gap-3 animate-fade-in">
               <RefreshCw className="w-8 h-8 text-primary-600 animate-spin" />
               <p className="text-gray-600">
-                {t.language === 'zh' ? '正在切换语言...' : 'Changing language...'}
+                {t.changingLanguage}
               </p>
             </div>
           </div>

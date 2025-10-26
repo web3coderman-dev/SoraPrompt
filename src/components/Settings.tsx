@@ -106,7 +106,7 @@ export default function Settings() {
 
         <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            {language === 'zh' ? '主题外观' : 'Theme Appearance'}
+            {t.themeAppearance}
           </h3>
           <div className="grid grid-cols-2 gap-3">
             <button
@@ -121,7 +121,7 @@ export default function Settings() {
                 <div className="flex items-center gap-3">
                   <Sun className="w-5 h-5" />
                   <span className="font-medium">
-                    {language === 'zh' ? '浅色模式' : 'Light Mode'}
+                    {t.lightMode}
                   </span>
                 </div>
                 {theme === 'light' && <Check className="w-5 h-5 text-primary-600" />}
@@ -140,7 +140,7 @@ export default function Settings() {
                 <div className="flex items-center gap-3">
                   <Moon className="w-5 h-5" />
                   <span className="font-medium">
-                    {language === 'zh' ? '深色模式' : 'Dark Mode'}
+                    {t.darkMode}
                   </span>
                 </div>
                 {theme === 'dark' && <Check className="w-5 h-5 text-primary-600" />}

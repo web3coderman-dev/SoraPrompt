@@ -174,9 +174,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
           {!user && (
             <div className="mt-6 p-4 bg-primary-50 border border-primary-200 rounded-lg">
               <p className="text-sm text-primary-800">
-                {language === 'zh'
-                  ? '💡 提示：未登录用户的历史记录保存在本地浏览器中，最多保存 10 条。'
-                  : '💡 Tip: History for guest users is saved locally in your browser, limited to 10 items.'}
+                {t.storageGuestTip}
               </p>
             </div>
           )}
@@ -194,14 +192,14 @@ export default function History({ onSelectPrompt }: HistoryProps) {
             <>
               <Cloud className="w-4 h-4 text-primary-600" />
               <span className="text-gray-700">
-                {language === 'zh' ? '云端' : 'Cloud'}
+                {t.storageCloud}
               </span>
             </>
           ) : (
             <>
               <HardDrive className="w-4 h-4 text-gray-600" />
               <span className="text-gray-700">
-                {language === 'zh' ? `本地 (${prompts.length}/10)` : `Local (${prompts.length}/10)`}
+                {t.storageLocalLimit.replace('{{count}}', String(prompts.length))}
               </span>
             </>
           )}

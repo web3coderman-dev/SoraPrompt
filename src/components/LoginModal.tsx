@@ -195,7 +195,7 @@ export default function LoginModal({ onClose }: LoginModalProps) {
               />
             </svg>
             <span>
-              {language === 'zh' ? '使用 Google 继续' : 'Continue with Google'}
+              {t.continueWithGoogle}
             </span>
           </button>
         </div>
@@ -217,10 +217,7 @@ export default function LoginModal({ onClose }: LoginModalProps) {
 
         <div className="mt-6 text-center text-xs text-gray-500">
           <p>
-            {language === 'zh'
-              ? '继续即表示您同意我们的服务条款和隐私政策'
-              : 'By continuing, you agree to our Terms of Service and Privacy Policy'
-            }
+            {t.privacyPolicy}
           </p>
         </div>
       </div>

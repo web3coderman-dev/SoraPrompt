@@ -135,7 +135,7 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
                 className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-semibold active:scale-[0.98]"
               >
                 <LogOut className="w-4 h-4" />
-                <span>{signingOut ? (language === 'zh' ? '退出中...' : 'Signing out...') : (language === 'zh' ? '退出登录' : 'Sign Out')}</span>
+                <span>{signingOut ? t.signingOut : t.signOut}</span>
               </button>
             </div>
           ) : (
@@ -145,7 +145,7 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
                 className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white rounded-lg transition-all duration-200 shadow-md hover:shadow-lg font-semibold active:scale-[0.98]"
               >
                 <LogIn className="w-5 h-5" />
-                <span>{language === 'zh' ? '登录 / 注册' : 'Sign In / Sign Up'}</span>
+                <span>{t.signInSignUp}</span>
               </button>
             </div>
           )}
