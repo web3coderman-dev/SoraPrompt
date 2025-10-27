@@ -1,550 +1,1296 @@
-# 🎨 Sora Prompt Studio 设计系统
+# 🎬 SoraPrompt Design System — Studio Edition v1.0
 
-> **版本：** v1.0.0
-> **最后更新：** 2025-10-26
+> **Core Theme:** AI Cinematic Studio（AI 电影片场）
+> **让每一个 Prompt 创作者，都像导演一样走进自己的 AI 片场**
 
----
-
-## 📋 目录
-
-1. [设计原则](#设计原则)
-2. [品牌基础](#品牌基础)
-3. [颜色系统](#颜色系统)
-4. [字体系统](#字体系统)
-5. [间距系统](#间距系统)
-6. [组件规范](#组件规范)
-7. [动画与交互](#动画与交互)
-8. [响应式规范](#响应式规范)
+**Version:** 1.0.0
+**Last Updated:** 2025-10-27
+**Brand Statement:** *"Direct the AI. Capture your imagination."*
 
 ---
 
-## 🎯 设计原则
+## 📋 Table of Contents
 
-### 1. 专业而友好
-- 保持专业的视觉呈现
-- 降低使用门槛，友好引导
-- 避免过度装饰
-
-### 2. 清晰的视觉层次
-- 主次分明的信息架构
-- 合理的留白和间距
-- 一致的视觉节奏
-
-### 3. 响应式优先
-- 移动端友好
-- 优雅的断点过渡
-- 适配不同屏幕尺寸
-
-### 4. 高性能
-- 流畅的动画（60fps）
-- 快速的交互反馈
-- 合理的加载状态
+1. [Design Philosophy](#-design-philosophy)
+2. [Visual System](#-visual-system)
+3. [Typography System](#-typography-system)
+4. [Spacing & Layout](#-spacing--layout)
+5. [Motion System](#-motion-system)
+6. [Component Grammar](#-component-grammar)
+7. [Interaction System](#-interaction-system)
+8. [Brand Language](#-brand-language)
+9. [Implementation Guide](#-implementation-guide)
 
 ---
 
-## 🎨 品牌基础
+## 🎯 Design Philosophy
 
-### 品牌定位
-**Sora Prompt Studio** - 专业的 AI 视频提示词创作工具
+### Core Metaphor: AI Film Studio
 
-### 品牌关键词
-- 🎬 电影感（Cinematic）
-- ⚡ 智能（Intelligent）
-- 🎨 创意（Creative）
-- 🚀 高效（Efficient）
+SoraPrompt 的视觉隐喻是 **"AI 电影片场"**。每个交互环节都应对应真实电影制作流程：
 
-### 视觉风格
-- **现代简约**：干净的界面，专注内容
-- **轻微渐变**：增加视觉深度
-- **圆角设计**：友好亲和
-- **微妙阴影**：层次感
+```
+Scene（场景）   → 主创作区域，布局场景
+Camera（镜头）  → 视角控制，构图调整
+Lighting（布光）→ 氛围营造，视觉增强
+Script（剧本）  → Prompt 编写，导演语言
+Render（渲染）  → AI 生成，实时预览
+```
+
+### Design Principles
+
+#### 1. **导演式协作 (Director's Collaboration)**
+- 用户不是"操作者"，而是"导演"
+- AI 是协作的"摄影师"和"灯光师"
+- 每个控件都是片场设备（如调光台、镜头选择器）
+
+#### 2. **暗夜片场氛围 (Night Studio Atmosphere)**
+- 深色背景模拟真实片场环境（0B0D12）
+- 蓝橙色光线模拟专业布光（Key Light + Rim Light）
+- 霓虹特效代表 AI 能量流动
+
+#### 3. **电影级视觉质感 (Cinematic Visual Quality)**
+- 使用真实光影效果（投射阴影、环境光）
+- 微妙的景深与模糊效果
+- 流畅的镜头运动式动画
+
+#### 4. **专业而直观 (Professional yet Intuitive)**
+- 视觉专业但不晦涩
+- 术语接地气（"开拍" > "执行"）
+- 降低创作门槛，保持专业调性
 
 ---
 
-## 🌈 颜色系统
+## 🌈 Visual System
 
-### 主色调（Primary）
-品牌主色 - 蓝色系（代表智能、专业、科技）
+### Color Tokens
 
-```css
-primary-50:   #EFF6FF   /* 极浅蓝 - 背景 */
-primary-100:  #DBEAFE   /* 浅蓝 - 次级背景 */
-primary-200:  #BFDBFE   /* 中浅蓝 */
-primary-300:  #93C5FD   /* 中蓝 */
-primary-400:  #60A5FA   /* 标准蓝 */
-primary-500:  #3B82F6   /* 主蓝 - 主按钮 */
-primary-600:  #2563EB   /* 深蓝 - 悬停 */
-primary-700:  #1D4ED8   /* 更深蓝 - 激活 */
-primary-800:  #1E40AF   /* 极深蓝 */
-primary-900:  #1E3A8A   /* 最深蓝 */
-```
+#### Scene Colors（场景色）
+片场基础色调，营造暗夜摄影棚氛围
 
-### 辅助色调（Secondary）
-电影感 - 紫色系（代表创意、艺术）
+| Token | Value | Usage | Example |
+|-------|-------|-------|---------|
+| `color.scene.background` | `#0B0D12` | 主背景（暗色片场地面） | 页面底色、侧边栏 |
+| `color.scene.fill` | `#141821` | 填充色（布景板） | 卡片背景、面板 |
+| `color.scene.fillLight` | `#1A1F2E` | 亮填充（补光区域） | 悬停状态、选中区域 |
+
+**视觉效果：** 深邃的片场环境，低反光，视觉焦点集中在内容
 
 ```css
-secondary-50:   #FAF5FF   /* 极浅紫 */
-secondary-100:  #F3E8FF   /* 浅紫 */
-secondary-200:  #E9D5FF   /* 中浅紫 */
-secondary-300:  #D8B4FE   /* 中紫 */
-secondary-400:  #C084FC   /* 标准紫 */
-secondary-500:  #A855F7   /* 主紫 - 强调色 */
-secondary-600:  #9333EA   /* 深紫 */
-secondary-700:  #7E22CE   /* 更深紫 */
-secondary-800:  #6B21A8   /* 极深紫 */
-secondary-900:  #581C87   /* 最深紫 */
-```
-
-### 中性色调（Neutral）
-界面基础色 - 灰色系
-
-```css
-gray-50:   #F9FAFB   /* 背景 */
-gray-100:  #F3F4F6   /* 次级背景 */
-gray-200:  #E5E7EB   /* 边框 */
-gray-300:  #D1D5DB   /* 分割线 */
-gray-400:  #9CA3AF   /* 禁用文本 */
-gray-500:  #6B7280   /* 次要文本 */
-gray-600:  #4B5563   /* 正文 */
-gray-700:  #374151   /* 小标题 */
-gray-800:  #1F2937   /* 标题 */
-gray-900:  #111827   /* 主标题 */
-```
-
-### 语义色（Semantic Colors）
-
-#### 成功（Success）
-```css
-success-50:   #F0FDF4   /* 浅绿背景 */
-success-500:  #10B981   /* 标准绿 */
-success-600:  #059669   /* 深绿 */
-```
-
-#### 警告（Warning）
-```css
-warning-50:   #FFFBEB   /* 浅黄背景 */
-warning-500:  #F59E0B   /* 标准黄 */
-warning-600:  #D97706   /* 深黄 */
-```
-
-#### 错误（Error）
-```css
-error-50:   #FEF2F2   /* 浅红背景 */
-error-500:  #EF4444   /* 标准红 */
-error-600:  #DC2626   /* 深红 */
-```
-
-#### 信息（Info）
-```css
-info-50:   #EFF6FF   /* 浅蓝背景 */
-info-500:  #3B82F6   /* 标准蓝 */
-info-600:  #2563EB   /* 深蓝 */
-```
-
-### 渐变色（Gradients）
-
-```css
-gradient-primary:   linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)
-gradient-secondary: linear-gradient(135deg, #A855F7 0%, #7E22CE 100%)
-gradient-mixed:     linear-gradient(135deg, #3B82F6 0%, #A855F7 100%)
-gradient-bg:        linear-gradient(135deg, #F9FAFB 0%, #EFF6FF 50%, #FAF5FF 100%)
+/* 示例：主容器 */
+.studio-container {
+  background: linear-gradient(180deg, #0B0D12 0%, #141821 100%);
+}
 ```
 
 ---
 
-## 📝 字体系统
+#### Light Colors（灯光色）
+专业布光系统，基于三点照明原理
 
-### 字体族（Font Family）
+| Token | Value | Usage | Metaphor |
+|-------|-------|-------|----------|
+| `color.light.key` | `#3A6CFF` | 主光源（Key Light） | 品牌主色、主按钮、链接 |
+| `color.light.rim` | `#E4A24D` | 边缘光（Rim Light） | 强调边框、温暖氛围 |
+| `color.light.neon` | `#8A60FF` | 霓虹光（Neon FX） | AI 能量、特效、动画 |
+| `color.light.fill` | `#2A3441` | 补光（Fill Light） | 次要元素、禁用状态 |
 
-#### 主字体
-```css
-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-           "Helvetica Neue", Arial, sans-serif
+**三点照明示意：**
+```
+     Key Light (蓝)
+         ▼
+    ┌─────────┐
+    │  主体   │ ← Rim Light (金)
+    └─────────┘
+         ▲
+    Fill Light (灰)
 ```
 
-#### 等宽字体（代码）
-```css
-font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
-           Consolas, monospace
-```
-
-### 字体大小（Font Size）
-
-| 名称 | 尺寸 | 行高 | 用途 |
-|------|------|------|------|
-| `text-xs` | 12px (0.75rem) | 16px (1rem) | 辅助信息、标签 |
-| `text-sm` | 14px (0.875rem) | 20px (1.25rem) | 次要文本、按钮 |
-| `text-base` | 16px (1rem) | 24px (1.5rem) | 正文 |
-| `text-lg` | 18px (1.125rem) | 28px (1.75rem) | 小标题 |
-| `text-xl` | 20px (1.25rem) | 28px (1.75rem) | 卡片标题 |
-| `text-2xl` | 24px (1.5rem) | 32px (2rem) | 页面副标题 |
-| `text-3xl` | 30px (1.875rem) | 36px (2.25rem) | 页面标题 |
-| `text-4xl` | 36px (2.25rem) | 40px (2.5rem) | 主标题 |
-| `text-5xl` | 48px (3rem) | 1 | Hero 标题 |
-| `text-6xl` | 60px (3.75rem) | 1 | 特大标题 |
-
-### 字重（Font Weight）
+**使用场景：**
+- **Key Light（蓝色）：** 导演的主要工作区（Prompt 编辑器、主按钮）
+- **Rim Light（金色）：** 高级功能提示、成功状态、预览区边缘
+- **Neon（紫色）：** AI 正在工作、渲染状态、魔法时刻
 
 ```css
-font-normal:    400   /* 正文 */
-font-medium:    500   /* 次要强调 */
-font-semibold:  600   /* 小标题、按钮 */
-font-bold:      700   /* 标题 */
-```
+/* 示例：主按钮（导演喊 Action） */
+.button-take {
+  background: linear-gradient(135deg, #3A6CFF 0%, #5C89FF 100%);
+  box-shadow: 0 0 24px rgba(58, 108, 255, 0.3);
+}
 
-### 行高（Line Height）
-
-```css
-leading-tight:   1.25   /* 标题 */
-leading-snug:    1.375  /* 小标题 */
-leading-normal:  1.5    /* 正文 */
-leading-relaxed: 1.625  /* 长文本 */
-leading-loose:   2      /* 特殊用途 */
+/* 示例：AI 渲染中 */
+.rendering-glow {
+  border: 2px solid #8A60FF;
+  box-shadow: 0 0 32px rgba(138, 96, 255, 0.5);
+  animation: neon-pulse 2s ease-in-out infinite;
+}
 ```
 
 ---
 
-## 📏 间距系统
+#### State Colors（状态色）
+清晰的状态反馈，符合电影制作流程
 
-采用 **8px 基准栅格系统**（8pt Grid）
+| Token | Value | Usage | Cinema Metaphor |
+|-------|-------|-------|-----------------|
+| `color.state.ok` | `#45E0A2` | 成功/就绪 | 绿灯（Green Light - 开拍） |
+| `color.state.error` | `#FF5E5E` | 错误/阻塞 | 红灯（Red Light - 停机） |
+| `color.state.warning` | `#FFB74D` | 警告/注意 | 黄灯（Amber Light - 准备） |
+| `color.state.info` | `#64B5F6` | 信息/提示 | 蓝灯（Blue Screen - 后期） |
 
-### 间距尺度（Spacing Scale）
-
-| Token | 值 | 用途 |
-|-------|-----|------|
-| `spacing-0` | 0px | 无间距 |
-| `spacing-1` | 4px | 极小间距 |
-| `spacing-2` | 8px | 小间距 |
-| `spacing-3` | 12px | 中小间距 |
-| `spacing-4` | 16px | 标准间距 |
-| `spacing-5` | 20px | 中间距 |
-| `spacing-6` | 24px | 中大间距 |
-| `spacing-8` | 32px | 大间距 |
-| `spacing-10` | 40px | 更大间距 |
-| `spacing-12` | 48px | 超大间距 |
-| `spacing-16` | 64px | 区块间距 |
-| `spacing-20` | 80px | 页面间距 |
-| `spacing-24` | 96px | 特大间距 |
-
-### 间距使用指南
-
-#### 组件内部间距（Padding）
-- **按钮内边距：** `px-4 py-2`（16px × 8px）或 `px-6 py-3`（24px × 12px）
-- **卡片内边距：** `p-4`（16px）或 `p-6`（24px）
-- **输入框内边距：** `px-4 py-2.5`（16px × 10px）
-
-#### 组件之间间距（Margin/Gap）
-- **表单项间距：** `space-y-4`（16px）
-- **卡片间距：** `gap-4`（16px）或 `gap-6`（24px）
-- **区块间距：** `space-y-8`（32px）或 `space-y-12`（48px）
+**状态语义：**
+```
+🟢 Green Light   → "Scene is ready"（场景就绪）
+🔴 Red Light     → "Cut! Something's wrong"（停！有问题）
+🟡 Amber Light   → "Stand by..."（准备中...）
+🔵 Blue Light    → "In post-production"（后期处理）
+```
 
 ---
 
-## 🧩 组件规范
+#### Text Colors（文字色）
+层次分明的文本系统
 
-### 按钮（Buttons）
+| Token | Value | Usage |
+|-------|-------|-------|
+| `color.text.primary` | `#FFFFFF` | 主要文字（剧本标题、导演指令） |
+| `color.text.secondary` | `#A0A8B8` | 次要文字（场记信息、时间码） |
+| `color.text.tertiary` | `#6B7280` | 辅助文字（备注、提示） |
+| `color.text.disabled` | `#4B5563` | 禁用文字（未激活设备） |
 
-#### 主要按钮（Primary Button）
+---
+
+#### Border & Overlay（边框与遮罩）
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `color.border.subtle` | `rgba(58, 108, 255, 0.1)` | 微妙分隔线 |
+| `color.border.default` | `rgba(58, 108, 255, 0.2)` | 标准边框 |
+| `color.border.strong` | `rgba(58, 108, 255, 0.4)` | 强调边框 |
+| `color.overlay.light` | `rgba(0, 0, 0, 0.4)` | 轻遮罩（模态框背景） |
+| `color.overlay.medium` | `rgba(0, 0, 0, 0.6)` | 中遮罩（聚焦模式） |
+| `color.overlay.heavy` | `rgba(0, 0, 0, 0.8)` | 重遮罩（全屏预览） |
+
+---
+
+### Gradients（渐变）
+
+模拟片场光线渐变效果
+
+```css
+/* 主光渐变（蓝色导演光） */
+gradient-key: linear-gradient(135deg, #3A6CFF 0%, #0A47E8 100%)
+
+/* 边缘光渐变（金色暖光） */
+gradient-rim: linear-gradient(135deg, #E4A24D 0%, #D68722 100%)
+
+/* 霓虹渐变（紫色能量） */
+gradient-neon: linear-gradient(135deg, #8A60FF 0%, #6730FF 100%)
+
+/* 混合光（蓝紫混合） */
+gradient-mixed: linear-gradient(135deg, #3A6CFF 0%, #8A60FF 100%)
+
+/* 片场背景（深色渐变） */
+gradient-studio: linear-gradient(180deg, #0B0D12 0%, #141821 100%)
+```
+
+**使用示例：**
+```css
+/* 高级按钮 */
+.button-director {
+  background: linear-gradient(135deg, #3A6CFF 0%, #8A60FF 100%);
+}
+
+/* 渲染进度条 */
+.progress-render {
+  background: linear-gradient(90deg, #8A60FF 0%, #3A6CFF 100%);
+}
+```
+
+---
+
+## 📝 Typography System
+
+### Font Family（字体族）
+
+基于电影制作流程的字体分类
+
+| Token | Font | Usage | Metaphor |
+|-------|------|-------|----------|
+| `font.primary` | Inter / 思源黑体 | 主界面文字 | 片场标识牌 |
+| `font.script` | EB Garamond / 仿宋体 | Prompt 剧本区 | 导演手写剧本 |
+| `font.code` | IBM Plex Mono | 技术参数、代码 | 摄影机参数面板 |
+| `font.display` | Space Grotesk | 品牌标题、大标题 | 片场大屏幕 |
+
+**字体选择原则：**
+- **Primary（Inter）：** 清晰、专业，适合长时间阅读
+- **Script（EB Garamond）：** 优雅、有仪式感，模拟导演手稿
+- **Code（IBM Plex Mono）：** 等宽、精确，技术参数专用
+- **Display（Space Grotesk）：** 几何、现代，品牌识别
+
+```css
+/* 实现示例 */
+.font-primary {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.font-script {
+  font-family: "EB Garamond", Georgia, serif;
+  font-style: italic; /* 导演手写感 */
+}
+
+.font-code {
+  font-family: "IBM Plex Mono", "Menlo", monospace;
+  font-variant-numeric: tabular-nums; /* 数字对齐 */
+}
+
+.font-display {
+  font-family: "Space Grotesk", Inter, sans-serif;
+  letter-spacing: -0.02em; /* 紧凑现代感 */
+}
+```
+
+---
+
+### Font Scale（字号比例）
+
+| Size Token | Value | Line Height | Usage | Cinema Context |
+|------------|-------|-------------|-------|----------------|
+| `text-xs` | 12px (0.75rem) | 16px (1.33) | 时间码、技术标签 | Timecode |
+| `text-sm` | 14px (0.875rem) | 20px (1.43) | 场记信息、次要文字 | Slate Info |
+| `text-base` | 16px (1rem) | 24px (1.5) | 正文、导演指令 | Script Body |
+| `text-lg` | 18px (1.125rem) | 28px (1.56) | 场景标题 | Scene Header |
+| `text-xl` | 20px (1.25rem) | 28px (1.4) | 镜头编号 | Shot Number |
+| `text-2xl` | 24px (1.5rem) | 32px (1.33) | 幕次标题 | Act Title |
+| `text-3xl` | 30px (1.875rem) | 36px (1.2) | 章节标题 | Chapter Title |
+| `text-4xl` | 36px (2.25rem) | 40px (1.11) | 主标题 | Main Title |
+| `text-5xl` | 48px (3rem) | 48px (1) | 片头标题 | Opening Title |
+
+---
+
+### Font Weight（字重）
+
+| Token | Value | Usage | Cinema Context |
+|-------|-------|-------|----------------|
+| `font-regular` | 400 | 正文、一般信息 | 普通场记 |
+| `font-medium` | 500 | 次要强调、标签 | 部门标注 |
+| `font-bold` | 700 | 标题、导演指令 | 导演批注 |
+
+**使用原则：**
+- Regular（400）：默认正文，舒适阅读
+- Medium（500）：界面标签、按钮文字
+- Bold（700）：标题、重要指令（导演的加粗批注）
+
+---
+
+### Line Height（行高）
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `leading-tight` | 1.2 | 大标题、Display 文字 |
+| `leading-normal` | 1.5 | 正文、Prompt 文本 |
+| `leading-relaxed` | 1.75 | 长文本、剧本阅读 |
+
+---
+
+### Letter Spacing（字间距）
+
+```css
+tracking-tight:   -0.02em   /* 紧凑（Display 标题） */
+tracking-normal:   0        /* 标准（正文） */
+tracking-wide:     0.05em   /* 宽松（小标签） */
+```
+
+---
+
+## 📏 Spacing & Layout
+
+### Spacing Scale（间距比例）
+
+基于 **8px Grid System**（8pt 栅格）
+
+| Token | Value | Usage | Studio Context |
+|-------|-------|-------|----------------|
+| `space.frame.sm` | 8px | 组件内小间距 | 设备按钮间距 |
+| `space.frame.md` | 16px | 组件内标准间距 | 控制面板间距 |
+| `space.frame.lg` | 32px | 场景区块间距 | 拍摄区域分隔 |
+| `space.frame.xl` | 48px | 主区域间距 | 片场分区间距 |
+
+---
+
+### Radius（圆角）
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `radius.sm` | 6px | 小按钮、标签 |
+| `radius.md` | 8px | 标准按钮、输入框 |
+| `radius.card` | 12px | 卡片、面板 |
+| `radius.lg` | 16px | 大型容器 |
+| `radius.full` | 9999px | 完全圆角（状态灯） |
+
+---
+
+### Shadows（阴影）
+
+模拟片场灯光投射效果
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `shadow.light` | `0 0 24px rgba(58, 108, 255, 0.2)` | Key Light 柔光 |
+| `shadow.key` | `0 8px 32px rgba(58, 108, 255, 0.3)` | 主光源投射 |
+| `shadow.rim` | `0 4px 16px rgba(228, 162, 77, 0.25)` | 边缘光晕 |
+| `shadow.neon` | `0 0 20px rgba(138, 96, 255, 0.4)` | 霓虹发光 |
+| `shadow.depth.sm` | `0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)` | 微景深 |
+| `shadow.depth.lg` | `0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05)` | 深景深 |
+
+---
+
+## ⚡ Motion System
+
+### Motion Tokens（动效令牌）
+
+基于电影拍摄术语的动画系统
+
+| Token | Duration | Easing | Usage | Cinema Term |
+|-------|----------|--------|-------|-------------|
+| `motion.camera.pan` | 300ms | ease-in-out | 面板切换 | 摇镜头（Pan） |
+| `motion.camera.dolly` | 500ms | ease-out | 缩放动画 | 推轨（Dolly） |
+| `motion.cut.fade` | 200ms | ease-in | 淡入淡出 | 淡化（Fade） |
+| `motion.cut.dissolve` | 400ms | ease-in-out | 溶解过渡 | 溶解（Dissolve） |
+| `motion.light.blink` | 1000ms | infinite alternate | 灯光闪烁 | 灯光效果 |
+| `motion.render.pulse` | 800ms | ease-in-out infinite | 渲染脉冲 | 渲染中 |
+
+---
+
+### Animation Examples（动画示例）
+
+#### Camera Pan（摇镜头）
+用于面板切换、侧边栏展开
+
+```css
+@keyframes camera-pan {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.panel-enter {
+  animation: camera-pan 300ms ease-in-out;
+}
+```
+
+#### Cut Fade（淡切）
+用于模态框、提示框
+
+```css
+@keyframes cut-fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.modal-enter {
+  animation: cut-fade 200ms ease-in;
+}
+```
+
+#### Light Blink（灯光闪烁）
+用于状态指示、AI 工作提示
+
+```css
+@keyframes light-blink {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+.status-recording {
+  animation: light-blink 1000ms infinite alternate;
+}
+```
+
+#### Render Pulse（渲染脉冲）
+用于 AI 生成中状态
+
+```css
+@keyframes render-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.ai-rendering {
+  animation: render-pulse 800ms ease-in-out infinite;
+}
+```
+
+---
+
+### Transition Duration（过渡时长）
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `duration.fast` | 150ms | 微交互（按钮悬停） |
+| `duration.normal` | 300ms | 标准过渡（面板切换） |
+| `duration.slow` | 500ms | 大型动画（页面过渡） |
+
+---
+
+## 🧩 Component Grammar
+
+### 组件命名规则（Cinematic Naming）
+
+所有组件使用电影制作术语命名
+
+| Component Type | Naming Convention | Example | Explanation |
+|----------------|-------------------|---------|-------------|
+| **按钮** | `Button.{Action}` | `Button.Take`, `Button.Cut` | 导演指令 |
+| **面板** | `Panel.{Area}` | `Panel.Scene`, `Panel.Script` | 片场区域 |
+| **标签** | `Tag.{Status}` | `Tag.Recording`, `Tag.Ready` | 状态指示 |
+| **滑块** | `Slider.{Control}` | `Slider.LightIntensity` | 设备控制 |
+| **进度** | `Progress.{Process}` | `Progress.Render` | 流程进度 |
+| **提示** | `Toast.{Type}` | `Toast.FilmSlate` | 场记板提示 |
+
+---
+
+### Button Components（按钮组件）
+
+#### Button.Take（开拍按钮）
+执行主要操作，如"生成 Prompt"、"开始渲染"
+
 ```tsx
-<button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-800
-                   text-white font-semibold rounded-lg shadow-md
-                   hover:shadow-lg transition-all duration-200
-                   disabled:opacity-50 disabled:cursor-not-allowed">
-  按钮文字
+<button className="
+  px-6 py-3
+  bg-gradient-to-r from-keyLight to-keyLight-600
+  text-white font-display font-bold
+  rounded-lg shadow-key
+  hover:shadow-neon hover:scale-105
+  active:scale-100
+  transition-all duration-300
+">
+  <PlayIcon className="w-5 h-5 mr-2" />
+  Take • 开拍
 </button>
 ```
 
-**规格：**
-- 高度：44px（移动端）/ 40px（桌面端）
-- 最小宽度：88px
-- 圆角：8px（`rounded-lg`）
-- 阴影：中等（`shadow-md`）
-- 悬停：加深颜色 + 增强阴影
-
-#### 次要按钮（Secondary Button）
-```tsx
-<button className="px-6 py-3 bg-white border-2 border-gray-300
-                   hover:border-gray-400 hover:bg-gray-50
-                   text-gray-700 font-semibold rounded-lg
-                   transition-all duration-200">
-  按钮文字
-</button>
-```
-
-#### 幽灵按钮（Ghost Button）
-```tsx
-<button className="px-4 py-2 text-blue-600 hover:bg-blue-50
-                   font-semibold rounded-lg transition-all duration-200">
-  按钮文字
-</button>
-```
-
-#### 按钮尺寸变体
-
-| 尺寸 | 类名 | 高度 | 内边距 |
-|------|------|------|--------|
-| 小 | `px-3 py-1.5 text-sm` | 32px | 12px × 6px |
-| 中 | `px-4 py-2 text-sm` | 36px | 16px × 8px |
-| 大 | `px-6 py-3 text-base` | 44px | 24px × 12px |
-| 超大 | `px-8 py-4 text-lg` | 56px | 32px × 16px |
+**视觉特征：**
+- 蓝色渐变（Key Light）
+- 发光阴影
+- 悬停时放大 + 紫色光晕（Neon）
+- 图标 + 文字组合
 
 ---
 
-### 输入框（Input Fields）
+#### Button.Cut（停止按钮）
+停止操作，如"停止生成"、"取消渲染"
 
-#### 标准输入框
 ```tsx
-<input className="w-full px-4 py-2.5 border border-gray-300 rounded-lg
-                  focus:outline-none focus:ring-2 focus:ring-blue-500
-                  focus:border-transparent placeholder:text-gray-400
-                  transition-all duration-200"
-       type="text"
-       placeholder="请输入..." />
-```
-
-**规格：**
-- 高度：44px
-- 边框：1px，灰色（`border-gray-300`）
-- 圆角：8px
-- 聚焦：2px 蓝色描边（`focus:ring-2 focus:ring-blue-500`）
-
-#### 文本域（Textarea）
-```tsx
-<textarea className="w-full px-4 py-3 border border-gray-300 rounded-lg
-                     focus:outline-none focus:ring-2 focus:ring-blue-500
-                     focus:border-transparent placeholder:text-gray-400
-                     resize-none transition-all duration-200"
-          rows={4}
-          placeholder="请输入..."></textarea>
+<button className="
+  px-6 py-3
+  bg-state-error/10 border-2 border-state-error
+  text-state-error font-display font-bold
+  rounded-lg
+  hover:bg-state-error hover:text-white
+  transition-all duration-200
+">
+  <StopIcon className="w-5 h-5 mr-2" />
+  Cut • 停
+</button>
 ```
 
 ---
 
-### 卡片（Cards）
+#### Button.Preview（预览按钮）
+次要操作，如"预览"、"查看详情"
 
-#### 标准卡片
 ```tsx
-<div className="bg-white rounded-2xl shadow-lg border border-gray-200
-                overflow-hidden hover:shadow-xl transition-shadow duration-300">
-  <div className="p-6">
-    卡片内容
+<button className="
+  px-4 py-2
+  bg-scene-fill border border-border-default
+  text-text-secondary font-medium
+  rounded-lg
+  hover:bg-scene-fillLight hover:border-keyLight
+  hover:text-text-primary
+  transition-all duration-200
+">
+  Preview • 预览
+</button>
+```
+
+---
+
+### Panel Components（面板组件）
+
+#### Panel.Scene（主场景面板）
+核心创作区域
+
+```tsx
+<div className="
+  bg-scene-fill border border-border-subtle
+  rounded-card p-6
+  shadow-depth-lg
+">
+  <div className="flex items-center gap-3 mb-4">
+    <FilmIcon className="w-6 h-6 text-keyLight" />
+    <h2 className="text-xl font-display font-bold text-text-primary">
+      Scene • 场景
+    </h2>
   </div>
+  {/* 内容区域 */}
 </div>
 ```
 
-**规格：**
-- 圆角：16px（`rounded-2xl`）
-- 阴影：大（`shadow-lg`）
-- 边框：1px 灰色
-- 内边距：24px（`p-6`）
-- 悬停：增强阴影
+---
 
-#### 交互卡片（可点击）
+#### Panel.Script（剧本面板）
+Prompt 编写区
+
 ```tsx
-<div className="bg-white rounded-xl shadow-md border border-gray-200
-                cursor-pointer hover:shadow-lg hover:border-blue-300
-                transition-all duration-200 active:scale-[0.98]">
-  <div className="p-4">
-    卡片内容
-  </div>
+<div className="
+  bg-scene-fill border-l-4 border-rimLight
+  rounded-card p-6
+">
+  <h3 className="text-lg font-script text-text-primary mb-4">
+    Script • 剧本
+  </h3>
+  <textarea className="
+    w-full h-64
+    bg-scene-background
+    border border-border-subtle
+    rounded-lg p-4
+    font-script text-text-primary
+    focus:border-keyLight focus:ring-2 focus:ring-keyLight/20
+    resize-none
+  " placeholder="Type your vision here..." />
 </div>
 ```
 
 ---
 
-### 标签（Badges/Tags）
+#### Panel.Lighting（灯光面板）
+控制视觉参数
 
-#### 状态标签
 ```tsx
-<span className="inline-flex items-center px-3 py-1 rounded-full
-                 text-xs font-medium bg-blue-100 text-blue-700">
-  标签文字
+<div className="
+  bg-gradient-to-br from-scene-fill to-scene-fillLight
+  border border-border-default
+  rounded-card p-4
+">
+  <h3 className="text-sm font-medium text-text-secondary mb-3">
+    Lighting • 灯光控制
+  </h3>
+  {/* 滑块控件 */}
+</div>
+```
+
+---
+
+### Tag Components（标签组件）
+
+#### Tag.SceneStatus（场景状态）
+
+```tsx
+/* Ready */
+<span className="
+  inline-flex items-center gap-2
+  px-3 py-1.5
+  bg-state-ok/10 text-state-ok
+  border border-state-ok/20
+  rounded-full
+  text-xs font-code font-medium
+">
+  <div className="w-2 h-2 rounded-full bg-state-ok animate-light-blink" />
+  Ready
+</span>
+
+/* Rendering */
+<span className="
+  inline-flex items-center gap-2
+  px-3 py-1.5
+  bg-neon/10 text-neon
+  border border-neon/20
+  rounded-full
+  text-xs font-code font-medium
+">
+  <div className="w-2 h-2 rounded-full bg-neon animate-render-pulse" />
+  Rendering...
+</span>
+
+/* Error */
+<span className="
+  inline-flex items-center gap-2
+  px-3 py-1.5
+  bg-state-error/10 text-state-error
+  border border-state-error/20
+  rounded-full
+  text-xs font-code font-medium
+">
+  <AlertIcon className="w-3 h-3" />
+  Error
 </span>
 ```
 
-**颜色变体：**
-- 蓝色：`bg-blue-100 text-blue-700`（信息）
-- 绿色：`bg-green-100 text-green-700`（成功）
-- 黄色：`bg-yellow-100 text-yellow-700`（警告）
-- 红色：`bg-red-100 text-red-700`（错误）
-- 灰色：`bg-gray-100 text-gray-700`（中性）
-- 紫色：`bg-purple-100 text-purple-700`（特殊）
+---
+
+### Slider Components（滑块组件）
+
+#### Slider.LightIntensity（灯光强度）
+
+```tsx
+<div className="space-y-2">
+  <label className="text-sm font-medium text-text-secondary">
+    Light Intensity • 光线强度
+  </label>
+  <input
+    type="range"
+    min="0"
+    max="100"
+    className="
+      w-full h-2
+      bg-scene-fillLight
+      rounded-full
+      appearance-none
+      [&::-webkit-slider-thumb]:appearance-none
+      [&::-webkit-slider-thumb]:w-4
+      [&::-webkit-slider-thumb]:h-4
+      [&::-webkit-slider-thumb]:rounded-full
+      [&::-webkit-slider-thumb]:bg-keyLight
+      [&::-webkit-slider-thumb]:shadow-light
+      [&::-webkit-slider-thumb]:cursor-pointer
+    "
+  />
+</div>
+```
 
 ---
 
-### 模态框（Modal）
+### Progress Components（进度组件）
+
+#### Progress.Render（渲染进度）
 
 ```tsx
-<div className="fixed inset-0 z-50 flex items-center justify-center
-                bg-black bg-opacity-50 backdrop-blur-sm
-                animate-in fade-in duration-200">
-  <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4
-                  animate-in zoom-in-95 duration-200">
-    <div className="p-6">
-      模态框内容
-    </div>
+<div className="space-y-2">
+  <div className="flex justify-between text-xs">
+    <span className="text-text-secondary">Rendering Scene 01</span>
+    <span className="text-keyLight font-code font-medium">45%</span>
+  </div>
+  <div className="
+    w-full h-2
+    bg-scene-fillLight
+    rounded-full
+    overflow-hidden
+  ">
+    <div
+      className="
+        h-full
+        bg-gradient-to-r from-neon to-keyLight
+        shadow-neon
+        animate-render-pulse
+      "
+      style={{ width: '45%' }}
+    />
   </div>
 </div>
 ```
 
-**规格：**
-- 遮罩：50% 不透明黑色 + 毛玻璃效果
-- 圆角：16px
-- 最大宽度：448px（`max-w-md`）
-- 动画：淡入 + 缩放
-
 ---
 
-## ⚡ 动画与交互
+### Toast Components（提示组件）
 
-### 过渡时长（Transition Duration）
+#### Toast.FilmSlate（场记板提示）
 
-```css
-duration-75:   75ms     /* 极快 - 微交互 */
-duration-100:  100ms    /* 很快 - 悬停 */
-duration-150:  150ms    /* 快 - 按钮 */
-duration-200:  200ms    /* 标准 - 默认 */
-duration-300:  300ms    /* 中等 - 卡片 */
-duration-500:  500ms    /* 慢 - 模态框 */
-duration-700:  700ms    /* 很慢 - 页面切换 */
-```
-
-### 缓动函数（Easing）
-
-```css
-ease-linear:     cubic-bezier(0, 0, 1, 1)         /* 线性 */
-ease-in:         cubic-bezier(0.4, 0, 1, 1)       /* 渐快 */
-ease-out:        cubic-bezier(0, 0, 0.2, 1)       /* 渐慢 - 推荐 */
-ease-in-out:     cubic-bezier(0.4, 0, 0.2, 1)     /* 中间快 */
-```
-
-### 常用交互效果
-
-#### 悬停效果（Hover）
-```css
-/* 颜色变化 */
-hover:bg-blue-700
-hover:text-white
-
-/* 阴影增强 */
-hover:shadow-lg
-
-/* 轻微上移 */
-hover:-translate-y-0.5
-
-/* 缩放 */
-hover:scale-105
-```
-
-#### 激活效果（Active）
-```css
-/* 按下缩放 */
-active:scale-[0.98]
-
-/* 颜色加深 */
-active:bg-blue-800
-```
-
-#### 聚焦效果（Focus）
-```css
-/* 描边 */
-focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-
-/* 移除默认边框 */
-focus:outline-none focus:border-transparent
-```
-
----
-
-## 📱 响应式规范
-
-### 断点（Breakpoints）
-
-```css
-sm:  640px    /* 小屏幕（手机横屏） */
-md:  768px    /* 中等屏幕（平板） */
-lg:  1024px   /* 大屏幕（桌面） */
-xl:  1280px   /* 超大屏幕 */
-2xl: 1536px   /* 超宽屏幕 */
-```
-
-### 响应式策略
-
-#### 移动优先（Mobile First）
 ```tsx
-<div className="text-sm md:text-base lg:text-lg">
-  文字会随屏幕增大
+<div className="
+  flex items-start gap-4
+  bg-scene-fill border-l-4 border-keyLight
+  rounded-lg p-4
+  shadow-key
+  animate-camera-pan
+">
+  <ClapperIcon className="w-6 h-6 text-keyLight flex-shrink-0" />
+  <div>
+    <h4 className="font-display font-bold text-text-primary mb-1">
+      Scene Rendered
+    </h4>
+    <p className="text-sm text-text-secondary">
+      Your prompt has been successfully generated.
+    </p>
+  </div>
 </div>
 ```
 
-#### 容器最大宽度
+---
 
+## 🎮 Interaction System
+
+### Scene Modes（场景模式）
+
+| Mode | Description | Visual State |
+|------|-------------|--------------|
+| **Scene Mode** | 主编辑模式 | 全局可见，多面板布局 |
+| **Camera Mode** | 镜头预览模式 | 放大预览区，控制条浮现 |
+| **Lighting Mode** | 灯光调整模式 | 侧边栏展开，调光面板激活 |
+| **Script Mode** | 剧本专注模式 | 只显示文本编辑器，暗角环境 |
+
+---
+
+### Feedback Motion（反馈动效）
+
+#### Hover States（悬停状态）
 ```css
-max-w-sm:    640px    /* 小容器 */
-max-w-md:    768px    /* 中等容器 */
-max-w-lg:    1024px   /* 大容器 */
-max-w-xl:    1280px   /* 超大容器 */
-max-w-2xl:   1536px   /* 超宽容器 */
-max-w-5xl:   1024px   /* 设置页面 */
-max-w-7xl:   1280px   /* 主内容区 */
+/* 按钮悬停：放大 + 光晕 */
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 32px rgba(58, 108, 255, 0.4);
+}
+
+/* 卡片悬停：上移 + 增强阴影 */
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
 ```
 
-#### 侧边栏响应式
+#### Active States（激活状态）
+```css
+/* 按钮按下：缩小 */
+.button:active {
+  transform: scale(0.98);
+}
+
+/* 面板激活：边框发光 */
+.panel.active {
+  border-color: #3A6CFF;
+  box-shadow: 0 0 0 4px rgba(58, 108, 255, 0.1);
+}
+```
+
+#### Focus States（聚焦状态）
+```css
+/* 输入框聚焦：蓝色光晕 */
+.input:focus {
+  outline: none;
+  border-color: #3A6CFF;
+  box-shadow: 0 0 0 4px rgba(58, 108, 255, 0.15);
+}
+```
+
+---
+
+### Status Indicators（状态指示器）
+
 ```tsx
-<aside className="fixed inset-y-0 left-0 w-64 bg-white
-                  transform -translate-x-full lg:translate-x-0
-                  transition-transform duration-300">
-  侧边栏内容
-</aside>
+/* Recording（录制中） */
+<div className="flex items-center gap-2">
+  <div className="w-3 h-3 rounded-full bg-state-error animate-light-blink" />
+  <span className="text-sm font-code text-state-error">REC</span>
+</div>
+
+/* Processing（处理中） */
+<div className="flex items-center gap-2">
+  <div className="w-3 h-3 rounded-full border-2 border-neon border-t-transparent animate-spin" />
+  <span className="text-sm font-code text-neon">Processing...</span>
+</div>
+
+/* Ready（就绪） */
+<div className="flex items-center gap-2">
+  <div className="w-3 h-3 rounded-full bg-state-ok" />
+  <span className="text-sm font-code text-state-ok">Ready</span>
+</div>
 ```
 
 ---
 
-## 🎯 无障碍规范（Accessibility）
+## 🎙️ Brand Language
 
-### 颜色对比度
-- **正文：** 最小对比度 4.5:1
-- **大号文字：** 最小对比度 3:1
-- **图标：** 最小对比度 3:1
+### Voice & Tone（语音与语气）
 
-### 焦点可见性
-- 所有可交互元素必须有明显的 `:focus` 状态
-- 使用 `focus:ring` 提供视觉反馈
+#### 1. Director's Voice（导演语气）
+像导演对 AI 说话，不是开发者对系统下命令
 
-### 语义化 HTML
-- 使用正确的 HTML5 标签（`<button>`, `<nav>`, `<main>`, `<article>`）
-- 为图标添加 `aria-label`
-- 为表单添加 `<label>`
+**❌ 避免：** 技术术语、生硬指令
+```
+"执行生成任务"
+"提交 Prompt"
+"渲染队列"
+```
 
----
-
-## 📦 实施指南
-
-### 1. Tailwind 配置更新
-在 `tailwind.config.js` 中定义自定义颜色、间距等。
-
-### 2. 创建基础组件库
-- 按钮组件（Button.tsx）
-- 输入框组件（Input.tsx）
-- 卡片组件（Card.tsx）
-- 模态框组件（Modal.tsx）
-
-### 3. 文档维护
-- 保持设计系统文档更新
-- 记录新增的组件和模式
-- 定期审查和优化
+**✅ 使用：** 电影术语、自然对话
+```
+"开拍！"（Take / Action）
+"准备场景"（Set the scene）
+"调整灯光"（Adjust lighting）
+```
 
 ---
 
-## 🔄 版本历史
+#### 2. Interface Copy Guidelines（界面文案指南）
 
-### v1.0.0 (2025-10-26)
-- ✅ 初始版本发布
-- ✅ 定义品牌色彩系统
-- ✅ 确立字体和间距规范
-- ✅ 创建组件设计指南
+| Context | Technical | Cinematic | Emotional Tone |
+|---------|-----------|-----------|----------------|
+| 生成 Prompt | "提交" | "开拍 Take" | 兴奋、期待 |
+| 停止生成 | "取消" | "停 Cut" | 果断、掌控 |
+| 保存草稿 | "保存" | "封存 Archive" | 安全、珍藏 |
+| 查看结果 | "查看输出" | "放映 Screen" | 成就、展示 |
+| AI 处理中 | "处理中..." | "拍摄中..." | 进行中、等待 |
+| 成功完成 | "完成" | "杀青 Wrap" | 庆祝、满足 |
 
 ---
 
-**设计系统维护者：** Sora Prompt Studio Team
-**反馈渠道：** GitHub Issues
+#### 3. Error Messages（错误提示）
+
+**原则：** 用电影场景类比，降低挫败感
+
+```tsx
+/* Bad */
+"Error 500: Internal server error"
+
+/* Good */
+"灯光故障 Lighting Malfunction
+片场设备需要调试，请稍后重试"
+
+/* Bad */
+"Invalid input format"
+
+/* Good */
+"剧本格式问题 Script Format Issue
+导演，这段文字似乎不完整，能再完善一下吗？"
+
+/* Bad */
+"Request timeout"
+
+/* Good */
+"拍摄超时 Shot Timeout
+这个镜头拍摄时间过长，建议简化场景或分段拍摄"
+```
+
+---
+
+### Micro-Copy Examples（微文案示例）
+
+#### Loading States
+```
+⏳ "布景中..." → Setting up the scene...
+⏳ "调光中..." → Adjusting lighting...
+⏳ "摄影机就位..." → Camera rolling...
+⏳ "AI 后期处理..." → Post-production...
+```
+
+#### Success Messages
+```
+✅ "场景就绪！" → Scene is ready!
+✅ "完美拍摄！" → Perfect take!
+✅ "已封存至片库" → Archived to vault
+```
+
+#### Empty States
+```
+📽️ "片场空空如也
+还没有任何项目，开始你的第一次拍摄吧！"
+```
+
+#### CTA Buttons
+```
+🎬 "开始新拍摄" → Start New Shoot
+🎥 "进入片场" → Enter Studio
+📜 "翻开剧本" → Open Script
+🌟 "获取灵感" → Get Inspired
+```
+
+---
+
+## 🛠️ Implementation Guide
+
+### File Structure（文件结构）
+
+```
+/design-system/
+├── tokens/
+│   ├── colors.json          # 颜色令牌
+│   ├── typography.json      # 字体令牌
+│   ├── spacing.json         # 间距令牌
+│   └── motion.json          # 动效令牌
+├── components/
+│   ├── Button/
+│   │   ├── Button.Take.tsx
+│   │   ├── Button.Cut.tsx
+│   │   └── Button.Preview.tsx
+│   ├── Panel/
+│   │   ├── Panel.Scene.tsx
+│   │   ├── Panel.Script.tsx
+│   │   └── Panel.Lighting.tsx
+│   ├── Tag/
+│   │   └── Tag.SceneStatus.tsx
+│   └── Motion/
+│       ├── CameraPan.tsx
+│       ├── CutFade.tsx
+│       └── LightBlink.tsx
+├── themes/
+│   ├── studio-dark.theme.json    # 默认暗色主题
+│   └── studio-light.theme.json   # 备选亮色主题
+└── docs/
+    ├── DESIGN_PHILOSOPHY.md
+    ├── VISUAL_GUIDE.md
+    ├── COMPONENT_NAMING.md
+    └── BRAND_LANGUAGE.md
+```
+
+---
+
+### Code Implementation（代码实现）
+
+#### Design Tokens（设计令牌）
+
+`/src/lib/design-tokens.ts`
+
+```typescript
+export const colors = {
+  scene: {
+    background: '#0B0D12',
+    fill: '#141821',
+    fillLight: '#1A1F2E',
+  },
+  light: {
+    key: '#3A6CFF',
+    rim: '#E4A24D',
+    neon: '#8A60FF',
+    fill: '#2A3441',
+  },
+  state: {
+    ok: '#45E0A2',
+    error: '#FF5E5E',
+    warning: '#FFB74D',
+    info: '#64B5F6',
+  },
+  text: {
+    primary: '#FFFFFF',
+    secondary: '#A0A8B8',
+    tertiary: '#6B7280',
+    disabled: '#4B5563',
+  },
+  border: {
+    subtle: 'rgba(58, 108, 255, 0.1)',
+    default: 'rgba(58, 108, 255, 0.2)',
+    strong: 'rgba(58, 108, 255, 0.4)',
+  },
+  overlay: {
+    light: 'rgba(0, 0, 0, 0.4)',
+    medium: 'rgba(0, 0, 0, 0.6)',
+    heavy: 'rgba(0, 0, 0, 0.8)',
+  },
+};
+
+export const fonts = {
+  primary: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  script: '"EB Garamond", Georgia, serif',
+  code: '"IBM Plex Mono", "Menlo", monospace',
+  display: '"Space Grotesk", Inter, sans-serif',
+};
+
+export const motion = {
+  camera: {
+    pan: '300ms ease-in-out',
+    dolly: '500ms ease-out',
+  },
+  cut: {
+    fade: '200ms ease-in',
+    dissolve: '400ms ease-in-out',
+  },
+  light: {
+    blink: '1000ms infinite alternate',
+  },
+  render: {
+    pulse: '800ms ease-in-out infinite',
+  },
+};
+```
+
+---
+
+#### Tailwind Configuration（Tailwind 配置）
+
+`tailwind.config.js`
+
+```javascript
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        scene: {
+          background: '#0B0D12',
+          fill: '#141821',
+          fillLight: '#1A1F2E',
+        },
+        keyLight: '#3A6CFF',
+        rimLight: '#E4A24D',
+        neon: '#8A60FF',
+        // ... 其他颜色
+      },
+      fontFamily: {
+        primary: ['Inter', 'sans-serif'],
+        script: ['"EB Garamond"', 'serif'],
+        code: ['"IBM Plex Mono"', 'monospace'],
+        display: ['"Space Grotesk"', 'sans-serif'],
+      },
+      boxShadow: {
+        light: '0 0 24px rgba(58, 108, 255, 0.2)',
+        key: '0 8px 32px rgba(58, 108, 255, 0.3)',
+        rim: '0 4px 16px rgba(228, 162, 77, 0.25)',
+        neon: '0 0 20px rgba(138, 96, 255, 0.4)',
+      },
+      animation: {
+        'camera-pan': 'cameraPan 300ms ease-in-out',
+        'cut-fade': 'cutFade 200ms ease-in',
+        'light-blink': 'lightBlink 1000ms infinite alternate',
+        'render-pulse': 'renderPulse 800ms ease-in-out infinite',
+      },
+      keyframes: {
+        cameraPan: {
+          '0%': { transform: 'translateX(-100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+        cutFade: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        lightBlink: {
+          '0%': { opacity: '0.3' },
+          '100%': { opacity: '1' },
+        },
+        renderPulse: {
+          '0%, 100%': { transform: 'scale(1)', opacity: '1' },
+          '50%': { transform: 'scale(1.05)', opacity: '0.8' },
+        },
+      },
+    },
+  },
+};
+```
+
+---
+
+### Component Implementation（组件实现）
+
+#### Button.Take Example
+
+`/src/components/ui/Button/Button.Take.tsx`
+
+```tsx
+import React from 'react';
+import { Play } from 'lucide-react';
+
+interface ButtonTakeProps {
+  onClick?: () => void;
+  loading?: boolean;
+  disabled?: boolean;
+  children?: React.ReactNode;
+}
+
+export const ButtonTake: React.FC<ButtonTakeProps> = ({
+  onClick,
+  loading = false,
+  disabled = false,
+  children = 'Take',
+}) => {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled || loading}
+      className="
+        group relative
+        px-6 py-3
+        bg-gradient-to-r from-keyLight to-keyLight-600
+        text-white font-display font-bold
+        rounded-lg
+        shadow-key
+        hover:shadow-neon hover:scale-105
+        active:scale-100
+        disabled:opacity-50 disabled:cursor-not-allowed
+        transition-all duration-300
+        flex items-center justify-center gap-2
+      "
+    >
+      {loading ? (
+        <>
+          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+          <span>拍摄中...</span>
+        </>
+      ) : (
+        <>
+          <Play className="w-5 h-5 group-hover:animate-render-pulse" />
+          <span>{children}</span>
+        </>
+      )}
+
+      {/* Neon glow effect on hover */}
+      <div className="
+        absolute inset-0 rounded-lg
+        bg-neon opacity-0 group-hover:opacity-20
+        transition-opacity duration-300
+        pointer-events-none
+      " />
+    </button>
+  );
+};
+```
+
+---
+
+### Usage Guidelines（使用指南）
+
+#### 1. Component Composition（组件组合）
+
+```tsx
+import { ButtonTake, ButtonCut } from '@/components/ui/Button';
+import { PanelScene, PanelScript } from '@/components/ui/Panel';
+import { TagSceneStatus } from '@/components/ui/Tag';
+
+export function StudioWorkspace() {
+  return (
+    <div className="min-h-screen bg-scene-background">
+      {/* Header with status */}
+      <header className="border-b border-border-subtle px-6 py-4">
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-display font-bold text-text-primary">
+            SoraPrompt Studio
+          </h1>
+          <TagSceneStatus status="ready" />
+        </div>
+      </header>
+
+      {/* Main workspace */}
+      <main className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
+        <PanelScript className="lg:col-span-2" />
+        <PanelScene />
+      </main>
+
+      {/* Action bar */}
+      <footer className="border-t border-border-subtle px-6 py-4">
+        <div className="flex justify-end gap-3">
+          <ButtonCut />
+          <ButtonTake />
+        </div>
+      </footer>
+    </div>
+  );
+}
+```
+
+---
+
+#### 2. Motion Integration（动效集成）
+
+使用 `framer-motion` 实现电影级动画
+
+```tsx
+import { motion } from 'framer-motion';
+
+export function PanelScene() {
+  return (
+    <motion.div
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+      className="bg-scene-fill rounded-card p-6"
+    >
+      {/* Panel content */}
+    </motion.div>
+  );
+}
+```
+
+---
+
+#### 3. Z-Index Layering（层级管理）
+
+```typescript
+export const zIndex = {
+  base: 0,           // 背景、场景
+  scene: 10,         // 主要内容
+  panel: 20,         // 面板、卡片
+  overlay: 30,       // 遮罩
+  hud: 40,           // 悬浮控件
+  modal: 50,         // 模态框
+  toast: 60,         // 提示消息
+};
+```
+
+---
+
+## 🎨 Moodboard & Visual References
+
+### Cinematic Atmosphere（电影氛围参考）
+
+**视觉基调：**
+- 🌃 **暗夜片场**：深色背景，模拟真实摄影棚环境
+- 💡 **三点布光**：Key Light（蓝）+ Rim Light（金）+ Fill（灰）
+- 🎞️ **胶片质感**：微妙颗粒感、高对比度
+- 🌟 **霓虹特效**：AI 能量流、科技感光效
+- 📹 **取景框美学**：16:9 宽银幕比例、电影级构图
+
+**UI 氛围关键词：**
+- Inter 字体 + EB Garamond 衬线 = 现代专业 + 古典优雅
+- 深色界面 + 蓝橙光线 = 片场夜景 + 专业布光
+- 流畅动画 + 镜头运动 = 电影感 + 导演视角
+
+---
+
+## 🔄 Version History
+
+### v1.0.0 (2025-10-27)
+- ✅ 完全重构为 AI Cinematic Studio 设计系统
+- ✅ 定义片场色彩体系（Scene + Light + State）
+- ✅ 建立电影术语命名规范（Take、Cut、Pan、Fade）
+- ✅ 创建完整动效系统（Camera、Cut、Light、Render）
+- ✅ 确立导演语气品牌语言
+- ✅ 提供完整组件实现指南
+
+---
+
+## 📖 Additional Resources
+
+### Design Tools
+- **Figma Library:** [SoraPrompt Studio Design Kit](#)
+- **Token Export:** `design-tokens.json`
+- **Icon Set:** Lucide Icons（电影主题图标）
+
+### Development
+- **Component Storybook:** [View Components](#)
+- **Code Sandbox:** [Live Examples](#)
+- **GitHub Repo:** [Design System](#)
+
+---
+
+## 🤝 Contributing
+
+### Design System Updates
+1. 提交 Issue 说明变更理由
+2. 遵循电影术语命名规范
+3. 保持视觉一致性（片场氛围）
+4. 更新文档与示例代码
+
+### Review Checklist
+- [ ] 是否符合 AI Cinematic Studio 主题？
+- [ ] 命名是否使用电影术语？
+- [ ] 视觉是否保持暗夜片场氛围？
+- [ ] 动效是否模拟镜头运动？
+- [ ] 文案是否使用导演语气？
+
+---
+
+**Design System Maintainer:** SoraPrompt Studio Team
+**Feedback:** design@soraprompt.studio
+**License:** Internal Use Only
+
+---
+
+*🎬 "Every frame matters. Every pixel tells a story."*
+*— SoraPrompt Design Philosophy*
