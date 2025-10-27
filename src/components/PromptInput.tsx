@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Sparkles, Clapperboard, Lock, X } from 'lucide-react';
+import { Sparkles, Clapperboard, Lock } from 'lucide-react';
 import { type SupportedLanguage, detectLanguageClient } from '../lib/openai';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { Textarea } from './ui/Input';
 import { Button } from './ui/Button';
 import { Card, CardBody, CardFooter } from './ui/Card';
+import { Modal } from './ui/Modal';
 import { LoginPrompt } from './LoginPrompt';
 
 type PromptInputProps = {
@@ -123,33 +124,28 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
         </div>
       )}
 
-      {showLoginPrompt && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-overlay-medium backdrop-blur-sm animate-fade-in">
-          <div className="relative max-w-md animate-scale-in">
-            <button
-              onClick={() => setShowLoginPrompt(false)}
-              className="absolute -top-2 -right-2 w-8 h-8 bg-scene-fill rounded-full shadow-depth-lg flex items-center justify-center text-text-secondary hover:text-text-primary z-10 border-2 border-keyLight/20 hover:border-keyLight/40 transition-all duration-300"
-              aria-label={language === 'zh' ? '关闭' : 'Close'}
-            >
-              <X className="w-4 h-4" />
-            </button>
-            <LoginPrompt
-              title={language === 'zh' ? '登录以使用 Director 模式' : 'Sign in to use Director Mode'}
-              message={language === 'zh'
-                ? 'Director 模式提供更详细的描述和分镜头脚本，帮助您创作更专业的视频内容'
-                : 'Director Mode provides detailed descriptions and storyboard scripts to help you create more professional video content'
-              }
-              benefits={[
-                language === 'zh' ? '🎬 完整版 Prompt + 分镜头脚本' : '🎬 Full Prompt + Storyboard Script',
-                language === 'zh' ? '🎨 更专业的视频描述' : '🎨 More professional video descriptions',
-                language === 'zh' ? '✨ 高质量输出结果' : '✨ Higher quality output',
-                language === 'zh' ? '🚀 解锁更多高级功能' : '🚀 Unlock more premium features',
-              ]}
-              onLoginSuccess={() => setShowLoginPrompt(false)}
-            />
-          </div>
-        </div>
-      )}
+      <Modal
+        isOpen={showLoginPrompt}
+        onClose={() => setShowLoginPrompt(false)}
+        maxWidth="md"
+        showCloseButton={true}
+        variant="default"
+      >
+        <LoginPrompt
+          title={language === 'zh' ? '登录以使用 Director 模式' : 'Sign in to use Director Mode'}
+          message={language === 'zh'
+            ? 'Director 模式提供更详细的描述和分镜头脚本，帮助您创作更专业的视频内容'
+            : 'Director Mode provides detailed descriptions and storyboard scripts to help you create more professional video content'
+          }
+          benefits={[
+            language === 'zh' ? '完整版 Prompt + 分镜头脚本' : 'Full Prompt + Storyboard Script',
+            language === 'zh' ? '更专业的视频描述' : 'More professional video descriptions',
+            language === 'zh' ? '高质量输出结果' : 'Higher quality output',
+            language === 'zh' ? '解锁更多高级功能' : 'Unlock more premium features',
+          ]}
+          onLoginSuccess={() => setShowLoginPrompt(false)}
+        />
+      </Modal>
     </Card>
   );
 }

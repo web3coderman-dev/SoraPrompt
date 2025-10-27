@@ -1,4 +1,4 @@
-import { LogIn, Crown, Cloud, Zap, Shield, Check } from 'lucide-react';
+import { LogIn, Crown, Cloud, Zap, Shield, Check, Clapperboard, Palette, Sparkles, Rocket } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Button } from './ui/Button';
 import LoginModal from './LoginModal';
@@ -31,7 +31,7 @@ export function LoginPrompt({
     language === 'zh' ? '数据安全同步' : 'Secure data sync',
   ];
 
-  const benefitIcons = [Cloud, Zap, Shield, Crown];
+  const benefitIcons = [Clapperboard, Palette, Sparkles, Rocket];
 
   const displayTitle = title || (language === 'zh' ? '登录以解锁完整功能' : 'Sign in to unlock full features');
   const displayMessage = message || (language === 'zh'
@@ -100,26 +100,26 @@ export function LoginPrompt({
 
   return (
     <>
-      <div className="bg-scene-fill rounded-2xl shadow-key border border-keyLight/20 p-8 text-center overflow-hidden relative">
+      <div className="bg-scene-fill rounded-2xl shadow-depth-xl border border-keyLight/20 p-8 text-center overflow-hidden relative" role="article" aria-labelledby="login-prompt-title">
         <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-keyLight/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
         <div className="relative z-10">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-keyLight to-neon rounded-2xl mb-4 shadow-key">
             <Crown className="w-8 h-8 text-white" />
           </div>
 
-          <h3 className="text-2xl font-bold font-display text-text-primary mb-2">{displayTitle}</h3>
-          <p className="text-text-secondary mb-6">{displayMessage}</p>
+          <h3 id="login-prompt-title" className="text-2xl font-bold font-display text-text-primary mb-3">{displayTitle}</h3>
+          <p className="text-text-secondary mb-8 leading-relaxed">{displayMessage}</p>
 
           {showBenefits && (
-            <div className="mb-6 space-y-3 text-left max-w-md mx-auto">
+            <div className="mb-8 space-y-4 text-left max-w-md mx-auto">
               {displayBenefits.map((benefit, index) => {
                 const Icon = benefitIcons[index] || Check;
                 return (
-                  <div key={index} className="flex items-start gap-3 text-sm text-text-secondary">
-                    <div className="w-5 h-5 bg-state-ok/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Icon className="w-3 h-3 text-state-ok" />
+                  <div key={index} className="flex items-center gap-3 text-base text-text-secondary group">
+                    <div className="w-10 h-10 bg-keyLight/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-keyLight/20 transition-colors duration-300">
+                      <Icon className="w-5 h-5 text-keyLight" />
                     </div>
-                    <span>{benefit}</span>
+                    <span className="font-medium">{benefit}</span>
                   </div>
                 );
               })}
