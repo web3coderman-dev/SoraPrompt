@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Clock, Trash2, Eye, Search, Filter, Cloud, HardDrive, AlertCircle } from 'lucide-react';
+import { Clock, Trash2, Eye, Search, Filter, Cloud, HardDrive, AlertCircle, X } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { PromptStorage } from '../lib/promptStorage';
@@ -8,6 +8,10 @@ import type { LocalPrompt } from '../lib/promptStorage';
 import SortDropdown from './SortDropdown';
 import ConfirmModal from './ConfirmModal';
 import { LoginPrompt } from './LoginPrompt';
+import { Button, OptionButton, Badge } from './ui';
+import { LoadingState } from './LoadingState';
+import { EmptyState } from './EmptyState';
+import { SearchInput } from './SearchInput';
 
 type HistoryProps = {
   onSelectPrompt: (prompt: Prompt | LocalPrompt) => void;
@@ -145,12 +149,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-2 border-neon border-t-transparent mx-auto mb-4"></div>
-            <p className="text-text-secondary">{t.historyLoading}</p>
-          </div>
-        </div>
+        <LoadingState message={t.historyLoading} />
       </div>
     );
   }
@@ -160,12 +159,13 @@ export default function History({ onSelectPrompt }: HistoryProps) {
       <div className="max-w-7xl mx-auto">
         <div className="bg-state-error/10 border border-state-error/30 rounded-xl p-6 text-center">
           <p className="text-state-error mb-4">{error}</p>
-          <button
+          <Button
             onClick={loadHistory}
-            className="px-5 py-2.5 bg-state-error text-white rounded-lg hover:bg-state-error/80 active:bg-red-800 transition-colors"
+            variant="cut"
+            size="md"
           >
             {t.language === 'zh' ? '重试' : 'Retry'}
-          </button>
+          </Button>
         </div>
       </div>
     );
@@ -174,20 +174,20 @@ export default function History({ onSelectPrompt }: HistoryProps) {
   if (prompts.length === 0) {
     return (
       <div className="max-w-7xl mx-auto">
-        <div className="bg-scene-fill rounded-2xl shadow-depth-lg border border-keyLight/20 p-12 text-center">
-          <Clock className="w-16 h-16 text-text-tertiary mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-text-primary mb-2">{t.historyEmpty}</h3>
-          <p className="text-text-secondary">{t.historyEmptyDesc}</p>
-          {!user && (
-            <div className="mt-6">
+        <EmptyState
+          icon={Clock}
+          title={t.historyEmpty}
+          description={t.historyEmptyDesc}
+          action={
+            !user ? (
               <LoginPrompt
                 variant="compact"
                 message={t.storageGuestTip}
                 showBenefits={false}
               />
-            </div>
-          )}
-        </div>
+            ) : undefined
+          }
+        />
       </div>
     );
   }
@@ -215,84 +215,75 @@ export default function History({ onSelectPrompt }: HistoryProps) {
                       : `You've used ${prompts.length}/10 local records. Sign in for unlimited cloud storage!`)
                 }
               </p>
-              <button
+              <Button
                 onClick={() => setShowLoginPrompt(true)}
-                className="bg-state-warning hover:bg-state-warning/80 text-white font-medium px-4 py-2 rounded-lg transition-colors text-sm"
+                variant="rim"
+                size="sm"
+                className="hover:shadow-light"
               >
                 {language === 'zh' ? '立即登录解锁' : 'Sign In to Unlock'}
-              </button>
+              </Button>
             </div>
           </div>
         </div>
       )}
 
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-        <h2 className="text-2xl md:text-3xl font-bold font-display text-text-primary">{t.historyTitle}</h2>
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-scene-fillLight rounded-lg text-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+        <h2 className="text-3xl md:text-4xl font-bold font-display text-text-primary">{t.historyTitle}</h2>
+        <Badge
+          variant={user ? 'info' : 'secondary'}
+          size="md"
+          className="flex items-center gap-2"
+        >
           {user ? (
             <>
-              <Cloud className="w-4 h-4 text-keyLight" />
-              <span className="text-text-secondary">
-                {t.storageCloud}
-              </span>
+              <Cloud className="w-4 h-4" />
+              <span>{t.storageCloud}</span>
             </>
           ) : (
             <>
-              <HardDrive className="w-4 h-4 text-text-secondary" />
-              <span className="text-text-secondary">
-                {t.storageLocalLimit.replace('{{count}}', String(prompts.length))}
-              </span>
+              <HardDrive className="w-4 h-4" />
+              <span>{t.storageLocalLimit.replace('{{count}}', String(prompts.length))}</span>
             </>
           )}
-        </div>
+        </Badge>
       </div>
 
-      <div className="bg-scene-fill rounded-xl shadow-depth-md border border-keyLight/20 p-4 mb-6 space-y-4">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-tertiary" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={t.historySearch}
-            className="w-full pl-10 pr-4 py-2.5 border border-keyLight/20 rounded-lg focus:ring-2 focus:ring-keyLight/20 focus:border-transparent text-text-primary"
-          />
-        </div>
+      <div className="bg-scene-fill rounded-xl shadow-depth-md border border-keyLight/20 p-6 mb-6 space-y-5">
+        <SearchInput
+          value={searchQuery}
+          onChange={setSearchQuery}
+          placeholder={t.historySearch}
+        />
 
-        <div className="flex flex-col sm:flex-row gap-3">
-          <div className="flex items-center gap-2 flex-1">
+        <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex items-center gap-3 flex-1">
             <Filter className="w-4 h-4 text-text-tertiary flex-shrink-0" />
             <div className="flex gap-2 flex-wrap">
-              <button
+              <OptionButton
                 onClick={() => setFilterMode('all')}
-                className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all duration-200 ${
-                  filterMode === 'all'
-                    ? 'bg-keyLight/20 text-keyLight border border-keyLight/30'
-                    : 'bg-scene-fillLight text-text-secondary border border-keyLight/10 hover:border-keyLight/20'
-                }`}
+                selected={filterMode === 'all'}
+                className="!px-3 !py-1.5 text-sm"
+                showCheckmark={false}
               >
                 {t.historyFilterAll}
-              </button>
-              <button
+              </OptionButton>
+              <OptionButton
                 onClick={() => setFilterMode('quick')}
-                className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all duration-200 ${
-                  filterMode === 'quick'
-                    ? 'bg-keyLight/20 text-keyLight border border-keyLight/30'
-                    : 'bg-scene-fillLight text-text-secondary border border-keyLight/10 hover:border-keyLight/20'
-                }`}
+                selected={filterMode === 'quick'}
+                className="!px-3 !py-1.5 text-sm"
+                showCheckmark={false}
               >
                 {t.historyFilterQuick}
-              </button>
-              <button
+              </OptionButton>
+              <OptionButton
                 onClick={() => setFilterMode('director')}
-                className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all duration-200 ${
-                  filterMode === 'director'
-                    ? 'bg-keyLight/20 text-keyLight border border-keyLight/30'
-                    : 'bg-scene-fillLight text-text-secondary border border-keyLight/10 hover:border-keyLight/20'
-                }`}
+                selected={filterMode === 'director'}
+                className="!px-3 !py-1.5 text-sm"
+                showCheckmark={false}
               >
                 {t.historyFilterDirector}
-              </button>
+              </OptionButton>
             </div>
           </div>
 
@@ -315,57 +306,75 @@ export default function History({ onSelectPrompt }: HistoryProps) {
       </div>
 
       {filteredAndSortedPrompts.length === 0 ? (
-        <div className="bg-scene-fill rounded-xl shadow-depth-md border border-keyLight/20 p-12 text-center">
-          <Search className="w-16 h-16 text-text-tertiary mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-text-primary mb-2">{t.historyNoResults}</h3>
-          <p className="text-text-secondary">{t.historyEmptyDesc}</p>
-        </div>
+        <EmptyState
+          icon={Search}
+          title={t.historyNoResults}
+          description={t.historyEmptyDesc}
+        />
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-6">
           {filteredAndSortedPrompts.map((prompt) => (
             <div
               key={prompt.id}
-              className="bg-scene-fill rounded-xl shadow-depth-md border border-keyLight/20 p-5 hover:shadow-depth-lg transition-shadow overflow-hidden"
+              className="bg-scene-fill rounded-xl shadow-depth-md border border-keyLight/20 p-6 hover:shadow-depth-lg hover:border-keyLight/30 transition-all duration-300 overflow-hidden"
             >
-              <div className="flex items-start justify-between gap-4 mb-3">
+              <div className="flex items-start justify-between gap-4 mb-4">
                 <div className="flex-1 min-w-0">
-                  <p className="text-text-primary font-medium mb-1 truncate">
+                  <p className="text-text-primary font-semibold mb-2 truncate text-base">
                     {prompt.user_input}
                   </p>
                   <div className="flex items-center gap-2 text-xs text-text-tertiary flex-wrap">
-                    <Clock className="w-3.5 h-3.5 flex-shrink-0" />
+                    <Clock className="w-4 h-4 flex-shrink-0" />
                     <span className="truncate font-code">{formatDate(prompt.created_at)}</span>
-                    <span className="px-2 py-0.5 bg-scene-fillLight rounded text-text-secondary whitespace-nowrap">
+                    <Badge
+                      variant="secondary"
+                      size="sm"
+                      className="whitespace-nowrap"
+                    >
                       {prompt.mode === 'quick' ? t.historyFilterQuick : t.historyFilterDirector}
-                    </span>
+                    </Badge>
                   </div>
                 </div>
-                <div className={`px-2.5 py-1 rounded-full text-xs font-semibold flex-shrink-0 ${getScoreColor(prompt.quality_score)}`}>
+                <Badge
+                  variant={
+                    prompt.quality_score >= 90 ? 'success' :
+                    prompt.quality_score >= 75 ? 'info' :
+                    prompt.quality_score >= 60 ? 'warning' : 'danger'
+                  }
+                  size="md"
+                  className="flex-shrink-0"
+                >
                   {prompt.quality_score}
-                </div>
+                </Badge>
               </div>
 
-              <div className="mb-4 bg-scene-fillLight rounded-lg p-3 border border-keyLight/10 overflow-hidden">
-                <p className="text-text-secondary text-sm line-clamp-3 break-words overflow-wrap-anywhere">
+              <div className="mb-5 bg-scene-fillLight rounded-lg p-4 border border-keyLight/10 overflow-hidden hover:border-keyLight/20 transition-colors duration-300">
+                <p className="text-text-secondary text-sm line-clamp-3 break-words overflow-wrap-anywhere leading-relaxed">
                   {prompt.generated_prompt}
                 </p>
               </div>
 
               <div className="flex gap-2">
-                <button
+                <Button
                   onClick={() => onSelectPrompt(prompt)}
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-scene-fill border border-border-default hover:bg-scene-fillLight hover:border-keyLight hover:text-text-primary text-text-secondary text-sm font-medium rounded-lg transition-all duration-200 active:scale-[0.98]"
+                  variant="preview"
+                  size="md"
+                  icon={Eye}
+                  fullWidth
+                  className="flex-1"
+                  aria-label={`${t.view} ${prompt.user_input}`}
                 >
-                  <Eye className="w-4 h-4" />
                   {t.view}
-                </button>
-                <button
+                </Button>
+                <Button
                   onClick={() => handleDeleteClick(prompt.id)}
-                  className="flex items-center justify-center gap-2 px-4 py-2 bg-state-error/10 hover:bg-state-error/20 text-state-error text-sm font-medium rounded-lg transition-colors"
+                  variant="cut"
+                  size="md"
+                  icon={Trash2}
+                  aria-label={`${t.delete} ${prompt.user_input}`}
                 >
-                  <Trash2 className="w-4 h-4" />
                   {t.delete}
-                </button>
+                </Button>
               </div>
             </div>
           ))}
@@ -384,13 +393,14 @@ export default function History({ onSelectPrompt }: HistoryProps) {
       />
 
       {showLoginPrompt && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
-          <div className="relative max-w-md">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-overlay-medium backdrop-blur-sm animate-cut-fade">
+          <div className="relative max-w-md animate-modal-enter">
             <button
               onClick={() => setShowLoginPrompt(false)}
-              className="absolute -top-2 -right-2 w-8 h-8 bg-scene-fill rounded-full shadow-depth-lg flex items-center justify-center text-text-secondary hover:text-text-primary z-10"
+              className="absolute -top-2 -right-2 w-8 h-8 bg-scene-fill rounded-full shadow-depth-lg flex items-center justify-center text-text-secondary hover:text-text-primary z-10 border-2 border-keyLight/20 hover:border-keyLight/40 transition-all duration-300"
+              aria-label={language === 'zh' ? '关闭' : 'Close'}
             >
-              ×
+              <X className="w-4 h-4" />
             </button>
             <LoginPrompt
               onLoginSuccess={() => setShowLoginPrompt(false)}

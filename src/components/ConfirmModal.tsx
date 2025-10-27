@@ -39,15 +39,15 @@ export default function ConfirmModal({
 
   const variantStyles = {
     danger: {
-      button: 'bg-state-error hover:bg-state-error/80 focus:ring-red-500',
+      button: 'bg-state-error hover:bg-state-error/80 focus:ring-state-error/20',
       icon: 'text-state-error bg-state-error/10'
     },
     warning: {
-      button: 'bg-yellow-600 hover:bg-yellow-700 focus:ring-yellow-500',
-      icon: 'text-yellow-600 bg-yellow-50'
+      button: 'bg-state-warning hover:bg-state-warning/80 focus:ring-state-warning/20',
+      icon: 'text-state-warning bg-state-warning/10'
     },
     info: {
-      button: 'bg-blue-600 hover:bg-blue-700 focus:ring-keyLight/20',
+      button: 'bg-keyLight hover:bg-keyLight/80 focus:ring-keyLight/20',
       icon: 'text-state-info bg-state-info/10'
     }
   };
@@ -55,13 +55,13 @@ export default function ConfirmModal({
   const styles = variantStyles[variant];
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 animate-cut-fade">
       <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-overlay-medium backdrop-blur-sm"
         onClick={onCancel}
       />
 
-      <div className="relative bg-scene-fill rounded-2xl shadow-key max-w-md w-full animate-fadeIn">
+      <div className="relative bg-scene-fill rounded-2xl shadow-key max-w-md w-full animate-modal-enter">
         <button
           onClick={onCancel}
           className="absolute top-4 right-4 text-text-tertiary hover:text-text-secondary transition-colors"
@@ -88,13 +88,13 @@ export default function ConfirmModal({
           <div className="flex gap-3">
             <button
               onClick={onCancel}
-              className="flex-1 px-4 py-2.5 border border-keyLight/20 text-text-secondary rounded-lg hover:bg-scene-fillLight font-medium transition-colors focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              className="flex-1 px-4 py-2.5 border border-keyLight/20 text-text-secondary rounded-lg hover:bg-scene-fillLight font-medium transition-all duration-300 focus:ring-2 focus:ring-keyLight/20 active:scale-[0.98]"
             >
               {cancelText}
             </button>
             <button
               onClick={onConfirm}
-              className={`flex-1 px-4 py-2.5 text-white rounded-lg font-medium transition-colors focus:ring-2 focus:ring-offset-2 ${styles.button}`}
+              className={`flex-1 px-4 py-2.5 text-white rounded-lg font-medium transition-all duration-300 focus:ring-2 active:scale-[0.98] ${styles.button}`}
             >
               {confirmText}
             </button>

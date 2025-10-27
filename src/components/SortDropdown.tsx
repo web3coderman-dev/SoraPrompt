@@ -34,7 +34,7 @@ export default function SortDropdown({ options, value, onChange }: SortDropdownP
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-1.5 text-sm border border-keyLight/20 rounded-lg hover:border-keyLight/40 focus:ring-2 focus:ring-keyLight/20 focus:border-transparent bg-scene-fill text-text-secondary transition-colors min-w-[140px] justify-between"
+        className="flex items-center gap-2 px-3 py-1.5 text-sm border border-keyLight/20 rounded-lg hover:border-keyLight/40 focus:ring-2 focus:ring-keyLight/20 focus:border-transparent bg-scene-fill text-text-secondary transition-all duration-300 min-w-[140px] justify-between active:scale-[0.98]"
       >
         <div className="flex items-center gap-2">
           <ArrowUpDown className="w-4 h-4 text-text-tertiary" />
@@ -51,7 +51,7 @@ export default function SortDropdown({ options, value, onChange }: SortDropdownP
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-scene-fill rounded-lg shadow-xl border border-keyLight/20 py-1 z-50">
+        <div className="absolute right-0 mt-2 w-48 bg-scene-fill rounded-lg shadow-depth-lg border border-keyLight/20 py-1 z-50 animate-scale-in">
           {options.map((option) => (
             <button
               key={option.value}
@@ -59,12 +59,12 @@ export default function SortDropdown({ options, value, onChange }: SortDropdownP
                 onChange(option.value);
                 setIsOpen(false);
               }}
-              className={`w-full px-4 py-2.5 text-left text-sm hover:bg-scene-fillLight flex items-center justify-between transition-colors ${
-                value === option.value ? 'bg-state-info/10 text-state-info' : 'text-text-secondary'
+              className={`w-full px-4 py-2.5 text-left text-sm hover:bg-scene-fillLight flex items-center justify-between transition-colors duration-300 ${
+                value === option.value ? 'bg-keyLight/10 text-keyLight' : 'text-text-secondary'
               }`}
             >
               <span>{option.label}</span>
-              {value === option.value && <Check className="w-4 h-4 text-state-info" />}
+              {value === option.value && <Check className="w-4 h-4 text-keyLight" />}
             </button>
           ))}
         </div>
