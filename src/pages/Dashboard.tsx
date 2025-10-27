@@ -8,7 +8,7 @@ import { SubscriptionPlans } from '../components/SubscriptionPlans';
 import { UsageCounter } from '../components/UsageCounter';
 import { UpgradeModal } from '../components/UpgradeModal';
 import { RegisterPromptModal } from '../components/RegisterPromptModal';
-import { GuestBanner } from '../components/GuestBanner';
+import { GuestUsageCard } from '../components/GuestUsageCard';
 import { ConflictResolutionModal } from '../components/ConflictResolutionModal';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -292,11 +292,13 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              {user && (
-                <div className="mb-8">
+              <div className="mb-8">
+                {user ? (
                   <UsageCounter />
-                </div>
-              )}
+                ) : (
+                  <GuestUsageCard />
+                )}
+              </div>
 
               <PromptInput
                 onGenerate={handleGenerate}
@@ -332,7 +334,6 @@ export default function Dashboard() {
         onViewChange={setCurrentView}
       />
       <main className="flex-1 overflow-x-hidden">
-        <GuestBanner />
         {renderContent()}
       </main>
 
