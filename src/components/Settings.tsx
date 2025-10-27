@@ -24,7 +24,7 @@ const interfaceLanguages: { code: Language; name: string }[] = [
 ];
 
 const outputLanguages: { code: SupportedLanguage; name: string; nameEn: string }[] = [
-  { code: 'auto', name: '自动匹配', nameEn: 'Auto Match' },
+  { code: 'auto', name: '自动检测', nameEn: 'Auto Detect' },
   ...LANGUAGES.map(lang => ({
     code: lang.code,
     name: lang.nativeName,

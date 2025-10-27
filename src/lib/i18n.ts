@@ -37,7 +37,7 @@ export const translations = {
     directorModeTitle: '导演模式',
     directorModeDesc: '深度优化，包含镜头语言、场景描述、情绪氛围等专业要素',
     multilingualTitle: '多语言支持',
-    multilingualDesc: '自动匹配输入语言，支持 60+ 种语言的提示词生成',
+    multilingualDesc: '自动检测输入语言，支持 60+ 种语言的提示词生成',
     smartOptTitle: '智能优化',
     smartOptDesc: '基于 Sora 最佳实践，自动优化提示词结构和细节描述',
 
@@ -92,7 +92,7 @@ export const translations = {
     settingsLanguage: '界面语言',
     settingsOutputLanguage: '输出语言偏好',
     settingsOutputLanguageDesc: '选择生成提示词的默认语言',
-    settingsAutoDetect: '自动匹配',
+    settingsAutoDetect: '自动检测',
     settingsSaved: '设置已保存',
     settingsSaveError: '保存设置失败',
 
@@ -102,7 +102,7 @@ export const translations = {
     sidebarVersion: 'v0.1 MVP',
     sidebarPowered: '由 GPT-5 驱动',
 
-    languageSelectorAuto: '自动匹配',
+    languageSelectorAuto: '自动检测',
     languageSelectorSearch: '搜索语言...',
     languageSelectorNoResults: '未找到匹配的语言',
 
@@ -343,7 +343,7 @@ export const translations = {
     settingsLanguage: 'Interface Language',
     settingsOutputLanguage: 'Output Language Preference',
     settingsOutputLanguageDesc: 'Select the default language for generated prompts',
-    settingsAutoDetect: 'Auto Match',
+    settingsAutoDetect: 'Auto Detect',
     settingsSaved: 'Settings saved',
     settingsSaveError: 'Failed to save settings',
 
@@ -353,7 +353,7 @@ export const translations = {
     sidebarVersion: 'v0.1 MVP',
     sidebarPowered: 'Powered by GPT-5',
 
-    languageSelectorAuto: 'Auto Match',
+    languageSelectorAuto: 'Auto Detect',
     languageSelectorSearch: 'Search language...',
     languageSelectorNoResults: 'No matching language found',
 
