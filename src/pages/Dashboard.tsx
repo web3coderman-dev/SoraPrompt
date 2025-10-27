@@ -292,19 +292,19 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="mb-8">
+              <PromptInput
+                onGenerate={handleGenerate}
+                isLoading={isGenerating}
+                initialValue={currentPrompt?.user_input}
+              />
+
+              <div className="mt-8">
                 {user ? (
                   <UsageCounter />
                 ) : (
                   <GuestUsageCard />
                 )}
               </div>
-
-              <PromptInput
-                onGenerate={handleGenerate}
-                isLoading={isGenerating}
-                initialValue={currentPrompt?.user_input}
-              />
 
               {currentPrompt && (
                 <div className="mt-8">
