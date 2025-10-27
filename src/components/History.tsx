@@ -334,7 +334,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
                   </p>
                   <div className="flex items-center gap-2 text-xs text-text-tertiary flex-wrap">
                     <Clock className="w-3.5 h-3.5 flex-shrink-0" />
-                    <span className="truncate">{formatDate(prompt.created_at)}</span>
+                    <span className="truncate font-code">{formatDate(prompt.created_at)}</span>
                     <span className="px-2 py-0.5 bg-scene-fillLight rounded text-text-secondary whitespace-nowrap">
                       {prompt.mode === 'quick' ? t.historyFilterQuick : t.historyFilterDirector}
                     </span>

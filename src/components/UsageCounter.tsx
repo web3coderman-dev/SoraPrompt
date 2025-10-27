@@ -23,12 +23,12 @@ export function UsageCounter() {
         <div className="bg-scene-fill rounded-lg shadow-sm border border-keyLight/20 p-4">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <HardDrive className={`w-5 h-5 ${isLocalNearLimit ? 'text-orange-500' : 'text-text-secondary'}`} />
+              <HardDrive className={`w-5 h-5 ${isLocalNearLimit ? 'text-state-warning' : 'text-text-secondary'}`} />
               <span className="font-medium text-text-primary">
                 {language === 'zh' ? '本地存储' : 'Local Storage'}
               </span>
             </div>
-            <span className="text-sm font-semibold text-text-secondary">
+            <span className="text-sm font-semibold font-code text-text-secondary">
               {localCount} / {localLimit}
             </span>
           </div>
@@ -63,7 +63,7 @@ export function UsageCounter() {
               </div>
               <button
                 onClick={() => setShowLoginPrompt(true)}
-                className="mt-2 w-full text-sm font-medium text-state-warning hover:text-state-warning bg-orange-100 hover:bg-orange-200 py-2 px-3 rounded transition-colors"
+                className="mt-2 w-full text-sm font-medium text-white bg-state-warning hover:bg-state-warning/80 py-2 px-3 rounded transition-all duration-200"
               >
                 {language === 'zh' ? '立即登录' : 'Sign In Now'}
               </button>
@@ -110,25 +110,25 @@ export function UsageCounter() {
 
   const getColor = () => {
     if (percentage > 50) return 'bg-state-ok/100';
-    if (percentage > 20) return 'bg-yellow-500';
+    if (percentage > 20) return 'bg-state-warning';
     return 'bg-state-error/100';
   };
 
-  const getBonusColor = () => 'bg-gradient-to-r from-yellow-400 to-orange-400';
+  const getBonusColor = () => 'bg-gradient-to-r from-state-warning to-state-warning/80';
 
   return (
     <div className="bg-scene-fill rounded-lg shadow-sm border border-keyLight/20 p-4">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           {isLow ? (
-            <Battery className="w-5 h-5 text-red-500" />
+            <Battery className="w-5 h-5 text-state-error" />
           ) : (
             <Zap className="w-5 h-5 text-keyLight" />
           )}
           <span className="font-medium text-text-primary">{t.subscriptionCredits}</span>
         </div>
         <div className="flex flex-col items-end">
-          <span className="text-sm font-semibold text-text-secondary">
+          <span className="text-sm font-semibold font-code text-text-secondary">
             {subscription.remaining_credits} / {subscription.total_credits}
           </span>
           {hasBonus && (
@@ -153,7 +153,7 @@ export function UsageCounter() {
       </div>
 
       {hasBonus && (
-        <div className="mt-3 p-3 bg-gradient-to-r from-yellow-50 to-orange-50 border border-state-warning/30 rounded-lg">
+        <div className="mt-3 p-3 bg-state-warning/10 border border-state-warning/30 rounded-lg">
           <div className="flex items-start gap-2">
             <Zap className="w-4 h-4 text-state-warning flex-shrink-0 mt-0.5" />
             <div className="flex-1">
@@ -197,7 +197,7 @@ export function UsageCounter() {
           <span>{t.subscriptionResetsMonthly}</span>
         )}
         {' • '}
-        <span>{new Date(subscription.renewal_date).toLocaleDateString()}</span>
+        <span className="font-code">{new Date(subscription.renewal_date).toLocaleDateString()}</span>
       </div>
     </div>
   );
