@@ -109,9 +109,21 @@ export default function LanguageSelector({ value, onChange, detectedLanguage, di
       }
     };
 
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+        setSearchQuery('');
+        buttonRef.current?.focus();
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen && buttonRef.current) {
@@ -175,6 +187,7 @@ export default function LanguageSelector({ value, onChange, detectedLanguage, di
     onChange(langCode);
     setIsOpen(false);
     setSearchQuery('');
+    buttonRef.current?.focus();
   };
 
   return (
@@ -184,13 +197,22 @@ export default function LanguageSelector({ value, onChange, detectedLanguage, di
         type="button"
         onClick={() => !disabled && setIsOpen(!isOpen)}
         disabled={disabled}
-        className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm border border-gray-300 rounded-lg px-2.5 md:px-3 py-1.5 hover:border-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed min-w-[160px] md:min-w-[180px] justify-between w-full sm:w-auto"
+        aria-expanded={isOpen}
+        aria-controls="language-dropdown"
+        aria-label={`${t.languageSelectorSearch || 'Select language'}: ${displayText}`}
+        className="flex items-center gap-2 text-sm border border-border-default rounded-lg px-3 py-2 hover:border-keyLight/40 hover:bg-scene-fillLight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-keyLight focus-visible:ring-offset-2 focus-visible:ring-offset-scene-bg text-text-primary bg-scene-fill transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed min-w-[160px] md:min-w-[180px] justify-between w-full sm:w-auto shadow-depth-sm"
       >
-        <div className="flex items-center gap-1.5 md:gap-2 min-w-0">
-          <Languages className="w-3.5 h-3.5 md:w-4 md:h-4 text-gray-500 flex-shrink-0" />
-          <span className="truncate">{displayText}</span>
+        <div className="flex items-center gap-2 min-w-0">
+          <Languages className="w-4 h-4 text-text-secondary flex-shrink-0" />
+          <span className="truncate font-medium">{displayText}</span>
         </div>
-        <svg className={`w-3.5 h-3.5 md:w-4 md:h-4 transition-transform flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg
+          className={`w-4 h-4 text-text-secondary transition-transform duration-300 flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
@@ -198,6 +220,9 @@ export default function LanguageSelector({ value, onChange, detectedLanguage, di
       {isOpen && createPortal(
         <div
           ref={dropdownRef}
+          id="language-dropdown"
+          role="listbox"
+          aria-label={t.languageSelectorSearch || 'Language selection'}
           style={{
             position: 'absolute',
             top: `${dropdownPosition.top}px`,
@@ -205,42 +230,57 @@ export default function LanguageSelector({ value, onChange, detectedLanguage, di
             minWidth: '320px',
             zIndex: 9999
           }}
-          className="bg-white rounded-lg shadow-2xl border border-gray-200 max-h-96 overflow-hidden"
+          className="bg-scene-fill rounded-xl shadow-depth-xl border border-keyLight/20 max-h-96 overflow-hidden animate-scale-in"
         >
-          <div className="p-3 border-b border-gray-200 sticky top-0 bg-white">
+          <div className="p-3 border-b border-border-default sticky top-0 bg-scene-fill backdrop-blur-sm z-10">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary pointer-events-none" />
               <input
                 ref={searchInputRef}
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t.languageSelectorSearch}
-                className="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                aria-label={t.languageSelectorSearch || 'Search languages'}
+                className="w-full pl-10 pr-3 py-2 text-sm bg-scene-fillLight border border-border-default rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-keyLight focus-visible:border-keyLight text-text-primary placeholder:text-text-tertiary transition-all duration-300"
               />
             </div>
           </div>
 
-          <div className="overflow-y-auto max-h-80">
+          <div className="overflow-y-auto max-h-80 scrollbar-thin scrollbar-thumb-keyLight/20 scrollbar-track-transparent">
             {filteredLanguages.length > 0 ? (
-              filteredLanguages.map((lang) => (
-                <button
-                  key={lang.code}
-                  onClick={() => handleSelect(lang.code)}
-                  className={`w-full px-4 py-2.5 text-left hover:bg-gray-50 flex items-center justify-between transition-colors ${
-                    value === lang.code ? 'bg-blue-50' : ''
-                  }`}
-                >
-                  <div className="flex flex-col">
-                    <span className="text-sm text-gray-900">{lang.nativeName}</span>
-                    <span className="text-xs text-gray-500">{lang.name}</span>
-                  </div>
-                  {value === lang.code && <Check className="w-4 h-4 text-blue-600" />}
-                </button>
-              ))
+              filteredLanguages.map((lang) => {
+                const isSelected = value === lang.code;
+                return (
+                  <button
+                    key={lang.code}
+                    onClick={() => handleSelect(lang.code)}
+                    role="option"
+                    aria-selected={isSelected}
+                    className={`w-full px-4 py-3 text-left hover:bg-keyLight/10 flex items-center justify-between transition-colors duration-200 group ${
+                      isSelected ? 'bg-keyLight/15' : ''
+                    }`}
+                  >
+                    <div className="flex flex-col gap-0.5">
+                      <span className={`text-sm font-medium ${isSelected ? 'text-keyLight' : 'text-text-primary'} group-hover:text-keyLight transition-colors duration-200`}>
+                        {lang.nativeName}
+                      </span>
+                      <span className="text-xs text-text-tertiary">{lang.name}</span>
+                    </div>
+                    {isSelected && (
+                      <Check className="w-4 h-4 text-keyLight flex-shrink-0" aria-hidden="true" />
+                    )}
+                  </button>
+                );
+              })
             ) : (
-              <div className="px-4 py-8 text-center text-sm text-gray-500">
-                {t.languageSelectorNoResults}
+              <div className="px-4 py-8 text-center">
+                <p className="text-sm text-text-secondary font-medium mb-1">
+                  {t.languageSelectorNoResults}
+                </p>
+                <p className="text-xs text-text-tertiary">
+                  {t.languageSelectorTryAgain || 'Try a different search term'}
+                </p>
               </div>
             )}
           </div>
