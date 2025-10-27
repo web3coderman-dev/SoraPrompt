@@ -15,3 +15,8 @@ export { GoogleIcon } from './GoogleIcon';
 
 export { ProgressBar } from './ProgressBar';
 export type { ProgressVariant, ProgressSize } from './ProgressBar';
+
+export { Alert } from './Alert';
+export type { AlertVariant } from './Alert';
+
+export { Divider } from './Divider';
