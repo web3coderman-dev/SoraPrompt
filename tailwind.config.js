@@ -7,8 +7,14 @@ export default {
       colors: {
         scene: {
           bg: '#0B0D12',
+          background: '#0B0D12',
           fill: '#141821',
           fillLight: '#1A1F2E',
+        },
+        border: {
+          subtle: 'rgba(58, 108, 255, 0.1)',
+          default: 'rgba(58, 108, 255, 0.2)',
+          strong: 'rgba(58, 108, 255, 0.4)',
         },
         keyLight: {
           DEFAULT: '#3A6CFF',
@@ -131,6 +137,7 @@ export default {
         'slide-up': 'slideUp 300ms ease-out',
         'slide-down': 'slideDown 300ms ease-out',
         'scale-in': 'scaleIn 200ms ease-out',
+        'shimmer': 'shimmer 2s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -160,6 +167,10 @@ export default {
         scaleIn: {
           '0%': { transform: 'scale(0.95)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
         },
       },
       transitionDuration: {
