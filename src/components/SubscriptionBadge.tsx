@@ -17,6 +17,13 @@ export function SubscriptionBadge({ tier, size = 'md', showLabel = true }: Subsc
   };
 
   const tierConfig = {
+    guest: {
+      bg: 'bg-scene-fill',
+      text: 'text-text-tertiary',
+      border: 'border-border-subtle',
+      icon: '👤',
+      label: t.tierGuest || 'Guest',
+    },
     free: {
       bg: 'bg-scene-fillLight',
       text: 'text-text-secondary',
@@ -25,22 +32,27 @@ export function SubscriptionBadge({ tier, size = 'md', showLabel = true }: Subsc
       label: t.tierFree,
     },
     creator: {
-      bg: 'bg-gradient-to-r from-state-ok to-state-ok/80',
+      bg: 'bg-gradient-to-r from-[#45E0A2] to-[#3DD598]',
       text: 'text-white',
-      border: 'border-state-ok',
+      border: 'border-[#45E0A2]',
       icon: '⚡️',
       label: t.tierCreator,
     },
     director: {
-      bg: 'bg-gradient-to-r from-keyLight to-neon',
+      bg: 'bg-gradient-to-r from-[#3A6CFF] to-[#8A60FF]',
       text: 'text-white',
-      border: 'border-keyLight',
+      border: 'border-[#3A6CFF]',
       icon: '🎥',
       label: t.tierDirector,
     },
   };
 
   const config = tierConfig[tier];
+
+  if (!config) {
+    console.error(`Unknown subscription tier: ${tier}`);
+    return null;
+  }
 
   return (
     <div
