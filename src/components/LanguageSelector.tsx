@@ -98,61 +98,26 @@ export default function LanguageSelector({ value, onChange, detectedLanguage, di
   const dropdownRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const updatePosition = useRef(() => {
-    if (!isOpen || !buttonRef.current) return;
-
-    const rect = buttonRef.current.getBoundingClientRect();
-    const dropdownHeight = 384;
-    const dropdownWidth = 320;
-    const spacing = 8;
-    const viewportHeight = window.innerHeight;
-    const viewportWidth = window.innerWidth;
-
-    const spaceBelow = viewportHeight - rect.bottom;
-    const spaceAbove = rect.top;
-    const shouldOpenUpward = spaceBelow < dropdownHeight && spaceAbove > spaceBelow;
-
-    const spaceRight = viewportWidth - rect.left;
-    const shouldAlignRight = spaceRight < dropdownWidth;
-
-    let top: number;
-    let left: number;
-
-    if (shouldOpenUpward) {
-      top = rect.top + window.scrollY - dropdownHeight - spacing;
-    } else {
-      top = rect.bottom + window.scrollY + spacing;
-    }
-
-    if (shouldAlignRight) {
-      left = rect.right + window.scrollX - dropdownWidth;
-    } else {
-      left = rect.left + window.scrollX;
-    }
-
-    left = Math.max(spacing, Math.min(left, viewportWidth - dropdownWidth - spacing + window.scrollX));
-    top = Math.max(spacing + window.scrollY, top);
-
-    setDropdownPosition({
-      top,
-      left,
-      width: rect.width
-    });
-  });
+  const updatePosition = useRef(() => {});
 
   updatePosition.current = () => {
     if (!isOpen || !buttonRef.current) return;
 
     const rect = buttonRef.current.getBoundingClientRect();
-    const dropdownHeight = 384;
+    const dropdownMaxHeight = 384;
+    const dropdownMinHeight = 200;
     const dropdownWidth = 320;
     const spacing = 8;
     const viewportHeight = window.innerHeight;
     const viewportWidth = window.innerWidth;
 
-    const spaceBelow = viewportHeight - rect.bottom;
-    const spaceAbove = rect.top;
-    const shouldOpenUpward = spaceBelow < dropdownHeight && spaceAbove > spaceBelow;
+    const spaceBelow = viewportHeight - rect.bottom - spacing;
+    const spaceAbove = rect.top - spacing;
+
+    const shouldOpenUpward =
+      spaceBelow < dropdownMinHeight &&
+      spaceAbove > dropdownMinHeight &&
+      spaceAbove > spaceBelow;
 
     const spaceRight = viewportWidth - rect.left;
     const shouldAlignRight = spaceRight < dropdownWidth;
@@ -161,7 +126,7 @@ export default function LanguageSelector({ value, onChange, detectedLanguage, di
     let left: number;
 
     if (shouldOpenUpward) {
-      top = rect.top + window.scrollY - dropdownHeight - spacing;
+      top = rect.top + window.scrollY - Math.min(dropdownMaxHeight, spaceAbove) - spacing;
     } else {
       top = rect.bottom + window.scrollY + spacing;
     }
