@@ -136,10 +136,10 @@ export default function History({ onSelectPrompt }: HistoryProps) {
   };
 
   const getScoreColor = (score: number) => {
-    if (score >= 90) return 'text-state-ok bg-state-ok/10';
-    if (score >= 75) return 'text-keyLight bg-keyLight/10 border border-keyLight/30';
+    if (score >= 90) return 'text-state-ok bg-state-ok/10 border border-state-ok/30';
+    if (score >= 75) return 'text-state-info bg-state-info/10 border border-state-info/30';
     if (score >= 60) return 'text-state-warning bg-state-warning/10 border border-state-warning/30';
-    return 'text-state-error bg-state-error/10';
+    return 'text-state-error bg-state-error/10 border border-state-error/30';
   };
 
   if (loading) {
@@ -265,30 +265,30 @@ export default function History({ onSelectPrompt }: HistoryProps) {
             <div className="flex gap-2 flex-wrap">
               <button
                 onClick={() => setFilterMode('all')}
-                className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all duration-200 ${
                   filterMode === 'all'
-                    ? 'bg-keyLight text-white'
-                    : 'bg-scene-fillLight text-text-secondary hover:bg-scene-fillLight'
+                    ? 'bg-keyLight/20 text-keyLight border border-keyLight/30'
+                    : 'bg-scene-fillLight text-text-secondary border border-keyLight/10 hover:border-keyLight/20'
                 }`}
               >
                 {t.historyFilterAll}
               </button>
               <button
                 onClick={() => setFilterMode('quick')}
-                className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all duration-200 ${
                   filterMode === 'quick'
-                    ? 'bg-keyLight text-white'
-                    : 'bg-scene-fillLight text-text-secondary hover:bg-scene-fillLight'
+                    ? 'bg-keyLight/20 text-keyLight border border-keyLight/30'
+                    : 'bg-scene-fillLight text-text-secondary border border-keyLight/10 hover:border-keyLight/20'
                 }`}
               >
                 {t.historyFilterQuick}
               </button>
               <button
                 onClick={() => setFilterMode('director')}
-                className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-all duration-200 ${
                   filterMode === 'director'
-                    ? 'bg-keyLight text-white'
-                    : 'bg-scene-fillLight text-text-secondary hover:bg-scene-fillLight'
+                    ? 'bg-keyLight/20 text-keyLight border border-keyLight/30'
+                    : 'bg-scene-fillLight text-text-secondary border border-keyLight/10 hover:border-keyLight/20'
                 }`}
               >
                 {t.historyFilterDirector}
@@ -354,14 +354,14 @@ export default function History({ onSelectPrompt }: HistoryProps) {
               <div className="flex gap-2">
                 <button
                   onClick={() => onSelectPrompt(prompt)}
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-keyLight hover:bg-keyLight-600 text-white text-sm font-semibold rounded-lg transition-all duration-200 active:scale-[0.98]"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-scene-fill border border-border-default hover:bg-scene-fillLight hover:border-keyLight hover:text-text-primary text-text-secondary text-sm font-medium rounded-lg transition-all duration-200 active:scale-[0.98]"
                 >
                   <Eye className="w-4 h-4" />
                   {t.view}
                 </button>
                 <button
                   onClick={() => handleDeleteClick(prompt.id)}
-                  className="flex items-center justify-center gap-2 px-4 py-2 bg-state-error/10 hover:bg-red-100 text-state-error text-sm font-medium rounded-lg transition-colors"
+                  className="flex items-center justify-center gap-2 px-4 py-2 bg-state-error/10 hover:bg-state-error/20 text-state-error text-sm font-medium rounded-lg transition-colors"
                 >
                   <Trash2 className="w-4 h-4" />
                   {t.delete}
