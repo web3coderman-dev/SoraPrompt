@@ -1,7 +1,7 @@
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'gradient' | 'scene' | 'rim';
+export type ButtonVariant = 'take' | 'cut' | 'preview' | 'director' | 'scene' | 'rim';
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -15,18 +15,25 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: `bg-keyLight hover:bg-keyLight-600 active:bg-keyLight-700
-            text-white shadow-key hover:shadow-light
-            transition-all duration-300 ease-smooth`,
-  secondary: `bg-scene-fill border border-keyLight/20 hover:border-keyLight/40
-              hover:bg-scene-fillLight text-text-primary
-              transition-all duration-300 ease-smooth`,
-  ghost: `text-keyLight hover:bg-keyLight/10 active:bg-keyLight/20
-          transition-all duration-200 ease-smooth`,
-  gradient: `bg-gradient-to-r from-neon-600 to-neon-500
-             hover:from-neon-700 hover:to-neon-600
-             text-white shadow-neon hover:shadow-rim
-             transition-all duration-300 ease-smooth`,
+  take: `bg-gradient-to-r from-keyLight to-keyLight-600
+         hover:shadow-neon hover:scale-105
+         text-white font-display shadow-key
+         transition-all duration-300 ease-smooth
+         relative overflow-hidden
+         before:absolute before:inset-0 before:bg-neon before:opacity-0 hover:before:opacity-20 before:transition-opacity before:duration-300`,
+  cut: `bg-state-error/10 border-2 border-state-error
+        hover:bg-state-error hover:text-white
+        text-state-error font-display
+        transition-all duration-200 ease-smooth`,
+  preview: `bg-scene-fill border border-border-default
+            hover:bg-scene-fillLight hover:border-keyLight
+            hover:text-text-primary text-text-secondary font-medium
+            transition-all duration-200 ease-smooth`,
+  director: `bg-gradient-to-r from-keyLight via-neon to-keyLight
+             hover:shadow-neon hover:scale-105
+             text-white font-display shadow-key
+             transition-all duration-300 ease-smooth
+             animate-render-pulse`,
   scene: `bg-scene-fill border border-rimLight/30 hover:border-rimLight/50
           hover:bg-scene-fillLight text-text-primary hover:text-rimLight
           transition-all duration-300 ease-smooth`,
@@ -44,7 +51,7 @@ const sizeClasses: Record<ButtonSize, string> = {
 };
 
 export const Button: React.FC<ButtonProps> = ({
-  variant = 'primary',
+  variant = 'take',
   size = 'lg',
   icon: Icon,
   iconPosition = 'left',

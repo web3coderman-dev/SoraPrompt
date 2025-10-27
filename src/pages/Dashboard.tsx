@@ -268,25 +268,25 @@ export default function Dashboard() {
           <div className="p-6 md:p-8 lg:p-12">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12">
-                <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                <div className="inline-flex items-center gap-2 bg-neon/10 text-neon border border-neon/30 px-4 py-2 rounded-full text-sm font-medium mb-4 shadow-neon">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-neon"></span>
                   </span>
                   {t.tagMVP}
                 </div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 tracking-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-text-primary mb-4 tracking-tight">
                   {t.title}
                 </h1>
-                <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+                <p className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto">
                   {t.subtitle}
                 </p>
 
                 <div className="flex flex-wrap items-center justify-center gap-3 mt-6">
-                  <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-700 rounded-lg text-sm font-medium">
+                  <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-neon/10 to-keyLight/10 border border-neon/20 text-text-primary rounded-lg text-sm font-medium">
                     {t.tagGeneration}
                   </span>
-                  <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-700 rounded-lg text-sm font-medium">
+                  <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-keyLight/10 to-rimLight/10 border border-keyLight/20 text-text-primary rounded-lg text-sm font-medium">
                     {t.tagAssistant}
                   </span>
                 </div>
@@ -324,7 +324,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
+    <div className="flex min-h-screen bg-gradient-to-br from-scene-bg via-scene-fill to-scene-fillLight">
       <Sidebar
         isOpen={sidebarOpen}
         onToggle={() => setSidebarOpen(!sidebarOpen)}

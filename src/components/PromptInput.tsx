@@ -56,7 +56,7 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
   };
 
   return (
-    <Card className="animate-fade-in">
+    <Card variant="script" className="animate-fade-in">
       <CardBody>
         <Textarea
           label={t.inputLabel}
@@ -72,7 +72,7 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
       <CardFooter className="flex flex-col sm:flex-row gap-3">
         <div className="w-full sm:w-1/2">
           <Button
-            variant="primary"
+            variant="take"
             icon={Sparkles}
             onClick={() => handleSubmit('quick')}
             disabled={!input.trim() || isLoading}
@@ -85,7 +85,7 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
 
         <div className="relative w-full sm:w-1/2">
           <Button
-            variant="gradient"
+            variant="director"
             icon={user ? Clapperboard : Lock}
             onClick={() => handleSubmit('director')}
             disabled={!input.trim() || isLoading}
@@ -98,24 +98,24 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
 
       {isLoading && (
         <div className="px-6 pb-6">
-          <div className="flex items-center gap-3 text-sm text-gray-600 animate-fade-in">
-            <div className="animate-spin rounded-full h-4 w-4 border-2 border-primary-600 border-t-transparent" />
-            <span>{t.generating}</span>
+          <div className="flex items-center gap-3 text-sm text-text-secondary animate-fade-in">
+            <div className="animate-spin rounded-full h-4 w-4 border-2 border-neon border-t-transparent" />
+            <span className="font-code">{t.generating}</span>
           </div>
         </div>
       )}
 
       {!user && (
         <div className="px-6 pb-6">
-          <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm">
-            <p className="text-blue-900 font-semibold mb-2">
+          <div className="p-4 bg-keyLight/10 border border-keyLight/20 rounded-lg text-sm">
+            <p className="text-text-primary font-semibold mb-2">
               {t.guestUsageTip}
             </p>
             <div className="space-y-1">
-              <p className="text-blue-800 text-xs leading-relaxed">
+              <p className="text-text-secondary text-xs leading-relaxed">
                 1. {t.guestUsageTip1}
               </p>
-              <p className="text-blue-800 text-xs leading-relaxed">
+              <p className="text-text-secondary text-xs leading-relaxed">
                 2. {t.guestUsageTip2}
               </p>
             </div>
@@ -124,7 +124,7 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
       )}
 
       {showLoginPrompt && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-scene-bg/80 backdrop-blur-sm">
           <div className="relative max-w-md">
             <button
               onClick={() => setShowLoginPrompt(false)}

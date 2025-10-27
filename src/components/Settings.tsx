@@ -158,37 +158,37 @@ export default function Settings() {
   return (
     <div className="max-w-5xl mx-auto">
       <div className="flex items-center gap-3 mb-6">
-        <SettingsIcon className="w-8 h-8 text-gray-900" />
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{t.settingsTitle}</h2>
+        <SettingsIcon className="w-8 h-8 text-keyLight" />
+        <h2 className="text-2xl md:text-3xl font-bold font-display text-text-primary">{t.settingsTitle}</h2>
       </div>
 
       {saved && (
-        <div className="mb-6 bg-green-50 border border-green-200 rounded-lg p-4 flex items-center gap-2 animate-fadeIn">
-          <Check className="w-5 h-5 text-green-600" />
-          <span className="text-green-800 font-medium">{t.settingsSaved}</span>
+        <div className="mb-6 bg-state-ok/10 border border-state-ok/30 rounded-lg p-4 flex items-center gap-2 animate-fadeIn">
+          <Check className="w-5 h-5 text-state-ok" />
+          <span className="text-state-ok font-medium">{t.settingsSaved}</span>
         </div>
       )}
 
       {user && (
         <div className={`mb-6 rounded-lg p-4 border-2 ${
-          syncStatus === 'success' ? 'bg-blue-50 border-blue-200' :
-          syncStatus === 'error' ? 'bg-red-50 border-red-200' :
-          syncStatus === 'syncing' ? 'bg-yellow-50 border-yellow-200' :
-          'bg-gray-50 border-gray-200'
+          syncStatus === 'success' ? 'bg-state-ok/10 border-state-ok/30' :
+          syncStatus === 'error' ? 'bg-state-error/10 border-state-error/30' :
+          syncStatus === 'syncing' ? 'bg-state-warning/10 border-state-warning/30' :
+          'bg-scene-fillLight border-keyLight/20'
         }`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               {syncStatus === 'syncing' || syncing ? (
-                <div className="animate-spin rounded-full h-5 w-5 border-2 border-blue-600 border-t-transparent" />
+                <div className="animate-spin rounded-full h-5 w-5 border-2 border-neon border-t-transparent" />
               ) : syncStatus === 'success' ? (
-                <CheckCircle className="w-5 h-5 text-green-600" />
+                <CheckCircle className="w-5 h-5 text-state-ok" />
               ) : syncStatus === 'error' ? (
-                <XCircle className="w-5 h-5 text-red-600" />
+                <XCircle className="w-5 h-5 text-state-error" />
               ) : (
-                <Cloud className="w-5 h-5 text-gray-600" />
+                <Cloud className="w-5 h-5 text-keyLight" />
               )}
               <div>
-                <p className="text-sm font-medium text-gray-900">
+                <p className="text-sm font-medium text-text-primary">
                   {syncStatus === 'syncing' || syncing
                     ? (language === 'zh' ? '正在同步...' : 'Syncing...')
                     : syncStatus === 'success'
@@ -199,26 +199,26 @@ export default function Settings() {
                   }
                 </p>
                 {lastSynced && !syncing && syncStatus !== 'error' && (
-                  <p className="text-xs text-gray-600 mt-0.5">
+                  <p className="text-xs text-text-secondary mt-0.5">
                     {language === 'zh' ? '上次同步: ' : 'Last synced: '}
                     {lastSynced.toLocaleTimeString(language === 'zh' ? 'zh-CN' : 'en-US')}
                   </p>
                 )}
                 {syncError && (
-                  <p className="text-xs text-red-600 mt-0.5">{syncError}</p>
+                  <p className="text-xs text-state-error mt-0.5">{syncError}</p>
                 )}
               </div>
             </div>
             <button
               onClick={handleManualSync}
               disabled={syncing || syncStatus === 'syncing'}
-              className="flex items-center gap-2 px-4 py-2 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-scene-fill hover:bg-scene-fillLight border border-keyLight/20 hover:border-keyLight/40 rounded-lg text-sm font-medium text-text-primary disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
               {language === 'zh' ? '立即同步' : 'Sync Now'}
             </button>
           </div>
-          <p className="text-xs text-gray-600 mt-2">
+          <p className="text-xs text-text-secondary mt-2">
             {language === 'zh'
               ? '设置修改后自动同步到云端，可跨设备访问'
               : 'Settings are automatically synced to cloud and accessible across devices'
@@ -228,14 +228,14 @@ export default function Settings() {
       )}
 
       {!user && (
-        <div className="mb-6 bg-orange-50 border-2 border-orange-200 rounded-lg p-4">
+        <div className="mb-6 bg-state-warning/10 border-2 border-state-warning/30 rounded-lg p-4">
           <div className="flex items-center gap-3 mb-2">
-            <CloudOff className="w-5 h-5 text-orange-600" />
-            <p className="text-sm font-medium text-orange-900">
+            <CloudOff className="w-5 h-5 text-state-warning" />
+            <p className="text-sm font-medium text-text-primary">
               {language === 'zh' ? '设置仅保存在本地' : 'Settings saved locally only'}
             </p>
           </div>
-          <p className="text-xs text-orange-700">
+          <p className="text-xs text-text-secondary">
             {language === 'zh'
               ? '登录以启用云端同步，跨设备保持设置一致'
               : 'Sign in to enable cloud sync and keep settings consistent across devices'
@@ -245,8 +245,8 @@ export default function Settings() {
       )}
 
       <div className="space-y-6">
-        <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">{t.settingsLanguage}</h3>
+        <div className="bg-scene-fill rounded-xl shadow-depth-md border border-keyLight/20 p-6">
+          <h3 className="text-lg font-semibold font-display text-text-primary mb-4">{t.settingsLanguage}</h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {interfaceLanguages.map((lang) => (
               <button
@@ -254,21 +254,21 @@ export default function Settings() {
                 onClick={() => handleLanguageChange(lang.code)}
                 className={`p-4 rounded-lg border-2 transition-all ${
                   language === lang.code
-                    ? 'border-primary-600 bg-primary-50 text-primary-900'
-                    : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
+                    ? 'border-keyLight bg-keyLight/10 text-text-primary shadow-light'
+                    : 'border-keyLight/20 bg-scene-fillLight text-text-secondary hover:border-keyLight/40'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="font-medium">{lang.name}</span>
-                  {language === lang.code && <Check className="w-5 h-5 text-primary-600" />}
+                  {language === lang.code && <Check className="w-5 h-5 text-keyLight" />}
                 </div>
               </button>
             ))}
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+        <div className="bg-scene-fill rounded-xl shadow-depth-md border border-keyLight/20 p-6">
+          <h3 className="text-lg font-semibold font-display text-text-primary mb-4">
             {t.themeAppearance}
           </h3>
           <div className="grid grid-cols-2 gap-3">
@@ -276,8 +276,8 @@ export default function Settings() {
               onClick={() => setTheme('light')}
               className={`p-4 rounded-lg border-2 transition-all ${
                 theme === 'light'
-                  ? 'border-primary-600 bg-primary-50 text-primary-900'
-                  : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
+                  ? 'border-keyLight bg-keyLight/10 text-text-primary shadow-light'
+                  : 'border-keyLight/20 bg-scene-fillLight text-text-secondary hover:border-keyLight/40'
               }`}
             >
               <div className="flex items-center justify-between">
@@ -287,7 +287,7 @@ export default function Settings() {
                     {t.lightMode}
                   </span>
                 </div>
-                {theme === 'light' && <Check className="w-5 h-5 text-primary-600" />}
+                {theme === 'light' && <Check className="w-5 h-5 text-keyLight" />}
               </div>
             </button>
 
@@ -295,8 +295,8 @@ export default function Settings() {
               onClick={() => setTheme('dark')}
               className={`p-4 rounded-lg border-2 transition-all ${
                 theme === 'dark'
-                  ? 'border-primary-600 bg-primary-50 text-primary-900'
-                  : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
+                  ? 'border-keyLight bg-keyLight/10 text-text-primary shadow-light'
+                  : 'border-keyLight/20 bg-scene-fillLight text-text-secondary hover:border-keyLight/40'
               }`}
             >
               <div className="flex items-center justify-between">
@@ -306,15 +306,15 @@ export default function Settings() {
                     {t.darkMode}
                   </span>
                 </div>
-                {theme === 'dark' && <Check className="w-5 h-5 text-primary-600" />}
+                {theme === 'dark' && <Check className="w-5 h-5 text-keyLight" />}
               </div>
             </button>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">{t.settingsOutputLanguage}</h3>
-          <p className="text-sm text-gray-600 mb-4">{t.settingsOutputLanguageDesc}</p>
+        <div className="bg-scene-fill rounded-xl shadow-depth-md border border-keyLight/20 p-6">
+          <h3 className="text-lg font-semibold font-display text-text-primary mb-2">{t.settingsOutputLanguage}</h3>
+          <p className="text-sm text-text-secondary mb-4">{t.settingsOutputLanguageDesc}</p>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-[400px] overflow-y-auto pr-2">
             {outputLanguages.map((lang) => (
@@ -323,15 +323,15 @@ export default function Settings() {
                 onClick={() => handleOutputLanguageChange(lang.code)}
                 className={`p-3 rounded-lg border-2 transition-all text-left ${
                   outputLanguage === lang.code
-                    ? 'border-primary-600 bg-primary-50 text-primary-900'
-                    : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
+                    ? 'border-keyLight bg-keyLight/10 text-text-primary shadow-light'
+                    : 'border-keyLight/20 bg-scene-fillLight text-text-secondary hover:border-keyLight/40'
                 }`}
               >
                 <div className="flex items-center justify-between gap-2">
                   <span className="font-medium text-sm truncate">
                     {lang.name}
                   </span>
-                  {outputLanguage === lang.code && <Check className="w-4 h-4 text-primary-600 flex-shrink-0" />}
+                  {outputLanguage === lang.code && <Check className="w-4 h-4 text-keyLight flex-shrink-0" />}
                 </div>
               </button>
             ))}
@@ -339,17 +339,17 @@ export default function Settings() {
         </div>
 
         {!user && (
-          <div className="bg-gradient-to-r from-blue-50 to-primary-50 rounded-xl shadow-md border-2 border-primary-300 p-6">
+          <div className="bg-gradient-to-r from-keyLight/10 to-neon/10 rounded-xl shadow-depth-md border-2 border-keyLight/30 p-6">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-br from-keyLight to-neon rounded-full flex items-center justify-center shadow-neon">
                   <Crown className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900">
+                  <h3 className="text-lg font-bold font-display text-text-primary">
                     {language === 'zh' ? '解锁完整功能' : 'Unlock Full Features'}
                   </h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-text-secondary">
                     {language === 'zh' ? '登录以享受更多功能' : 'Sign in to enjoy more features'}
                   </p>
                 </div>
@@ -357,27 +357,27 @@ export default function Settings() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-              <div className="flex items-center gap-2 text-sm text-gray-700 bg-white p-3 rounded-lg">
-                <Cloud className="w-4 h-4 text-blue-600" />
+              <div className="flex items-center gap-2 text-sm text-text-primary bg-scene-fill border border-keyLight/20 p-3 rounded-lg">
+                <Cloud className="w-4 h-4 text-keyLight" />
                 <span>{language === 'zh' ? '无限云端存储' : 'Unlimited cloud storage'}</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-700 bg-white p-3 rounded-lg">
-                <Shield className="w-4 h-4 text-green-600" />
+              <div className="flex items-center gap-2 text-sm text-text-primary bg-scene-fill border border-keyLight/20 p-3 rounded-lg">
+                <Shield className="w-4 h-4 text-state-ok" />
                 <span>{language === 'zh' ? '数据安全同步' : 'Secure data sync'}</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-700 bg-white p-3 rounded-lg">
-                <Crown className="w-4 h-4 text-purple-600" />
+              <div className="flex items-center gap-2 text-sm text-text-primary bg-scene-fill border border-keyLight/20 p-3 rounded-lg">
+                <Crown className="w-4 h-4 text-neon" />
                 <span>{language === 'zh' ? '高级功能访问' : 'Premium features'}</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-700 bg-white p-3 rounded-lg">
-                <Check className="w-4 h-4 text-green-600" />
+              <div className="flex items-center gap-2 text-sm text-text-primary bg-scene-fill border border-keyLight/20 p-3 rounded-lg">
+                <Check className="w-4 h-4 text-state-ok" />
                 <span>{language === 'zh' ? '更多生成次数' : 'More generations'}</span>
               </div>
             </div>
 
             <button
               onClick={() => setShowLoginPrompt(true)}
-              className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+              className="w-full bg-gradient-to-r from-keyLight to-keyLight-600 hover:shadow-neon text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-key flex items-center justify-center gap-2"
             >
               <LogIn className="w-5 h-5" />
               {language === 'zh' ? '立即登录' : 'Sign In Now'}
@@ -385,10 +385,10 @@ export default function Settings() {
           </div>
         )}
 
-        <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+        <div className="bg-scene-fill rounded-xl shadow-depth-md border border-keyLight/20 p-6">
           <div className="flex items-center gap-2 mb-4">
-            <Shield className="w-5 h-5 text-gray-900" />
-            <h3 className="text-lg font-semibold text-gray-900">
+            <Shield className="w-5 h-5 text-keyLight" />
+            <h3 className="text-lg font-semibold font-display text-text-primary">
               {language === 'zh' ? '账号与安全' : 'Account & Security'}
             </h3>
           </div>
@@ -396,18 +396,18 @@ export default function Settings() {
           {user ? (
             profile?.google_id ? (
             <div className="space-y-4">
-              <div className="flex items-start gap-3 p-4 bg-green-50 border border-green-200 rounded-lg">
-                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 p-4 bg-state-ok/10 border border-state-ok/30 rounded-lg">
+                <Check className="w-5 h-5 text-state-ok flex-shrink-0 mt-0.5" />
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-green-900">
+                  <p className="text-sm font-medium text-text-primary">
                     {language === 'zh' ? 'Google 账号已关联' : 'Google Account Connected'}
                   </p>
-                  <p className="text-xs text-green-700 mt-1">
+                  <p className="text-xs text-text-secondary mt-1">
                     {user.email}
                   </p>
                 </div>
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-600">
+              <div className="flex items-center gap-2 text-sm text-text-secondary">
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
                     fill="#4285F4"
@@ -436,15 +436,15 @@ export default function Settings() {
             </div>
             ) : (
               <div className="space-y-4">
-                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="text-sm font-medium text-blue-900 mb-1">
+                <div className="p-4 bg-keyLight/10 border border-keyLight/30 rounded-lg">
+                  <p className="text-sm font-medium text-text-primary mb-1">
                     {language === 'zh' ? '当前状态：邮箱登录' : 'Current Status: Email Login'}
                   </p>
-                  <p className="text-xs text-blue-700">
+                  <p className="text-xs text-text-secondary">
                     {user?.email}
                   </p>
                 </div>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-text-secondary">
                   {language === 'zh'
                     ? '关联 Google 账号以启用一键登录和云端数据同步'
                     : 'Link your Google account for one-click sign-in and cloud sync'
@@ -453,7 +453,7 @@ export default function Settings() {
                 <button
                   onClick={handleLinkGoogle}
                   disabled={linking}
-                  className="w-full bg-white hover:bg-gray-50 text-gray-900 font-semibold py-3 px-6 rounded-lg border-2 border-gray-300 hover:border-gray-400 transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+                  className="w-full bg-scene-fillLight hover:bg-scene-fill text-text-primary font-semibold py-3 px-6 rounded-lg border-2 border-keyLight/20 hover:border-keyLight/40 transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-light"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
@@ -485,8 +485,8 @@ export default function Settings() {
             )
           ) : (
             <div className="text-center py-6">
-              <LogIn className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-              <p className="text-gray-600 mb-4">
+              <LogIn className="w-12 h-12 text-text-secondary mx-auto mb-3" />
+              <p className="text-text-secondary mb-4">
                 {language === 'zh'
                   ? '登录后查看账号信息'
                   : 'Sign in to view account information'
@@ -496,11 +496,11 @@ export default function Settings() {
           )}
         </div>
 
-        <div className="bg-gray-50 rounded-xl border border-gray-200 p-6">
-          <h3 className="text-sm font-semibold text-gray-700 mb-3">
+        <div className="bg-scene-fillLight rounded-xl border border-keyLight/20 p-6">
+          <h3 className="text-sm font-semibold text-text-secondary mb-3">
             {language === 'zh' ? '关于' : 'About'}
           </h3>
-          <div className="space-y-2 text-sm text-gray-600">
+          <div className="space-y-2 text-sm text-text-secondary">
             <p>
               <span className="font-medium">Version:</span> 0.1 MVP
             </p>

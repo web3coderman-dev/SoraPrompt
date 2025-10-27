@@ -5,7 +5,7 @@ interface CardProps {
   className?: string;
   hoverable?: boolean;
   onClick?: () => void;
-  variant?: 'default' | 'scene' | 'glass';
+  variant?: 'scene' | 'script' | 'lighting' | 'glass';
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -13,12 +13,13 @@ export const Card: React.FC<CardProps> = ({
   className = '',
   hoverable = false,
   onClick,
-  variant = 'default',
+  variant = 'scene',
 }) => {
   const variantClasses = {
-    default: 'bg-white dark:bg-scene-fill border border-gray-200 dark:border-keyLight/10',
-    scene: 'bg-scene-fill border border-keyLight/20 shadow-light',
-    glass: 'bg-scene-fill/80 backdrop-blur-md border border-keyLight/10',
+    scene: 'bg-scene-fill border border-keyLight/20 shadow-depth-lg',
+    script: 'bg-scene-fill border-l-4 border-rimLight shadow-depth-md',
+    lighting: 'bg-gradient-to-br from-scene-fill to-scene-fillLight border border-border-default shadow-depth-md',
+    glass: 'bg-scene-fill/80 backdrop-blur-md border border-keyLight/10 shadow-light',
   };
 
   const baseClasses = `
@@ -28,7 +29,7 @@ export const Card: React.FC<CardProps> = ({
   `;
 
   const hoverClasses = hoverable
-    ? 'hover:shadow-depth-lg hover:border-keyLight/30 dark:hover:border-keyLight/40 cursor-pointer active:scale-[0.99] hover:-translate-y-0.5'
+    ? 'hover:shadow-key hover:border-keyLight/40 cursor-pointer active:scale-[0.99] hover:-translate-y-1 transition-transform'
     : '';
 
   return (
@@ -54,8 +55,8 @@ export const CardHeader: React.FC<CardHeaderProps> = ({
 }) => {
   const baseClasses = 'px-6 py-4';
   const gradientClasses = gradient
-    ? 'bg-gradient-to-r from-keyLight/10 to-neon/10 border-b border-keyLight/10'
-    : 'border-b border-gray-200 dark:border-keyLight/10';
+    ? 'bg-gradient-to-r from-keyLight/10 via-neon/10 to-rimLight/10 border-b border-keyLight/20'
+    : 'border-b border-border-default';
 
   return (
     <div className={`${baseClasses} ${gradientClasses} ${className}`.trim().replace(/\s+/g, ' ')}>
@@ -99,7 +100,7 @@ export const CardFooter: React.FC<CardFooterProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`px-6 py-4 bg-gray-50 dark:bg-scene-fillLight border-t border-gray-100 dark:border-keyLight/10 ${className}`.trim()}>
+    <div className={`px-6 py-4 bg-scene-fillLight border-t border-keyLight/10 ${className}`.trim()}>
       {children}
     </div>
   );

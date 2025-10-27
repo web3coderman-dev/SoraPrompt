@@ -16,13 +16,16 @@
 
   body {
     @apply font-sans antialiased;
-    @apply bg-white dark:bg-scene-bg;
-    @apply text-gray-900 dark:text-text-primary;
+    @apply bg-scene-bg text-text-primary;
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 
+  body.light-mode {
+    @apply bg-white text-gray-900;
+  }
+
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
+    @apply font-display font-bold tracking-tight;
   }
 
   h1 {
@@ -45,11 +48,21 @@
   }
 
   a {
-    @apply transition-colors duration-200 ease-smooth;
+    @apply text-keyLight hover:text-keyLight-400 transition-colors duration-200 ease-smooth;
   }
 
   button {
     @apply transition-all duration-300 ease-smooth;
+  }
+
+  input, textarea, select {
+    @apply bg-scene-fillLight border-keyLight/20 text-text-primary;
+    @apply focus:border-keyLight focus:ring-2 focus:ring-keyLight/20;
+    @apply placeholder:text-text-secondary;
+  }
+
+  input:disabled, textarea:disabled, select:disabled {
+    @apply opacity-50 cursor-not-allowed;
   }
 }
 
