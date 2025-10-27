@@ -98,6 +98,90 @@ export default function LanguageSelector({ value, onChange, detectedLanguage, di
   const dropdownRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
+  const updatePosition = useRef(() => {
+    if (!isOpen || !buttonRef.current) return;
+
+    const rect = buttonRef.current.getBoundingClientRect();
+    const dropdownHeight = 384;
+    const dropdownWidth = 320;
+    const spacing = 8;
+    const viewportHeight = window.innerHeight;
+    const viewportWidth = window.innerWidth;
+
+    const spaceBelow = viewportHeight - rect.bottom;
+    const spaceAbove = rect.top;
+    const shouldOpenUpward = spaceBelow < dropdownHeight && spaceAbove > spaceBelow;
+
+    const spaceRight = viewportWidth - rect.left;
+    const shouldAlignRight = spaceRight < dropdownWidth;
+
+    let top: number;
+    let left: number;
+
+    if (shouldOpenUpward) {
+      top = rect.top + window.scrollY - dropdownHeight - spacing;
+    } else {
+      top = rect.bottom + window.scrollY + spacing;
+    }
+
+    if (shouldAlignRight) {
+      left = rect.right + window.scrollX - dropdownWidth;
+    } else {
+      left = rect.left + window.scrollX;
+    }
+
+    left = Math.max(spacing, Math.min(left, viewportWidth - dropdownWidth - spacing + window.scrollX));
+    top = Math.max(spacing + window.scrollY, top);
+
+    setDropdownPosition({
+      top,
+      left,
+      width: rect.width
+    });
+  });
+
+  updatePosition.current = () => {
+    if (!isOpen || !buttonRef.current) return;
+
+    const rect = buttonRef.current.getBoundingClientRect();
+    const dropdownHeight = 384;
+    const dropdownWidth = 320;
+    const spacing = 8;
+    const viewportHeight = window.innerHeight;
+    const viewportWidth = window.innerWidth;
+
+    const spaceBelow = viewportHeight - rect.bottom;
+    const spaceAbove = rect.top;
+    const shouldOpenUpward = spaceBelow < dropdownHeight && spaceAbove > spaceBelow;
+
+    const spaceRight = viewportWidth - rect.left;
+    const shouldAlignRight = spaceRight < dropdownWidth;
+
+    let top: number;
+    let left: number;
+
+    if (shouldOpenUpward) {
+      top = rect.top + window.scrollY - dropdownHeight - spacing;
+    } else {
+      top = rect.bottom + window.scrollY + spacing;
+    }
+
+    if (shouldAlignRight) {
+      left = rect.right + window.scrollX - dropdownWidth;
+    } else {
+      left = rect.left + window.scrollX;
+    }
+
+    left = Math.max(spacing, Math.min(left, viewportWidth - dropdownWidth - spacing + window.scrollX));
+    top = Math.max(spacing + window.scrollY, top);
+
+    setDropdownPosition({
+      top,
+      left,
+      width: rect.width
+    });
+  };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -126,45 +210,35 @@ export default function LanguageSelector({ value, onChange, detectedLanguage, di
   }, [isOpen]);
 
   useEffect(() => {
-    if (isOpen && buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
-      const dropdownHeight = 384;
-      const dropdownWidth = 320;
-      const spacing = 8;
-      const viewportHeight = window.innerHeight;
-      const viewportWidth = window.innerWidth;
+    if (!isOpen) return;
 
-      const spaceBelow = viewportHeight - rect.bottom;
-      const spaceAbove = rect.top;
-      const shouldOpenUpward = spaceBelow < dropdownHeight && spaceAbove > spaceBelow;
+    updatePosition.current();
 
-      const spaceRight = viewportWidth - rect.left;
-      const shouldAlignRight = spaceRight < dropdownWidth;
-
-      let top: number;
-      let left: number;
-
-      if (shouldOpenUpward) {
-        top = rect.top + window.scrollY - dropdownHeight - spacing;
-      } else {
-        top = rect.bottom + window.scrollY + spacing;
-      }
-
-      if (shouldAlignRight) {
-        left = rect.right + window.scrollX - dropdownWidth;
-      } else {
-        left = rect.left + window.scrollX;
-      }
-
-      left = Math.max(spacing, Math.min(left, viewportWidth - dropdownWidth - spacing + window.scrollX));
-      top = Math.max(spacing + window.scrollY, top);
-
-      setDropdownPosition({
-        top,
-        left,
-        width: rect.width
+    let rafId: number;
+    const handlePositionUpdate = () => {
+      rafId = requestAnimationFrame(() => {
+        updatePosition.current();
       });
-    }
+    };
+
+    const handleScroll = () => {
+      handlePositionUpdate();
+    };
+
+    const handleResize = () => {
+      handlePositionUpdate();
+    };
+
+    window.addEventListener('scroll', handleScroll, true);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll, true);
+      window.removeEventListener('resize', handleResize);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+    };
   }, [isOpen]);
 
   useEffect(() => {
