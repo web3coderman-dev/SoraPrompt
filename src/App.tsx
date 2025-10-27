@@ -1,43 +1,86 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
-import { LanguageProvider } from './contexts/LanguageContext';
-import { SubscriptionProvider } from './contexts/SubscriptionContext';
-import AuthCallback from './pages/AuthCallback';
-import Dashboard from './pages/Dashboard';
-import { ToastContainer } from './components/Toast';
-import { Loader2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Sidebar } from './components/Sidebar';
+import { PromptGenerator } from './components/PromptGenerator';
+import { HistoryPage } from './components/HistoryPage';
+import { SettingsPage } from './components/SettingsPage';
+import { SubscriptionPage } from './components/subscription/SubscriptionPage';
+import { SuccessPage } from './components/subscription/SuccessPage';
+import { AuthModal } from './components/auth/AuthModal';
+import { I18nProvider } from './contexts/I18nContext';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { useAuth } from './hooks/useAuth';
+import { Toaster } from 'react-hot-toast';
 
-function AppRoutes() {
-  const { loading } = useAuth();
+function App() {
+  const { user, loading } = useAuth();
+  const [authModal, setAuthModal] = useState<{ isOpen: boolean; mode: 'signin' | 'signup' }>({
+    isOpen: false,
+    mode: 'signin'
+  });
+
+  const openAuthModal = (mode: 'signin' | 'signup') => {
+    setAuthModal({ isOpen: true, mode });
+  };
+
+  const closeAuthModal = () => {
+    setAuthModal({ isOpen: false, mode: 'signin' });
+  };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
-        <Loader2 className="w-12 h-12 text-blue-600 animate-spin" />
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <Routes>
-      <Route path="/auth/callback" element={<AuthCallback />} />
-      <Route path="/" element={<Dashboard />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <I18nProvider>
+      <ThemeProvider>
+        <Router>
+          <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+            <Sidebar user={user} onAuthClick={openAuthModal} />
+            <main className="flex-1 overflow-hidden">
+              <Routes>
+                <Route path="/" element={<PromptGenerator />} />
+                <Route path="/history" element={<HistoryPage />} />
+                <Route path="/settings" element={<SettingsPage />} />
+                <Route 
+                  path="/subscription" 
+                  element={user ? <SubscriptionPage /> : <Navigate to="/" />} 
+                />
+                <Route 
+                  path="/subscription/success" 
+                  element={user ? <SuccessPage /> : <Navigate to="/" />} 
+                />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </main>
+          </div>
+          
+          <AuthModal
+            isOpen={authModal.isOpen}
+            onClose={closeAuthModal}
+            mode={authModal.mode}
+            onModeChange={(mode) => setAuthModal({ isOpen: true, mode })}
+          />
+          
+          <Toaster 
+            position="top-right"
+            toastOptions={{
+              duration: 3000,
+              style: {
+                background: 'var(--toast-bg)',
+                color: 'var(--toast-color)',
+                border: '1px solid var(--toast-border)',
+              },
+            }}
+          />
+        </Router>
+      </ThemeProvider>
+    </I18nProvider>
   );
 }
 
-export default function App() {
-  return (
-    <BrowserRouter>
-      <LanguageProvider>
-        <AuthProvider>
-          <SubscriptionProvider>
-            <AppRoutes />
-            <ToastContainer />
-          </SubscriptionProvider>
-        </AuthProvider>
-      </LanguageProvider>
-    </BrowserRouter>
-  );
-}
+export default App;
