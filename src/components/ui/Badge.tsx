@@ -1,5 +1,6 @@
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 export type BadgeVariant = 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info' | 'neutral';
 export type BadgeSize = 'sm' | 'md' | 'lg';
@@ -13,13 +14,13 @@ interface BadgeProps {
 }
 
 const variantClasses: Record<BadgeVariant, string> = {
-  primary: 'bg-primary-100 text-primary-700',
-  secondary: 'bg-gradient-to-r from-secondary-100 to-secondary-200 text-secondary-700',
-  success: 'bg-green-100 text-green-700',
-  warning: 'bg-yellow-100 text-yellow-700',
-  error: 'bg-red-100 text-red-700',
-  info: 'bg-blue-100 text-blue-700',
-  neutral: 'bg-gray-100 text-gray-700',
+  primary: 'bg-keyLight/10 text-keyLight border border-keyLight/30',
+  secondary: 'bg-rimLight/10 text-rimLight border border-rimLight/30',
+  success: 'bg-state-ok/10 text-state-ok border border-state-ok/30',
+  warning: 'bg-state-warning/10 text-state-warning border border-state-warning/30',
+  error: 'bg-state-error/10 text-state-error border border-state-error/30',
+  info: 'bg-state-info/10 text-state-info border border-state-info/30',
+  neutral: 'bg-scene-fillLight text-text-secondary border border-keyLight/10',
 };
 
 const sizeClasses: Record<BadgeSize, string> = {
@@ -56,11 +57,13 @@ interface QualityBadgeProps {
 }
 
 export const QualityBadge: React.FC<QualityBadgeProps> = ({ score, className = '' }) => {
+  const { t } = useLanguage();
+
   const getScoreColor = () => {
-    if (score >= 90) return 'bg-green-50 border-green-200 text-green-700';
-    if (score >= 75) return 'bg-blue-50 border-blue-200 text-blue-700';
-    if (score >= 60) return 'bg-yellow-50 border-yellow-200 text-yellow-700';
-    return 'bg-red-50 border-red-200 text-red-700';
+    if (score >= 90) return 'bg-state-ok/10 border-state-ok/30 text-state-ok';
+    if (score >= 75) return 'bg-state-info/10 border-state-info/30 text-state-info';
+    if (score >= 60) return 'bg-state-warning/10 border-state-warning/30 text-state-warning';
+    return 'bg-state-error/10 border-state-error/30 text-state-error';
   };
 
   return (
@@ -71,8 +74,8 @@ export const QualityBadge: React.FC<QualityBadgeProps> = ({ score, className = '
         ${className}
       `.trim().replace(/\s+/g, ' ')}
     >
-      <span className="text-sm font-semibold">质量评分:</span>
-      <span className="text-sm font-bold">{score} / 100</span>
+      <span className="text-sm font-semibold">{t.qualityScore}:</span>
+      <span className="text-sm font-bold font-code">{score} / 100</span>
     </div>
   );
 };

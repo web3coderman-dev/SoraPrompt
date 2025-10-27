@@ -20,40 +20,40 @@ export function UsageCounter() {
   if (!user) {
     return (
       <>
-        <div className="bg-scene-fill rounded-lg shadow-sm border border-keyLight/20 p-4">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <HardDrive className={`w-5 h-5 ${isLocalNearLimit ? 'text-orange-500' : 'text-text-secondary'}`} />
-              <span className="font-medium text-text-primary">
+              <HardDrive className={`w-5 h-5 ${isLocalNearLimit ? 'text-orange-500' : 'text-gray-600'}`} />
+              <span className="font-medium text-gray-900">
                 {language === 'zh' ? '本地存储' : 'Local Storage'}
               </span>
             </div>
-            <span className="text-sm font-semibold text-text-secondary">
+            <span className="text-sm font-semibold text-gray-600">
               {localCount} / {localLimit}
             </span>
           </div>
 
-          <div className="w-full bg-scene-fillLight rounded-full h-2.5 overflow-hidden">
+          <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
             <div
               className={`h-full transition-all duration-300 ${
-                isLocalAtLimit ? 'bg-state-error/100' : isLocalNearLimit ? 'bg-state-warning/100' : 'bg-state-info/100'
+                isLocalAtLimit ? 'bg-red-500' : isLocalNearLimit ? 'bg-orange-500' : 'bg-blue-500'
               }`}
               style={{ width: `${(localCount / localLimit) * 100}%` }}
             />
           </div>
 
           {isLocalNearLimit && (
-            <div className="mt-3 p-3 bg-state-warning/10 border border-state-warning/30 rounded-lg">
+            <div className="mt-3 p-3 bg-orange-50 border border-orange-200 rounded-lg">
               <div className="flex items-start gap-2">
-                <AlertCircle className="w-4 h-4 text-state-warning flex-shrink-0 mt-0.5" />
+                <AlertCircle className="w-4 h-4 text-orange-600 flex-shrink-0 mt-0.5" />
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-state-warning">
+                  <p className="text-sm font-medium text-orange-900">
                     {isLocalAtLimit
                       ? (language === 'zh' ? '存储空间已满' : 'Storage full')
                       : (language === 'zh' ? '存储空间即将用尽' : 'Storage almost full')
                     }
                   </p>
-                  <p className="text-xs text-state-warning mt-1">
+                  <p className="text-xs text-orange-700 mt-1">
                     {language === 'zh'
                       ? '登录后可解锁无限云端存储'
                       : 'Sign in to unlock unlimited cloud storage'
@@ -63,14 +63,14 @@ export function UsageCounter() {
               </div>
               <button
                 onClick={() => setShowLoginPrompt(true)}
-                className="mt-2 w-full text-sm font-medium text-state-warning hover:text-state-warning bg-orange-100 hover:bg-orange-200 py-2 px-3 rounded transition-colors"
+                className="mt-2 w-full text-sm font-medium text-orange-700 hover:text-orange-800 bg-orange-100 hover:bg-orange-200 py-2 px-3 rounded transition-colors"
               >
                 {language === 'zh' ? '立即登录' : 'Sign In Now'}
               </button>
             </div>
           )}
 
-          <div className="mt-2 text-xs text-text-tertiary">
+          <div className="mt-2 text-xs text-gray-500">
             {language === 'zh'
               ? '未登录用户最多保存 10 条记录'
               : 'Guest users can save up to 10 records'
@@ -83,7 +83,7 @@ export function UsageCounter() {
             <div className="relative max-w-md">
               <button
                 onClick={() => setShowLoginPrompt(false)}
-                className="absolute -top-2 -right-2 w-8 h-8 bg-scene-fill rounded-full shadow-depth-lg flex items-center justify-center text-text-secondary hover:text-text-primary z-10"
+                className="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-gray-900 z-10"
               >
                 ×
               </button>
@@ -109,37 +109,37 @@ export function UsageCounter() {
   const hasBonus = bonusCredits > 0;
 
   const getColor = () => {
-    if (percentage > 50) return 'bg-state-ok/100';
+    if (percentage > 50) return 'bg-green-500';
     if (percentage > 20) return 'bg-yellow-500';
-    return 'bg-state-error/100';
+    return 'bg-red-500';
   };
 
   const getBonusColor = () => 'bg-gradient-to-r from-yellow-400 to-orange-400';
 
   return (
-    <div className="bg-scene-fill rounded-lg shadow-sm border border-keyLight/20 p-4">
+    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           {isLow ? (
             <Battery className="w-5 h-5 text-red-500" />
           ) : (
-            <Zap className="w-5 h-5 text-keyLight" />
+            <Zap className="w-5 h-5 text-primary-600" />
           )}
-          <span className="font-medium text-text-primary">{t.subscriptionCredits}</span>
+          <span className="font-medium text-gray-900">{t.subscriptionCredits}</span>
         </div>
         <div className="flex flex-col items-end">
-          <span className="text-sm font-semibold text-text-secondary">
+          <span className="text-sm font-semibold text-gray-600">
             {subscription.remaining_credits} / {subscription.total_credits}
           </span>
           {hasBonus && (
-            <span className="text-xs font-medium text-state-warning">
+            <span className="text-xs font-medium text-orange-600">
               +{bonusCredits} {language === 'zh' ? '奖励' : 'bonus'}
             </span>
           )}
         </div>
       </div>
 
-      <div className="w-full bg-scene-fillLight rounded-full h-2.5 overflow-hidden relative">
+      <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden relative">
         <div
           className={`h-full ${getColor()} transition-all duration-300 absolute left-0`}
           style={{ width: `${Math.max(0, Math.min(100, percentage))}%` }}
@@ -153,14 +153,14 @@ export function UsageCounter() {
       </div>
 
       {hasBonus && (
-        <div className="mt-3 p-3 bg-gradient-to-r from-yellow-50 to-orange-50 border border-state-warning/30 rounded-lg">
+        <div className="mt-3 p-3 bg-gradient-to-r from-yellow-50 to-orange-50 border border-orange-200 rounded-lg">
           <div className="flex items-start gap-2">
-            <Zap className="w-4 h-4 text-state-warning flex-shrink-0 mt-0.5" />
+            <Zap className="w-4 h-4 text-orange-600 flex-shrink-0 mt-0.5" />
             <div className="flex-1">
-              <p className="text-sm font-medium text-state-warning">
+              <p className="text-sm font-medium text-orange-900">
                 {language === 'zh' ? '🎉 注册奖励' : '🎉 Registration Bonus'}
               </p>
-              <p className="text-xs text-state-warning mt-1">
+              <p className="text-xs text-orange-700 mt-1">
                 {language === 'zh'
                   ? `恭喜！您获得了 ${bonusCredits} 次额外生成机会`
                   : `Congrats! You got ${bonusCredits} extra generations`
@@ -172,14 +172,14 @@ export function UsageCounter() {
       )}
 
       {isLow && (
-        <div className="mt-3 p-3 bg-state-error/10 border border-state-error/30 rounded-lg">
+        <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">
           <div className="flex items-start gap-2">
-            <AlertCircle className="w-4 h-4 text-state-error flex-shrink-0 mt-0.5" />
+            <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
             <div className="flex-1">
-              <p className="text-sm font-medium text-state-error">
+              <p className="text-sm font-medium text-red-900">
                 {language === 'zh' ? 'Credits 即将用尽' : 'Credits running low'}
               </p>
-              <p className="text-xs text-state-error mt-1">
+              <p className="text-xs text-red-700 mt-1">
                 {language === 'zh'
                   ? '考虑升级套餐以获得更多 Credits'
                   : 'Consider upgrading for more credits'
@@ -190,7 +190,7 @@ export function UsageCounter() {
         </div>
       )}
 
-      <div className="mt-2 text-xs text-text-tertiary">
+      <div className="mt-2 text-xs text-gray-500">
         {subscription.reset_cycle === 'daily' ? (
           <span>{t.subscriptionResetsDaily}</span>
         ) : (

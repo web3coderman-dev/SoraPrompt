@@ -71,22 +71,22 @@ export default function LoginModal({ onClose }: LoginModalProps) {
         onClick={onClose}
       />
 
-      <div className="relative w-full max-w-md bg-scene-fill rounded-2xl shadow-key border border-keyLight/10 p-8 max-h-[90vh] overflow-y-auto">
+      <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-gray-100 p-8 max-h-[90vh] overflow-y-auto">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-text-tertiary hover:text-text-secondary transition-colors"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
         >
           <X className="w-6 h-6" />
         </button>
 
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-keyLight to-neon rounded-2xl mb-4 shadow-neon">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl mb-4">
             <Film className="w-8 h-8 text-white" />
           </div>
-          <h2 className="text-3xl font-bold font-display text-text-primary mb-2">
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">
             {t.title}
           </h2>
-          <p className="text-text-secondary">
+          <p className="text-gray-600">
             {isSignUp
               ? (t['auth.register.title'] || 'Create your account')
               : (t['auth.login.title'] || 'Sign in to continue')
@@ -95,16 +95,16 @@ export default function LoginModal({ onClose }: LoginModalProps) {
         </div>
 
         {error && (
-          <div className="mb-6 bg-state-error/10 border border-state-error/30 rounded-lg p-4 flex items-start gap-3 animate-slide-down">
-            <AlertCircle className="w-5 h-5 text-state-error flex-shrink-0 mt-0.5" />
-            <p className="text-sm text-state-error">{error}</p>
+          <div className="mb-6 bg-red-50 border border-red-200 rounded-lg p-4 flex items-start gap-3 animate-slide-down">
+            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+            <p className="text-sm text-red-800">{error}</p>
           </div>
         )}
 
         <button
           onClick={handleGoogleLogin}
           disabled={loading}
-          className="w-full bg-scene-fill hover:bg-scene-fillLight text-text-primary font-semibold py-3.5 px-6 rounded-lg border-2 border-keyLight/20 hover:border-gray-400 transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-depth-md"
+          className="w-full bg-white hover:bg-gray-50 text-gray-900 font-semibold py-3.5 px-6 rounded-lg border-2 border-gray-300 hover:border-gray-400 transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path
@@ -132,10 +132,10 @@ export default function LoginModal({ onClose }: LoginModalProps) {
         <div className="my-6">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-keyLight/20"></div>
+              <div className="w-full border-t border-gray-200"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-scene-fill text-text-tertiary">
+              <span className="px-4 bg-white text-gray-500">
                 {t.orContinueWith || 'Or continue with'}
               </span>
             </div>
@@ -144,41 +144,41 @@ export default function LoginModal({ onClose }: LoginModalProps) {
 
         <form onSubmit={handleEmailAuth} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-text-secondary mb-2">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
               {t.email || 'Email'}
             </label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-tertiary" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
               <input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={t.emailPlaceholder || 'Enter your email'}
-                className="w-full pl-10 pr-4 py-3 border border-keyLight/20 rounded-lg focus:ring-2 focus:ring-keyLight/20 focus:border-transparent transition-all"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
                 disabled={loading}
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-text-secondary mb-2">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
               {t.password || 'Password'}
             </label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-tertiary" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
               <input
                 id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder={t.passwordPlaceholder || 'Enter your password'}
-                className="w-full pl-10 pr-4 py-3 border border-keyLight/20 rounded-lg focus:ring-2 focus:ring-keyLight/20 focus:border-transparent transition-all"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
                 disabled={loading}
               />
             </div>
             {isSignUp && (
-              <p className="mt-2 text-xs text-text-tertiary">
+              <p className="mt-2 text-xs text-gray-500">
                 {t.passwordMinLength || 'Password must be at least 6 characters'}
               </p>
             )}
@@ -187,7 +187,7 @@ export default function LoginModal({ onClose }: LoginModalProps) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-keyLight to-neon hover:opacity-90 text-white font-semibold py-3.5 px-6 rounded-lg transition-all duration-200 shadow-key hover:shadow-neon disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]"
+            className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-3.5 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]"
           >
             {loading ? (
               <span>{t['auth.processing'] || 'Processing...'}</span>
@@ -203,7 +203,7 @@ export default function LoginModal({ onClose }: LoginModalProps) {
               setIsSignUp(!isSignUp);
               setError(null);
             }}
-            className="text-sm text-keyLight hover:text-keyLight font-medium transition-colors"
+            className="text-sm text-primary-600 hover:text-primary-700 font-medium transition-colors"
           >
             {isSignUp
               ? (t.alreadyHaveAccount || 'Already have an account?') + ' ' + (t.signIn || 'Sign In')
@@ -212,7 +212,7 @@ export default function LoginModal({ onClose }: LoginModalProps) {
           </button>
         </div>
 
-        <div className="mt-6 text-center text-xs text-text-tertiary">
+        <div className="mt-6 text-center text-xs text-gray-500">
           <p>
             {t.privacyPolicy}
           </p>

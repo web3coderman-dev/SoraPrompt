@@ -36,7 +36,7 @@ export function SubscriptionPlans() {
         t.featureSameAI,
       ],
       color: 'from-gray-100 to-gray-200',
-      textColor: 'text-text-secondary',
+      textColor: 'text-gray-700',
     },
     {
       tier: 'creator' as SubscriptionTier,
@@ -80,8 +80,8 @@ export function SubscriptionPlans() {
     return (
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold font-display text-text-primary mb-4">{t.subscriptionTitle}</h2>
-          <p className="text-lg text-text-secondary">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">{t.subscriptionTitle}</h2>
+          <p className="text-lg text-gray-600">
             {language === 'zh'
               ? '登录后查看和管理您的订阅套餐'
               : 'Sign in to view and manage your subscription plans'
@@ -107,14 +107,14 @@ export function SubscriptionPlans() {
           {plans.map((plan) => (
             <div
               key={plan.tier}
-              className="bg-scene-fill rounded-xl border border-keyLight/20 p-6 text-center"
+              className="bg-white rounded-xl border border-gray-200 p-6 text-center"
             >
               <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${plan.color} ${plan.textColor} mb-3`}>
                 {plan.icon}
               </div>
-              <h3 className="text-xl font-bold text-text-primary mb-2">{plan.name}</h3>
-              <div className="text-3xl font-bold text-text-primary mb-2">{plan.price.split('/')[0]}</div>
-              <p className="text-sm text-text-secondary">{plan.credits}</p>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+              <div className="text-3xl font-bold text-gray-900 mb-2">{plan.price.split('/')[0]}</div>
+              <p className="text-sm text-gray-600">{plan.credits}</p>
             </div>
           ))}
         </div>
@@ -125,7 +125,7 @@ export function SubscriptionPlans() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-2 border-neon border-t-transparent" />
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600" />
       </div>
     );
   }
@@ -133,8 +133,8 @@ export function SubscriptionPlans() {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold font-display text-text-primary mb-4">{t.subscriptionTitle}</h2>
-        <p className="text-lg text-text-secondary">
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">{t.subscriptionTitle}</h2>
+        <p className="text-lg text-gray-600">
           {subscription && (
             <span className="inline-flex items-center gap-2">
               {t.subscriptionCurrent}:{' '}
@@ -155,15 +155,15 @@ export function SubscriptionPlans() {
                 relative rounded-2xl p-8 transition-all
                 ${
                   plan.popular
-                    ? 'border-2 border-keyLight shadow-key scale-105'
-                    : 'border border-keyLight/20 shadow-depth-lg'
+                    ? 'border-2 border-primary-500 shadow-2xl scale-105'
+                    : 'border border-gray-200 shadow-lg'
                 }
-                bg-scene-fill hover:shadow-key
+                bg-white hover:shadow-2xl
               `}
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="bg-gradient-to-r from-state-ok to-state-ok/80 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-rim">
+                  <span className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-lg">
                     Popular
                   </span>
                 </div>
@@ -173,19 +173,19 @@ export function SubscriptionPlans() {
                 <div className={`p-3 rounded-2xl bg-gradient-to-r ${plan.color} ${plan.textColor} mb-4`}>
                   {plan.icon}
                 </div>
-                <h3 className="text-2xl font-bold font-display text-text-primary mb-2">{plan.name}</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
                 <div className="mb-4">
-                  <span className="text-4xl font-bold text-text-primary">{plan.price.split('/')[0]}</span>
+                  <span className="text-4xl font-bold text-gray-900">{plan.price.split('/')[0]}</span>
                   {plan.price.includes('/') && (
-                    <span className="text-text-tertiary">/{plan.price.split('/')[1]}</span>
+                    <span className="text-gray-500">/{plan.price.split('/')[1]}</span>
                   )}
                 </div>
-                <p className="text-sm font-medium text-text-secondary">{plan.credits}</p>
+                <p className="text-sm font-medium text-gray-600">{plan.credits}</p>
               </div>
 
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature, index) => (
-                  <li key={index} className="flex items-start gap-3 text-sm text-text-secondary">
+                  <li key={index} className="flex items-start gap-3 text-sm text-gray-700">
                     <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
                     <span>{feature}</span>
                   </li>
@@ -199,7 +199,7 @@ export function SubscriptionPlans() {
                   w-full
                   ${
                     isCurrentPlan
-                      ? 'bg-scene-fillLight text-text-secondary cursor-not-allowed'
+                      ? 'bg-gray-200 text-gray-700 cursor-not-allowed'
                       : `bg-gradient-to-r ${plan.color} hover:opacity-90 text-white`
                   }
                 `}
@@ -211,7 +211,7 @@ export function SubscriptionPlans() {
         })}
       </div>
 
-      <div className="mt-12 text-center text-sm text-text-tertiary">
+      <div className="mt-12 text-center text-sm text-gray-500">
         <p>{t.featureSameAI}</p>
         <p className="mt-2">{t.privacyPolicy}</p>
       </div>

@@ -39,16 +39,16 @@ export default function ConfirmModal({
 
   const variantStyles = {
     danger: {
-      button: 'bg-state-error hover:bg-state-error/80 focus:ring-red-500',
-      icon: 'text-state-error bg-state-error/10'
+      button: 'bg-red-600 hover:bg-red-700 focus:ring-red-500',
+      icon: 'text-red-600 bg-red-50'
     },
     warning: {
       button: 'bg-yellow-600 hover:bg-yellow-700 focus:ring-yellow-500',
       icon: 'text-yellow-600 bg-yellow-50'
     },
     info: {
-      button: 'bg-blue-600 hover:bg-blue-700 focus:ring-keyLight/20',
-      icon: 'text-state-info bg-state-info/10'
+      button: 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500',
+      icon: 'text-blue-600 bg-blue-50'
     }
   };
 
@@ -61,10 +61,10 @@ export default function ConfirmModal({
         onClick={onCancel}
       />
 
-      <div className="relative bg-scene-fill rounded-2xl shadow-key max-w-md w-full animate-fadeIn">
+      <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full animate-fadeIn">
         <button
           onClick={onCancel}
-          className="absolute top-4 right-4 text-text-tertiary hover:text-text-secondary transition-colors"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
           aria-label={t['ui.modal.close'] || 'Close'}
         >
           <X className="w-5 h-5" />
@@ -77,18 +77,18 @@ export default function ConfirmModal({
             </svg>
           </div>
 
-          <h3 className="text-xl font-semibold text-text-primary mb-2">
+          <h3 className="text-xl font-semibold text-gray-900 mb-2">
             {title}
           </h3>
 
-          <p className="text-text-secondary mb-6">
+          <p className="text-gray-600 mb-6">
             {message}
           </p>
 
           <div className="flex gap-3">
             <button
               onClick={onCancel}
-              className="flex-1 px-4 py-2.5 border border-keyLight/20 text-text-secondary rounded-lg hover:bg-scene-fillLight font-medium transition-colors focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              className="flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
             >
               {cancelText}
             </button>

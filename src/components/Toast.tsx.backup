@@ -24,17 +24,17 @@ export function Toast({ message, type = 'info', duration = 5000, onClose }: Toas
   };
 
   const colors = {
-    success: 'bg-state-ok/10 border-state-ok/30 text-green-800',
-    error: 'bg-state-error/10 border-state-error/30 text-state-error',
-    info: 'bg-state-info/10 border-state-info/30 text-state-info',
-    warning: 'bg-state-warning/10 border-state-warning/30 text-state-warning',
+    success: 'bg-green-50 border-green-200 text-green-800',
+    error: 'bg-red-50 border-red-200 text-red-800',
+    info: 'bg-blue-50 border-blue-200 text-blue-800',
+    warning: 'bg-orange-50 border-orange-200 text-orange-800',
   };
 
   const iconColors = {
-    success: 'text-state-ok',
-    error: 'text-state-error',
-    info: 'text-state-info',
-    warning: 'text-state-warning',
+    success: 'text-green-600',
+    error: 'text-red-600',
+    info: 'text-blue-600',
+    warning: 'text-orange-600',
   };
 
   return (
@@ -43,7 +43,7 @@ export function Toast({ message, type = 'info', duration = 5000, onClose }: Toas
         fixed top-4 right-4 z-[100] max-w-md w-full
         animate-slide-in-right
         ${colors[type]}
-        border rounded-lg shadow-depth-lg p-4
+        border rounded-lg shadow-lg p-4
         flex items-start gap-3
       `}
     >

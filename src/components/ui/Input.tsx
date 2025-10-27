@@ -23,25 +23,28 @@ export const Input: React.FC<InputProps> = ({
   return (
     <div className="space-y-2">
       {label && (
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-medium text-text-secondary">
           {label}
         </label>
       )}
       <div className="relative">
         {Icon && iconPosition === 'left' && (
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary">
             <Icon className="w-5 h-5" />
           </div>
         )}
         <input
           className={`
             w-full px-4 py-2.5 rounded-lg
-            border ${hasError ? 'border-red-500' : 'border-gray-300'}
+            bg-scene-fillLight
+            border ${hasError ? 'border-state-error' : 'border-keyLight/20'}
+            text-text-primary
             focus:outline-none focus:ring-2
-            ${hasError ? 'focus:ring-red-500' : 'focus:ring-primary-500'}
-            focus:border-transparent
-            placeholder:text-gray-400
-            transition-all duration-200
+            ${hasError ? 'focus:ring-state-error/20' : 'focus:ring-keyLight/20'}
+            focus:border-keyLight
+            placeholder:text-text-tertiary
+            transition-all duration-200 ease-smooth
+            disabled:opacity-50 disabled:cursor-not-allowed
             ${Icon && iconPosition === 'left' ? 'pl-10' : ''}
             ${Icon && iconPosition === 'right' ? 'pr-10' : ''}
             ${className}
@@ -49,18 +52,18 @@ export const Input: React.FC<InputProps> = ({
           {...props}
         />
         {Icon && iconPosition === 'right' && (
-          <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 text-text-tertiary">
             <Icon className="w-5 h-5" />
           </div>
         )}
       </div>
       {error && (
-        <p className="text-xs text-red-600 flex items-center gap-1">
+        <p className="text-xs text-state-error flex items-center gap-1">
           {error}
         </p>
       )}
       {helperText && !error && (
-        <p className="text-xs text-gray-500">{helperText}</p>
+        <p className="text-xs text-text-tertiary">{helperText}</p>
       )}
     </div>
   );
@@ -84,29 +87,32 @@ export const Textarea: React.FC<TextareaProps> = ({
   return (
     <div className="space-y-2">
       {label && (
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-medium text-text-secondary">
           {label}
         </label>
       )}
       <textarea
         className={`
           w-full px-4 py-3 rounded-lg
-          border ${hasError ? 'border-red-500' : 'border-gray-300'}
+          bg-scene-fillLight
+          border ${hasError ? 'border-state-error' : 'border-keyLight/20'}
+          text-text-primary
           focus:outline-none focus:ring-2
-          ${hasError ? 'focus:ring-red-500' : 'focus:ring-primary-500'}
-          focus:border-transparent
-          placeholder:text-gray-400
+          ${hasError ? 'focus:ring-state-error/20' : 'focus:ring-keyLight/20'}
+          focus:border-keyLight
+          placeholder:text-text-tertiary
           resize-none
-          transition-all duration-200
+          transition-all duration-200 ease-smooth
+          disabled:opacity-50 disabled:cursor-not-allowed
           ${className}
         `.trim().replace(/\s+/g, ' ')}
         {...props}
       />
       {error && (
-        <p className="text-xs text-red-600">{error}</p>
+        <p className="text-xs text-state-error">{error}</p>
       )}
       {helperText && !error && (
-        <p className="text-xs text-gray-500">{helperText}</p>
+        <p className="text-xs text-text-tertiary">{helperText}</p>
       )}
     </div>
   );

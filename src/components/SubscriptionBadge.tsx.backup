@@ -19,8 +19,8 @@ export function SubscriptionBadge({ tier, size = 'md', showLabel = true }: Subsc
   const tierConfig = {
     free: {
       bg: 'bg-gradient-to-r from-gray-100 to-gray-200',
-      text: 'text-text-secondary',
-      border: 'border-keyLight/20',
+      text: 'text-gray-700',
+      border: 'border-gray-300',
       icon: '⚪️',
       label: t.tierFree,
     },
