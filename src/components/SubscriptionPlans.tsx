@@ -1,4 +1,4 @@
-import { Check, Sparkles, Zap, Film } from 'lucide-react';
+import { Check, Sparkles, Zap, Film, CreditCard } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useSubscription, SubscriptionTier } from '../contexts/SubscriptionContext';
@@ -6,14 +6,16 @@ import { Button } from './ui/Button';
 import { SubscriptionBadge } from './SubscriptionBadge';
 import LoginModal from './LoginModal';
 import { useState, useEffect } from 'react';
+import { StripeService, STRIPE_PRICE_IDS } from '../lib/stripe';
 
 export function SubscriptionPlans() {
   const { t, language } = useLanguage();
   const { user } = useAuth();
-  const { subscription, upgradeSubscription, loading } = useSubscription();
+  const { subscription, upgradeSubscription, loading, refreshSubscription } = useSubscription();
   const [upgrading, setUpgrading] = useState(false);
   const [targetTier, setTargetTier] = useState<SubscriptionTier | null>(null);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [processingPayment, setProcessingPayment] = useState(false);
 
   const plans = [
     {
@@ -81,21 +83,54 @@ export function SubscriptionPlans() {
       return;
     }
 
-    setUpgrading(true);
-    try {
-      await upgradeSubscription(tier);
+    if (tier === 'free') {
+      setUpgrading(true);
+      try {
+        await upgradeSubscription(tier);
+        const message = language === 'zh' ? '已切换到免费套餐' : 'Switched to free plan';
+        window.dispatchEvent(new CustomEvent('show-toast', {
+          detail: { message, type: 'success' }
+        }));
+      } catch (error) {
+        const message = language === 'zh' ? '切换失败，请重试' : 'Failed to switch plan';
+        window.dispatchEvent(new CustomEvent('show-toast', {
+          detail: { message, type: 'error' }
+        }));
+      } finally {
+        setUpgrading(false);
+      }
+      return;
+    }
 
-      const message = language === 'zh' ? '订阅成功' : 'Subscription updated successfully';
-      window.dispatchEvent(new CustomEvent('show-toast', {
-        detail: { message, type: 'success' }
-      }));
+    setProcessingPayment(true);
+    try {
+      const priceId = tier === 'creator' ? STRIPE_PRICE_IDS.pro_monthly : STRIPE_PRICE_IDS.director_monthly;
+      const planType = tier === 'creator' ? 'pro' : 'director';
+
+      await StripeService.redirectToCheckout(priceId, planType);
     } catch (error) {
-      const message = language === 'zh' ? '订阅失败，请重试' : 'Subscription failed, please retry';
+      console.error('Payment error:', error);
+      const message = language === 'zh' ? '支付处理失败，请重试' : 'Payment processing failed, please retry';
       window.dispatchEvent(new CustomEvent('show-toast', {
         detail: { message, type: 'error' }
       }));
-    } finally {
-      setUpgrading(false);
+      setProcessingPayment(false);
+    }
+  };
+
+  const handleManageSubscription = async () => {
+    if (!user) return;
+
+    try {
+      setProcessingPayment(true);
+      await StripeService.redirectToPortal();
+    } catch (error) {
+      console.error('Portal error:', error);
+      const message = language === 'zh' ? '无法打开订阅管理页面' : 'Could not open subscription portal';
+      window.dispatchEvent(new CustomEvent('show-toast', {
+        detail: { message, type: 'error' }
+      }));
+      setProcessingPayment(false);
     }
   };
 
@@ -105,29 +140,35 @@ export function SubscriptionPlans() {
 
   useEffect(() => {
     if (user && targetTier) {
-      const timer = setTimeout(async () => {
-        setUpgrading(true);
-        try {
-          await upgradeSubscription(targetTier);
-
-          const message = language === 'zh' ? '订阅成功' : 'Subscription updated successfully';
-          window.dispatchEvent(new CustomEvent('show-toast', {
-            detail: { message, type: 'success' }
-          }));
-        } catch (error) {
-          const message = language === 'zh' ? '订阅失败，请重试' : 'Subscription failed, please retry';
-          window.dispatchEvent(new CustomEvent('show-toast', {
-            detail: { message, type: 'error' }
-          }));
-        } finally {
-          setUpgrading(false);
-          setTargetTier(null);
-        }
+      const timer = setTimeout(() => {
+        handleUpgrade(targetTier);
+        setTargetTier(null);
       }, 500);
 
       return () => clearTimeout(timer);
     }
-  }, [user, targetTier, upgradeSubscription, language]);
+  }, [user, targetTier]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session_id');
+    const canceled = params.get('canceled');
+
+    if (sessionId) {
+      const message = language === 'zh' ? '支付成功！您的订阅已激活' : 'Payment successful! Your subscription is now active';
+      window.dispatchEvent(new CustomEvent('show-toast', {
+        detail: { message, type: 'success' }
+      }));
+      refreshSubscription();
+      window.history.replaceState({}, '', '/dashboard');
+    } else if (canceled) {
+      const message = language === 'zh' ? '支付已取消' : 'Payment canceled';
+      window.dispatchEvent(new CustomEvent('show-toast', {
+        detail: { message, type: 'info' }
+      }));
+      window.history.replaceState({}, '', '/dashboard');
+    }
+  }, [language, refreshSubscription]);
 
   if (loading) {
     return (
@@ -143,9 +184,23 @@ export function SubscriptionPlans() {
         <h2 className="text-3xl font-bold font-display text-text-primary mb-4">{t.subscriptionTitle}</h2>
         <p className="text-lg text-text-secondary">
           {user && subscription ? (
-            <span className="inline-flex items-center gap-2">
-              {t.subscriptionCurrent}:{' '}
-              <SubscriptionBadge tier={subscription.tier} size="md" />
+            <span className="flex flex-col items-center gap-3">
+              <span className="inline-flex items-center gap-2">
+                {t.subscriptionCurrent}:{' '}
+                <SubscriptionBadge tier={subscription.tier} size="md" />
+              </span>
+              {subscription.stripe_subscription_id && subscription.subscription_status === 'active' && (
+                <Button
+                  variant="scene"
+                  size="sm"
+                  onClick={handleManageSubscription}
+                  disabled={processingPayment}
+                  className="gap-2"
+                >
+                  <CreditCard className="w-4 h-4" />
+                  {language === 'zh' ? '管理订阅' : 'Manage Subscription'}
+                </Button>
+              )}
             </span>
           ) : (
             language === 'zh'
@@ -209,7 +264,7 @@ export function SubscriptionPlans() {
                 {plan.tier === 'free' ? (
                   <Button
                     onClick={() => handleUpgrade(plan.tier)}
-                    disabled={upgrading || isCurrentPlan}
+                    disabled={upgrading || processingPayment || isCurrentPlan}
                     variant={isCurrentPlan ? 'preview' : 'scene'}
                     fullWidth
                   >
@@ -218,20 +273,42 @@ export function SubscriptionPlans() {
                 ) : plan.tier === 'creator' ? (
                   <Button
                     onClick={() => handleUpgrade(plan.tier)}
-                    disabled={upgrading || isCurrentPlan}
+                    disabled={upgrading || processingPayment || isCurrentPlan}
                     variant={isCurrentPlan ? 'preview' : 'rim'}
                     fullWidth
+                    className="gap-2"
                   >
-                    {isCurrentPlan ? t.subscriptionCurrent : t.subscriptionUpgrade}
+                    {processingPayment && !isCurrentPlan ? (
+                      <>
+                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent" />
+                        {language === 'zh' ? '处理中...' : 'Processing...'}
+                      </>
+                    ) : (
+                      <>
+                        {!isCurrentPlan && <CreditCard className="w-4 h-4" />}
+                        {isCurrentPlan ? t.subscriptionCurrent : (language === 'zh' ? '订阅支付' : 'Subscribe & Pay')}
+                      </>
+                    )}
                   </Button>
                 ) : (
                   <Button
                     onClick={() => handleUpgrade(plan.tier)}
-                    disabled={upgrading || isCurrentPlan}
+                    disabled={upgrading || processingPayment || isCurrentPlan}
                     variant={isCurrentPlan ? 'preview' : 'director'}
                     fullWidth
+                    className="gap-2"
                   >
-                    {isCurrentPlan ? t.subscriptionCurrent : t.subscriptionUpgrade}
+                    {processingPayment && !isCurrentPlan ? (
+                      <>
+                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent" />
+                        {language === 'zh' ? '处理中...' : 'Processing...'}
+                      </>
+                    ) : (
+                      <>
+                        {!isCurrentPlan && <CreditCard className="w-4 h-4" />}
+                        {isCurrentPlan ? t.subscriptionCurrent : (language === 'zh' ? '订阅支付' : 'Subscribe & Pay')}
+                      </>
+                    )}
                   </Button>
                 )}
               </div>
