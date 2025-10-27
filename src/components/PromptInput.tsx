@@ -106,24 +106,6 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
         </div>
       )}
 
-      {!user && (
-        <div className="px-6 pb-6">
-          <div className="p-4 bg-keyLight/15 border border-keyLight/20 rounded-lg text-sm">
-            <p className="text-text-primary font-semibold mb-2">
-              {t.guestUsageTip}
-            </p>
-            <div className="space-y-1">
-              <p className="text-text-secondary text-xs leading-relaxed">
-                1. {t.guestUsageTip1}
-              </p>
-              <p className="text-text-secondary text-xs leading-relaxed">
-                2. {t.guestUsageTip2}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-
       <Modal
         isOpen={showLoginPrompt}
         onClose={() => setShowLoginPrompt(false)}
