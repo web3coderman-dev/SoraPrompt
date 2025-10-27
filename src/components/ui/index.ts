@@ -9,3 +9,6 @@ export { Badge, QualityBadge } from './Badge';
 export type { BadgeVariant, BadgeSize } from './Badge';
 
 export { Modal, ModalFooter } from './Modal';
+
+export { OptionButton } from './OptionButton';
+export { GoogleIcon } from './GoogleIcon';

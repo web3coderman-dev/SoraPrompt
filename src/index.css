@@ -109,6 +109,31 @@
       rgba(var(--color-rimLight), 0.1) 100%
     );
   }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(58, 108, 255, 0.3) rgba(26, 31, 46, 1);
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: rgba(26, 31, 46, 1);
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgba(58, 108, 255, 0.3);
+    border-radius: 3px;
+    transition: background 200ms ease-in-out;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: rgba(58, 108, 255, 0.5);
+  }
 }
 
 @keyframes fadeIn {

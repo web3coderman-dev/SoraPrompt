@@ -1,7 +1,7 @@
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 
-export type ButtonVariant = 'take' | 'cut' | 'preview' | 'director' | 'scene' | 'rim';
+export type ButtonVariant = 'take' | 'cut' | 'preview' | 'director' | 'scene' | 'rim' | 'secondary';
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -41,6 +41,11 @@ const variantClasses: Record<ButtonVariant, string> = {
         hover:from-rimLight-600 hover:to-rimLight-700
         text-white shadow-rim
         transition-all duration-300 ease-in-out`,
+  secondary: `bg-scene-fill border border-keyLight/20
+              hover:bg-scene-fillLight hover:border-keyLight/40
+              hover:shadow-light
+              text-text-primary font-medium
+              transition-all duration-300 ease-in-out`,
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

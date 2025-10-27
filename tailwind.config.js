@@ -67,6 +67,11 @@ export default {
           tertiary: '#6B7280',
           disabled: '#4B5563',
         },
+        overlay: {
+          light: 'rgba(0, 0, 0, 0.4)',
+          medium: 'rgba(0, 0, 0, 0.6)',
+          heavy: 'rgba(0, 0, 0, 0.8)',
+        },
         primary: {
           50: '#EBF0FF',
           100: '#D6E1FF',
@@ -131,16 +136,22 @@ export default {
       },
       animation: {
         'fade-in': 'fadeIn 200ms ease-in',
+        'cut-fade': 'cutFade 200ms ease-in',
         'camera-pan': 'cameraPan 300ms ease-in-out',
         'light-blink': 'lightBlink 1000ms infinite alternate',
         'render-pulse': 'renderPulse 800ms ease-in-out infinite',
         'slide-up': 'slideUp 300ms ease-out',
         'slide-down': 'slideDown 300ms ease-out',
         'scale-in': 'scaleIn 200ms ease-out',
+        'modal-enter': 'modalEnter 300ms ease-out',
         'shimmer': 'shimmer 2s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        cutFade: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
@@ -167,6 +178,10 @@ export default {
         scaleIn: {
           '0%': { transform: 'scale(0.95)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        modalEnter: {
+          '0%': { transform: 'scale(0.95) translateY(10px)', opacity: '0' },
+          '100%': { transform: 'scale(1) translateY(0)', opacity: '1' },
         },
         shimmer: {
           '0%': { transform: 'translateX(-100%)' },
