@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Copy, RefreshCw, Info, Check } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import type { Prompt } from '../lib/supabase';
-import LanguageSelector from './LanguageSelector';
 import type { SupportedLanguage } from '../lib/openai';
 import { Card, CardHeader, CardBody } from './ui/Card';
 import { Button } from './ui/Button';
@@ -32,29 +31,6 @@ export default function PromptResult({
   const [copied, setCopied] = useState(false);
   const [improvementFeedback, setImprovementFeedback] = useState('');
   const [showImprovementInput, setShowImprovementInput] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState<SupportedLanguage>(() => {
-    const detectedLang = prompt.detected_input_language || prompt.output_language;
-    if (detectedLang && ['zh', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'ru', 'pt', 'it'].includes(detectedLang)) {
-      return detectedLang as SupportedLanguage;
-    }
-    return (localStorage.getItem('output-language') as SupportedLanguage) || 'en';
-  });
-
-  useEffect(() => {
-    const detectedLang = prompt.detected_input_language || prompt.output_language;
-    if (detectedLang && ['zh', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'ru', 'pt', 'it'].includes(detectedLang)) {
-      setSelectedLanguage(detectedLang as SupportedLanguage);
-    } else {
-      const lang = (localStorage.getItem('output-language') as SupportedLanguage) || 'en';
-      setSelectedLanguage(lang);
-    }
-  }, [prompt]);
-
-  const handleLanguageChange = (lang: SupportedLanguage) => {
-    setSelectedLanguage(lang);
-    localStorage.setItem('output-language', lang);
-    onLanguageChange(lang);
-  };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(prompt.generated_prompt);
@@ -78,15 +54,7 @@ export default function PromptResult({
             <span className="text-2xl">🎬</span>
             {t.resultTitle}
           </h3>
-          <div className="flex items-center gap-3">
-            <LanguageSelector
-              value={selectedLanguage}
-              onChange={handleLanguageChange}
-              detectedLanguage={selectedLanguage}
-              disabled={isImproving || isChangingLanguage}
-            />
-            <QualityBadge score={prompt.quality_score} />
-          </div>
+          <QualityBadge score={prompt.quality_score} />
         </div>
       </CardHeader>
 
