@@ -65,12 +65,12 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
       {/* Mobile Menu Button */}
       <button
         onClick={onToggle}
-        className="fixed top-4 left-4 z-50 lg:hidden bg-white p-2 rounded-lg shadow-lg border border-gray-200"
+        className="fixed top-4 left-4 z-50 lg:hidden bg-scene-fill p-2 rounded-lg shadow-depth-lg border border-keyLight/20"
       >
         {isOpen ? (
-          <X className="w-6 h-6 text-gray-700" />
+          <X className="w-6 h-6 text-text-primary" />
         ) : (
-          <Menu className="w-6 h-6 text-gray-700" />
+          <Menu className="w-6 h-6 text-text-primary" />
         )}
       </button>
 
@@ -99,10 +99,10 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
                   onToggle();
                 }
               }}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 border ${
                 currentView === item.view
-                  ? 'bg-keyLight/10 text-keyLight font-semibold shadow-light border border-keyLight/20'
-                  : 'text-text-secondary hover:bg-scene-fillLight hover:text-text-primary'
+                  ? 'bg-keyLight/10 text-keyLight font-semibold shadow-light border-keyLight/20'
+                  : 'text-text-secondary hover:bg-scene-fillLight hover:text-text-primary border-transparent'
               }`}
             >
               <item.icon className="w-5 h-5" />
@@ -120,7 +120,7 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
                   <img
                     src={profile.avatar_url}
                     alt={profile.full_name || 'User'}
-                    className="w-10 h-10 rounded-full border-2 border-gray-200"
+                    className="w-10 h-10 rounded-full border-2 border-keyLight/20"
                   />
                 ) : (
                   <div className="w-10 h-10 rounded-full bg-keyLight/20 flex items-center justify-center">
@@ -147,7 +147,7 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
             <div className="p-4">
               <button
                 onClick={() => setShowLoginModal(true)}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-keyLight to-keyLight-600 hover:shadow-neon text-white rounded-lg transition-all duration-200 shadow-key font-semibold active:scale-[0.98]"
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-keyLight to-neon hover:shadow-neon text-white rounded-lg transition-all duration-200 shadow-key font-semibold active:scale-[0.98]"
               >
                 <LogIn className="w-5 h-5" />
                 <span>{t.signInSignUp}</span>
