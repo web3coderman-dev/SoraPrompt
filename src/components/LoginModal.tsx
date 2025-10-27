@@ -5,9 +5,13 @@ import { useLanguage } from '../contexts/LanguageContext';
 
 interface LoginModalProps {
   onClose: () => void;
+  context?: {
+    title?: string;
+    message?: string;
+  };
 }
 
-export default function LoginModal({ onClose }: LoginModalProps) {
+export default function LoginModal({ onClose, context }: LoginModalProps) {
   const { signInWithGoogle, signInWithEmail, signUpWithEmail } = useAuth();
   const { t, language } = useLanguage();
   const [loading, setLoading] = useState(false);
@@ -84,13 +88,13 @@ export default function LoginModal({ onClose }: LoginModalProps) {
             <Film className="w-8 h-8 text-white" />
           </div>
           <h2 className="text-3xl font-bold font-display text-text-primary mb-2">
-            {t.title}
+            {context?.title || t.title}
           </h2>
           <p className="text-text-secondary">
-            {isSignUp
+            {context?.message || (isSignUp
               ? (t['auth.register.title'] || 'Create your account')
               : (t['auth.login.title'] || 'Sign in to continue')
-            }
+            )}
           </p>
         </div>
 
