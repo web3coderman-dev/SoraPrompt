@@ -12,3 +12,6 @@ export { Modal, ModalFooter } from './Modal';
 
 export { OptionButton } from './OptionButton';
 export { GoogleIcon } from './GoogleIcon';
+
+export { ProgressBar } from './ProgressBar';
+export type { ProgressVariant, ProgressSize } from './ProgressBar';

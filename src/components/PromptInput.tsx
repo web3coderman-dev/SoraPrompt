@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Sparkles, Clapperboard, Lock } from 'lucide-react';
+import { Sparkles, Clapperboard, Lock, X } from 'lucide-react';
 import { type SupportedLanguage, detectLanguageClient } from '../lib/openai';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -107,7 +107,7 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
 
       {!user && (
         <div className="px-6 pb-6">
-          <div className="p-4 bg-keyLight/10 border border-keyLight/20 rounded-lg text-sm">
+          <div className="p-4 bg-keyLight/15 border border-keyLight/20 rounded-lg text-sm">
             <p className="text-text-primary font-semibold mb-2">
               {t.guestUsageTip}
             </p>
@@ -124,13 +124,14 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
       )}
 
       {showLoginPrompt && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-scene-bg/80 backdrop-blur-sm">
-          <div className="relative max-w-md">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-overlay-medium backdrop-blur-sm animate-fade-in">
+          <div className="relative max-w-md animate-scale-in">
             <button
               onClick={() => setShowLoginPrompt(false)}
-              className="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-gray-900 z-10"
+              className="absolute -top-2 -right-2 w-8 h-8 bg-scene-fill rounded-full shadow-depth-lg flex items-center justify-center text-text-secondary hover:text-text-primary z-10 border-2 border-keyLight/20 hover:border-keyLight/40 transition-all duration-300"
+              aria-label={language === 'zh' ? '关闭' : 'Close'}
             >
-              ×
+              <X className="w-4 h-4" />
             </button>
             <LoginPrompt
               title={language === 'zh' ? '登录以使用 Director 模式' : 'Sign in to use Director Mode'}

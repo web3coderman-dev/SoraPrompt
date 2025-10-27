@@ -11,6 +11,7 @@ import { RegisterPromptModal } from '../components/RegisterPromptModal';
 import { GuestUsageCard } from '../components/GuestUsageCard';
 import { ConflictResolutionModal } from '../components/ConflictResolutionModal';
 import { useLanguage } from '../contexts/LanguageContext';
+import { Badge } from '../components/ui/Badge';
 import { useAuth } from '../contexts/AuthContext';
 import { useSubscription } from '../contexts/SubscriptionContext';
 import { SettingsSync, type UserSettings } from '../lib/settingsSync';
@@ -268,27 +269,27 @@ export default function Dashboard() {
           <div className="p-6 md:p-8 lg:p-12">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12">
-                <div className="inline-flex items-center gap-2 bg-neon/10 text-neon border border-neon/30 px-4 py-2 rounded-full text-sm font-medium mb-4 shadow-neon">
-                  <span className="relative flex h-2 w-2">
+                <Badge variant="neon" size="lg" className="mb-4">
+                  <span className="relative flex h-2 w-2 mr-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-neon"></span>
                   </span>
                   {t.tagMVP}
-                </div>
+                </Badge>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-text-primary mb-4 tracking-tight">
                   {t.title}
                 </h1>
-                <p className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto">
+                <p className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto font-medium">
                   {t.subtitle}
                 </p>
 
-                <div className="flex flex-wrap items-center justify-center gap-3 mt-6">
-                  <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-neon/10 to-keyLight/10 border border-neon/20 text-text-primary rounded-lg text-sm font-medium">
+                <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
+                  <Badge variant="info" size="sm">
                     {t.tagGeneration}
-                  </span>
-                  <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-keyLight/10 to-rimLight/10 border border-keyLight/20 text-text-primary rounded-lg text-sm font-medium">
+                  </Badge>
+                  <Badge variant="secondary" size="sm">
                     {t.tagAssistant}
-                  </span>
+                  </Badge>
                 </div>
               </div>
 
@@ -298,7 +299,7 @@ export default function Dashboard() {
                 initialValue={currentPrompt?.user_input}
               />
 
-              <div className="mt-8">
+              <div className="mt-10">
                 {user ? (
                   <UsageCounter />
                 ) : (
@@ -307,7 +308,7 @@ export default function Dashboard() {
               </div>
 
               {currentPrompt && (
-                <div className="mt-8">
+                <div className="mt-12">
                   <PromptResult
                     prompt={currentPrompt}
                     onImprove={handleImprove}

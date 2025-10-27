@@ -2,7 +2,7 @@ import React from 'react';
 import { LucideIcon } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
-export type BadgeVariant = 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info' | 'neutral';
+export type BadgeVariant = 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info' | 'neutral' | 'neon';
 export type BadgeSize = 'sm' | 'md' | 'lg';
 
 interface BadgeProps {
@@ -21,6 +21,7 @@ const variantClasses: Record<BadgeVariant, string> = {
   error: 'bg-state-error/10 text-state-error border border-state-error/30',
   info: 'bg-state-info/10 text-state-info border border-state-info/30',
   neutral: 'bg-scene-fillLight text-text-secondary border border-keyLight/10',
+  neon: 'bg-neon/10 text-neon border border-neon/30 shadow-neon',
 };
 
 const sizeClasses: Record<BadgeSize, string> = {
