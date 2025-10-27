@@ -23,13 +23,9 @@ const interfaceLanguages: { code: Language; name: string }[] = [
   { code: 'ko', name: '한국어' },
 ];
 
-const outputLanguages: { code: SupportedLanguage; name: string; nameEn: string }[] = [
-  { code: 'auto', name: '自动检测', nameEn: 'Auto Detect' },
-  ...LANGUAGES.map(lang => ({
-    code: lang.code,
-    name: lang.nativeName,
-    nameEn: lang.name
-  }))
+const getOutputLanguages = (): { code: SupportedLanguage }[] => [
+  { code: 'auto' },
+  ...LANGUAGES.map(lang => ({ code: lang.code }))
 ];
 
 export default function Settings() {
@@ -226,7 +222,7 @@ export default function Settings() {
           <p className="text-sm text-text-secondary mb-4">{t.settingsOutputLanguageDesc}</p>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-[400px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-keyLight/30 scrollbar-track-scene-fillLight">
-            {outputLanguages.map((lang) => (
+            {getOutputLanguages().map((lang) => (
               <OptionButton
                 key={lang.code}
                 onClick={() => handleOutputLanguageChange(lang.code)}
@@ -235,7 +231,7 @@ export default function Settings() {
                 showCheckmark={true}
               >
                 <span className="text-sm truncate">
-                  {lang.name}
+                  {(t as any).languages?.[lang.code] || lang.code}
                 </span>
               </OptionButton>
             ))}
