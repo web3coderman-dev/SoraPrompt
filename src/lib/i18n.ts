@@ -159,19 +159,68 @@ export const translations = {
     subscriptionResetsMonthly: '每月重置',
     subscriptionRenewsOn: '续订日期',
 
+    tierGuest: 'Guest',
     tierFree: 'Free',
     tierCreator: 'Creator',
     tierDirector: 'Director',
+    tierGuestName: '游客',
     tierFreeName: '免费版',
     tierCreatorName: '创作者',
     tierDirectorName: '导演',
+    tierGuestPrice: '免费体验',
     tierFreePrice: '$0',
     tierCreatorPrice: '$19/月',
     tierDirectorPrice: '$49/月',
 
+    tierGuestCredits: '每日 2 次试用',
     tierFreeCredits: '每日 3 次',
     tierCreatorCredits: '每月 1000 次',
     tierDirectorCredits: '每月 3000 次',
+
+    guestMode: {
+      title: '🎭 游客模式',
+      remaining: '试用次数',
+      cta: '注册即可获得每日 3 次免费生成！',
+      registerButton: '免费注册',
+    },
+
+    registerModal: {
+      noCredits: {
+        title: '🎬 试用次数已用完',
+        message: '今日试用次数已用完！注册即可获得每日 3 次免费生成。',
+      },
+      frequentUser: {
+        title: '🔥 你的创作势头太棒了！',
+        message: '喜欢 SoraPrompt？注册即可解锁每日 3 次免费生成，并永久保存您的作品！',
+      },
+      directorLocked: {
+        title: '🎥 导演模式为付费专享',
+        message: '包含完整分镜脚本生成的导演模式仅对注册用户开放。',
+      },
+      historyLocked: {
+        title: '💾 保存您的创作',
+        message: '注册后可永久保存您的提示词历史记录，并在任何设备上访问。',
+      },
+      benefit1: {
+        title: '每日 3 次生成',
+        desc: '比游客模式多 50%',
+      },
+      benefit2: {
+        title: '云端同步',
+        desc: '随时随地访问您的提示词',
+      },
+      benefit3: {
+        title: '永久历史',
+        desc: '永不丢失您的创作',
+      },
+      benefit4: {
+        title: '随时升级',
+        desc: '可随时解锁导演模式',
+      },
+      noCreditCard: '100% 免费 - 无需信用卡',
+      instantAccess: '立即获得所有免费版功能',
+      registerButton: '免费注册',
+    },
 
     featureQuickMode: '快速生成模式',
     featureDirectorMode: '导演生成模式',
@@ -359,19 +408,68 @@ export const translations = {
     subscriptionResetsMonthly: 'Resets Monthly',
     subscriptionRenewsOn: 'Renews On',
 
+    tierGuest: 'Guest',
     tierFree: 'Free',
     tierCreator: 'Creator',
     tierDirector: 'Director',
+    tierGuestName: 'Guest',
     tierFreeName: 'Free Plan',
     tierCreatorName: 'Creator',
     tierDirectorName: 'Director',
+    tierGuestPrice: 'Free Trial',
     tierFreePrice: '$0',
     tierCreatorPrice: '$19/mo',
     tierDirectorPrice: '$49/mo',
 
+    tierGuestCredits: '2 trial per day',
     tierFreeCredits: '3 per day',
     tierCreatorCredits: '1000 per month',
     tierDirectorCredits: '3000 per month',
+
+    guestMode: {
+      title: '🎭 Guest Mode',
+      remaining: 'Trial credits',
+      cta: 'Register for 3 free daily generations!',
+      registerButton: 'Free Register',
+    },
+
+    registerModal: {
+      noCredits: {
+        title: '🎬 Trial Credits Used Up',
+        message: 'You\'ve used all your trial credits for today! Register to get 3 free generations daily.',
+      },
+      frequentUser: {
+        title: '🔥 You\'re on Fire!',
+        message: 'Loving SoraPrompt? Register to unlock 3 free daily generations and save your work forever!',
+      },
+      directorLocked: {
+        title: '🎥 Director Mode is Premium',
+        message: 'Director Mode with full storyboard generation is exclusive to registered users.',
+      },
+      historyLocked: {
+        title: '💾 Save Your Creations',
+        message: 'Register to permanently save your prompt history and access it from any device.',
+      },
+      benefit1: {
+        title: '3 Daily Generations',
+        desc: '50% more than guest mode',
+      },
+      benefit2: {
+        title: 'Cloud Sync',
+        desc: 'Access your prompts anywhere',
+      },
+      benefit3: {
+        title: 'Forever History',
+        desc: 'Never lose your creations',
+      },
+      benefit4: {
+        title: 'Upgrade Ready',
+        desc: 'Unlock Director Mode anytime',
+      },
+      noCreditCard: '100% Free - No Credit Card Required',
+      instantAccess: 'Get instant access to all Free tier features',
+      registerButton: 'Register for Free',
+    },
 
     featureQuickMode: 'Quick Generate Mode',
     featureDirectorMode: 'Director Generate Mode',

@@ -1,8 +1,14 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
+import {
+  getGuestCredits,
+  hasGuestCredits,
+  deductGuestCredits,
+  getGuestUsageStats,
+} from '../lib/guestUsage';
 
-export type SubscriptionTier = 'free' | 'creator' | 'director';
+export type SubscriptionTier = 'guest' | 'free' | 'creator' | 'director';
 export type ResetCycle = 'daily' | 'monthly';
 
 export interface Subscription {
@@ -19,8 +25,17 @@ export interface Subscription {
   updated_at: string;
 }
 
+interface GuestSubscription {
+  tier: 'guest';
+  remaining_credits: number;
+  total_credits: number;
+  reset_cycle: 'daily';
+  isGuest: true;
+}
+
 interface SubscriptionContextType {
-  subscription: Subscription | null;
+  subscription: Subscription | GuestSubscription | null;
+  isGuest: boolean;
   loading: boolean;
   error: string | null;
   hasCredits: (cost?: number) => boolean;
@@ -34,14 +49,26 @@ const SubscriptionContext = createContext<SubscriptionContextType | undefined>(u
 
 export function SubscriptionProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
-  const [subscription, setSubscription] = useState<Subscription | null>(null);
+  const [subscription, setSubscription] = useState<Subscription | GuestSubscription | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const loadGuestSubscription = () => {
+    const stats = getGuestUsageStats();
+    const guestSub: GuestSubscription = {
+      tier: 'guest',
+      remaining_credits: stats.remaining,
+      total_credits: stats.total,
+      reset_cycle: 'daily',
+      isGuest: true,
+    };
+    setSubscription(guestSub);
+    setLoading(false);
+  };
+
   const refreshSubscription = async () => {
     if (!user) {
-      setSubscription(null);
-      setLoading(false);
+      loadGuestSubscription();
       return;
     }
 
@@ -88,18 +115,28 @@ export function SubscriptionProvider({ children }: { children: ReactNode }) {
     refreshSubscription();
   }, [user]);
 
+  const isGuest = !user;
+
   const hasCredits = (cost: number = 1): boolean => {
     if (!subscription) return false;
+
+    if (isGuest) {
+      return hasGuestCredits(cost);
+    }
+
     return subscription.remaining_credits >= cost;
   };
 
   const canUseDirectorMode = (): boolean => {
     if (!subscription) return false;
-    return subscription.tier === 'creator' || subscription.tier === 'director';
+    if (isGuest) return false;
+
+    const tier = subscription.tier as SubscriptionTier;
+    return tier === 'creator' || tier === 'director';
   };
 
   const upgradeSubscription = async (newTier: SubscriptionTier): Promise<boolean> => {
-    if (!user || !subscription) return false;
+    if (!user || !subscription || isGuest) return false;
 
     try {
       const { data, error } = await supabase.rpc('upgrade_subscription', {
@@ -125,6 +162,14 @@ export function SubscriptionProvider({ children }: { children: ReactNode }) {
     mode: string,
     cost: number = 1
   ): Promise<boolean> => {
+    if (isGuest) {
+      const success = deductGuestCredits(cost);
+      if (success) {
+        loadGuestSubscription();
+      }
+      return success;
+    }
+
     if (!user) return false;
 
     try {
@@ -150,6 +195,7 @@ export function SubscriptionProvider({ children }: { children: ReactNode }) {
 
   const value: SubscriptionContextType = {
     subscription,
+    isGuest,
     loading,
     error,
     hasCredits,

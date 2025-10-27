@@ -7,11 +7,14 @@ import Settings from '../components/Settings';
 import { SubscriptionPlans } from '../components/SubscriptionPlans';
 import { UsageCounter } from '../components/UsageCounter';
 import { UpgradeModal } from '../components/UpgradeModal';
+import { RegisterPromptModal } from '../components/RegisterPromptModal';
+import { GuestBanner } from '../components/GuestBanner';
 import { ConflictResolutionModal } from '../components/ConflictResolutionModal';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useSubscription } from '../contexts/SubscriptionContext';
 import { SettingsSync, type UserSettings } from '../lib/settingsSync';
+import { shouldPromptRegistration } from '../lib/guestUsage';
 import type { Prompt } from '../lib/supabase';
 import type { SupportedLanguage } from '../lib/openai';
 import { generateSoraPrompt } from '../lib/promptGenerator';
@@ -30,6 +33,8 @@ export default function Dashboard() {
   const [explanation, setExplanation] = useState<string | undefined>();
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [upgradeReason, setUpgradeReason] = useState<'credits_out' | 'frequent_use' | 'director_locked'>('credits_out');
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [registerReason, setRegisterReason] = useState<'no_credits' | 'frequent_user' | 'director_locked' | 'history_locked'>('no_credits');
   const [showConflictModal, setShowConflictModal] = useState(false);
   const [conflictData, setConflictData] = useState<{
     cloudSettings: Omit<UserSettings, 'user_id'>;
@@ -38,7 +43,7 @@ export default function Dashboard() {
   } | null>(null);
   const { t } = useLanguage();
   const { user } = useAuth();
-  const { subscription, hasCredits, canUseDirectorMode, deductCredits } = useSubscription();
+  const { subscription, isGuest, hasCredits, canUseDirectorMode, deductCredits } = useSubscription();
 
   useEffect(() => {
     const handleConflict = (event: Event) => {
@@ -90,16 +95,34 @@ export default function Dashboard() {
     language: SupportedLanguage,
     detectedInputLanguage: SupportedLanguage
   ) => {
-    if (user && mode === 'director' && !canUseDirectorMode()) {
-      setUpgradeReason('director_locked');
-      setShowUpgradeModal(true);
-      return;
+    if (mode === 'director' && !canUseDirectorMode()) {
+      if (isGuest) {
+        setRegisterReason('director_locked');
+        setShowRegisterModal(true);
+        return;
+      } else {
+        setUpgradeReason('director_locked');
+        setShowUpgradeModal(true);
+        return;
+      }
     }
 
-    if (user && !hasCredits()) {
-      setUpgradeReason('credits_out');
-      setShowUpgradeModal(true);
-      return;
+    if (!hasCredits()) {
+      if (isGuest) {
+        setRegisterReason('no_credits');
+        setShowRegisterModal(true);
+        return;
+      } else {
+        setUpgradeReason('credits_out');
+        setShowUpgradeModal(true);
+        return;
+      }
+    }
+
+    const shouldPrompt = shouldPromptRegistration();
+    if (isGuest && shouldPrompt === 'frequent_user') {
+      setRegisterReason('frequent_user');
+      setShowRegisterModal(true);
     }
 
     try {
@@ -309,6 +332,7 @@ export default function Dashboard() {
         onViewChange={setCurrentView}
       />
       <main className="flex-1 overflow-x-hidden">
+        <GuestBanner />
         {renderContent()}
       </main>
 
@@ -324,6 +348,12 @@ export default function Dashboard() {
               }
             : undefined
         }
+      />
+
+      <RegisterPromptModal
+        isOpen={showRegisterModal}
+        onClose={() => setShowRegisterModal(false)}
+        reason={registerReason}
       />
 
       {conflictData && (
