@@ -96,10 +96,10 @@ export function SubscriptionPlans() {
             : 'Sign in to view all subscription plans, manage your subscription, and upgrade to premium tiers'
           }
           benefits={[
-            language === 'zh' ? '🌟 查看所有订阅套餐和价格' : '🌟 View all subscription plans and pricing',
-            language === 'zh' ? '📊 管理您的当前订阅' : '📊 Manage your current subscription',
-            language === 'zh' ? '⚡ 升级到 Creator 或 Director 套餐' : '⚡ Upgrade to Creator or Director plans',
-            language === 'zh' ? '🎯 解锁更多生成次数和高级功能' : '🎯 Unlock more generations and premium features',
+            language === 'zh' ? '查看所有订阅套餐和价格' : 'View all subscription plans and pricing',
+            language === 'zh' ? '管理您的当前订阅' : 'Manage your current subscription',
+            language === 'zh' ? '升级到 Creator 或 Director 套餐' : 'Upgrade to Creator or Director plans',
+            language === 'zh' ? '解锁更多生成次数和高级功能' : 'Unlock more generations and premium features',
           ]}
         />
 
@@ -107,12 +107,12 @@ export function SubscriptionPlans() {
           {plans.map((plan) => (
             <div
               key={plan.tier}
-              className="bg-scene-fill rounded-xl border border-keyLight/20 p-6 text-center"
+              className="bg-scene-fill rounded-xl border border-keyLight/20 p-6 text-center shadow-depth-md"
             >
-              <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${plan.color} ${plan.textColor} mb-3`}>
+              <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${plan.color} ${plan.textColor} mb-3 shadow-depth-sm`}>
                 {plan.icon}
               </div>
-              <h3 className="text-xl font-bold text-text-primary mb-2">{plan.name}</h3>
+              <h3 className="text-xl font-bold font-display text-text-primary mb-2">{plan.name}</h3>
               <div className="text-3xl font-bold text-text-primary mb-2">{plan.price.split('/')[0]}</div>
               <p className="text-sm text-text-secondary">{plan.credits}</p>
             </div>
@@ -152,25 +152,27 @@ export function SubscriptionPlans() {
             <div
               key={plan.tier}
               className={`
-                relative rounded-2xl p-8 transition-all
+                relative rounded-2xl p-8 transition-all duration-300 overflow-hidden
                 ${
                   plan.popular
                     ? 'border-2 border-keyLight shadow-key scale-105'
                     : 'border border-keyLight/20 shadow-depth-lg'
                 }
-                bg-scene-fill hover:shadow-key
+                bg-scene-fill hover:shadow-key hover:border-keyLight/40 group
               `}
             >
+              <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-keyLight/5 to-transparent rounded-full blur-2xl translate-x-1/4 -translate-y-1/4 group-hover:from-keyLight/10 transition-all duration-300" />
+
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="bg-gradient-to-r from-[#E4A24D] to-[#D68722] text-white px-4 py-1 rounded-full text-sm font-semibold shadow-rim">
-                    {language === 'zh' ? '🌟 最受欢迎' : '🌟 Most Popular'}
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                  <span className="bg-gradient-to-r from-rimLight to-[#D68722] text-white px-4 py-1 rounded-full text-sm font-semibold shadow-rim">
+                    {language === 'zh' ? '最受欢迎' : 'Most Popular'}
                   </span>
                 </div>
               )}
 
-              <div className="flex flex-col items-center text-center mb-6">
-                <div className={`p-3 rounded-2xl bg-gradient-to-r ${plan.color} ${plan.textColor} mb-4`}>
+              <div className="relative z-10 flex flex-col items-center text-center mb-6">
+                <div className={`p-3 rounded-2xl bg-gradient-to-r ${plan.color} ${plan.textColor} mb-4 shadow-depth-md group-hover:shadow-depth-lg transition-shadow duration-300`}>
                   {plan.icon}
                 </div>
                 <h3 className="text-2xl font-bold font-display text-text-primary mb-2">{plan.name}</h3>
@@ -183,7 +185,7 @@ export function SubscriptionPlans() {
                 <p className="text-sm font-medium text-text-secondary">{plan.credits}</p>
               </div>
 
-              <ul className="space-y-3 mb-8">
+              <ul className="relative z-10 space-y-3 mb-8">
                 {plan.features.map((feature, index) => (
                   <li key={index} className="flex items-start gap-3 text-sm text-text-secondary">
                     <Check className="w-5 h-5 text-[#45E0A2] flex-shrink-0 mt-0.5" />
@@ -192,7 +194,8 @@ export function SubscriptionPlans() {
                 ))}
               </ul>
 
-              {plan.tier === 'free' ? (
+              <div className="relative z-10">
+                {plan.tier === 'free' ? (
                 <Button
                   onClick={() => handleUpgrade(plan.tier)}
                   disabled={upgrading || isCurrentPlan}
@@ -219,7 +222,8 @@ export function SubscriptionPlans() {
                 >
                   {isCurrentPlan ? t.subscriptionCurrent : t.subscriptionUpgrade}
                 </Button>
-              )}
+                )}
+              </div>
             </div>
           );
         })}
