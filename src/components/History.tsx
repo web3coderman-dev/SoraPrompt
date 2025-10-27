@@ -296,8 +296,8 @@ export default function History({ onSelectPrompt }: HistoryProps) {
             </div>
           </div>
 
-          <div className="flex justify-end sm:justify-start">
-            <span className="text-sm text-text-secondary mr-auto sm:mr-0">
+          <div className="flex items-center justify-between gap-4">
+            <span className="text-sm text-text-secondary">
               {filteredAndSortedPrompts.length} {t.language === 'zh' ? '条记录' : 'results'}
             </span>
             <SortDropdown
