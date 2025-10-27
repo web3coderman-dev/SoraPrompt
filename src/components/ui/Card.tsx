@@ -100,7 +100,7 @@ export const CardFooter: React.FC<CardFooterProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`px-6 py-4 bg-scene-fillLight border-t border-keyLight/10 ${className}`.trim()}>
+    <div className={`px-6 py-4 border-t border-keyLight/10 ${className}`.trim()}>
       {children}
     </div>
   );
