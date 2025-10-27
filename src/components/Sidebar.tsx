@@ -25,6 +25,7 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
       await signOut();
     } catch (error) {
       console.error('Error signing out:', error);
+    } finally {
       setSigningOut(false);
     }
   };

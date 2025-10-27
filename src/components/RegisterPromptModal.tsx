@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Modal, ModalFooter } from './ui/Modal';
 import { Button } from './ui/Button';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useNavigate } from 'react-router-dom';
 import { trackRegisterModalShown } from '../lib/analytics';
 
 type TriggerReason = 'no_credits' | 'frequent_user' | 'director_locked' | 'history_locked';
@@ -10,7 +11,6 @@ type TriggerReason = 'no_credits' | 'frequent_user' | 'director_locked' | 'histo
 interface RegisterPromptModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onRegister?: () => void;
   reason?: TriggerReason;
 }
 
@@ -76,8 +76,9 @@ const benefits = [
   },
 ];
 
-export function RegisterPromptModal({ isOpen, onClose, onRegister, reason = 'no_credits' }: RegisterPromptModalProps) {
+export function RegisterPromptModal({ isOpen, onClose, reason = 'no_credits' }: RegisterPromptModalProps) {
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   const config = reasonConfig[reason];
   const Icon = config.icon;
@@ -90,9 +91,7 @@ export function RegisterPromptModal({ isOpen, onClose, onRegister, reason = 'no_
 
   const handleRegister = () => {
     onClose();
-    if (onRegister) {
-      onRegister();
-    }
+    navigate('/login');
   };
 
   return (
