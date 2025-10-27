@@ -155,32 +155,32 @@ export function SubscriptionPlans() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-6 mt-8">
         {plans.map((plan) => {
           const isCurrentPlan = user && subscription?.tier === plan.tier;
 
           return (
-            <div
-              key={plan.tier}
-              className={`
-                relative rounded-2xl p-8 transition-all duration-300 overflow-hidden
-                ${
-                  plan.popular
-                    ? 'border-2 border-keyLight shadow-key scale-105'
-                    : 'border border-keyLight/20 shadow-depth-lg'
-                }
-                bg-scene-fill hover:shadow-key hover:border-keyLight/40 group
-              `}
-            >
-              <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-keyLight/5 to-transparent rounded-full blur-2xl translate-x-1/4 -translate-y-1/4 group-hover:from-keyLight/10 transition-all duration-300" />
-
+            <div key={plan.tier} className="relative pt-6">
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                <div className="absolute -top-0 left-1/2 -translate-x-1/2 z-20">
                   <span className="bg-gradient-to-r from-rimLight to-[#D68722] text-white px-4 py-1 rounded-full text-sm font-semibold shadow-rim">
                     {language === 'zh' ? '最受欢迎' : 'Most Popular'}
                   </span>
                 </div>
               )}
+
+              <div
+                className={`
+                  relative rounded-2xl p-8 transition-all duration-300 overflow-hidden
+                  ${
+                    plan.popular
+                      ? 'border-2 border-keyLight shadow-key scale-105'
+                      : 'border border-keyLight/20 shadow-depth-lg'
+                  }
+                  bg-scene-fill hover:shadow-key hover:border-keyLight/40 group
+                `}
+              >
+                <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-keyLight/5 to-transparent rounded-full blur-2xl translate-x-1/4 -translate-y-1/4 group-hover:from-keyLight/10 transition-all duration-300" />
 
               <div className="relative z-10 flex flex-col items-center text-center mb-6">
                 <div className={`p-3 rounded-2xl bg-gradient-to-r ${plan.color} ${plan.textColor} mb-4 shadow-depth-md group-hover:shadow-depth-lg transition-shadow duration-300`}>
@@ -234,6 +234,7 @@ export function SubscriptionPlans() {
                     {isCurrentPlan ? t.subscriptionCurrent : t.subscriptionUpgrade}
                   </Button>
                 )}
+              </div>
               </div>
             </div>
           );
