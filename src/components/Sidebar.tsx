@@ -20,20 +20,13 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleSignOut = async () => {
-import { PlusCircle, History, Settings, Sparkles, CreditCard, User, LogOut } from 'lucide-react';
+    try {
       setSigningOut(true);
-import { User as SupabaseUser } from '@supabase/supabase-js';
       await signOut();
-import { useAuth } from '../hooks/useAuth';
     } catch (error) {
-interface SidebarProps {
-  user: SupabaseUser | null;
-  onAuthClick: (mode: 'signin' | 'signup') => void;
-}
-
-export function Sidebar({ user, onAuthClick }: SidebarProps) {
+      console.error('Error signing out:', error);
+    } finally {
       setSigningOut(false);
-  const { signOut } = useAuth();
     }
   };
 
@@ -57,17 +50,8 @@ export function Sidebar({ user, onAuthClick }: SidebarProps) {
       icon: Settings,
       label: t.sidebarSettings,
       view: 'settings' as ViewType,
-    ...(user ? [{ id: 'subscription', icon: CreditCard, label: t('sidebarSubscription'), path: '/subscription' }] : []),
     },
   ];
-
-  const handleSignOut = async () => {
-    try {
-      await signOut();
-    } catch (error) {
-      console.error('Error signing out:', error);
-    }
-  };
 
   return (
     <>
@@ -110,44 +94,6 @@ export function Sidebar({ user, onAuthClick }: SidebarProps) {
           {menuItems.map((item) => (
             <button
               key={item.label}
-      {/* User Section */}
-      <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-        {user ? (
-          <div className="space-y-2">
-            <div className="flex items-center space-x-3 px-3 py-2">
-              <User className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
-                  {user.email}
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={handleSignOut}
-              className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-            >
-              <LogOut className="w-5 h-5" />
-              <span className="font-medium">{t('signOut')}</span>
-            </button>
-          </div>
-        ) : (
-          <div className="space-y-2">
-            <button
-              onClick={() => onAuthClick('signin')}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
-            >
-              {t('signIn')}
-            </button>
-            <button
-              onClick={() => onAuthClick('signup')}
-              className="w-full border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 font-medium py-2 px-4 rounded-lg transition-colors"
-            >
-              {t('signUp')}
-            </button>
-          </div>
-        )}
-      </div>
-
               onClick={() => {
                 onViewChange(item.view);
                 if (window.innerWidth < 1024) {
