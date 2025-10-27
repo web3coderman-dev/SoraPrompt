@@ -101,14 +101,20 @@ export function UsageCounter() {
     return null;
   }
 
-  const percentage = (subscription.remaining_credits / subscription.total_credits) * 100;
-  const isLow = percentage < 20;
+  const bonusCredits = subscription.bonus_credits || 0;
+  const totalAvailable = subscription.remaining_credits + bonusCredits;
+  const totalCapacity = subscription.total_credits;
+  const percentage = (subscription.remaining_credits / totalCapacity) * 100;
+  const isLow = percentage < 20 && bonusCredits === 0;
+  const hasBonus = bonusCredits > 0;
 
   const getColor = () => {
     if (percentage > 50) return 'bg-green-500';
     if (percentage > 20) return 'bg-yellow-500';
     return 'bg-red-500';
   };
+
+  const getBonusColor = () => 'bg-gradient-to-r from-yellow-400 to-orange-400';
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
@@ -121,17 +127,49 @@ export function UsageCounter() {
           )}
           <span className="font-medium text-gray-900">{t.subscriptionCredits}</span>
         </div>
-        <span className="text-sm font-semibold text-gray-600">
-          {subscription.remaining_credits} / {subscription.total_credits}
-        </span>
+        <div className="flex flex-col items-end">
+          <span className="text-sm font-semibold text-gray-600">
+            {subscription.remaining_credits} / {subscription.total_credits}
+          </span>
+          {hasBonus && (
+            <span className="text-xs font-medium text-orange-600">
+              +{bonusCredits} {language === 'zh' ? '奖励' : 'bonus'}
+            </span>
+          )}
+        </div>
       </div>
 
-      <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+      <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden relative">
         <div
-          className={`h-full ${getColor()} transition-all duration-300`}
+          className={`h-full ${getColor()} transition-all duration-300 absolute left-0`}
           style={{ width: `${Math.max(0, Math.min(100, percentage))}%` }}
         />
+        {hasBonus && (
+          <div
+            className={`h-full ${getBonusColor()} transition-all duration-300 absolute left-0 opacity-60`}
+            style={{ width: `${Math.max(0, Math.min(100, (bonusCredits / totalCapacity) * 100))}%`, left: `${percentage}%` }}
+          />
+        )}
       </div>
+
+      {hasBonus && (
+        <div className="mt-3 p-3 bg-gradient-to-r from-yellow-50 to-orange-50 border border-orange-200 rounded-lg">
+          <div className="flex items-start gap-2">
+            <Zap className="w-4 h-4 text-orange-600 flex-shrink-0 mt-0.5" />
+            <div className="flex-1">
+              <p className="text-sm font-medium text-orange-900">
+                {language === 'zh' ? '🎉 注册奖励' : '🎉 Registration Bonus'}
+              </p>
+              <p className="text-xs text-orange-700 mt-1">
+                {language === 'zh'
+                  ? `恭喜！您获得了 ${bonusCredits} 次额外生成机会`
+                  : `Congrats! You got ${bonusCredits} extra generations`
+                }
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {isLow && (
         <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">

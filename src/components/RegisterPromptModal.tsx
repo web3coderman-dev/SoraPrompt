@@ -1,8 +1,10 @@
 import { UserPlus, Zap, History, Film, Cloud, CheckCircle } from 'lucide-react';
+import { useEffect } from 'react';
 import { Modal, ModalFooter } from './ui/Modal';
 import { Button } from './ui/Button';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigate } from 'react-router-dom';
+import { trackRegisterModalShown } from '../lib/analytics';
 
 type TriggerReason = 'no_credits' | 'frequent_user' | 'director_locked' | 'history_locked';
 
@@ -80,6 +82,12 @@ export function RegisterPromptModal({ isOpen, onClose, reason = 'no_credits' }: 
 
   const config = reasonConfig[reason];
   const Icon = config.icon;
+
+  useEffect(() => {
+    if (isOpen) {
+      trackRegisterModalShown(reason);
+    }
+  }, [isOpen, reason]);
 
   const handleRegister = () => {
     onClose();

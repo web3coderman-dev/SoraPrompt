@@ -1,7 +1,10 @@
+import { getOrGenerateFingerprint } from './fingerprint';
+
 export interface GuestUsage {
   count: number;
   resetDate: string;
   sessionId: string;
+  fingerprint?: string;
   firstVisit: string;
   lastUsed: string;
 }
@@ -27,6 +30,19 @@ function getTodayDate(): string {
   return new Date().toISOString().split('T')[0];
 }
 
+async function initFingerprint(usage: GuestUsage): Promise<GuestUsage> {
+  if (!usage.fingerprint) {
+    try {
+      const fingerprint = await getOrGenerateFingerprint();
+      usage.fingerprint = fingerprint;
+      saveGuestUsage(usage);
+    } catch (error) {
+      console.error('Failed to generate fingerprint:', error);
+    }
+  }
+  return usage;
+}
+
 function getGuestUsage(): GuestUsage {
   const stored = localStorage.getItem(STORAGE_KEY);
   const today = getTodayDate();
@@ -40,6 +56,7 @@ function getGuestUsage(): GuestUsage {
       lastUsed: new Date().toISOString(),
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(newUsage));
+    initFingerprint(newUsage);
     return newUsage;
   }
 
@@ -49,6 +66,10 @@ function getGuestUsage(): GuestUsage {
     usage.count = 0;
     usage.resetDate = today;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(usage));
+  }
+
+  if (!usage.fingerprint) {
+    initFingerprint(usage);
   }
 
   return usage;
@@ -148,4 +169,20 @@ export function getGuestConversionTrigger(): {
     type: null,
     shouldShow: false,
   };
+}
+
+export async function getFingerprint(): Promise<string | undefined> {
+  const usage = getGuestUsage();
+  if (!usage.fingerprint) {
+    try {
+      const fingerprint = await getOrGenerateFingerprint();
+      usage.fingerprint = fingerprint;
+      saveGuestUsage(usage);
+      return fingerprint;
+    } catch (error) {
+      console.error('Failed to get fingerprint:', error);
+      return undefined;
+    }
+  }
+  return usage.fingerprint;
 }

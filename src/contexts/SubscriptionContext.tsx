@@ -17,6 +17,9 @@ export interface Subscription {
   tier: SubscriptionTier;
   remaining_credits: number;
   total_credits: number;
+  bonus_credits?: number;
+  bonus_granted_at?: string;
+  bonus_reason?: string;
   reset_cycle: ResetCycle;
   renewal_date: string;
   stripe_customer_id?: string;

@@ -8,9 +8,54 @@ const corsHeaders = {
 
 const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') || '';
 
+const RATE_LIMIT_GUEST_PER_DAY = 5;
+const RATE_LIMIT_ANON_PER_HOUR = 10;
+
 interface RequestBody {
   action: 'parseIntent' | 'generatePrompt' | 'evaluateQuality' | 'improvePrompt' | 'explainPrompt' | 'detectLanguage';
   data: any;
+  fingerprint?: string;
+}
+
+interface RateLimitStore {
+  [key: string]: {
+    count: number;
+    windowStart: number;
+  };
+}
+
+const rateLimitStore: RateLimitStore = {};
+
+function checkRateLimit(identifier: string, isGuest: boolean): { allowed: boolean; remaining: number } {
+  const now = Date.now();
+  const limit = isGuest ? RATE_LIMIT_GUEST_PER_DAY : RATE_LIMIT_ANON_PER_HOUR;
+  const windowSize = isGuest ? 24 * 60 * 60 * 1000 : 60 * 60 * 1000;
+
+  if (!rateLimitStore[identifier]) {
+    rateLimitStore[identifier] = {
+      count: 0,
+      windowStart: now,
+    };
+  }
+
+  const record = rateLimitStore[identifier];
+  const windowElapsed = now - record.windowStart;
+
+  if (windowElapsed >= windowSize) {
+    record.count = 0;
+    record.windowStart = now;
+  }
+
+  const allowed = record.count < limit;
+  const remaining = Math.max(0, limit - record.count);
+
+  return { allowed, remaining };
+}
+
+function incrementRateLimit(identifier: string): void {
+  if (rateLimitStore[identifier]) {
+    rateLimitStore[identifier].count += 1;
+  }
 }
 
 Deno.serve(async (req: Request) => {
@@ -22,7 +67,33 @@ Deno.serve(async (req: Request) => {
   }
 
   try {
-    const { action, data }: RequestBody = await req.json();
+    const ipAddress = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown';
+    const authHeader = req.headers.get('authorization');
+    const isAuthenticated = authHeader && authHeader.includes('Bearer');
+
+    const { action, data, fingerprint }: RequestBody = await req.json();
+
+    if (!isAuthenticated) {
+      const identifier = fingerprint || ipAddress;
+      const rateCheck = checkRateLimit(identifier, !!fingerprint);
+
+      if (!rateCheck.allowed) {
+        return new Response(
+          JSON.stringify({
+            error: 'Rate limit exceeded',
+            message: 'Too many requests. Please register for unlimited access or try again later.',
+            remaining: 0,
+            resetIn: fingerprint ? '24 hours' : '1 hour',
+          }),
+          {
+            status: 429,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          }
+        );
+      }
+
+      incrementRateLimit(identifier);
+    }
 
     if (!OPENAI_API_KEY) {
       return new Response(
