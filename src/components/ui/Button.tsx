@@ -21,14 +21,14 @@ const variantClasses: Record<ButtonVariant, string> = {
          transition-all duration-300 ease-in-out
          relative overflow-hidden
          before:absolute before:inset-0 before:bg-neon before:opacity-0 hover:before:opacity-20 before:transition-opacity before:duration-300`,
-  cut: `bg-state-error/10 border-2 border-state-error
-        hover:bg-state-error hover:text-white
-        text-state-error font-display
-        transition-all duration-200 ease-in-out`,
+  cut: `bg-state-error/10 border-2 border-state-error/30
+        hover:bg-state-error hover:border-state-error hover:text-white
+        text-state-error font-medium
+        transition-all duration-300 ease-in-out`,
   preview: `bg-scene-fill border border-border-default
             hover:bg-scene-fillLight hover:border-keyLight
             hover:text-text-primary text-text-secondary font-medium
-            transition-all duration-200 ease-in-out`,
+            transition-all duration-300 ease-in-out`,
   director: `bg-gradient-to-r from-keyLight via-neon to-keyLight
              hover:shadow-neon hover:scale-105
              text-white font-display shadow-key
