@@ -78,21 +78,6 @@ export function GuestBanner() {
               </div>
             </div>
           </div>
-
-          <div className="flex items-center gap-3">
-            <p className="text-xs text-text-secondary hidden sm:block max-w-xs leading-relaxed">
-              {t['guestMode.cta'] || 'Register for 3 free daily generations!'}
-            </p>
-            <Button
-              variant="gradient"
-              size="sm"
-              icon={UserPlus}
-              onClick={handleRegister}
-              className="shadow-neon hover:scale-105 transition-transform duration-300"
-            >
-              {t['guestMode.registerButton'] || 'Free Register'}
-            </Button>
-          </div>
         </div>
       </div>
     </div>

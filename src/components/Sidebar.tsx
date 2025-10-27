@@ -150,8 +150,11 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
                 className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-keyLight to-neon hover:shadow-neon text-white rounded-lg transition-all duration-200 shadow-key font-semibold active:scale-[0.98]"
               >
                 <LogIn className="w-5 h-5" />
-                <span>{t.signInSignUp}</span>
+                <span>{t.freeRegister || t.signInSignUp}</span>
               </button>
+              <p className="text-xs text-text-tertiary text-center mt-2 leading-relaxed">
+                {t.freeRegisterHint || 'Register for 3 free daily generations!'}
+              </p>
             </div>
           )}
         </div>
