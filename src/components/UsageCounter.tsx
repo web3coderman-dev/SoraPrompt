@@ -196,8 +196,12 @@ export function UsageCounter() {
         ) : (
           <span>{t.subscriptionResetsMonthly}</span>
         )}
-        {' • '}
-        <span className="font-code">{new Date(subscription.renewal_date).toLocaleDateString()}</span>
+        {'renewal_date' in subscription && subscription.renewal_date && (
+          <>
+            {' • '}
+            <span className="font-code">{new Date(subscription.renewal_date).toLocaleDateString()}</span>
+          </>
+        )}
       </div>
     </div>
   );
