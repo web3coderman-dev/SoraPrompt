@@ -10,6 +10,7 @@ import { UpgradeModal } from '../components/UpgradeModal';
 import { RegisterPromptModal } from '../components/RegisterPromptModal';
 import { GuestUsageCard } from '../components/GuestUsageCard';
 import { ConflictResolutionModal } from '../components/ConflictResolutionModal';
+import LoginModal from '../components/LoginModal';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Badge } from '../components/ui/Badge';
 import { useAuth } from '../contexts/AuthContext';
@@ -36,6 +37,7 @@ export default function Dashboard() {
   const [upgradeReason, setUpgradeReason] = useState<'credits_out' | 'frequent_use' | 'director_locked'>('credits_out');
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [registerReason, setRegisterReason] = useState<'no_credits' | 'frequent_user' | 'director_locked' | 'history_locked'>('no_credits');
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const [showConflictModal, setShowConflictModal] = useState(false);
   const [conflictData, setConflictData] = useState<{
     cloudSettings: Omit<UserSettings, 'user_id'>;
@@ -355,8 +357,13 @@ export default function Dashboard() {
       <RegisterPromptModal
         isOpen={showRegisterModal}
         onClose={() => setShowRegisterModal(false)}
+        onRegister={() => setShowLoginModal(true)}
         reason={registerReason}
       />
+
+      {showLoginModal && (
+        <LoginModal onClose={() => setShowLoginModal(false)} />
+      )}
 
       {conflictData && (
         <ConflictResolutionModal
