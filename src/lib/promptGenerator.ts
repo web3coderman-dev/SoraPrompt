@@ -32,6 +32,8 @@ export async function generateSoraPrompt(
     style_data: styleData,
     quality_score: qualityScore,
     mode,
+    detected_input_language: detectedInputLanguage,
+    output_language: outputLanguage,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   };
