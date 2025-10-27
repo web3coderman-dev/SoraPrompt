@@ -35,8 +35,8 @@ export function SubscriptionPlans() {
         t.featureUnlimitedHistory,
         t.featureSameAI,
       ],
-      color: 'from-gray-100 to-gray-200',
-      textColor: 'text-text-secondary',
+      color: 'from-gray-400 to-gray-500',
+      textColor: 'text-white',
     },
     {
       tier: 'creator' as SubscriptionTier,
@@ -52,7 +52,7 @@ export function SubscriptionPlans() {
         t.featureSameAI,
         t.featureBadge,
       ],
-      color: 'from-green-400 to-emerald-500',
+      color: 'from-state-ok to-[#3DD598]',
       textColor: 'text-white',
       popular: true,
     },
@@ -71,7 +71,7 @@ export function SubscriptionPlans() {
         t.featurePrioritySupport,
         t.featureBadge,
       ],
-      color: 'from-blue-500 to-indigo-600',
+      color: 'from-keyLight to-[#2D5AE8]',
       textColor: 'text-white',
     },
   ];
@@ -163,8 +163,8 @@ export function SubscriptionPlans() {
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="bg-gradient-to-r from-state-ok to-state-ok/80 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-rim">
-                    Popular
+                  <span className="bg-gradient-to-r from-rimLight to-[#D68722] text-white px-4 py-1 rounded-full text-sm font-semibold shadow-rim">
+                    {language === 'zh' ? '🌟 最受欢迎' : '🌟 Most Popular'}
                   </span>
                 </div>
               )}
@@ -186,26 +186,40 @@ export function SubscriptionPlans() {
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature, index) => (
                   <li key={index} className="flex items-start gap-3 text-sm text-text-secondary">
-                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <Check className="w-5 h-5 text-state-ok flex-shrink-0 mt-0.5" />
                     <span>{feature}</span>
                   </li>
                 ))}
               </ul>
 
-              <Button
-                onClick={() => handleUpgrade(plan.tier)}
-                disabled={upgrading || isCurrentPlan}
-                className={`
-                  w-full
-                  ${
-                    isCurrentPlan
-                      ? 'bg-scene-fillLight text-text-secondary cursor-not-allowed'
-                      : `bg-gradient-to-r ${plan.color} hover:opacity-90 text-white`
-                  }
-                `}
-              >
-                {isCurrentPlan ? t.subscriptionCurrent : t.subscriptionUpgrade}
-              </Button>
+              {plan.tier === 'free' ? (
+                <Button
+                  onClick={() => handleUpgrade(plan.tier)}
+                  disabled={upgrading || isCurrentPlan}
+                  variant={isCurrentPlan ? 'preview' : 'scene'}
+                  fullWidth
+                >
+                  {isCurrentPlan ? t.subscriptionCurrent : t.subscriptionUpgrade}
+                </Button>
+              ) : plan.tier === 'creator' ? (
+                <Button
+                  onClick={() => handleUpgrade(plan.tier)}
+                  disabled={upgrading || isCurrentPlan}
+                  variant={isCurrentPlan ? 'preview' : 'rim'}
+                  fullWidth
+                >
+                  {isCurrentPlan ? t.subscriptionCurrent : t.subscriptionUpgrade}
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => handleUpgrade(plan.tier)}
+                  disabled={upgrading || isCurrentPlan}
+                  variant={isCurrentPlan ? 'preview' : 'director'}
+                  fullWidth
+                >
+                  {isCurrentPlan ? t.subscriptionCurrent : t.subscriptionUpgrade}
+                </Button>
+              )}
             </div>
           );
         })}
