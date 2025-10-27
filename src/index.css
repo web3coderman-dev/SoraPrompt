@@ -2,18 +2,99 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --color-scene-bg: 11, 13, 18;
+    --color-scene-fill: 20, 24, 33;
+    --color-scene-fillLight: 26, 31, 46;
+    --color-keyLight: 58, 108, 255;
+    --color-rimLight: 228, 162, 77;
+    --color-neon: 138, 96, 255;
+    --color-text-primary: 255, 255, 255;
+    --color-text-secondary: 160, 168, 184;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    @apply bg-white dark:bg-scene-bg;
+    @apply text-gray-900 dark:text-text-primary;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl lg:text-5xl;
+    line-height: 1.2;
+  }
+
+  h2 {
+    @apply text-3xl lg:text-4xl;
+    line-height: 1.2;
+  }
+
+  h3 {
+    @apply text-2xl lg:text-3xl;
+    line-height: 1.2;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  a {
+    @apply transition-colors duration-200 ease-smooth;
+  }
+
+  button {
+    @apply transition-all duration-300 ease-smooth;
+  }
+}
+
 @layer utilities {
   .animate-fadeIn {
-    animation: fadeIn 0.5s ease-in-out;
+    animation: fadeIn 200ms ease-in;
   }
 
   .animate-slide-in-right {
-    animation: slideInRight 0.3s ease-out;
+    animation: slideInRight 300ms ease-out;
   }
 
   .overflow-wrap-anywhere {
     overflow-wrap: anywhere;
     word-break: break-word;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scene-glow {
+    box-shadow: 0 0 24px rgba(var(--color-keyLight), 0.2);
+  }
+
+  .scene-glow-strong {
+    box-shadow: 0 0 32px rgba(var(--color-keyLight), 0.4),
+                0 0 64px rgba(var(--color-neon), 0.2);
+  }
+
+  .rim-glow {
+    box-shadow: 0 4px 16px rgba(var(--color-rimLight), 0.25);
+  }
+
+  .glass-effect {
+    @apply bg-scene-fill/80 backdrop-blur-md border border-keyLight/10;
+  }
+
+  .cinematic-gradient {
+    background: linear-gradient(
+      135deg,
+      rgba(var(--color-keyLight), 0.1) 0%,
+      rgba(var(--color-neon), 0.1) 50%,
+      rgba(var(--color-rimLight), 0.1) 100%
+    );
   }
 }
 
@@ -36,5 +117,46 @@
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes cameraPan {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes lightBlink {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes renderPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

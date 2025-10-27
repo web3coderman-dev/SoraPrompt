@@ -1,7 +1,7 @@
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'gradient';
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'gradient' | 'scene' | 'rim';
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -15,21 +15,32 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: `bg-primary-600 hover:bg-primary-700 active:bg-primary-800
-            text-white shadow-md hover:shadow-lg`,
-  secondary: `bg-white border-2 border-gray-300 hover:border-gray-400
-              hover:bg-gray-50 text-gray-700`,
-  ghost: `text-primary-600 hover:bg-primary-50`,
-  gradient: `bg-gradient-to-r from-secondary-600 to-secondary-700
-             hover:from-secondary-700 hover:to-secondary-800
-             text-white shadow-md hover:shadow-glow-purple`,
+  primary: `bg-keyLight hover:bg-keyLight-600 active:bg-keyLight-700
+            text-white shadow-key hover:shadow-light
+            transition-all duration-300 ease-smooth`,
+  secondary: `bg-scene-fill border border-keyLight/20 hover:border-keyLight/40
+              hover:bg-scene-fillLight text-text-primary
+              transition-all duration-300 ease-smooth`,
+  ghost: `text-keyLight hover:bg-keyLight/10 active:bg-keyLight/20
+          transition-all duration-200 ease-smooth`,
+  gradient: `bg-gradient-to-r from-neon-600 to-neon-500
+             hover:from-neon-700 hover:to-neon-600
+             text-white shadow-neon hover:shadow-rim
+             transition-all duration-300 ease-smooth`,
+  scene: `bg-scene-fill border border-rimLight/30 hover:border-rimLight/50
+          hover:bg-scene-fillLight text-text-primary hover:text-rimLight
+          transition-all duration-300 ease-smooth`,
+  rim: `bg-gradient-to-r from-rimLight-500 to-rimLight-600
+        hover:from-rimLight-600 hover:to-rimLight-700
+        text-white shadow-rim
+        transition-all duration-300 ease-smooth`,
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: 'px-3 py-1.5 text-sm',
-  md: 'px-4 py-2 text-sm',
-  lg: 'px-6 py-3 text-base',
-  xl: 'px-8 py-4 text-lg',
+  sm: 'px-3 py-1.5 text-sm rounded-md',
+  md: 'px-4 py-2 text-sm rounded-lg',
+  lg: 'px-6 py-3 text-base rounded-lg',
+  xl: 'px-8 py-4 text-lg rounded-xl',
 };
 
 export const Button: React.FC<ButtonProps> = ({
@@ -46,10 +57,11 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const baseClasses = `
     inline-flex items-center justify-center gap-2
-    font-semibold rounded-lg
-    transition-all duration-200
-    disabled:opacity-50 disabled:cursor-not-allowed
+    font-medium
+    transition-all duration-300
+    disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none
     active:scale-[0.98]
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-keyLight focus-visible:ring-offset-2 focus-visible:ring-offset-scene-bg
   `;
 
   const widthClass = fullWidth ? 'w-full' : '';
@@ -68,7 +80,7 @@ export const Button: React.FC<ButtonProps> = ({
     >
       {loading ? (
         <>
-          <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+          <svg className="animate-render-pulse h-5 w-5" viewBox="0 0 24 24">
             <circle
               className="opacity-25"
               cx="12"
