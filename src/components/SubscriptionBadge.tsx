@@ -18,23 +18,23 @@ export function SubscriptionBadge({ tier, size = 'md', showLabel = true }: Subsc
 
   const tierConfig = {
     free: {
-      bg: 'bg-gradient-to-r from-gray-100 to-gray-200',
+      bg: 'bg-scene-fillLight',
       text: 'text-text-secondary',
       border: 'border-keyLight/20',
       icon: '⚪️',
       label: t.tierFree,
     },
     creator: {
-      bg: 'bg-gradient-to-r from-green-400 to-emerald-500',
+      bg: 'bg-gradient-to-r from-state-ok to-state-ok/80',
       text: 'text-white',
-      border: 'border-green-600',
+      border: 'border-state-ok',
       icon: '⚡️',
       label: t.tierCreator,
     },
     director: {
-      bg: 'bg-gradient-to-r from-blue-500 to-indigo-600',
+      bg: 'bg-gradient-to-r from-keyLight to-neon',
       text: 'text-white',
-      border: 'border-blue-700',
+      border: 'border-keyLight',
       icon: '🎥',
       label: t.tierDirector,
     },

@@ -24,12 +24,12 @@ export const Card: React.FC<CardProps> = ({
 
   const baseClasses = `
     rounded-xl shadow-depth-md
-    overflow-hidden transition-all duration-300 ease-smooth
+    overflow-hidden transition-all duration-300 ease-in-out
     ${variantClasses[variant]}
   `;
 
   const hoverClasses = hoverable
-    ? 'hover:shadow-key hover:border-keyLight/40 cursor-pointer active:scale-[0.99] hover:-translate-y-1 transition-transform'
+    ? 'hover:shadow-key hover:border-keyLight/40 cursor-pointer active:scale-[0.99] hover:-translate-y-1'
     : '';
 
   return (

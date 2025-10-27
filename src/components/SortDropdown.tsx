@@ -34,7 +34,7 @@ export default function SortDropdown({ options, value, onChange }: SortDropdownP
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-1.5 text-sm border border-keyLight/20 rounded-lg hover:border-gray-400 focus:ring-2 focus:ring-keyLight/20 focus:border-transparent bg-scene-fill text-text-secondary transition-colors min-w-[140px] justify-between"
+        className="flex items-center gap-2 px-3 py-1.5 text-sm border border-keyLight/20 rounded-lg hover:border-keyLight/40 focus:ring-2 focus:ring-keyLight/20 focus:border-transparent bg-scene-fill text-text-secondary transition-colors min-w-[140px] justify-between"
       >
         <div className="flex items-center gap-2">
           <ArrowUpDown className="w-4 h-4 text-text-tertiary" />

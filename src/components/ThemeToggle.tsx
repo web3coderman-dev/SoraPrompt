@@ -9,9 +9,9 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-lg bg-scene-fillLight dark:bg-gray-800 hover:bg-scene-fillLight dark:hover:bg-gray-700
-                 text-text-secondary dark:text-gray-300 transition-all duration-200
-                 active:scale-95"
+      className="p-2 rounded-md bg-scene-fillLight hover:bg-scene-fill
+                 text-text-secondary hover:text-text-primary
+                 transition-all duration-200 active:scale-95"
       aria-label={t['ui.themeToggle'] || 'Toggle theme'}
     >
       {theme === 'light' ? (

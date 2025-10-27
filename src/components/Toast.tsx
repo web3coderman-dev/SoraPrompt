@@ -24,7 +24,7 @@ export function Toast({ message, type = 'info', duration = 5000, onClose }: Toas
   };
 
   const colors = {
-    success: 'bg-state-ok/10 border-state-ok/30 text-green-800',
+    success: 'bg-state-ok/10 border-state-ok/30 text-state-ok',
     error: 'bg-state-error/10 border-state-error/30 text-state-error',
     info: 'bg-state-info/10 border-state-info/30 text-state-info',
     warning: 'bg-state-warning/10 border-state-warning/30 text-state-warning',

@@ -43,7 +43,7 @@ export const Input: React.FC<InputProps> = ({
             ${hasError ? 'focus:ring-state-error/20' : 'focus:ring-keyLight/20'}
             focus:border-keyLight
             placeholder:text-text-tertiary
-            transition-all duration-200 ease-smooth
+            transition-all duration-200 ease-in-out
             disabled:opacity-50 disabled:cursor-not-allowed
             ${Icon && iconPosition === 'left' ? 'pl-10' : ''}
             ${Icon && iconPosition === 'right' ? 'pr-10' : ''}
@@ -102,7 +102,7 @@ export const Textarea: React.FC<TextareaProps> = ({
           focus:border-keyLight
           placeholder:text-text-tertiary
           resize-none
-          transition-all duration-200 ease-smooth
+          transition-all duration-200 ease-in-out
           disabled:opacity-50 disabled:cursor-not-allowed
           ${className}
         `.trim().replace(/\s+/g, ' ')}

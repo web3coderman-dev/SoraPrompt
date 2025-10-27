@@ -58,7 +58,7 @@ export const Modal: React.FC<ModalProps> = ({
   if (!isOpen) return null;
 
   const variantClasses = {
-    default: 'bg-white dark:bg-scene-fill border border-gray-200 dark:border-keyLight/20',
+    default: 'bg-scene-fill border border-keyLight/20',
     scene: 'bg-scene-fill border border-keyLight/20 shadow-light',
     glass: 'bg-scene-fill/95 backdrop-blur-xl border border-keyLight/20',
   };
@@ -66,7 +66,7 @@ export const Modal: React.FC<ModalProps> = ({
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center
-                 bg-black/60 backdrop-blur-sm
+                 bg-overlay-medium backdrop-blur-sm
                  animate-fade-in"
       onClick={onClose}
     >
@@ -74,16 +74,16 @@ export const Modal: React.FC<ModalProps> = ({
         className={`
           rounded-2xl shadow-depth-xl w-full mx-4
           animate-scale-in
-          transition-all duration-300 ease-smooth
+          transition-all duration-300 ease-in-out
           ${variantClasses[variant]}
           ${maxWidthClasses[maxWidth]}
         `.trim().replace(/\s+/g, ' ')}
         onClick={(e) => e.stopPropagation()}
       >
         {(title || showCloseButton) && (
-          <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200 dark:border-keyLight/10">
+          <div className="flex items-center justify-between px-6 py-5 border-b border-keyLight/10">
             {title && (
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-text-primary">
+              <h2 className="text-xl font-semibold text-text-primary">
                 {title}
               </h2>
             )}
@@ -113,7 +113,7 @@ interface ModalFooterProps {
 
 export const ModalFooter: React.FC<ModalFooterProps> = ({ children, className = '' }) => {
   return (
-    <div className={`flex items-center justify-end gap-3 px-6 py-4 bg-gray-50 dark:bg-scene-fillLight border-t border-gray-200 dark:border-keyLight/10 ${className}`.trim()}>
+    <div className={`flex items-center justify-end gap-3 px-6 py-4 bg-scene-fillLight border-t border-keyLight/10 ${className}`.trim()}>
       {children}
     </div>
   );
