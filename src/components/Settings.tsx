@@ -231,7 +231,7 @@ export default function Settings() {
                 showCheckmark={true}
               >
                 <span className="text-sm truncate">
-                  {(t as any).languages?.[lang.code] || lang.code}
+                  {t.languages && (t.languages as any)[lang.code] ? (t.languages as any)[lang.code] : lang.code}
                 </span>
               </OptionButton>
             ))}
