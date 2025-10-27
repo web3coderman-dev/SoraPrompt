@@ -39,6 +39,8 @@ export type Prompt = {
   style_data: StyleData;
   quality_score: number;
   mode: 'quick' | 'director';
+  detected_input_language?: string;
+  output_language?: string;
   created_at: string;
   updated_at: string;
 };

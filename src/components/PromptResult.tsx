@@ -33,12 +33,21 @@ export default function PromptResult({
   const [improvementFeedback, setImprovementFeedback] = useState('');
   const [showImprovementInput, setShowImprovementInput] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<SupportedLanguage>(() => {
+    const detectedLang = prompt.detected_input_language || prompt.output_language;
+    if (detectedLang && ['zh', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'ru', 'pt', 'it'].includes(detectedLang)) {
+      return detectedLang as SupportedLanguage;
+    }
     return (localStorage.getItem('output-language') as SupportedLanguage) || 'en';
   });
 
   useEffect(() => {
-    const lang = (localStorage.getItem('output-language') as SupportedLanguage) || 'en';
-    setSelectedLanguage(lang);
+    const detectedLang = prompt.detected_input_language || prompt.output_language;
+    if (detectedLang && ['zh', 'en', 'ja', 'ko', 'es', 'fr', 'de', 'ru', 'pt', 'it'].includes(detectedLang)) {
+      setSelectedLanguage(detectedLang as SupportedLanguage);
+    } else {
+      const lang = (localStorage.getItem('output-language') as SupportedLanguage) || 'en';
+      setSelectedLanguage(lang);
+    }
   }, [prompt]);
 
   const handleLanguageChange = (lang: SupportedLanguage) => {
