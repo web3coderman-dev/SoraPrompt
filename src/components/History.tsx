@@ -164,7 +164,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
             variant="cut"
             size="md"
           >
-            {t.language === 'zh' ? '重试' : 'Retry'}
+            {t.historyRetry}
           </Button>
         </div>
       </div>
@@ -200,19 +200,12 @@ export default function History({ onSelectPrompt }: HistoryProps) {
             <AlertCircle className="w-6 h-6 text-state-warning flex-shrink-0 mt-0.5" />
             <div className="flex-1">
               <h3 className="font-semibold text-state-warning mb-1">
-                {isLocalAtLimit
-                  ? (language === 'zh' ? '本地存储已满！' : 'Local storage is full!')
-                  : (language === 'zh' ? '本地存储即将用尽' : 'Local storage almost full')
-                }
+                {isLocalAtLimit ? t.historyAlertFullTitle : t.historyAlertNearFullTitle}
               </h3>
               <p className="text-sm text-state-warning mb-3">
                 {isLocalAtLimit
-                  ? (language === 'zh'
-                      ? '您的本地存储已达上限（10条）。新记录将覆盖最旧的记录。登录以保存所有历史记录到云端！'
-                      : 'Your local storage has reached its limit (10 records). New records will overwrite the oldest ones. Sign in to save all history to the cloud!')
-                  : (language === 'zh'
-                      ? `您已使用 ${prompts.length}/10 条本地记录。登录后可享受无限云端存储！`
-                      : `You've used ${prompts.length}/10 local records. Sign in for unlimited cloud storage!`)
+                  ? t.historyAlertFullMessage
+                  : t.historyAlertNearFullMessage.replace('{{count}}', String(prompts.length))
                 }
               </p>
               <Button
@@ -221,7 +214,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
                 size="sm"
                 className="hover:shadow-light"
               >
-                {language === 'zh' ? '立即登录解锁' : 'Sign In to Unlock'}
+                {t.historySignInUnlock}
               </Button>
             </div>
           </div>
@@ -289,7 +282,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
 
           <div className="flex items-center justify-between gap-4">
             <span className="text-sm text-text-secondary">
-              {filteredAndSortedPrompts.length} {t.language === 'zh' ? '条记录' : 'results'}
+              {filteredAndSortedPrompts.length} {t.historyResultCount}
             </span>
             <SortDropdown
               options={[
@@ -398,7 +391,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
             <button
               onClick={() => setShowLoginPrompt(false)}
               className="absolute -top-2 -right-2 w-8 h-8 bg-scene-fill rounded-full shadow-depth-lg flex items-center justify-center text-text-secondary hover:text-text-primary z-10 border-2 border-keyLight/20 hover:border-keyLight/40 transition-all duration-300"
-              aria-label={language === 'zh' ? '关闭' : 'Close'}
+              aria-label={t.historyClose}
             >
               <X className="w-4 h-4" />
             </button>
