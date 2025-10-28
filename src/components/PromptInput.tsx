@@ -61,8 +61,8 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
   };
 
   return (
-    <Card variant="script" className="animate-fade-in">
-      <CardBody>
+    <Card variant="idea" className="animate-fade-in">
+      <CardBody className="pt-7 pb-5">
         <Textarea
           label={t.inputLabel}
           value={input}
@@ -71,10 +71,11 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
           placeholder={t.inputPlaceholder}
           rows={3}
           disabled={isLoading}
+          variant="cinematic"
         />
       </CardBody>
 
-      <CardFooter className="flex flex-col sm:flex-row gap-3">
+      <CardFooter className="flex flex-col sm:flex-row gap-4 pt-5">
         <div className="w-full sm:w-1/2">
           <Button
             variant="take"
@@ -83,6 +84,8 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
             disabled={!input.trim() || isLoading}
             loading={isLoading && !isLoading}
             fullWidth
+            size="xl"
+            className="h-14"
           >
             {t.quickGenerate}
           </Button>
@@ -95,6 +98,8 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
             onClick={() => handleSubmit('director')}
             disabled={!input.trim() || isLoading}
             fullWidth
+            size="xl"
+            className="h-14"
           >
             {t.directorMode}
           </Button>
@@ -147,7 +152,7 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
               <ProgressBar
                 value={subscription.remaining_credits}
                 total={subscription.total_credits}
-                variant="default"
+                variant="cinematic"
                 size="md"
                 animated={true}
               />

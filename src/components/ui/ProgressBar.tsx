@@ -1,6 +1,7 @@
 import React from 'react';
+import { useTheme } from '../../contexts/ThemeContext';
 
-export type ProgressVariant = 'default' | 'success' | 'warning' | 'error';
+export type ProgressVariant = 'default' | 'success' | 'warning' | 'error' | 'cinematic';
 export type ProgressSize = 'sm' | 'md' | 'lg';
 
 interface ProgressBarProps {
@@ -14,6 +15,10 @@ interface ProgressBarProps {
 }
 
 const getVariantClass = (percentage: number, variant: ProgressVariant): string => {
+  if (variant === 'cinematic') {
+    return '';
+  }
+
   if (variant !== 'default') {
     switch (variant) {
       case 'success':
@@ -36,6 +41,12 @@ const sizeClasses: Record<ProgressSize, string> = {
   lg: 'h-3',
 };
 
+const cinematicSizeClasses: Record<ProgressSize, string> = {
+  sm: 'h-1.5',
+  md: 'h-2',
+  lg: 'h-2.5',
+};
+
 export const ProgressBar: React.FC<ProgressBarProps> = ({
   value,
   total,
@@ -45,7 +56,15 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   animated = true,
   className = '',
 }) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  const isCinematic = variant === 'cinematic';
   const percentage = Math.min(100, Math.max(0, (value / total) * 100));
+
+  const cinematicBarStyle = isCinematic ? {
+    background: 'linear-gradient(90deg, #3961FB 0%, #5A7FFF 50%, #3961FB 100%)',
+    backgroundSize: '200% 100%',
+  } : {};
 
   return (
     <div className={`w-full ${className}`}>
@@ -60,15 +79,31 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         </div>
       )}
 
-      <div className={`relative w-full ${sizeClasses[size]} bg-scene-background rounded-full overflow-hidden border border-border-subtle`}>
-        {animated && (
+      <div className={`relative w-full ${isCinematic ? cinematicSizeClasses[size] : sizeClasses[size]} rounded-full overflow-hidden`}
+        style={{
+          backgroundColor: isCinematic
+            ? isDark ? 'rgba(58, 108, 255, 0.1)' : 'rgba(58, 108, 255, 0.08)'
+            : undefined,
+        }}
+      >
+        {animated && !isCinematic && (
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer" />
         )}
         <div
-          className={`h-full bg-gradient-to-r ${getVariantClass(percentage, variant)} transition-all duration-500 ease-out relative`}
-          style={{ width: `${percentage}%` }}
+          className={`h-full transition-all duration-500 ease-out relative ${
+            !isCinematic ? `bg-gradient-to-r ${getVariantClass(percentage, variant)}` : 'animate-progress-shine'
+          }`}
+          style={{
+            width: `${percentage}%`,
+            ...(isCinematic ? cinematicBarStyle : {}),
+          }}
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/20" />
+          {isCinematic && (
+            <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-white/30" />
+          )}
+          {!isCinematic && (
+            <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/20" />
+          )}
         </div>
       </div>
     </div>

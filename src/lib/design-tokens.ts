@@ -175,3 +175,57 @@ export const zIndex = {
   modal: 50,
   toast: 60,
 };
+
+// Idea Card - Enhanced tokens for cinematic experience
+export const ideaCard = {
+  dark: {
+    background: 'linear-gradient(135deg, #141821 0%, #1A1F2E 100%)',
+    border: 'rgba(58, 108, 255, 0.25)',
+    borderHover: 'rgba(58, 108, 255, 0.4)',
+    shadow: '0 0 0 1px rgba(58, 108, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.4), 0 16px 48px rgba(58, 108, 255, 0.12)',
+    shadowHover: '0 0 0 1px rgba(58, 108, 255, 0.15), 0 12px 32px rgba(0, 0, 0, 0.5), 0 24px 64px rgba(58, 108, 255, 0.2)',
+    input: {
+      background: 'rgba(26, 31, 46, 0.6)',
+      backgroundFocus: 'rgba(26, 31, 46, 0.8)',
+      border: 'rgba(58, 108, 255, 0.15)',
+      borderFocus: 'rgba(58, 108, 255, 0.3)',
+      shadowFocus: '0 0 0 2px rgba(57, 97, 251, 0.2), 0 0 20px rgba(138, 96, 255, 0.15), inset 0 0 0 1px rgba(58, 108, 255, 0.3)',
+      placeholder: 'rgba(255, 255, 255, 0.35)',
+    },
+    button: {
+      primaryGradient: 'linear-gradient(135deg, #3961FB 0%, #5A7FFF 100%)',
+      primaryGradientHover: 'linear-gradient(135deg, #4A72FF 0%, #6B8FFF 100%)',
+      primaryShadow: '0 4px 12px rgba(57, 97, 251, 0.3), 0 0 20px rgba(57, 97, 251, 0.15)',
+      primaryShadowHover: '0 6px 16px rgba(57, 97, 251, 0.4), 0 0 32px rgba(57, 97, 251, 0.25)',
+      secondaryGradient: 'linear-gradient(135deg, #3961FB 0%, #8A60FF 50%, #A66BFF 100%)',
+      secondaryShadow: '0 4px 12px rgba(138, 96, 255, 0.3), 0 0 20px rgba(138, 96, 255, 0.2)',
+      secondaryShadowHover: '0 6px 16px rgba(138, 96, 255, 0.4), 0 0 32px rgba(138, 96, 255, 0.3)',
+    },
+    divider: 'linear-gradient(90deg, rgba(58, 108, 255, 0) 0%, rgba(58, 108, 255, 0.25) 50%, rgba(58, 108, 255, 0) 100%)',
+  },
+  light: {
+    background: 'linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%)',
+    border: 'rgba(58, 108, 255, 0.12)',
+    borderHover: 'rgba(58, 108, 255, 0.2)',
+    shadow: '0 0 0 1px rgba(58, 108, 255, 0.04), 0 4px 12px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(58, 108, 255, 0.06)',
+    shadowHover: '0 0 0 1px rgba(58, 108, 255, 0.08), 0 6px 16px rgba(0, 0, 0, 0.06), 0 12px 32px rgba(58, 108, 255, 0.1)',
+    input: {
+      background: 'rgba(248, 248, 255, 0.8)',
+      backgroundFocus: 'rgba(255, 255, 255, 0.95)',
+      border: 'rgba(58, 108, 255, 0.12)',
+      borderFocus: 'rgba(58, 108, 255, 0.3)',
+      shadowFocus: '0 0 0 2px rgba(57, 97, 251, 0.15), 0 0 16px rgba(138, 96, 255, 0.1), inset 0 0 0 1px rgba(58, 108, 255, 0.2)',
+      placeholder: 'rgba(0, 0, 0, 0.35)',
+    },
+    button: {
+      primaryGradient: 'linear-gradient(135deg, #3961FB 0%, #5A7FFF 100%)',
+      primaryGradientHover: 'linear-gradient(135deg, #4A72FF 0%, #6B8FFF 100%)',
+      primaryShadow: '0 2px 8px rgba(57, 97, 251, 0.2), 0 0 16px rgba(57, 97, 251, 0.1)',
+      primaryShadowHover: '0 4px 12px rgba(57, 97, 251, 0.25), 0 0 24px rgba(57, 97, 251, 0.15)',
+      secondaryGradient: 'linear-gradient(135deg, #3961FB 0%, #8A60FF 50%, #A66BFF 100%)',
+      secondaryShadow: '0 2px 8px rgba(138, 96, 255, 0.2), 0 0 16px rgba(138, 96, 255, 0.12)',
+      secondaryShadowHover: '0 4px 12px rgba(138, 96, 255, 0.25), 0 0 24px rgba(138, 96, 255, 0.18)',
+    },
+    divider: 'linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.08) 50%, rgba(0, 0, 0, 0) 100%)',
+  },
+};
