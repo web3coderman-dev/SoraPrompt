@@ -125,7 +125,6 @@ export default function NewProject() {
               <h1 className="text-4xl md:text-5xl font-bold text-text-primary font-display">
                 {t.title}
               </h1>
-              <Badge variant="neon" size="sm">{t.tagMVP}</Badge>
             </div>
             <p className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto">
               {t.subtitle}
