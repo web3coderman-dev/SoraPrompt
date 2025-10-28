@@ -14,11 +14,11 @@ import { Divider } from './ui/Divider';
 
 type PromptInputProps = {
   onGenerate: (input: string, mode: 'quick' | 'director', language: SupportedLanguage, detectedInputLanguage: SupportedLanguage) => void;
-  isLoading: boolean;
+  isGenerating: boolean;
   initialValue?: string;
 };
 
-export default function PromptInput({ onGenerate, isLoading, initialValue }: PromptInputProps) {
+export default function PromptInput({ onGenerate, isGenerating, initialValue }: PromptInputProps) {
   const { t, language } = useLanguage();
   const { user } = useAuth();
   const { subscription, isGuest } = useSubscription();
@@ -37,19 +37,23 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
       return;
     }
 
-    if (input.trim() && !isLoading) {
-      const outputLanguage = localStorage.getItem('output-language') as SupportedLanguage || 'auto';
+    if (input.trim() && !isGenerating) {
+      try {
+        const outputLanguage = localStorage.getItem('output-language') as SupportedLanguage || 'auto';
 
-      const detected = await detectLanguageClient(input);
+        const detected = await detectLanguageClient(input);
 
-      let language: SupportedLanguage;
-      if (outputLanguage === 'auto') {
-        language = detected;
-      } else {
-        language = outputLanguage;
+        let language: SupportedLanguage;
+        if (outputLanguage === 'auto') {
+          language = detected;
+        } else {
+          language = outputLanguage;
+        }
+
+        onGenerate(input, mode, language, detected);
+      } catch (error) {
+        console.error('Error in handleSubmit:', error);
       }
-
-      onGenerate(input, mode, language, detected);
     }
   };
 
@@ -70,7 +74,7 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
           onKeyDown={handleKeyDown}
           placeholder={t.inputPlaceholder}
           rows={3}
-          disabled={isLoading}
+          disabled={isGenerating}
           variant="cinematic"
         />
       </CardBody>
@@ -81,8 +85,8 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
             variant="take"
             icon={Sparkles}
             onClick={() => handleSubmit('quick')}
-            disabled={!input.trim() || isLoading}
-            loading={isLoading && !isLoading}
+            disabled={!input.trim() || isGenerating}
+            loading={isGenerating}
             fullWidth
             size="xl"
             className="h-14"
@@ -96,7 +100,8 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
             variant="director"
             icon={user ? Clapperboard : Lock}
             onClick={() => handleSubmit('director')}
-            disabled={!input.trim() || isLoading}
+            disabled={!input.trim() || isGenerating}
+            loading={isGenerating}
             fullWidth
             size="xl"
             className="h-14"
@@ -106,7 +111,7 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
         </div>
       </CardFooter>
 
-      {isLoading && (
+      {isGenerating && (
         <div className="px-6 pb-6">
           <div className="flex items-center gap-3 text-sm text-text-secondary animate-fade-in">
             <div className="animate-spin rounded-full h-4 w-4 border-2 border-neon border-t-transparent" />

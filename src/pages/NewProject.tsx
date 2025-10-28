@@ -1,18 +1,21 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import PromptInput from '../components/PromptInput';
 import PromptResult from '../components/PromptResult';
 import Footer from '../components/Footer';
 import { UsageCounter } from '../components/UsageCounter';
 import { UpgradeModal } from '../components/UpgradeModal';
 import { RegisterPromptModal } from '../components/RegisterPromptModal';
+import { Toast } from '../components/Toast';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Badge } from '../components/ui/Badge';
 import { useAuth } from '../contexts/AuthContext';
 import { useSubscription } from '../contexts/SubscriptionContext';
 import { shouldPromptRegistration } from '../lib/guestUsage';
+import { useToast } from '../hooks/useToast';
 import type { Prompt } from '../lib/supabase';
 import type { SupportedLanguage } from '../lib/openai';
-import { generatePrompt, improvePrompt, explainPrompt } from '../lib/openai';
+import { generateSoraPrompt } from '../lib/promptGenerator';
+import { improvePrompt as improvePromptAPI, explainPrompt as explainPromptAPI } from '../lib/openai';
 import { PromptStorage } from '../lib/promptStorage';
 
 export default function NewProject() {
@@ -24,9 +27,11 @@ export default function NewProject() {
   const [upgradeReason, setUpgradeReason] = useState<'credits_out' | 'frequent_use' | 'director_locked'>('credits_out');
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [registerReason, setRegisterReason] = useState<'no_credits' | 'frequent_user' | 'director_locked' | 'history_locked'>('no_credits');
+  const resultRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
   const { user } = useAuth();
   const { subscription, isGuest, hasCredits, canUseDirectorMode, deductCredits } = useSubscription();
+  const { toasts, error: showError, remove: removeToast } = useToast();
 
   const handleGenerate = async (
     input: string,
@@ -61,10 +66,19 @@ export default function NewProject() {
     setExplanation(undefined);
 
     try {
-      const result = await generatePrompt(input, mode, language, detectedInputLanguage);
+      const result = await generateSoraPrompt(
+        input,
+        mode,
+        language,
+        detectedInputLanguage,
+        user?.id
+      );
       setCurrentPrompt(result);
-      await PromptStorage.savePrompt(result);
       await deductCredits(result.id, mode);
+
+      setTimeout(() => {
+        resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
 
       if (shouldPromptRegistration()) {
         setRegisterReason('frequent_user');
@@ -72,6 +86,7 @@ export default function NewProject() {
       }
     } catch (error) {
       console.error('Error generating prompt:', error);
+      showError(t['error.generate'] || 'Failed to generate prompt. Please try again.');
     } finally {
       setIsGenerating(false);
     }
@@ -93,12 +108,25 @@ export default function NewProject() {
 
     setIsImproving(true);
     try {
-      const result = await improvePrompt(currentPrompt, improvementInput);
-      setCurrentPrompt(result);
-      await PromptStorage.savePrompt(result);
-      await deductCredits(result.id, result.mode);
+      const result = await improvePromptAPI(
+        currentPrompt.generated_prompt,
+        improvementInput,
+        currentPrompt.output_language || 'en'
+      );
+
+      const updatedPrompt: Prompt = {
+        ...currentPrompt,
+        generated_prompt: result.prompt,
+        quality_score: result.qualityScore,
+        updated_at: new Date().toISOString(),
+      };
+
+      setCurrentPrompt(updatedPrompt);
+      await PromptStorage.savePrompt(updatedPrompt);
+      await deductCredits(updatedPrompt.id, updatedPrompt.mode);
     } catch (error) {
       console.error('Error improving prompt:', error);
+      showError(t['error.improve'] || 'Failed to improve prompt. Please try again.');
     } finally {
       setIsImproving(false);
     }
@@ -108,10 +136,15 @@ export default function NewProject() {
     if (!currentPrompt) return;
 
     try {
-      const result = await explainPrompt(currentPrompt);
+      const result = await explainPromptAPI(
+        currentPrompt.generated_prompt,
+        currentPrompt.intent_data,
+        currentPrompt.output_language || 'en'
+      );
       setExplanation(result);
     } catch (error) {
       console.error('Error explaining prompt:', error);
+      showError(t['error.explain'] || 'Failed to explain prompt. Please try again.');
     }
   };
 
@@ -142,13 +175,15 @@ export default function NewProject() {
           {user && <UsageCounter />}
 
           {currentPrompt && (
-            <PromptResult
-              prompt={currentPrompt}
-              onImprove={handleImprove}
-              isImproving={isImproving}
-              onExplain={handleExplain}
-              explanation={explanation}
-            />
+            <div ref={resultRef}>
+              <PromptResult
+                prompt={currentPrompt}
+                onImprove={handleImprove}
+                isImproving={isImproving}
+                onExplain={handleExplain}
+                explanation={explanation}
+              />
+            </div>
           )}
         </div>
       </div>
@@ -170,6 +205,15 @@ export default function NewProject() {
           onClose={() => setShowRegisterModal(false)}
         />
       )}
+
+      {toasts.map(toast => (
+        <Toast
+          key={toast.id}
+          message={toast.message}
+          type={toast.type}
+          onClose={() => removeToast(toast.id)}
+        />
+      ))}
     </div>
   );
 }
