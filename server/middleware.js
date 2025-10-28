@@ -5,14 +5,34 @@
  * - Blocks bots, crawlers, and scanners
  * - Prevents access to sensitive paths
  * - Restricts API access to same-origin requests
+ * - Rate limiting to prevent abuse
  * - Maintains clean analytics data
  */
+
+const rateLimitMap = new Map();
+
+function cleanupRateLimitMap() {
+  const now = Date.now();
+  const windowMs = 60 * 1000;
+
+  for (const [key, value] of rateLimitMap.entries()) {
+    if (now - value.start > windowMs * 2) {
+      rateLimitMap.delete(key);
+    }
+  }
+}
+
+setInterval(cleanupRateLimitMap, 120 * 1000);
 
 export async function onRequest({ request, next }) {
   const url = new URL(request.url);
   const ua = request.headers.get('user-agent') || '';
   const referer = request.headers.get('referer') || '';
   const origin = request.headers.get('origin') || '';
+  const ip = request.headers.get('cf-connecting-ip') ||
+             request.headers.get('x-forwarded-for') ||
+             request.headers.get('x-real-ip') ||
+             'unknown';
 
   // 1️⃣ Block sensitive paths
   const blockedPaths = [
@@ -129,12 +149,32 @@ export async function onRequest({ request, next }) {
     });
   }
 
-  // 5️⃣ Rate limiting detection (basic)
-  const clientIp = request.headers.get('cf-connecting-ip') ||
-                   request.headers.get('x-forwarded-for') ||
-                   'unknown';
+  // 5️⃣ Rate Limiting: 每IP每分钟最多30次请求
+  const now = Date.now();
+  const windowMs = 60 * 1000;
+  const maxRequests = 30;
+  const record = rateLimitMap.get(ip) || { count: 0, start: now };
 
-  // Block requests with no user agent (common in automated attacks)
+  if (now - record.start < windowMs) {
+    record.count++;
+    if (record.count > maxRequests) {
+      return new Response('Too Many Requests', {
+        status: 429,
+        headers: {
+          'Content-Type': 'text/plain',
+          'Retry-After': '60',
+          'X-RateLimit-Limit': maxRequests.toString(),
+          'X-RateLimit-Remaining': '0'
+        }
+      });
+    }
+  } else {
+    record.count = 1;
+    record.start = now;
+  }
+  rateLimitMap.set(ip, record);
+
+  // 6️⃣ Block requests with no user agent (common in automated attacks)
   if (!ua || ua.length < 10) {
     return new Response('Bad Request', {
       status: 400,
@@ -142,6 +182,6 @@ export async function onRequest({ request, next }) {
     });
   }
 
-  // 6️⃣ Allow legitimate traffic
+  // 7️⃣ Allow legitimate traffic
   return next();
 }
