@@ -5,7 +5,6 @@ import Footer from '../components/Footer';
 import { UsageCounter } from '../components/UsageCounter';
 import { UpgradeModal } from '../components/UpgradeModal';
 import { RegisterPromptModal } from '../components/RegisterPromptModal';
-import { GuestUsageCard } from '../components/GuestUsageCard';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Badge } from '../components/ui/Badge';
 import { useAuth } from '../contexts/AuthContext';
@@ -140,7 +139,6 @@ export default function NewProject() {
             isGenerating={isGenerating}
           />
 
-          {isGuest && <GuestUsageCard />}
           {user && <UsageCounter />}
 
           {currentPrompt && (
