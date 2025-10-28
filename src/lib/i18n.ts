@@ -332,6 +332,16 @@ export const translations = {
       be: '白俄罗斯语',
       yi: '意第绪语',
     },
+
+    'footer.company': 'SoraPrompt Studio',
+    'footer.tagline': '专业的 AI 视频提示词生成工具，为 Sora 和其他 AI 视频工具打造电影级提示词',
+    'footer.legal': '法律条款',
+    'footer.product': '产品',
+    'footer.community': '社区',
+    'footer.terms': '服务条款',
+    'footer.privacy': '隐私政策',
+    'footer.docs': '产品文档',
+    'footer.copyright': 'SoraPrompt Studio. 保留所有权利。',
   },
   en: {
     title: 'Sora Prompt Studio',
@@ -664,6 +674,16 @@ export const translations = {
       be: 'Belarusian',
       yi: 'Yiddish',
     },
+
+    'footer.company': 'SoraPrompt Studio',
+    'footer.tagline': 'Professional AI-powered video prompt generator for Sora and other AI video tools.',
+    'footer.legal': 'Legal',
+    'footer.product': 'Product',
+    'footer.community': 'Community',
+    'footer.terms': 'Terms of Service',
+    'footer.privacy': 'Privacy Policy',
+    'footer.docs': 'Documentation',
+    'footer.copyright': 'SoraPrompt Studio. All rights reserved.',
   },
   ja: {
     title: 'Sora Prompt Studio',

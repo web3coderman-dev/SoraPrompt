@@ -4,6 +4,7 @@ import PromptInput from '../components/PromptInput';
 import PromptResult from '../components/PromptResult';
 import History from '../components/History';
 import Settings from '../components/Settings';
+import Footer from '../components/Footer';
 import { SubscriptionPlans } from '../components/SubscriptionPlans';
 import { UsageCounter } from '../components/UsageCounter';
 import { UpgradeModal } from '../components/UpgradeModal';
@@ -334,9 +335,12 @@ export default function Dashboard() {
         currentView={currentView}
         onViewChange={setCurrentView}
       />
-      <main className="flex-1 overflow-x-hidden">
-        {renderContent()}
-      </main>
+      <div className="flex-1 flex flex-col overflow-x-hidden">
+        <main className="flex-1">
+          {renderContent()}
+        </main>
+        <Footer />
+      </div>
 
       <UpgradeModal
         isOpen={showUpgradeModal}
