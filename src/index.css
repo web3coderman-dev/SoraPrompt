@@ -221,6 +221,19 @@
   .light [class*="border-keyLight"] {
     border-color: var(--color-border-default) !important;
   }
+
+  /* Badge styles for Light mode */
+  .light [class*="bg-keyLight/"] {
+    background-color: rgba(58, 108, 255, 0.1);
+  }
+
+  .light [class*="bg-rimLight/"] {
+    background-color: rgba(228, 162, 77, 0.1);
+  }
+
+  .light [class*="bg-neon/"] {
+    background-color: rgba(138, 96, 255, 0.1);
+  }
 }
 
 @keyframes fadeIn {
