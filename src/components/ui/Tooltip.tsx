@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTheme } from '../../contexts/ThemeContext';
+import { tooltip as tooltipTokens } from '../../lib/design-tokens';
 
 interface TooltipProps {
   content: string;
@@ -15,10 +17,13 @@ export const Tooltip: React.FC<TooltipProps> = ({
   disabled = false,
   delay = 200,
 }) => {
+  const { theme } = useTheme();
   const [isVisible, setIsVisible] = useState(false);
   const [coords, setCoords] = useState({ top: 0, left: 0 });
   const timeoutRef = useRef<NodeJS.Timeout>();
   const targetRef = useRef<HTMLDivElement>(null);
+
+  const tooltipStyle = theme === 'dark' ? tooltipTokens.dark : tooltipTokens.light;
 
   const showTooltip = () => {
     if (disabled) return;
@@ -90,10 +95,14 @@ export const Tooltip: React.FC<TooltipProps> = ({
 
       {isVisible && (
         <div
-          className="fixed z-toast px-3 py-2 text-sm font-medium text-white bg-scene-fill border border-keyLight/20 rounded-lg shadow-depth-lg animate-fade-in pointer-events-none whitespace-nowrap"
+          className="fixed z-toast px-3 py-2 text-sm font-medium rounded-lg animate-fade-in pointer-events-none whitespace-nowrap"
           style={{
             top: `${coords.top}px`,
             left: `${coords.left}px`,
+            backgroundColor: tooltipStyle.background,
+            color: tooltipStyle.text,
+            border: `1px solid ${tooltipStyle.border}`,
+            boxShadow: tooltipStyle.shadow,
           }}
         >
           {content}

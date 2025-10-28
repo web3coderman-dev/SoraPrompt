@@ -176,6 +176,22 @@ export const zIndex = {
   toast: 60,
 };
 
+// Tooltip - High contrast tokens for readability
+export const tooltip = {
+  dark: {
+    background: '#1F2937',
+    text: '#F9FAFB',
+    border: 'rgba(58, 108, 255, 0.3)',
+    shadow: '0 4px 12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(58, 108, 255, 0.2)',
+  },
+  light: {
+    background: '#FFFFFF',
+    text: '#111827',
+    border: 'rgba(0, 0, 0, 0.15)',
+    shadow: '0 4px 12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1)',
+  },
+};
+
 // Idea Card - Enhanced tokens for cinematic experience
 export const ideaCard = {
   dark: {
