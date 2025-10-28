@@ -11,7 +11,7 @@ export interface GuestUsage {
 
 const STORAGE_KEY = 'soraprompt_guest_usage';
 const SESSION_KEY = 'soraprompt_session_id';
-const DAILY_GUEST_CREDITS = 2;
+const DAILY_GUEST_CREDITS = 3;
 
 function generateSessionId(): string {
   return `guest_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;

@@ -96,8 +96,8 @@ export function SubscriptionProvider({ children }: { children: ReactNode }) {
           .insert({
             user_id: user.id,
             tier: 'free',
-            remaining_credits: 3,
-            total_credits: 3,
+            remaining_credits: 5,
+            total_credits: 5,
             reset_cycle: 'daily',
             renewal_date: new Date(Date.now() + 86400000).toISOString(),
           })
@@ -138,7 +138,7 @@ export function SubscriptionProvider({ children }: { children: ReactNode }) {
     if (isGuest) return false;
 
     const tier = subscription.tier as SubscriptionTier;
-    return tier === 'creator' || tier === 'director';
+    return tier === 'free' || tier === 'creator' || tier === 'director';
   };
 
   const upgradeSubscription = async (newTier: SubscriptionTier): Promise<boolean> => {

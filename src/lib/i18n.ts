@@ -244,7 +244,7 @@ export const translations = {
     tierDirectorPrice: '$49/月',
 
     tierGuestCredits: '每日 2 次试用',
-    tierFreeCredits: '每日 3 次',
+    tierFreeCredits: '每日 5 次',
     tierCreatorCredits: '每月 1000 次',
     tierDirectorCredits: '每月 3000 次',
 
@@ -774,7 +774,7 @@ export const translations = {
     tierDirectorPrice: '$49/mo',
 
     tierGuestCredits: '2 trial per day',
-    tierFreeCredits: '3 per day',
+    tierFreeCredits: '5 per day',
     tierCreatorCredits: '1000 per month',
     tierDirectorCredits: '3000 per month',
 
@@ -1270,7 +1270,7 @@ export const translations = {
     tierCreatorPrice: '$19/月',
     tierDirectorPrice: '$49/月',
 
-    tierFreeCredits: '1日3回',
+    tierFreeCredits: '1日5回',
     tierCreatorCredits: '月1000回',
     tierDirectorCredits: '月3000回',
 
@@ -1753,7 +1753,7 @@ export const translations = {
     tierCreatorPrice: '$19/mes',
     tierDirectorPrice: '$49/mes',
 
-    tierFreeCredits: '3 por día',
+    tierFreeCredits: '5 por día',
     tierCreatorCredits: '1000 por mes',
     tierDirectorCredits: '3000 por mes',
 
@@ -2223,7 +2223,7 @@ export const translations = {
     tierCreatorPrice: '$19/mois',
     tierDirectorPrice: '$49/mois',
 
-    tierFreeCredits: '3 par jour',
+    tierFreeCredits: '5 par jour',
     tierCreatorCredits: '1000 par mois',
     tierDirectorCredits: '3000 par mois',
 
@@ -2693,7 +2693,7 @@ export const translations = {
     tierCreatorPrice: '$19/Monat',
     tierDirectorPrice: '$49/Monat',
 
-    tierFreeCredits: '3 pro Tag',
+    tierFreeCredits: '5 pro Tag',
     tierCreatorCredits: '1000 pro Monat',
     tierDirectorCredits: '3000 pro Monat',
 
@@ -3163,7 +3163,7 @@ export const translations = {
     tierCreatorPrice: '$19/월',
     tierDirectorPrice: '$49/월',
 
-    tierFreeCredits: '하루 3회',
+    tierFreeCredits: '하루 5회',
     tierCreatorCredits: '월 1000회',
     tierDirectorCredits: '월 3000회',
 

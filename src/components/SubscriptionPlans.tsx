@@ -26,6 +26,7 @@ export function SubscriptionPlans() {
       icon: <Sparkles className="w-8 h-8" />,
       features: [
         t.featureQuickMode,
+        t.featureDirectorMode,
         t.tierFreeCredits,
         t.featureUnlimitedHistory,
         t.featureSameAI,
