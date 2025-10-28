@@ -10,6 +10,26 @@ import { Divider } from './ui/Divider';
 import { GoogleIcon } from './ui/GoogleIcon';
 import { Checkbox } from './ui/Checkbox';
 
+function ExternalLink({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) {
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.open(href, '_blank', 'noopener,noreferrer');
+  };
+
+  return (
+    <a
+      href={href}
+      onClick={handleClick}
+      className={className}
+      role="link"
+      tabIndex={0}
+    >
+      {children}
+    </a>
+  );
+}
+
 interface LoginModalProps {
   onClose: () => void;
   context?: {
@@ -158,25 +178,19 @@ export default function LoginModal({ onClose, context }: LoginModalProps) {
               label={
                 <span>
                   {t['auth.agreeToTermsLabel'] || 'I agree to the'}{' '}
-                  <a
+                  <ExternalLink
                     href="/terms"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="text-keyLight hover:text-keyLight/80 transition-colors duration-300 underline underline-offset-2"
-                    onClick={(e) => e.stopPropagation()}
                   >
                     {t['auth.terms.termsOfService'] || 'Terms of Service'}
-                  </a>
+                  </ExternalLink>
                   {' '}{t['auth.terms.and'] || 'and'}{' '}
-                  <a
+                  <ExternalLink
                     href="/privacy"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="text-keyLight hover:text-keyLight/80 transition-colors duration-300 underline underline-offset-2"
-                    onClick={(e) => e.stopPropagation()}
                   >
                     {t['auth.terms.privacyPolicy'] || 'Privacy Policy'}
-                  </a>
+                  </ExternalLink>
                   .
                 </span>
               }
@@ -214,23 +228,19 @@ export default function LoginModal({ onClose, context }: LoginModalProps) {
           <div className="text-center text-sm text-text-tertiary px-4">
             <p>
               {t['auth.signInTermsNotice'] || 'By continuing, you agree to our'}{' '}
-              <a
+              <ExternalLink
                 href="/terms"
-                target="_blank"
-                rel="noopener noreferrer"
                 className="text-keyLight hover:text-keyLight/80 transition-colors duration-300 underline underline-offset-2"
               >
                 {t['auth.terms.termsOfService'] || 'Terms of Service'}
-              </a>
+              </ExternalLink>
               {' '}{t['auth.terms.and'] || 'and'}{' '}
-              <a
+              <ExternalLink
                 href="/privacy"
-                target="_blank"
-                rel="noopener noreferrer"
                 className="text-keyLight hover:text-keyLight/80 transition-colors duration-300 underline underline-offset-2"
               >
                 {t['auth.terms.privacyPolicy'] || 'Privacy Policy'}
-              </a>
+              </ExternalLink>
               .
             </p>
           </div>
