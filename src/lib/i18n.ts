@@ -248,13 +248,11 @@ export const translations = {
     tierCreatorCredits: '每月 1000 次',
     tierDirectorCredits: '每月 3000 次',
 
-    guestMode: {
-      title: '🎭 游客模式',
-      trial: '试用',
-      remaining: '试用次数',
-      cta: '注册即可获得每日 3 次免费生成！',
-      registerButton: '免费注册',
-    },
+    'guestMode.title': '游客模式',
+    'guestMode.trial': '试用',
+    'guestMode.remaining': '试用次数',
+    'guestMode.cta': '注册即可获得每日 3 次免费生成！',
+    'guestMode.registerButton': '免费注册',
 
     registerModal: {
       noCredits: {
@@ -780,13 +778,11 @@ export const translations = {
     tierCreatorCredits: '1000 per month',
     tierDirectorCredits: '3000 per month',
 
-    guestMode: {
-      title: '🎭 Guest Mode',
-      trial: 'TRIAL',
-      remaining: 'Trial credits',
-      cta: 'Register for 3 free daily generations!',
-      registerButton: 'Free Register',
-    },
+    'guestMode.title': 'Guest Mode',
+    'guestMode.trial': 'TRIAL',
+    'guestMode.remaining': 'Trial credits',
+    'guestMode.cta': 'Register for 3 free daily generations!',
+    'guestMode.registerButton': 'Free Register',
 
     registerModal: {
       noCredits: {
@@ -1354,13 +1350,11 @@ export const translations = {
     usageRemaining: '残り{{count}}回',
     usageUnlimited: '無制限',
 
-    guestMode: {
-      title: '🎭 ゲストモード',
-      trial: '試用版',
-      remaining: '試用クレジット',
-      cta: '登録すると毎日3回無料生成できます！',
-      registerButton: '無料登録',
-    },
+    'guestMode.title': 'ゲストモード',
+    'guestMode.trial': '試用版',
+    'guestMode.remaining': '試用クレジット',
+    'guestMode.cta': '登録すると毎日3回無料生成できます！',
+    'guestMode.registerButton': '無料登録',
 
     guestUsageTip: 'お知らせ',
     guestUsageTip1: '未ログインまたは無料ユーザーは1日3回Soraプロンプトを生成できます；',
@@ -1839,13 +1833,11 @@ export const translations = {
     usageRemaining: '{{count}} restantes',
     usageUnlimited: 'Ilimitado',
 
-    guestMode: {
-      title: '🎭 Modo Invitado',
-      trial: 'PRUEBA',
-      remaining: 'Créditos de prueba',
-      cta: '¡Regístrate para obtener 3 generaciones diarias gratuitas!',
-      registerButton: 'Registro Gratuito',
-    },
+    'guestMode.title': 'Modo Invitado',
+    'guestMode.trial': 'PRUEBA',
+    'guestMode.remaining': 'Créditos de prueba',
+    'guestMode.cta': '¡Regístrate para obtener 3 generaciones diarias gratuitas!',
+    'guestMode.registerButton': 'Registro Gratuito',
 
     guestUsageTip: 'Recordatorio',
     guestUsageTip1: 'Los usuarios invitados o gratuitos pueden generar 3 Sora Prompts diarios;',
@@ -2311,13 +2303,11 @@ export const translations = {
     usageRemaining: '{{count}} restants',
     usageUnlimited: 'Illimité',
 
-    guestMode: {
-      title: '🎭 Mode Invité',
-      trial: 'ESSAI',
-      remaining: 'Crédits d\'essai',
-      cta: 'Inscrivez-vous pour 3 générations quotidiennes gratuites!',
-      registerButton: 'Inscription Gratuite',
-    },
+    'guestMode.title': 'Mode Invité',
+    'guestMode.trial': 'ESSAI',
+    'guestMode.remaining': 'Crédits d\'essai',
+    'guestMode.cta': 'Inscrivez-vous pour 3 générations quotidiennes gratuites!',
+    'guestMode.registerButton': 'Inscription Gratuite',
 
     guestUsageTip: 'Rappel',
     guestUsageTip1: 'Les utilisateurs invités ou gratuits peuvent générer 3 Sora Prompts par jour;',
@@ -2783,13 +2773,11 @@ export const translations = {
     usageRemaining: '{{count}} verbleibend',
     usageUnlimited: 'Unbegrenzt',
 
-    guestMode: {
-      title: '🎭 Gastmodus',
-      trial: 'TESTVERSION',
-      remaining: 'Test-Credits',
-      cta: 'Registrieren Sie sich für 3 kostenlose tägliche Generierungen!',
-      registerButton: 'Kostenlose Registrierung',
-    },
+    'guestMode.title': 'Gastmodus',
+    'guestMode.trial': 'TESTVERSION',
+    'guestMode.remaining': 'Test-Credits',
+    'guestMode.cta': 'Registrieren Sie sich für 3 kostenlose tägliche Generierungen!',
+    'guestMode.registerButton': 'Kostenlose Registrierung',
 
     guestUsageTip: 'Hinweis',
     guestUsageTip1: 'Gast- oder kostenlose Benutzer können täglich 3 Sora Prompts generieren;',
@@ -3256,13 +3244,11 @@ export const translations = {
     usageRemaining: '{{count}}회 남음',
     usageUnlimited: '무제한',
 
-    guestMode: {
-      title: '🎭 게스트 모드',
-      trial: '체험판',
-      remaining: '체험 크레딧',
-      cta: '등록하면 매일 3회 무료 생성!',
-      registerButton: '무료 등록',
-    },
+    'guestMode.title': '게스트 모드',
+    'guestMode.trial': '체험판',
+    'guestMode.remaining': '체험 크레딧',
+    'guestMode.cta': '등록하면 매일 3회 무료 생성!',
+    'guestMode.registerButton': '무료 등록',
 
     guestUsageTip: '안내',
     guestUsageTip1: '비로그인 또는 무료 사용자는 하루에 3개Sora Prompt를 생성할 수 있습니다;',
