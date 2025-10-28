@@ -46,7 +46,7 @@ export default function UserProfile() {
           <button
             onClick={handleSignOut}
             disabled={signingOut}
-            className="p-2 rounded-lg bg-scene-fill text-text-secondary hover:text-text-primary hover:bg-scene-fillLight border border-subtle hover:border-default transition-all duration-200"
+            className="p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-scene-fillLight border border-keyLight/5 hover:border-keyLight/10 transition-all duration-200"
           >
             <LogOut className="w-5 h-5" />
           </button>
@@ -56,7 +56,7 @@ export default function UserProfile() {
   }
 
   return (
-    <div className="p-4 border-b border-default">
+    <div className="p-4 border-b border-keyLight/20">
       <div className="flex items-center gap-3 mb-3 overflow-hidden">
         {profile?.avatar_url ? (
           <img

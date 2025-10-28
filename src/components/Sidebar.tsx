@@ -76,7 +76,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-screen bg-scene-background border-r border-default shadow-depth-md z-modal ${
+        className={`fixed top-0 left-0 h-screen bg-scene-fill border-r border-keyLight/20 z-modal ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0 lg:sticky flex flex-col ${
           sidebarCollapsed ? 'w-20' : 'w-64'
@@ -113,7 +113,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
         </nav>
 
         {/* User Profile & Footer */}
-        <div className="border-t border-default">
+        <div className="border-t border-keyLight/20">
           {user ? (
             <UserProfile />
           ) : (

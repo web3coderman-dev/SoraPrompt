@@ -23,7 +23,7 @@ export default function NavLinkItem({ to, icon: Icon, label, onClick, collapsed 
         ${
           isActive
             ? 'bg-keyLight/10 text-keyLight font-semibold shadow-light border-keyLight/20'
-            : 'bg-scene-fill text-text-secondary hover:bg-scene-fillLight hover:text-text-primary border-subtle hover:border-default'
+            : 'text-text-secondary hover:bg-scene-fillLight hover:text-text-primary border-keyLight/5 hover:border-keyLight/10'
         }
       `}
       style={{

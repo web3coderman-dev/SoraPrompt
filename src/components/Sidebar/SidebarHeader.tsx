@@ -13,7 +13,7 @@ export default function SidebarHeader({ isHovered = false }: SidebarHeaderProps)
 
   if (sidebarCollapsed) {
     return (
-      <div className="p-6 border-b border-default transition-all duration-300 px-4 relative">
+      <div className="p-6 border-b border-keyLight/20 transition-all duration-300 px-4 relative">
         {/* Mobile: Entire area clickable */}
         <button
           onClick={toggleSidebar}
@@ -51,7 +51,7 @@ export default function SidebarHeader({ isHovered = false }: SidebarHeaderProps)
   }
 
   return (
-    <div className="p-6 border-b border-default transition-all duration-300">
+    <div className="p-6 border-b border-keyLight/20 transition-all duration-300">
       <div className="flex items-center gap-3 min-w-0">
         <Logo size={32} className="flex-shrink-0" />
         <h2 className="text-xl font-bold font-display text-text-primary whitespace-nowrap flex-1">
