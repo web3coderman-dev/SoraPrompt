@@ -298,38 +298,38 @@ export default function Settings() {
           </div>
         )}
 
-        <div className="bg-scene-fill rounded-xl shadow-depth-md border border-keyLight/20 p-6">
-          <div className="flex items-center gap-2 mb-4">
-            <Shield className="w-6 h-6 text-keyLight" />
-            <h3 className="text-xl font-semibold font-display text-text-primary">
-              {language === 'zh' ? '账号与安全' : 'Account & Security'}
-            </h3>
-          </div>
+        {user && (
+          <div className="bg-scene-fill rounded-xl shadow-depth-md border border-keyLight/20 p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <Shield className="w-6 h-6 text-keyLight" />
+              <h3 className="text-xl font-semibold font-display text-text-primary">
+                {language === 'zh' ? '账号与安全' : 'Account & Security'}
+              </h3>
+            </div>
 
-          {user ? (
-            profile?.google_id ? (
-            <div className="space-y-4">
-              <div className="flex items-start gap-3 p-4 bg-state-ok/10 border border-state-ok/30 rounded-lg">
-                <Check className="w-5 h-5 text-state-ok flex-shrink-0 mt-0.5" />
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-text-primary">
-                    {language === 'zh' ? 'Google 账号已关联' : 'Google Account Connected'}
-                  </p>
-                  <p className="text-xs text-text-secondary mt-1">
-                    {user.email}
-                  </p>
+            {profile?.google_id ? (
+              <div className="space-y-4">
+                <div className="flex items-start gap-3 p-4 bg-state-ok/10 border border-state-ok/30 rounded-lg">
+                  <Check className="w-5 h-5 text-state-ok flex-shrink-0 mt-0.5" />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-text-primary">
+                      {language === 'zh' ? 'Google 账号已关联' : 'Google Account Connected'}
+                    </p>
+                    <p className="text-xs text-text-secondary mt-1">
+                      {user.email}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-text-secondary">
+                  <GoogleIcon className="w-5 h-5" />
+                  <span>
+                    {language === 'zh'
+                      ? '使用 Google 账号登录可享受安全便捷的体验'
+                      : 'Enjoy secure and convenient access with Google'
+                    }
+                  </span>
                 </div>
               </div>
-              <div className="flex items-center gap-2 text-sm text-text-secondary">
-                <GoogleIcon className="w-5 h-5" />
-                <span>
-                  {language === 'zh'
-                    ? '使用 Google 账号登录可享受安全便捷的体验'
-                    : 'Enjoy secure and convenient access with Google'
-                  }
-                </span>
-              </div>
-            </div>
             ) : (
               <div className="space-y-4">
                 <div className="p-4 bg-keyLight/10 border border-keyLight/30 rounded-lg">
@@ -363,19 +363,9 @@ export default function Settings() {
                   </span>
                 </Button>
               </div>
-            )
-          ) : (
-            <div className="text-center py-6">
-              <LogIn className="w-12 h-12 text-text-secondary mx-auto mb-3" />
-              <p className="text-text-secondary mb-4">
-                {language === 'zh'
-                  ? '登录后查看账号信息'
-                  : 'Sign in to view account information'
-                }
-              </p>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
       </div>
 
       {showLoginPrompt && (
