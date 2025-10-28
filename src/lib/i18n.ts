@@ -151,11 +151,14 @@ export const translations = {
     sidebarNew: '新建项目',
     sidebarHistory: '历史记录',
     sidebarSettings: '设置',
+    sidebarSubscription: '订阅管理',
     sceneNew: '新场景',
     sceneTakes: '拍摄记录',
     sceneStudio: '片场设置',
     sidebarVersion: 'v0.1 MVP',
     sidebarPowered: '由 GPT-5 驱动',
+    collapseSidebar: '收起侧边栏',
+    expandSidebar: '展开侧边栏',
 
     languageSelectorAuto: '自动检测',
     languageSelectorSearch: '搜索语言...',
@@ -220,7 +223,6 @@ export const translations = {
     'ui.modal.close': '关闭',
     'ui.themeToggle': '切换主题',
 
-    sidebarSubscription: '订阅',
     subscriptionTitle: '选择您的计划',
     subscriptionCurrent: '当前装备',
     subscriptionUpgrade: '切换装备',
@@ -681,9 +683,12 @@ export const translations = {
     sidebarNew: 'New Project',
     sidebarHistory: 'History',
     sidebarSettings: 'Settings',
+    sidebarSubscription: 'Subscription',
     sceneNew: 'New Scene',
     sceneTakes: 'Takes',
     sceneStudio: 'Studio',
+    collapseSidebar: 'Collapse',
+    expandSidebar: 'Expand',
     sidebarVersion: 'v0.1 MVP',
     sidebarPowered: 'Powered by GPT-5',
 
@@ -750,7 +755,6 @@ export const translations = {
     'ui.modal.close': 'Close',
     'ui.themeToggle': 'Toggle theme',
 
-    sidebarSubscription: 'Subscription',
     subscriptionTitle: 'Choose Your Plan',
     subscriptionCurrent: 'Current Gear',
     subscriptionUpgrade: 'Switch Gear',

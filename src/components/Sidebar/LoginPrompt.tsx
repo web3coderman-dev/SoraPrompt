@@ -1,6 +1,8 @@
 import { LogIn } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { useTheme } from '../../contexts/ThemeContext';
 import { Button } from '../ui/Button';
+import { Tooltip } from '../ui/Tooltip';
 
 interface LoginPromptProps {
   onLogin: () => void;
@@ -8,6 +10,22 @@ interface LoginPromptProps {
 
 export default function LoginPrompt({ onLogin }: LoginPromptProps) {
   const { t } = useLanguage();
+  const { sidebarCollapsed } = useTheme();
+
+  if (sidebarCollapsed) {
+    return (
+      <div className="p-4 flex justify-center">
+        <Tooltip content={t.freeRegister || t.signInSignUp} position="right">
+          <button
+            onClick={onLogin}
+            className="p-3 rounded-lg text-white bg-gradient-to-br from-[#3961FB] to-[#5A7FFF] hover:from-[#4A72FF] hover:to-[#6B8FFF] border border-transparent transition-all duration-200 shadow-depth-md hover:shadow-key"
+          >
+            <LogIn className="w-5 h-5" />
+          </button>
+        </Tooltip>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4">

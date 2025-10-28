@@ -6,6 +6,9 @@ interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
   setTheme: (theme: Theme) => void;
+  sidebarCollapsed: boolean;
+  toggleSidebar: () => void;
+  setSidebarCollapsed: (collapsed: boolean) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -15,6 +18,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const savedTheme = localStorage.getItem('theme') as Theme;
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     return savedTheme || (prefersDark ? 'dark' : 'light');
+  });
+
+  const [sidebarCollapsed, setSidebarCollapsedState] = useState<boolean>(() => {
+    const saved = localStorage.getItem('sidebarCollapsed');
+    return saved === 'true';
   });
 
   useEffect(() => {
@@ -35,6 +43,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, [theme]);
 
+  useEffect(() => {
+    localStorage.setItem('sidebarCollapsed', String(sidebarCollapsed));
+  }, [sidebarCollapsed]);
+
   const toggleTheme = () => {
     setThemeState(prev => prev === 'light' ? 'dark' : 'light');
   };
@@ -43,8 +55,16 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setThemeState(newTheme);
   };
 
+  const toggleSidebar = () => {
+    setSidebarCollapsedState(prev => !prev);
+  };
+
+  const setSidebarCollapsed = (collapsed: boolean) => {
+    setSidebarCollapsedState(collapsed);
+  };
+
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme, sidebarCollapsed, toggleSidebar, setSidebarCollapsed }}>
       {children}
     </ThemeContext.Provider>
   );
