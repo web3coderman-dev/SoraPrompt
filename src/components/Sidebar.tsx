@@ -1,8 +1,9 @@
-import { Film, Sparkles, History, Settings, Menu, X, LogOut, User, LogIn, CreditCard } from 'lucide-react';
+import { Sparkles, History, Settings, Menu, X, LogOut, User, LogIn, CreditCard } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useState } from 'react';
 import LoginModal from './LoginModal';
+import { Logo } from './ui/Logo';
 
 type ViewType = 'new' | 'history' | 'settings' | 'subscription';
 
@@ -82,8 +83,8 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
       >
         {/* Header */}
         <div className="p-6 border-b border-keyLight/20">
-          <div className="flex items-center gap-2">
-            <Film className="w-8 h-8 text-keyLight" />
+          <div className="flex items-center gap-3">
+            <Logo size={32} />
             <h2 className="text-xl font-bold font-display text-text-primary">SoraPrompt</h2>
           </div>
         </div>

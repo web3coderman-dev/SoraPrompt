@@ -1,6 +1,7 @@
-import { Film, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
+import { Logo } from '../components/ui/Logo';
 
 export default function Terms() {
   const navigate = useNavigate();
@@ -19,9 +20,7 @@ export default function Terms() {
           </Button>
 
           <div className="flex items-center gap-3 mb-4">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-keyLight to-neon rounded-xl shadow-neon">
-              <Film className="w-6 h-6 text-white" />
-            </div>
+            <Logo size={48} />
             <h1 className="text-4xl font-bold font-display">服务条款</h1>
           </div>
           <p className="text-text-secondary">最后更新：2025年1月</p>

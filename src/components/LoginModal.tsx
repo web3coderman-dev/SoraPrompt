@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Film, AlertCircle, Mail, Lock } from 'lucide-react';
+import { AlertCircle, Mail, Lock } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Modal } from './ui/Modal';
@@ -9,6 +9,7 @@ import { Alert } from './ui/Alert';
 import { Divider } from './ui/Divider';
 import { GoogleIcon } from './ui/GoogleIcon';
 import { Checkbox } from './ui/Checkbox';
+import { Logo } from './ui/Logo';
 
 function ExternalLink({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) {
   const handleClick = (e: React.MouseEvent) => {
@@ -111,8 +112,8 @@ export default function LoginModal({ onClose, context }: LoginModalProps) {
     >
       <div className="space-y-6">
         <div className="text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-keyLight to-neon rounded-2xl mb-4 shadow-neon">
-            <Film className="w-8 h-8 text-white" />
+          <div className="inline-flex items-center justify-center w-20 h-20 mb-4">
+            <Logo size={80} className="drop-shadow-glow" />
           </div>
           <h2 id="modal-title" className="text-3xl font-bold font-display text-text-primary mb-2">
             {context?.title || t.title}
