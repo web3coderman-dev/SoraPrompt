@@ -3,9 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  :root,
-  :root.dark,
-  html.dark {
+  :root {
     /* Default Dark Theme */
     --color-scene-bg: 11, 13, 18;
     --color-scene-fill: 20, 24, 33;
@@ -22,8 +20,7 @@
     --color-overlay-heavy: 0, 0, 0;
   }
 
-  :root.light,
-  html.light {
+  .light {
     /* Light Theme */
     --color-scene-bg: 255, 255, 255;
     --color-scene-fill: 248, 249, 250;
@@ -34,6 +31,23 @@
     --color-text-disabled: 160, 174, 192;
     --color-border-subtle: 0, 0, 0;
     --color-border-default: 0, 0, 0;
+    --color-border-strong: 58, 108, 255;
+    --color-overlay-light: 0, 0, 0;
+    --color-overlay-medium: 0, 0, 0;
+    --color-overlay-heavy: 0, 0, 0;
+  }
+
+  .dark {
+    /* Dark Theme - explicit override */
+    --color-scene-bg: 11, 13, 18;
+    --color-scene-fill: 20, 24, 33;
+    --color-scene-fillLight: 26, 31, 46;
+    --color-text-primary: 255, 255, 255;
+    --color-text-secondary: 160, 168, 184;
+    --color-text-tertiary: 107, 114, 128;
+    --color-text-disabled: 75, 85, 99;
+    --color-border-subtle: 58, 108, 255;
+    --color-border-default: 58, 108, 255;
     --color-border-strong: 58, 108, 255;
     --color-overlay-light: 0, 0, 0;
     --color-overlay-medium: 0, 0, 0;
@@ -167,8 +181,7 @@
     background: rgba(58, 108, 255, 0.5);
   }
 
-  :root.light .scrollbar-thin,
-  html.light .scrollbar-thin {
+  .light .scrollbar-thin {
     scrollbar-color: rgba(58, 108, 255, 0.4) rgb(var(--color-scene-fillLight));
   }
 }

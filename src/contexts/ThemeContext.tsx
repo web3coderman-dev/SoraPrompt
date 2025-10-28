@@ -25,6 +25,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     root.classList.add(theme);
     root.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
+
+    window.dispatchEvent(new CustomEvent('settings-changed', {
+      detail: { type: 'theme', value: theme }
+    }));
   }, [theme]);
 
   useEffect(() => {
