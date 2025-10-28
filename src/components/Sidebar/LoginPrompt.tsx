@@ -20,9 +20,6 @@ export default function LoginPrompt({ onLogin }: LoginPromptProps) {
       >
         {t.freeRegister || t.signInSignUp}
       </Button>
-      <p className="text-xs text-text-tertiary text-center mt-2 leading-relaxed">
-        {t.freeRegisterHint || 'Register for 3 free daily generations!'}
-      </p>
     </div>
   );
 }
