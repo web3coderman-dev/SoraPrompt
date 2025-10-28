@@ -356,7 +356,7 @@ export const translations = {
     'footer.terms': '服务条款',
     'footer.privacy': '隐私政策',
     'footer.docs': '产品文档',
-    'footer.copyright': 'SoraPrompt Studio. 保留所有权利。',
+    'footer.copyright': '© 2025 SoraPrompt Studio. 保留所有权利。',
 
     'terms.title': '服务条款',
     'terms.lastUpdated': '最后更新：2025年1月',
@@ -782,7 +782,7 @@ export const translations = {
     'footer.terms': 'Terms of Service',
     'footer.privacy': 'Privacy Policy',
     'footer.docs': 'Documentation',
-    'footer.copyright': 'SoraPrompt Studio. All rights reserved.',
+    'footer.copyright': '© 2025 SoraPrompt Studio. All rights reserved.',
 
     'terms.title': 'Terms of Service',
     'terms.lastUpdated': 'Last updated: January 2025',
