@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
+  :root,
+  :root.dark,
+  html.dark {
     /* Default Dark Theme */
     --color-scene-bg: 11, 13, 18;
     --color-scene-fill: 20, 24, 33;
@@ -20,7 +22,8 @@
     --color-overlay-heavy: 0, 0, 0;
   }
 
-  .light {
+  :root.light,
+  html.light {
     /* Light Theme */
     --color-scene-bg: 255, 255, 255;
     --color-scene-fill: 248, 249, 250;
@@ -164,7 +167,8 @@
     background: rgba(58, 108, 255, 0.5);
   }
 
-  .light .scrollbar-thin {
+  :root.light .scrollbar-thin,
+  html.light .scrollbar-thin {
     scrollbar-color: rgba(58, 108, 255, 0.4) rgb(var(--color-scene-fillLight));
   }
 }
