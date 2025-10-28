@@ -42,7 +42,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-border-subtle bg-scene-fill mt-auto">
+    <footer className="border-t border-border-subtle bg-scene-background mt-auto">
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Main Grid - 3 Columns */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
