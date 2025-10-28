@@ -1,0 +1,41 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="soraGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3961FB"/>
+      <stop offset="100%" stop-color="#A66BFF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 圆形背景 - 在深色/浅色模式下都清晰 -->
+  <circle cx="256" cy="256" r="240" fill="url(#soraGradient)"/>
+
+  <!-- 极简抽象标记：S+P 融合 (白色以确保可见性) -->
+  <g>
+    <!-- 主光束 -->
+    <path d="
+      M 180 400
+      Q 220 300, 280 220
+      L 320 180
+      "
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-width="45"
+      stroke-linecap="round"/>
+
+    <!-- S 曲线 -->
+    <path d="
+      M 240 260
+      Q 300 240, 340 280
+      M 180 340
+      Q 240 380, 320 360
+      "
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-width="38"
+      stroke-linecap="round"/>
+
+    <!-- 中心点 -->
+    <circle cx="256" cy="256" r="20" fill="#FFFFFF"/>
+    <circle cx="256" cy="256" r="8" fill="#3961FB"/>
+  </g>
+</svg>

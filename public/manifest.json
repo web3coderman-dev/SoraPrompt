@@ -1,0 +1,25 @@
+{
+  "name": "SoraPrompt Studio",
+  "short_name": "SoraPrompt",
+  "description": "Professional AI-powered video prompt generator for Sora",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1d2e",
+  "theme_color": "#3961FB",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/soraprompt-logo-simple.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "orientation": "portrait-primary"
+}
