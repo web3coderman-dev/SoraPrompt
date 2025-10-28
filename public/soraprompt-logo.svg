@@ -1,0 +1,44 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="soraGradient" x1="10%" y1="10%" x2="90%" y2="90%">
+      <stop offset="0%" stop-color="#5FC8FF"/>
+      <stop offset="35%" stop-color="#5B9FFF"/>
+      <stop offset="65%" stop-color="#8B7BFF"/>
+      <stop offset="100%" stop-color="#E85CFF"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.4 0" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Smooth flowing P shape -->
+  <path
+    d="M 120 620
+       L 120 180
+       C 120 160 125 150 140 145
+       L 240 140
+       C 310 140 370 158 415 194
+       C 460 230 485 280 485 340
+       C 485 400 460 450 415 486
+       C 370 522 310 540 240 540
+       C 225 540 210 539 195 537
+       L 195 620
+       Z
+       M 195 200
+       L 195 475
+       C 208 477 222 478 237 478
+       C 295 478 340 464 372 437
+       C 404 410 420 370 420 340
+       C 420 310 404 270 372 243
+       C 340 216 295 202 237 202
+       C 220 202 205 201 195 200
+       Z"
+    fill="url(#soraGradient)"
+    filter="url(#glow)"
+  />
+</svg>
