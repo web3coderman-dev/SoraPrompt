@@ -251,17 +251,17 @@ export const translations = {
     'guestMode.title': '游客模式',
     'guestMode.trial': '试用',
     'guestMode.remaining': '试用次数',
-    'guestMode.cta': '注册即可获得每日 3 次免费生成！',
+    'guestMode.cta': '注册即可获得每日 5 次免费生成！',
     'guestMode.registerButton': '免费注册',
 
     registerModal: {
       noCredits: {
         title: '🎬 试用次数已用完',
-        message: '今日试用次数已用完！注册即可获得每日 3 次免费生成。',
+        message: '今日试用次数已用完！注册即可获得每日 5 次免费生成。',
       },
       frequentUser: {
         title: '🔥 你的创作势头太棒了！',
-        message: '喜欢 SoraPrompt？注册即可解锁每日 3 次免费生成，并永久保存您的作品！',
+        message: '喜欢 SoraPrompt？注册即可解锁每日 5 次免费生成，并永久保存您的作品！',
       },
       directorLocked: {
         title: '🎥 导演模式为付费专享',
@@ -272,8 +272,8 @@ export const translations = {
         message: '注册后可永久保存您的提示词历史记录，并在任何设备上访问。',
       },
       benefit1: {
-        title: '每日 3 次生成',
-        desc: '比游客模式多 50%',
+        title: '每日 5 次生成',
+        desc: '比游客模式多 67%',
       },
       benefit2: {
         title: '云端同步',
@@ -695,7 +695,7 @@ export const translations = {
     signOut: 'Sign Out',
     signInSignUp: 'Sign In / Sign Up',
     freeRegister: 'Free Register',
-    freeRegisterHint: 'Register for 3 free daily generations!',
+    freeRegisterHint: 'Register for 5 free daily generations!',
     continueWithGoogle: 'Continue with Google',
     privacyPolicy: 'By continuing, you agree to our Terms of Service and Privacy Policy',
     'auth.terms.byContinuing': 'I agree to the',
@@ -781,7 +781,7 @@ export const translations = {
     'guestMode.title': 'Guest Mode',
     'guestMode.trial': 'TRIAL',
     'guestMode.remaining': 'Trial credits',
-    'guestMode.cta': 'Register for 3 free daily generations!',
+    'guestMode.cta': 'Register for 5 free daily generations!',
     'guestMode.registerButton': 'Free Register',
 
     registerModal: {
@@ -791,7 +791,7 @@ export const translations = {
       },
       frequentUser: {
         title: '🔥 You\'re on Fire!',
-        message: 'Loving SoraPrompt? Register to unlock 3 free daily generations and save your work forever!',
+        message: 'Loving SoraPrompt? Register to unlock 5 free daily generations and save your work forever!',
       },
       directorLocked: {
         title: '🎥 Director Mode is Premium',
@@ -1353,7 +1353,7 @@ export const translations = {
     'guestMode.title': 'ゲストモード',
     'guestMode.trial': '試用版',
     'guestMode.remaining': '試用クレジット',
-    'guestMode.cta': '登録すると毎日3回無料生成できます！',
+    'guestMode.cta': '登録すると毎日5回無料生成できます！',
     'guestMode.registerButton': '無料登録',
 
     guestUsageTip: 'お知らせ',
@@ -1675,7 +1675,7 @@ export const translations = {
     signOut: 'Cerrar Sesión',
     signInSignUp: 'Iniciar Sesión / Registrarse',
     freeRegister: 'Registro Gratuito',
-    freeRegisterHint: '¡Regístrate para obtener 3 generaciones diarias gratis!',
+    freeRegisterHint: '¡Regístrate para obtener 5 generaciones diarias gratis!',
     continueWithGoogle: 'Continuar con Google',
     privacyPolicy: 'Al continuar, aceptas nuestros Términos de Servicio y Política de Privacidad',
     'auth.terms.byContinuing': 'Acepto los',
@@ -1836,7 +1836,7 @@ export const translations = {
     'guestMode.title': 'Modo Invitado',
     'guestMode.trial': 'PRUEBA',
     'guestMode.remaining': 'Créditos de prueba',
-    'guestMode.cta': '¡Regístrate para obtener 3 generaciones diarias gratuitas!',
+    'guestMode.cta': '¡Regístrate para obtener 5 generaciones diarias gratuitas!',
     'guestMode.registerButton': 'Registro Gratuito',
 
     guestUsageTip: 'Recordatorio',
@@ -2145,7 +2145,7 @@ export const translations = {
     signOut: 'Se Déconnecter',
     signInSignUp: 'Se Connecter / S\'inscrire',
     freeRegister: 'Inscription Gratuite',
-    freeRegisterHint: 'Inscrivez-vous pour 3 générations quotidiennes gratuites!',
+    freeRegisterHint: 'Inscrivez-vous pour 5 générations quotidiennes gratuites!',
     continueWithGoogle: 'Continuer avec Google',
     privacyPolicy: 'En continuant, vous acceptez nos Conditions d\'utilisation et Politique de confidentialité',
     'auth.terms.byContinuing': 'J\'accepte les',
@@ -2306,7 +2306,7 @@ export const translations = {
     'guestMode.title': 'Mode Invité',
     'guestMode.trial': 'ESSAI',
     'guestMode.remaining': 'Crédits d\'essai',
-    'guestMode.cta': 'Inscrivez-vous pour 3 générations quotidiennes gratuites!',
+    'guestMode.cta': 'Inscrivez-vous pour 5 générations quotidiennes gratuites!',
     'guestMode.registerButton': 'Inscription Gratuite',
 
     guestUsageTip: 'Rappel',
@@ -2615,7 +2615,7 @@ export const translations = {
     signOut: 'Abmelden',
     signInSignUp: 'Anmelden / Registrieren',
     freeRegister: 'Kostenlose Registrierung',
-    freeRegisterHint: 'Registrieren Sie sich für 3 kostenlose tägliche Generierungen!',
+    freeRegisterHint: 'Registrieren Sie sich für 5 kostenlose tägliche Generierungen!',
     continueWithGoogle: 'Mit Google fortfahren',
     privacyPolicy: 'Durch Fortfahren stimmen Sie unseren Nutzungsbedingungen und Datenschutzrichtlinien zu',
     'auth.terms.byContinuing': 'Ich akzeptiere die',
@@ -2776,7 +2776,7 @@ export const translations = {
     'guestMode.title': 'Gastmodus',
     'guestMode.trial': 'TESTVERSION',
     'guestMode.remaining': 'Test-Credits',
-    'guestMode.cta': 'Registrieren Sie sich für 3 kostenlose tägliche Generierungen!',
+    'guestMode.cta': 'Registrieren Sie sich für 5 kostenlose tägliche Generierungen!',
     'guestMode.registerButton': 'Kostenlose Registrierung',
 
     guestUsageTip: 'Hinweis',
@@ -3085,7 +3085,7 @@ export const translations = {
     signOut: '로그아웃',
     signInSignUp: '로그인 / 회원가입',
     freeRegister: '무료 회원가입',
-    freeRegisterHint: '회원가입하면 매일 3회 무료 생성을 이용할 수 있습니다!',
+    freeRegisterHint: '회원가입하면 매일 5회 무료 생성을 이용할 수 있습니다!',
     continueWithGoogle: 'Google로 계속하기',
     privacyPolicy: '계속하면 서비스 약관 및 개인정보 보호정책에 동의하는 것으로 간주됩니다',
     'auth.terms.byContinuing': '동의합니다:',
@@ -3247,7 +3247,7 @@ export const translations = {
     'guestMode.title': '게스트 모드',
     'guestMode.trial': '체험판',
     'guestMode.remaining': '체험 크레딧',
-    'guestMode.cta': '등록하면 매일 3회 무료 생성!',
+    'guestMode.cta': '등록하면 매일 5회 무료 생성!',
     'guestMode.registerButton': '무료 등록',
 
     guestUsageTip: '안내',

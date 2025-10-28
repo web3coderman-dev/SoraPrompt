@@ -1,61 +1,56 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import { createClient } from 'jsr:@supabase/supabase-js@2';
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Client-Info, Apikey",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Client-Info, Apikey, X-Fingerprint",
 };
 
 const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') || '';
+const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || '';
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
 
-const RATE_LIMIT_GUEST_PER_DAY = 5;
-const RATE_LIMIT_ANON_PER_HOUR = 10;
+const DAILY_GUEST_LIMIT = 3;
 
 interface RequestBody {
-  action: 'parseIntent' | 'generatePrompt' | 'evaluateQuality' | 'improvePrompt' | 'explainPrompt' | 'detectLanguage';
+  action: 'parseIntent' | 'generatePrompt' | 'evaluateQuality' | 'improvePrompt' | 'explainPrompt' | 'detectLanguage' | 'checkGuestUsage';
   data: any;
   fingerprint?: string;
 }
 
-interface RateLimitStore {
-  [key: string]: {
-    count: number;
-    windowStart: number;
-  };
+async function checkGuestUsage(fingerprint: string, ipAddress: string) {
+  const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+
+  const { data, error } = await supabase.rpc('check_guest_usage', {
+    p_fingerprint: fingerprint,
+    p_ip_address: ipAddress,
+    p_daily_limit: DAILY_GUEST_LIMIT
+  });
+
+  if (error) {
+    console.error('Error checking guest usage:', error);
+    throw error;
+  }
+
+  return data;
 }
 
-const rateLimitStore: RateLimitStore = {};
+async function recordGuestUsage(fingerprint: string, ipAddress: string, sessionId?: string) {
+  const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
-function checkRateLimit(identifier: string, isGuest: boolean): { allowed: boolean; remaining: number } {
-  const now = Date.now();
-  const limit = isGuest ? RATE_LIMIT_GUEST_PER_DAY : RATE_LIMIT_ANON_PER_HOUR;
-  const windowSize = isGuest ? 24 * 60 * 60 * 1000 : 60 * 60 * 1000;
+  const { data, error } = await supabase.rpc('record_guest_usage', {
+    p_fingerprint: fingerprint,
+    p_ip_address: ipAddress,
+    p_session_id: sessionId
+  });
 
-  if (!rateLimitStore[identifier]) {
-    rateLimitStore[identifier] = {
-      count: 0,
-      windowStart: now,
-    };
+  if (error) {
+    console.error('Error recording guest usage:', error);
+    throw error;
   }
 
-  const record = rateLimitStore[identifier];
-  const windowElapsed = now - record.windowStart;
-
-  if (windowElapsed >= windowSize) {
-    record.count = 0;
-    record.windowStart = now;
-  }
-
-  const allowed = record.count < limit;
-  const remaining = Math.max(0, limit - record.count);
-
-  return { allowed, remaining };
-}
-
-function incrementRateLimit(identifier: string): void {
-  if (rateLimitStore[identifier]) {
-    rateLimitStore[identifier].count += 1;
-  }
+  return data;
 }
 
 Deno.serve(async (req: Request) => {
@@ -73,17 +68,41 @@ Deno.serve(async (req: Request) => {
 
     const { action, data, fingerprint }: RequestBody = await req.json();
 
-    if (!isAuthenticated) {
-      const identifier = fingerprint || ipAddress;
-      const rateCheck = checkRateLimit(identifier, !!fingerprint);
+    // Special action to check guest usage
+    if (action === 'checkGuestUsage') {
+      if (!fingerprint) {
+        return new Response(
+          JSON.stringify({ error: 'Fingerprint required' }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
 
-      if (!rateCheck.allowed) {
+      const usageCheck = await checkGuestUsage(fingerprint, ipAddress);
+      return new Response(
+        JSON.stringify(usageCheck),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Verify guest usage for unauthenticated users
+    if (!isAuthenticated) {
+      if (!fingerprint) {
+        return new Response(
+          JSON.stringify({ error: 'Fingerprint required for guest users' }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      const usageCheck = await checkGuestUsage(fingerprint, ipAddress);
+
+      if (!usageCheck.allowed) {
         return new Response(
           JSON.stringify({
-            error: 'Rate limit exceeded',
-            message: 'Too many requests. Please register for unlimited access or try again later.',
+            error: 'Daily limit reached',
+            message: usageCheck.message || 'You have reached your daily limit. Please register for more generations.',
             remaining: 0,
-            resetIn: fingerprint ? '24 hours' : '1 hour',
+            total: DAILY_GUEST_LIMIT,
+            resetAt: usageCheck.reset_at,
           }),
           {
             status: 429,
@@ -92,7 +111,8 @@ Deno.serve(async (req: Request) => {
         );
       }
 
-      incrementRateLimit(identifier);
+      // Record usage for guest
+      await recordGuestUsage(fingerprint, ipAddress, data.sessionId);
     }
 
     if (!OPENAI_API_KEY) {

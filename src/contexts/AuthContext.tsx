@@ -2,6 +2,8 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
 import { PromptStorage } from '../lib/promptStorage';
+import { SettingsSync } from '../lib/settingsSync';
+import { clearGuestUsage } from '../lib/guestUsage';
 
 interface UserProfile {
   id: string;
@@ -211,6 +213,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         console.error('Error signing out:', error);
         throw error;
       }
+
+      // Clear guest usage data to prevent data leakage
+      clearGuestUsage();
+
       setUser(null);
       setProfile(null);
       setSession(null);

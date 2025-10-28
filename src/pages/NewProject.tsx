@@ -65,7 +65,7 @@ export default function NewProject() {
       const result = await generatePrompt(input, mode, language, detectedInputLanguage);
       setCurrentPrompt(result);
       await PromptStorage.savePrompt(result);
-      await deductCredits(mode);
+      await deductCredits(result.id, mode);
 
       if (shouldPromptRegistration()) {
         setRegisterReason('frequent_user');
@@ -97,7 +97,7 @@ export default function NewProject() {
       const result = await improvePrompt(currentPrompt, improvementInput);
       setCurrentPrompt(result);
       await PromptStorage.savePrompt(result);
-      await deductCredits(currentPrompt.mode);
+      await deductCredits(result.id, result.mode);
     } catch (error) {
       console.error('Error improving prompt:', error);
     } finally {
