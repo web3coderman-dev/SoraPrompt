@@ -72,6 +72,7 @@ export const Modal: React.FC<ModalProps> = ({
     >
       <div
         className={`
+          modal-content
           rounded-2xl shadow-depth-xl w-full mx-4
           animate-scale-in
           transition-all duration-300 ease-in-out

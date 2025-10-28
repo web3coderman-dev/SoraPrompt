@@ -269,7 +269,7 @@ export default function LanguageSelector({ value, onChange, detectedLanguage, di
             minWidth: '320px',
             zIndex: 9999
           }}
-          className="bg-scene-fill rounded-xl shadow-depth-xl border border-keyLight/20 max-h-96 overflow-hidden animate-scale-in"
+          className="dropdown-menu bg-scene-fill rounded-xl shadow-depth-xl border border-keyLight/20 max-h-96 overflow-hidden animate-scale-in"
         >
           <div className="p-3 border-b border-border-default sticky top-0 bg-scene-fill backdrop-blur-sm z-10">
             <div className="relative">

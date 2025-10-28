@@ -51,7 +51,7 @@ export default function SortDropdown({ options, value, onChange }: SortDropdownP
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-scene-fill rounded-lg shadow-depth-lg border border-keyLight/20 py-1 z-50 animate-scale-in">
+        <div className="dropdown-menu absolute right-0 mt-2 w-48 bg-scene-fill rounded-lg shadow-depth-lg border border-keyLight/20 py-1 z-50 animate-scale-in">
           {options.map((option) => (
             <button
               key={option.value}
