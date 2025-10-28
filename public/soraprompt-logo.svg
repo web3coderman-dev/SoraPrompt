@@ -1,44 +1,138 @@
 <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="soraGradient" x1="10%" y1="10%" x2="90%" y2="90%">
-      <stop offset="0%" stop-color="#5FC8FF"/>
-      <stop offset="35%" stop-color="#5B9FFF"/>
-      <stop offset="65%" stop-color="#8B7BFF"/>
-      <stop offset="100%" stop-color="#E85CFF"/>
+    <!-- 主渐变：Sora 蓝到灵感紫 -->
+    <linearGradient id="soraGradient" x1="15%" y1="15%" x2="85%" y2="85%">
+      <stop offset="0%" stop-color="#3961FB"/>
+      <stop offset="55%" stop-color="#6B7BFF"/>
+      <stop offset="100%" stop-color="#A66BFF"/>
     </linearGradient>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
-      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.4 0" result="coloredBlur"/>
+
+    <!-- 光晕渐变 -->
+    <radialGradient id="glowGradient" cx="50%" cy="45%">
+      <stop offset="0%" stop-color="#A66BFF" stop-opacity="0.5"/>
+      <stop offset="40%" stop-color="#6B7BFF" stop-opacity="0.25"/>
+      <stop offset="70%" stop-color="#3961FB" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#3961FB" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 电影级柔和发光滤镜 -->
+    <filter id="cinematicGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur1"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur2"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur3"/>
       <feMerge>
-        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="blur3"/>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
+
+    <!-- 光线滤镜 -->
+    <filter id="lightRay">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.4 0"/>
+    </filter>
   </defs>
 
-  <!-- Smooth flowing P shape -->
-  <path
-    d="M 120 620
-       L 120 180
-       C 120 160 125 150 140 145
-       L 240 140
-       C 310 140 370 158 415 194
-       C 460 230 485 280 485 340
-       C 485 400 460 450 415 486
-       C 370 522 310 540 240 540
-       C 225 540 210 539 195 537
-       L 195 620
-       Z
-       M 195 200
-       L 195 475
-       C 208 477 222 478 237 478
-       C 295 478 340 464 372 437
-       C 404 410 420 370 420 340
-       C 420 310 404 270 372 243
-       C 340 216 295 202 237 202
-       C 220 202 205 201 195 200
-       Z"
-    fill="url(#soraGradient)"
-    filter="url(#glow)"
-  />
+  <!-- 背景光晕层 -->
+  <ellipse cx="256" cy="240" rx="200" ry="200"
+           fill="url(#glowGradient)"
+           opacity="0.6"/>
+
+  <!-- 主体：抽象的 S+P 光锥形态 -->
+  <g filter="url(#cinematicGlow)">
+    <!-- 左下到右上的主光束：体现升腾感 -->
+    <path d="
+      M 140 380
+      Q 160 340, 180 300
+      Q 200 260, 230 230
+      Q 260 200, 290 185
+      L 310 175
+      "
+      fill="none"
+      stroke="url(#soraGradient)"
+      stroke-width="28"
+      stroke-linecap="round"
+      opacity="0.9"/>
+
+    <!-- S 形曲线：上半部分 -->
+    <path d="
+      M 200 240
+      Q 240 220, 280 220
+      Q 320 220, 340 245
+      Q 350 260, 345 280
+      "
+      fill="none"
+      stroke="url(#soraGradient)"
+      stroke-width="24"
+      stroke-linecap="round"
+      opacity="0.85"/>
+
+    <!-- S 形曲线：下半部分 -->
+    <path d="
+      M 160 320
+      Q 180 340, 220 350
+      Q 260 360, 300 355
+      Q 330 350, 350 330
+      "
+      fill="none"
+      stroke="url(#soraGradient)"
+      stroke-width="24"
+      stroke-linecap="round"
+      opacity="0.85"/>
+
+    <!-- P 的垂直延伸：中心稳定锚点 -->
+    <path d="
+      M 230 230
+      L 230 380
+      "
+      fill="none"
+      stroke="url(#soraGradient)"
+      stroke-width="20"
+      stroke-linecap="round"
+      opacity="0.8"/>
+
+    <!-- P 的圆弧：右上方 -->
+    <path d="
+      M 230 200
+      L 270 195
+      Q 320 195, 350 220
+      Q 370 240, 370 275
+      Q 370 310, 350 330
+      Q 330 345, 290 345
+      L 230 340
+      "
+      fill="none"
+      stroke="url(#soraGradient)"
+      stroke-width="22"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      opacity="0.88"/>
+
+    <!-- 中心光芯 -->
+    <circle cx="256" cy="256" r="14"
+            fill="url(#soraGradient)"/>
+    <circle cx="256" cy="256" r="6"
+            fill="#FFFFFF"
+            opacity="0.9"/>
+  </g>
+
+  <!-- 镜头光晕：穿透效果 -->
+  <g filter="url(#lightRay)" opacity="0.35">
+    <line x1="320" y1="160" x2="390" y2="90"
+          stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="335" y1="170" x2="405" y2="100"
+          stroke="#A66BFF" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="327" y1="165" x2="397" y2="95"
+          stroke="#6B7BFF" stroke-width="1" stroke-linecap="round"/>
+  </g>
+
+  <!-- 光斑粒子 -->
+  <g opacity="0.7">
+    <circle cx="360" cy="180" r="3" fill="#FFFFFF"/>
+    <circle cx="190" cy="300" r="2.5" fill="#A66BFF"/>
+    <circle cx="300" cy="370" r="3" fill="#6B7BFF"/>
+    <circle cx="280" cy="150" r="2" fill="#FFFFFF" opacity="0.6"/>
+  </g>
 </svg>

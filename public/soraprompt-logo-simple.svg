@@ -1,0 +1,73 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="soraGradient" x1="15%" y1="15%" x2="85%" y2="85%">
+      <stop offset="0%" stop-color="#3961FB"/>
+      <stop offset="55%" stop-color="#6B7BFF"/>
+      <stop offset="100%" stop-color="#A66BFF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 简化的 S+P 形态 -->
+  <g>
+    <path d="
+      M 140 380
+      Q 160 340, 180 300
+      Q 200 260, 230 230
+      Q 260 200, 290 185
+      L 310 175
+      "
+      fill="none"
+      stroke="url(#soraGradient)"
+      stroke-width="28"
+      stroke-linecap="round"/>
+
+    <path d="
+      M 200 240
+      Q 240 220, 280 220
+      Q 320 220, 340 245
+      Q 350 260, 345 280
+      "
+      fill="none"
+      stroke="url(#soraGradient)"
+      stroke-width="24"
+      stroke-linecap="round"/>
+
+    <path d="
+      M 160 320
+      Q 180 340, 220 350
+      Q 260 360, 300 355
+      Q 330 350, 350 330
+      "
+      fill="none"
+      stroke="url(#soraGradient)"
+      stroke-width="24"
+      stroke-linecap="round"/>
+
+    <path d="
+      M 230 230
+      L 230 380
+      "
+      fill="none"
+      stroke="url(#soraGradient)"
+      stroke-width="20"
+      stroke-linecap="round"/>
+
+    <path d="
+      M 230 200
+      L 270 195
+      Q 320 195, 350 220
+      Q 370 240, 370 275
+      Q 370 310, 350 330
+      Q 330 345, 290 345
+      L 230 340
+      "
+      fill="none"
+      stroke="url(#soraGradient)"
+      stroke-width="22"
+      stroke-linecap="round"
+      stroke-linejoin="round"/>
+
+    <circle cx="256" cy="256" r="12" fill="url(#soraGradient)"/>
+    <circle cx="256" cy="256" r="5" fill="#FFFFFF" opacity="0.9"/>
+  </g>
+</svg>
