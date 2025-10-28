@@ -151,6 +151,13 @@ export const translations = {
 
     closeModal: '关闭',
 
+    loginPromptDirectorTitle: '登录以使用导演模式',
+    loginPromptDirectorMessage: '导演模式提供更详细的描述和分镜头脚本，帮助您创作更专业的视频内容',
+    loginPromptBenefit1: '完整版 Prompt + 分镜头脚本',
+    loginPromptBenefit2: '更专业的视频描述',
+    loginPromptBenefit3: '高质量输出结果',
+    loginPromptBenefit4: '解锁更多高级功能',
+
     'auth.login.title': '登录以继续',
     'auth.register.title': '创建您的账号',
     'auth.loginFailed': '登录失败，请重试',
@@ -261,6 +268,10 @@ export const translations = {
     guestUsageTip: '温馨提示',
     guestUsageTip1: '未登录或免费用户每日可生成 3 条Sora Prompt；',
     guestUsageTip2: '导演模式提供完整版本 + 分镜头脚本，登录后即可使用。',
+
+    notFoundTitle: '页面未找到',
+    notFoundDescription: '您访问的页面不存在或已被移动。',
+    notFoundBackHome: '返回首页',
 
     languages: {
       auto: '自动检测',
@@ -497,6 +508,13 @@ export const translations = {
 
     closeModal: 'Close',
 
+    loginPromptDirectorTitle: 'Sign in to use Director Mode',
+    loginPromptDirectorMessage: 'Director Mode provides detailed descriptions and storyboard scripts to help you create more professional video content',
+    loginPromptBenefit1: 'Full Prompt + Storyboard Script',
+    loginPromptBenefit2: 'More professional video descriptions',
+    loginPromptBenefit3: 'Higher quality output',
+    loginPromptBenefit4: 'Unlock more premium features',
+
     'auth.login.title': 'Sign in to continue',
     'auth.register.title': 'Create your account',
     'auth.loginFailed': 'Login failed, please try again',
@@ -607,6 +625,10 @@ export const translations = {
     guestUsageTip: 'Friendly Reminder',
     guestUsageTip1: 'Guest or free users can generate 3 Sora Prompts daily;',
     guestUsageTip2: 'Director mode provides full version + storyboard script. Sign in to unlock.',
+
+    notFoundTitle: 'Page Not Found',
+    notFoundDescription: 'The page you are looking for does not exist or has been moved.',
+    notFoundBackHome: 'Back to Home',
 
     languages: {
       auto: 'Auto Detect',
@@ -813,6 +835,13 @@ export const translations = {
     mode: 'モード',
     closeModal: '閉じる',
 
+    loginPromptDirectorTitle: 'ディレクターモードを使用するにはログイン',
+    loginPromptDirectorMessage: 'ディレクターモードは、より詳細な説明とストーリーボードスクリプトを提供し、よりプロフェッショナルなビデオコンテンツの作成を支援します',
+    loginPromptBenefit1: '完全版プロンプト + ストーリーボードスクリプト',
+    loginPromptBenefit2: 'よりプロフェッショナルなビデオ説明',
+    loginPromptBenefit3: '高品質な出力結果',
+    loginPromptBenefit4: 'さらなるプレミアム機能のロック解除',
+
     'auth.login.title': 'ログインして続行',
     'auth.register.title': 'アカウントを作成',
     'auth.loginFailed': 'ログインに失敗しました。もう一度お試しください',
@@ -873,6 +902,10 @@ export const translations = {
     guestUsageTip: 'お知らせ',
     guestUsageTip1: '未ログインまたは無料ユーザーは1日3回Soraプロンプトを生成できます；',
     guestUsageTip2: 'ディレクターモードは完全版+絵コンテスクリプトを提供します。ログインしてご利用ください。',
+
+    notFoundTitle: 'ページが見つかりません',
+    notFoundDescription: 'お探しのページは存在しないか、移動されました。',
+    notFoundBackHome: 'ホームに戻る',
 
     email: 'メールアドレス',
     password: 'パスワード',
@@ -1081,6 +1114,13 @@ export const translations = {
     mode: 'Modo',
     closeModal: 'Cerrar',
 
+    loginPromptDirectorTitle: 'Inicie sesión para usar el Modo Director',
+    loginPromptDirectorMessage: 'El Modo Director proporciona descripciones detalladas y guiones de storyboard para ayudarte a crear contenido de video más profesional',
+    loginPromptBenefit1: 'Prompt completo + Guión de storyboard',
+    loginPromptBenefit2: 'Descripciones de video más profesionales',
+    loginPromptBenefit3: 'Salida de mayor calidad',
+    loginPromptBenefit4: 'Desbloquea más funciones premium',
+
     'auth.login.title': 'Iniciar sesión para continuar',
     'auth.register.title': 'Crea tu cuenta',
     'auth.loginFailed': 'Error de inicio de sesión, por favor intente nuevamente',
@@ -1154,6 +1194,10 @@ export const translations = {
     guestUsageTip: 'Recordatorio',
     guestUsageTip1: 'Los usuarios invitados o gratuitos pueden generar 3 Sora Prompts diarios;',
     guestUsageTip2: 'El modo director proporciona versión completa + guión de storyboard. Inicie sesión para desbloquear.',
+
+    notFoundTitle: 'Página no encontrada',
+    notFoundDescription: 'La página que estás buscando no existe o ha sido movida.',
+    notFoundBackHome: 'Volver al inicio',
 
     languages: {
       auto: 'Detección automática',
@@ -1349,6 +1393,13 @@ export const translations = {
     mode: 'Mode',
     closeModal: 'Fermer',
 
+    loginPromptDirectorTitle: 'Connectez-vous pour utiliser le Mode Réalisateur',
+    loginPromptDirectorMessage: 'Le Mode Réalisateur fournit des descriptions détaillées et des scripts de storyboard pour vous aider à créer un contenu vidéo plus professionnel',
+    loginPromptBenefit1: 'Prompt complet + Script de storyboard',
+    loginPromptBenefit2: 'Descriptions vidéo plus professionnelles',
+    loginPromptBenefit3: 'Sortie de meilleure qualité',
+    loginPromptBenefit4: 'Débloquez plus de fonctionnalités premium',
+
     'auth.login.title': 'Se connecter pour continuer',
     'auth.register.title': 'Créer votre compte',
     'auth.loginFailed': 'Échec de la connexion, veuillez réessayer',
@@ -1422,6 +1473,10 @@ export const translations = {
     guestUsageTip: 'Rappel',
     guestUsageTip1: 'Les utilisateurs invités ou gratuits peuvent générer 3 Sora Prompts par jour;',
     guestUsageTip2: 'Le mode réalisateur fournit la version complète + script storyboard. Connectez-vous pour débloquer.',
+
+    notFoundTitle: 'Page non trouvée',
+    notFoundDescription: 'La page que vous recherchez n\'existe pas ou a été déplacée.',
+    notFoundBackHome: 'Retour à l\'accueil',
 
     languages: {
       auto: 'Détection automatique',
@@ -1617,6 +1672,13 @@ export const translations = {
     mode: 'Modus',
     closeModal: 'Schließen',
 
+    loginPromptDirectorTitle: 'Melden Sie sich an, um den Regisseur-Modus zu verwenden',
+    loginPromptDirectorMessage: 'Der Regisseur-Modus bietet detaillierte Beschreibungen und Storyboard-Skripte, um Ihnen bei der Erstellung professionellerer Videoinhalte zu helfen',
+    loginPromptBenefit1: 'Vollständiger Prompt + Storyboard-Skript',
+    loginPromptBenefit2: 'Professionellere Videobeschreibungen',
+    loginPromptBenefit3: 'Höhere Ausgabequalität',
+    loginPromptBenefit4: 'Schalten Sie weitere Premium-Funktionen frei',
+
     'auth.login.title': 'Anmelden um fortzufahren',
     'auth.register.title': 'Erstellen Sie Ihr Konto',
     'auth.loginFailed': 'Anmeldung fehlgeschlagen, bitte versuchen Sie es erneut',
@@ -1690,6 +1752,10 @@ export const translations = {
     guestUsageTip: 'Hinweis',
     guestUsageTip1: 'Gast- oder kostenlose Benutzer können täglich 3 Sora Prompts generieren;',
     guestUsageTip2: 'Regisseur-Modus bietet Vollversion + Storyboard-Skript. Melden Sie sich an, um freizuschalten.',
+
+    notFoundTitle: 'Seite nicht gefunden',
+    notFoundDescription: 'Die Seite, die Sie suchen, existiert nicht oder wurde verschoben.',
+    notFoundBackHome: 'Zurück zur Startseite',
 
     languages: {
       auto: 'Automatische Erkennung',
@@ -1885,6 +1951,13 @@ export const translations = {
     mode: '모드',
     closeModal: '닫기',
 
+    loginPromptDirectorTitle: '디렉터 모드를 사용하려면 로그인하세요',
+    loginPromptDirectorMessage: '디렉터 모드는 보다 전문적인 비디오 콘텐츠 제작을 위한 상세한 설명과 스토리보드 스크립트를 제공합니다',
+    loginPromptBenefit1: '전체 프롬프트 + 스토리보드 스크립트',
+    loginPromptBenefit2: '더 전문적인 비디오 설명',
+    loginPromptBenefit3: '더 높은 품질의 출력',
+    loginPromptBenefit4: '더 많은 프리미엄 기능 잠금 해제',
+
     'auth.login.title': '로그인하여 계속하기',
     'auth.register.title': '계정 만들기',
     'auth.loginFailed': '로그인 실패, 다시 시도해주세요',
@@ -1959,6 +2032,10 @@ export const translations = {
     guestUsageTip: '안내',
     guestUsageTip1: '비로그인 또는 무료 사용자는 하루에 3개Sora Prompt를 생성할 수 있습니다;',
     guestUsageTip2: '디렉터 모드는 전체 버전 + 스토리보드 스크립트를 제공합니다. 로그인하여 사용하세요.',
+
+    notFoundTitle: '페이지를 찾을 수 없습니다',
+    notFoundDescription: '찾고 계신 페이지가 존재하지 않거나 이동되었습니다.',
+    notFoundBackHome: '홈으로 돌아가기',
 
     languages: {
       auto: '자동 감지',

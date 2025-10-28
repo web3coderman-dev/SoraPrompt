@@ -114,16 +114,13 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
         variant="default"
       >
         <LoginPrompt
-          title={language === 'zh' ? '登录以使用 Director 模式' : 'Sign in to use Director Mode'}
-          message={language === 'zh'
-            ? 'Director 模式提供更详细的描述和分镜头脚本，帮助您创作更专业的视频内容'
-            : 'Director Mode provides detailed descriptions and storyboard scripts to help you create more professional video content'
-          }
+          title={t.loginPromptDirectorTitle}
+          message={t.loginPromptDirectorMessage}
           benefits={[
-            language === 'zh' ? '完整版 Prompt + 分镜头脚本' : 'Full Prompt + Storyboard Script',
-            language === 'zh' ? '更专业的视频描述' : 'More professional video descriptions',
-            language === 'zh' ? '高质量输出结果' : 'Higher quality output',
-            language === 'zh' ? '解锁更多高级功能' : 'Unlock more premium features',
+            t.loginPromptBenefit1,
+            t.loginPromptBenefit2,
+            t.loginPromptBenefit3,
+            t.loginPromptBenefit4,
           ]}
           onLoginSuccess={() => setShowLoginPrompt(false)}
         />
