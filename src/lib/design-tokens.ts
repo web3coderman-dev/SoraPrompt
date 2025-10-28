@@ -1,36 +1,60 @@
 export const colors = {
-  scene: {
-    background: '#0B0D12',
-    fill: '#141821',
-    fillLight: '#1A1F2E',
+  dark: {
+    scene: {
+      background: '#0B0D12',
+      fill: '#141821',
+      fillLight: '#1A1F2E',
+    },
+    text: {
+      primary: '#FFFFFF',
+      secondary: '#A0A8B8',
+      tertiary: '#6B7280',
+      disabled: '#4B5563',
+    },
+    border: {
+      subtle: 'rgba(58, 108, 255, 0.1)',
+      default: 'rgba(58, 108, 255, 0.2)',
+      strong: 'rgba(58, 108, 255, 0.4)',
+    },
+    overlay: {
+      light: 'rgba(0, 0, 0, 0.4)',
+      medium: 'rgba(0, 0, 0, 0.6)',
+      heavy: 'rgba(0, 0, 0, 0.8)',
+    },
   },
   light: {
-    key: '#3A6CFF',
-    rim: '#E4A24D',
+    scene: {
+      background: '#FFFFFF',
+      fill: '#F8F9FA',
+      fillLight: '#F1F3F5',
+    },
+    text: {
+      primary: '#1A1D23',
+      secondary: '#4A5568',
+      tertiary: '#718096',
+      disabled: '#A0AEC0',
+    },
+    border: {
+      subtle: 'rgba(0, 0, 0, 0.06)',
+      default: 'rgba(0, 0, 0, 0.1)',
+      strong: 'rgba(58, 108, 255, 0.3)',
+    },
+    overlay: {
+      light: 'rgba(0, 0, 0, 0.3)',
+      medium: 'rgba(0, 0, 0, 0.5)',
+      heavy: 'rgba(0, 0, 0, 0.7)',
+    },
+  },
+  shared: {
+    keyLight: '#3A6CFF',
+    rimLight: '#E4A24D',
     neon: '#8A60FF',
-    fill: '#2A3441',
-  },
-  state: {
-    ok: '#45E0A2',
-    error: '#FF5E5E',
-    warning: '#FFB74D',
-    info: '#64B5F6',
-  },
-  text: {
-    primary: '#FFFFFF',
-    secondary: '#A0A8B8',
-    tertiary: '#6B7280',
-    disabled: '#4B5563',
-  },
-  border: {
-    subtle: 'rgba(58, 108, 255, 0.1)',
-    default: 'rgba(58, 108, 255, 0.2)',
-    strong: 'rgba(58, 108, 255, 0.4)',
-  },
-  overlay: {
-    light: 'rgba(0, 0, 0, 0.4)',
-    medium: 'rgba(0, 0, 0, 0.6)',
-    heavy: 'rgba(0, 0, 0, 0.8)',
+    state: {
+      ok: '#45E0A2',
+      error: '#FF5E5E',
+      warning: '#FFB74D',
+      info: '#64B5F6',
+    },
   },
 };
 
@@ -90,15 +114,29 @@ export const radius = {
 };
 
 export const shadows = {
-  light: '0 0 24px rgba(58, 108, 255, 0.2)',
-  key: '0 8px 32px rgba(58, 108, 255, 0.3)',
-  rim: '0 4px 16px rgba(228, 162, 77, 0.25)',
-  neon: '0 0 20px rgba(138, 96, 255, 0.4)',
-  depth: {
-    sm: '0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)',
-    md: '0 4px 6px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.06)',
-    lg: '0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05)',
-    xl: '0 20px 25px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.04)',
+  dark: {
+    light: '0 0 24px rgba(58, 108, 255, 0.2)',
+    key: '0 8px 32px rgba(58, 108, 255, 0.3)',
+    rim: '0 4px 16px rgba(228, 162, 77, 0.25)',
+    neon: '0 0 20px rgba(138, 96, 255, 0.4)',
+    depth: {
+      sm: '0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)',
+      md: '0 4px 6px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.06)',
+      lg: '0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05)',
+      xl: '0 20px 25px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.04)',
+    },
+  },
+  light: {
+    light: '0 0 24px rgba(58, 108, 255, 0.15)',
+    key: '0 8px 32px rgba(58, 108, 255, 0.2)',
+    rim: '0 4px 16px rgba(228, 162, 77, 0.2)',
+    neon: '0 0 20px rgba(138, 96, 255, 0.3)',
+    depth: {
+      sm: '0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12)',
+      md: '0 4px 6px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.03)',
+      lg: '0 10px 15px rgba(0, 0, 0, 0.05), 0 4px 6px rgba(0, 0, 0, 0.025)',
+      xl: '0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.02)',
+    },
   },
 };
 
