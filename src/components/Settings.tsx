@@ -376,23 +376,6 @@ export default function Settings() {
             </div>
           )}
         </div>
-
-        <div className="bg-scene-fill rounded-xl border border-keyLight/20 p-6">
-          <h3 className="text-base font-semibold text-text-secondary mb-3">
-            {language === 'zh' ? '关于' : 'About'}
-          </h3>
-          <div className="space-y-2 text-sm text-text-secondary">
-            <p>
-              <span className="font-medium">Version:</span> 0.1 MVP
-            </p>
-            <p>
-              <span className="font-medium">
-                {language === 'zh' ? '技术栈' : 'Tech Stack'}:
-              </span>{' '}
-              React + Supabase + OpenAI
-            </p>
-          </div>
-        </div>
       </div>
 
       {showLoginPrompt && (
