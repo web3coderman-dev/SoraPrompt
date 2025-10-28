@@ -270,13 +270,6 @@ export default function Dashboard() {
           <div className="p-6 md:p-8 lg:p-12">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12">
-                <Badge variant="neon" size="lg" className="mb-4">
-                  <span className="relative flex h-2 w-2 mr-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-neon"></span>
-                  </span>
-                  {t.tagMVP}
-                </Badge>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-text-primary mb-4 tracking-tight">
                   {t.title}
                 </h1>
