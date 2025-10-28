@@ -20,6 +20,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
   const { user } = useAuth();
   const { sidebarCollapsed } = useTheme();
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [isSidebarHovered, setIsSidebarHovered] = useState(false);
   const location = useLocation();
 
   const menuItems = [
@@ -80,8 +81,10 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
         } lg:translate-x-0 lg:sticky flex flex-col ${
           sidebarCollapsed ? 'w-20' : 'w-64'
         }`}
+        onMouseEnter={() => setIsSidebarHovered(true)}
+        onMouseLeave={() => setIsSidebarHovered(false)}
       >
-        <SidebarHeader />
+        <SidebarHeader isHovered={isSidebarHovered} />
 
         {/* Navigation */}
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
