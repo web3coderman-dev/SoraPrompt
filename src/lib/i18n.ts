@@ -452,7 +452,7 @@ export const translations = {
     },
 
     'footer.company': 'SoraPrompt Studio',
-    'footer.slogan': '让你的创意，变成 Sora 短视频爆款',
+    'footer.slogan': '让你的创意，变成Sora爆款',
     'footer.tagline': '专业的 AI 视频提示词生成工具，为 Sora 和其他 AI 视频工具打造电影级提示词',
     'footer.legal': '法律条款',
     'footer.product': '产品',
@@ -982,7 +982,7 @@ export const translations = {
     },
 
     'footer.company': 'SoraPrompt Studio',
-    'footer.slogan': 'Turn your ideas into viral Sora videos',
+    'footer.slogan': 'Turn your ideas into viral Sora content',
     'footer.tagline': 'Professional AI-powered video prompt generator for Sora and other AI video tools.',
     'footer.legal': 'Legal',
     'footer.product': 'Product',
@@ -1452,7 +1452,7 @@ export const translations = {
     },
 
     'footer.company': 'SoraPrompt Studio',
-    'footer.slogan': 'アイデアをバイラルSora動画に',
+    'footer.slogan': 'アイデアをSoraコンテンツに',
     'footer.tagline': 'Soraおよびその他のAI動画ツール向けプロフェッショナルAI動画プロンプトジェネレーター',
     'footer.legal': '法的事項',
     'footer.product': '製品',
@@ -1922,7 +1922,7 @@ export const translations = {
     },
 
     'footer.company': 'SoraPrompt Studio',
-    'footer.slogan': 'Convierte tus ideas en videos virales de Sora',
+    'footer.slogan': 'Convierte tus ideas en contenido Sora viral',
     'footer.tagline': 'Generador profesional de prompts de video con IA para Sora y otras herramientas de video con IA.',
     'footer.legal': 'Legal',
     'footer.product': 'Producto',
@@ -2392,7 +2392,7 @@ export const translations = {
     },
 
     'footer.company': 'SoraPrompt Studio',
-    'footer.slogan': 'Transformez vos idées en vidéos Sora virales',
+    'footer.slogan': 'Transformez vos idées en contenu Sora viral',
     'footer.tagline': 'Générateur professionnel de prompts vidéo alimenté par l\'IA pour Sora et autres outils vidéo IA.',
     'footer.legal': 'Légal',
     'footer.product': 'Produit',
@@ -2862,7 +2862,7 @@ export const translations = {
     },
 
     'footer.company': 'SoraPrompt Studio',
-    'footer.slogan': 'Verwandeln Sie Ihre Ideen in virale Sora-Videos',
+    'footer.slogan': 'Verwandeln Sie Ihre Ideen in virale Sora-Inhalte',
     'footer.tagline': 'Professioneller KI-gestützter Video-Prompt-Generator für Sora und andere KI-Video-Tools.',
     'footer.legal': 'Rechtliches',
     'footer.product': 'Produkt',
@@ -3333,7 +3333,7 @@ export const translations = {
     },
 
     'footer.company': 'SoraPrompt Studio',
-    'footer.slogan': '아이디어를 바이럴 Sora 비디오로',
+    'footer.slogan': '아이디어를 Sora 콘텐츠로',
     'footer.tagline': 'Sora 및 기타 AI 비디오 도구를 위한 전문 AI 기반 비디오 프롬프트 생성기.',
     'footer.legal': '법무',
     'footer.product': '제품',

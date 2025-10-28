@@ -52,7 +52,7 @@ export default function Footer() {
               {t['footer.company'] || 'SoraPrompt Studio'}
             </h3>
             <p className="text-sm text-text-secondary leading-relaxed max-w-[280px]">
-              {t['footer.slogan'] || '让你的创意，变成 Sora 短视频爆款'}
+              {t['footer.slogan'] || '让你的创意，变成Sora爆款'}
             </p>
           </div>
 
