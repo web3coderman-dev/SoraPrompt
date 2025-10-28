@@ -267,8 +267,8 @@ export default function Dashboard() {
         );
       default:
         return (
-          <div className="p-6 md:p-8 lg:p-12">
-            <div className="max-w-7xl mx-auto">
+          <div className="p-6 md:p-8 lg:p-12 pb-20">
+            <div className="max-w-5xl mx-auto">
               <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-text-primary mb-4 tracking-tight">
                   {t.title}

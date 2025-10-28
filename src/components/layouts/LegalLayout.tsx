@@ -17,8 +17,8 @@ export function LegalLayout({ children }: LegalLayoutProps) {
       />
 
       <div className="flex-1 flex flex-col overflow-x-hidden">
-        <main className="flex-1 p-6 md:p-8 lg:p-12">
-          <div className="max-w-4xl mx-auto">
+        <main className="flex-1 p-6 md:p-8 lg:p-12 pb-20">
+          <div className="max-w-5xl mx-auto">
             {children}
           </div>
         </main>

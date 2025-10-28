@@ -117,8 +117,8 @@ export default function NewProject() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-scene-background via-scene-fill to-scene-background flex flex-col">
-      <div className="container mx-auto px-4 py-8 flex-1">
-        <div className="max-w-4xl mx-auto space-y-8">
+      <div className="container mx-auto px-4 sm:px-6 py-8 flex-1">
+        <div className="max-w-5xl mx-auto space-y-8 pb-20">
           <header className="text-center space-y-4">
             <div className="flex items-center justify-center gap-2 flex-wrap">
               <h1 className="text-4xl md:text-5xl font-bold text-text-primary font-display">
@@ -152,6 +152,8 @@ export default function NewProject() {
           )}
         </div>
       </div>
+
+      <div className="h-20" />
 
       <Footer />
 
