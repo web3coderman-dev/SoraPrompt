@@ -3,7 +3,7 @@ export type Language = 'zh' | 'en' | 'ja' | 'es' | 'fr' | 'de' | 'ko';
 export const translations = {
   zh: {
     title: 'Sora Prompt Studio',
-    subtitle: '把一句话变成导演级 Prompt，让 Sora 输出真正的电影感',
+    subtitle: '让你的创意，变成 Sora 爆款',
 
     email: '邮箱',
     password: '密码',
@@ -334,7 +334,7 @@ export const translations = {
     },
 
     'footer.company': 'SoraPrompt Studio',
-    'footer.slogan': '让你的创意，变成 Sora 短视频爆款',
+    'footer.slogan': '让你的创意，变成 Sora 爆款',
     'footer.tagline': '专业的 AI 视频提示词生成工具，为 Sora 和其他 AI 视频工具打造电影级提示词',
     'footer.legal': '法律条款',
     'footer.product': '产品',
@@ -346,7 +346,7 @@ export const translations = {
   },
   en: {
     title: 'Sora Prompt Studio',
-    subtitle: 'Transform simple ideas into cinematic-quality Sora prompts',
+    subtitle: 'Turn your ideas into viral Sora videos',
 
     email: 'Email',
     password: 'Password',
