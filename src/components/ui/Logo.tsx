@@ -1,3 +1,5 @@
+import { Sparkles } from 'lucide-react';
+
 interface LogoProps {
   size?: number;
   className?: string;
@@ -5,13 +7,15 @@ interface LogoProps {
 
 export function Logo({ size = 32, className = '' }: LogoProps) {
   return (
-    <img
-      src="/assets/soraprompt-logo.png"
-      alt="SoraPrompt Studio Logo"
-      width={size}
-      height={size}
-      className={`rounded-lg ${className}`}
-      style={{ aspectRatio: '1 / 1' }}
-    />
+    <div
+      className={`flex items-center justify-center rounded-lg bg-gradient-to-br from-keyLight via-accent to-neon shadow-key ${className}`}
+      style={{ width: size, height: size, minWidth: size, minHeight: size }}
+    >
+      <Sparkles
+        className="text-white"
+        size={size * 0.6}
+        strokeWidth={2.5}
+      />
+    </div>
   );
 }
