@@ -100,6 +100,14 @@ export default function Settings() {
     showSavedMessage();
   };
 
+  const handleThemeChange = (newTheme: 'light' | 'dark') => {
+    setTheme(newTheme);
+    showSavedMessage();
+    window.dispatchEvent(new CustomEvent('settings-changed', {
+      detail: { type: 'theme', value: newTheme }
+    }));
+  };
+
   const handleOutputLanguageChange = async (lang: SupportedLanguage) => {
     setOutputLanguage(lang);
     localStorage.setItem('output-language', lang);
@@ -200,7 +208,7 @@ export default function Settings() {
           </h3>
           <div className="grid grid-cols-2 gap-3">
             <OptionButton
-              onClick={() => setTheme('light')}
+              onClick={() => handleThemeChange('light')}
               selected={theme === 'light'}
               icon={<Sun className="w-5 h-5" />}
             >
@@ -208,7 +216,7 @@ export default function Settings() {
             </OptionButton>
 
             <OptionButton
-              onClick={() => setTheme('dark')}
+              onClick={() => handleThemeChange('dark')}
               selected={theme === 'dark'}
               icon={<Moon className="w-5 h-5" />}
             >
