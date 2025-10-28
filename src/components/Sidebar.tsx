@@ -2,51 +2,48 @@ import { Sparkles, History, Settings, Menu, X, CreditCard } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import LoginModal from './LoginModal';
-import NavItem from './Sidebar/NavItem';
+import NavLinkItem from './Sidebar/NavLinkItem';
 import UserProfile from './Sidebar/UserProfile';
 import SidebarHeader from './Sidebar/SidebarHeader';
 import LoginPrompt from './Sidebar/LoginPrompt';
 
-type ViewType = 'new' | 'history' | 'settings' | 'subscription';
-
 type SidebarProps = {
   isOpen: boolean;
   onToggle: () => void;
-  currentView: ViewType;
-  onViewChange: (view: ViewType) => void;
 };
 
-export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }: SidebarProps) {
+export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
   const { t } = useLanguage();
   const { user } = useAuth();
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const location = useLocation();
 
   const menuItems = [
     {
       icon: Sparkles,
       label: t.sidebarNew,
-      view: 'new' as ViewType,
+      path: '/new',
     },
     {
       icon: History,
       label: t.sidebarHistory,
-      view: 'history' as ViewType,
+      path: '/history',
     },
     {
       icon: CreditCard,
       label: t.sidebarSubscription,
-      view: 'subscription' as ViewType,
+      path: '/subscription',
     },
     {
       icon: Settings,
       label: t.sidebarSettings,
-      view: 'settings' as ViewType,
+      path: '/settings',
     },
   ];
 
-  const handleNavClick = (view: ViewType) => {
-    onViewChange(view);
+  const handleNavClick = () => {
     if (window.innerWidth < 1024) {
       onToggle();
     }
@@ -85,12 +82,12 @@ export default function Sidebar({ isOpen, onToggle, currentView, onViewChange }:
         {/* Navigation */}
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
           {menuItems.map((item) => (
-            <NavItem
-              key={item.label}
+            <NavLinkItem
+              key={item.path}
+              to={item.path}
               icon={item.icon}
               label={item.label}
-              active={currentView === item.view}
-              onClick={() => handleNavClick(item.view)}
+              onClick={handleNavClick}
             />
           ))}
         </nav>
