@@ -80,23 +80,25 @@ export default function UserProfile() {
           <p className="text-xs text-text-secondary truncate whitespace-nowrap">{user.email}</p>
         </div>
       </div>
-      <Button
-        onClick={handleSignOut}
-        disabled={signingOut}
-        variant="scene"
-        size="md"
-        icon={LogOut}
-        fullWidth
+      <div
         style={{
           opacity: sidebarCollapsed ? 0 : 1,
-          height: sidebarCollapsed ? 0 : 'auto',
-          marginTop: sidebarCollapsed ? 0 : undefined,
-          padding: sidebarCollapsed ? 0 : undefined,
-          transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), height 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          maxHeight: sidebarCollapsed ? '0px' : '60px',
+          overflow: 'hidden',
+          transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         }}
       >
-        {signingOut ? t.signingOut : t.signOut}
-      </Button>
+        <Button
+          onClick={handleSignOut}
+          disabled={signingOut}
+          variant="scene"
+          size="md"
+          icon={LogOut}
+          fullWidth
+        >
+          {signingOut ? t.signingOut : t.signOut}
+        </Button>
+      </div>
     </div>
   );
 }
