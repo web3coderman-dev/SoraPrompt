@@ -8,6 +8,7 @@ import { Button } from './ui/Button';
 import { Alert } from './ui/Alert';
 import { Divider } from './ui/Divider';
 import { GoogleIcon } from './ui/GoogleIcon';
+import { Checkbox } from './ui/Checkbox';
 
 interface LoginModalProps {
   onClose: () => void;
@@ -25,6 +26,7 @@ export default function LoginModal({ onClose, context }: LoginModalProps) {
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
 
   const handleGoogleLogin = async () => {
     try {
@@ -49,6 +51,11 @@ export default function LoginModal({ onClose, context }: LoginModalProps) {
 
     if (password.length < 6) {
       setError(t.passwordMinLength || 'Password must be at least 6 characters');
+      return;
+    }
+
+    if (isSignUp && !agreeToTerms) {
+      setError(t['auth.agreeToTermsError'] || 'Please agree to the Terms of Service and Privacy Policy to continue');
       return;
     }
 
@@ -142,11 +149,45 @@ export default function LoginModal({ onClose, context }: LoginModalProps) {
             helperText={isSignUp ? (t.passwordMinLength || 'Password must be at least 6 characters') : undefined}
           />
 
+          {isSignUp && (
+            <Checkbox
+              id="agree-terms"
+              checked={agreeToTerms}
+              onChange={setAgreeToTerms}
+              error={error === (t['auth.agreeToTermsError'] || 'Please agree to the Terms of Service and Privacy Policy to continue')}
+              label={
+                <span>
+                  {t['auth.agreeToTermsLabel'] || 'I agree to the'}{' '}
+                  <a
+                    href="/terms"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-keyLight hover:text-keyLight/80 transition-colors duration-300 underline underline-offset-2"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {t['auth.terms.termsOfService'] || 'Terms of Service'}
+                  </a>
+                  {' '}{t['auth.terms.and'] || 'and'}{' '}
+                  <a
+                    href="/privacy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-keyLight hover:text-keyLight/80 transition-colors duration-300 underline underline-offset-2"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {t['auth.terms.privacyPolicy'] || 'Privacy Policy'}
+                  </a>
+                  .
+                </span>
+              }
+            />
+          )}
+
           <Button
             type="submit"
             variant="director"
             fullWidth
-            disabled={loading}
+            disabled={loading || (isSignUp && !agreeToTerms)}
             loading={loading}
           >
             {isSignUp ? (t.signUp || 'Sign Up') : (t.signIn || 'Sign In')}
@@ -158,6 +199,7 @@ export default function LoginModal({ onClose, context }: LoginModalProps) {
             onClick={() => {
               setIsSignUp(!isSignUp);
               setError(null);
+              setAgreeToTerms(false);
             }}
             className="text-sm text-keyLight hover:text-keyLight/80 font-medium transition-colors duration-300"
           >
@@ -168,29 +210,31 @@ export default function LoginModal({ onClose, context }: LoginModalProps) {
           </button>
         </div>
 
-        <div className="text-center text-sm text-text-tertiary px-4">
-          <p>
-            {t['auth.terms.byContinuing'] || 'By continuing, you agree to our'}{' '}
-            <a
-              href="/terms"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-keyLight hover:text-keyLight/80 transition-colors duration-300 underline underline-offset-2"
-            >
-              {t['auth.terms.termsOfService'] || 'Terms of Service'}
-            </a>
-            {' '}{t['auth.terms.and'] || 'and'}{' '}
-            <a
-              href="/privacy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-keyLight hover:text-keyLight/80 transition-colors duration-300 underline underline-offset-2"
-            >
-              {t['auth.terms.privacyPolicy'] || 'Privacy Policy'}
-            </a>
-            .
-          </p>
-        </div>
+        {!isSignUp && (
+          <div className="text-center text-sm text-text-tertiary px-4">
+            <p>
+              {t['auth.signInTermsNotice'] || 'By continuing, you agree to our'}{' '}
+              <a
+                href="/terms"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-keyLight hover:text-keyLight/80 transition-colors duration-300 underline underline-offset-2"
+              >
+                {t['auth.terms.termsOfService'] || 'Terms of Service'}
+              </a>
+              {' '}{t['auth.terms.and'] || 'and'}{' '}
+              <a
+                href="/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-keyLight hover:text-keyLight/80 transition-colors duration-300 underline underline-offset-2"
+              >
+                {t['auth.terms.privacyPolicy'] || 'Privacy Policy'}
+              </a>
+              .
+            </p>
+          </div>
+        )}
       </div>
     </Modal>
   );

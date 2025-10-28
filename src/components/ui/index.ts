@@ -20,3 +20,5 @@ export { Alert } from './Alert';
 export type { AlertVariant } from './Alert';
 
 export { Divider } from './Divider';
+
+export { Checkbox } from './Checkbox';
