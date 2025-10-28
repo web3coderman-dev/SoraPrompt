@@ -105,6 +105,49 @@ export const translations = {
     settingsSaved: '设置已保存',
     settingsSaveError: '保存设置失败',
 
+    // Settings - Cloud Sync
+    'settings.localOnlyTitle': '设置仅保存在本地',
+    'settings.localOnlyDesc': '登录以启用云端同步，跨设备保持设置一致',
+    'settings.syncing': '正在同步',
+    'settings.cloudSyncEnabled': '云端同步已启用',
+    'settings.syncFailed': '同步失败',
+    'settings.cloudSync': '云端同步',
+    'settings.lastSynced': '上次同步: ',
+    'settings.syncNowAria': '立即同步设置到云端',
+    'settings.syncNow': '立即同步',
+    'settings.autoSyncDesc': '设置修改后自动同步到云端，可跨设备访问',
+    'settings.syncSuccess': '设置已同步到云端',
+    'settings.syncErrorRetry': '同步失败，请稍后重试',
+
+    // Settings - Unlock Features
+    'settings.unlockTitle': '解锁完整功能',
+    'settings.unlockDesc': '登录以享受更多功能',
+    'settings.featureUnlimitedStorage': '无限云端存储',
+    'settings.featureSecureSync': '数据安全同步',
+    'settings.featurePremium': '高级功能访问',
+    'settings.featureMoreGenerations': '更多生成次数',
+    'settings.signInNow': '立即登录',
+
+    // Settings - Account & Security
+    'settings.accountTitle': '账号与安全',
+    'settings.googleConnected': 'Google 账号已关联',
+    'settings.googleBenefit': '使用 Google 账号登录可享受安全便捷的体验',
+    'settings.emailLoginStatus': '当前状态：邮箱登录',
+    'settings.linkGoogleDesc': '关联 Google 账号以启用一键登录和云端数据同步',
+    'settings.linking': '关联中...',
+    'settings.linkGoogle': '关联 Google 账号',
+
+    // Language Names
+    languageNames: {
+      zh: '中文',
+      en: 'English',
+      ja: '日本語',
+      es: 'Español',
+      fr: 'Français',
+      de: 'Deutsch',
+      ko: '한국어',
+    },
+
     sidebarNew: '新建项目',
     sidebarHistory: '历史记录',
     sidebarSettings: '设置',
@@ -554,6 +597,49 @@ export const translations = {
     settingsSaved: 'Settings saved',
     settingsSaveError: 'Failed to save settings',
 
+    // Settings - Cloud Sync
+    'settings.localOnlyTitle': 'Settings saved locally only',
+    'settings.localOnlyDesc': 'Sign in to enable cloud sync and keep settings consistent across devices',
+    'settings.syncing': 'Syncing',
+    'settings.cloudSyncEnabled': 'Cloud sync enabled',
+    'settings.syncFailed': 'Sync failed',
+    'settings.cloudSync': 'Cloud sync',
+    'settings.lastSynced': 'Last synced: ',
+    'settings.syncNowAria': 'Sync settings to cloud now',
+    'settings.syncNow': 'Sync Now',
+    'settings.autoSyncDesc': 'Settings are automatically synced to cloud and accessible across devices',
+    'settings.syncSuccess': 'Settings synced to cloud',
+    'settings.syncErrorRetry': 'Sync failed, please try again',
+
+    // Settings - Unlock Features
+    'settings.unlockTitle': 'Unlock Full Features',
+    'settings.unlockDesc': 'Sign in to enjoy more features',
+    'settings.featureUnlimitedStorage': 'Unlimited cloud storage',
+    'settings.featureSecureSync': 'Secure data sync',
+    'settings.featurePremium': 'Premium features',
+    'settings.featureMoreGenerations': 'More generations',
+    'settings.signInNow': 'Sign In Now',
+
+    // Settings - Account & Security
+    'settings.accountTitle': 'Account & Security',
+    'settings.googleConnected': 'Google Account Connected',
+    'settings.googleBenefit': 'Enjoy secure and convenient access with Google',
+    'settings.emailLoginStatus': 'Current Status: Email Login',
+    'settings.linkGoogleDesc': 'Link your Google account for one-click sign-in and cloud sync',
+    'settings.linking': 'Linking...',
+    'settings.linkGoogle': 'Link Google Account',
+
+    // Language Names
+    languageNames: {
+      zh: '中文',
+      en: 'English',
+      ja: '日本語',
+      es: 'Español',
+      fr: 'Français',
+      de: 'Deutsch',
+      ko: '한국어',
+    },
+
     sidebarNew: 'New Project',
     sidebarHistory: 'History',
     sidebarSettings: 'Settings',
@@ -986,6 +1072,49 @@ export const translations = {
     settingsSaved: '設定を保存しました',
     settingsSaveError: '設定の保存に失敗しました',
 
+    // Settings - Cloud Sync
+    'settings.localOnlyTitle': '設定はローカルのみに保存',
+    'settings.localOnlyDesc': 'クラウド同期を有効にするにはログインしてください',
+    'settings.syncing': '同期中',
+    'settings.cloudSyncEnabled': 'クラウド同期が有効',
+    'settings.syncFailed': '同期に失敗',
+    'settings.cloudSync': 'クラウド同期',
+    'settings.lastSynced': '最終同期: ',
+    'settings.syncNowAria': '今すぐ設定をクラウドに同期',
+    'settings.syncNow': '今すぐ同期',
+    'settings.autoSyncDesc': '設定は自動的にクラウドに同期され、デバイス間でアクセス可能',
+    'settings.syncSuccess': '設定をクラウドに同期しました',
+    'settings.syncErrorRetry': '同期に失敗しました。後でもう一度お試しください',
+
+    // Settings - Unlock Features
+    'settings.unlockTitle': 'すべての機能を解除',
+    'settings.unlockDesc': 'サインインしてより多くの機能をお楽しみください',
+    'settings.featureUnlimitedStorage': '無制限のクラウドストレージ',
+    'settings.featureSecureSync': '安全なデータ同期',
+    'settings.featurePremium': 'プレミアム機能',
+    'settings.featureMoreGenerations': 'より多くの生成回数',
+    'settings.signInNow': '今すぐサインイン',
+
+    // Settings - Account & Security
+    'settings.accountTitle': 'アカウントとセキュリティ',
+    'settings.googleConnected': 'Googleアカウント接続済み',
+    'settings.googleBenefit': 'Googleで安全で便利なアクセスをお楽しみください',
+    'settings.emailLoginStatus': '現在のステータス: メールログイン',
+    'settings.linkGoogleDesc': 'Googleアカウントをリンクしてワンクリックサインインとクラウド同期を有効化',
+    'settings.linking': 'リンク中...',
+    'settings.linkGoogle': 'Googleアカウントをリンク',
+
+    // Language Names
+    languageNames: {
+      zh: '中文',
+      en: 'English',
+      ja: '日本語',
+      es: 'Español',
+      fr: 'Français',
+      de: 'Deutsch',
+      ko: '한국어',
+    },
+
     sidebarNew: '新規プロジェクト',
     sidebarHistory: '履歴',
     sidebarSettings: '設定',
@@ -1367,6 +1496,49 @@ export const translations = {
     settingsAutoDetect: 'Coincidencia Automática',
     settingsSaved: 'Configuración guardada',
     settingsSaveError: 'Error al guardar configuración',
+
+    // Settings - Cloud Sync
+    'settings.localOnlyTitle': 'Configuración guardada solo localmente',
+    'settings.localOnlyDesc': 'Inicia sesión para habilitar la sincronización en la nube',
+    'settings.syncing': 'Sincronizando',
+    'settings.cloudSyncEnabled': 'Sincronización en la nube habilitada',
+    'settings.syncFailed': 'Sincronización fallida',
+    'settings.cloudSync': 'Sincronización en la nube',
+    'settings.lastSynced': 'Última sincronización: ',
+    'settings.syncNowAria': 'Sincronizar configuración a la nube ahora',
+    'settings.syncNow': 'Sincronizar Ahora',
+    'settings.autoSyncDesc': 'La configuración se sincroniza automáticamente con la nube',
+    'settings.syncSuccess': 'Configuración sincronizada con la nube',
+    'settings.syncErrorRetry': 'Sincronización fallida, intenta de nuevo',
+
+    // Settings - Unlock Features
+    'settings.unlockTitle': 'Desbloquear Todas las Funciones',
+    'settings.unlockDesc': 'Inicia sesión para disfrutar más funciones',
+    'settings.featureUnlimitedStorage': 'Almacenamiento ilimitado en la nube',
+    'settings.featureSecureSync': 'Sincronización segura de datos',
+    'settings.featurePremium': 'Funciones premium',
+    'settings.featureMoreGenerations': 'Más generaciones',
+    'settings.signInNow': 'Iniciar Sesión Ahora',
+
+    // Settings - Account & Security
+    'settings.accountTitle': 'Cuenta y Seguridad',
+    'settings.googleConnected': 'Cuenta de Google Conectada',
+    'settings.googleBenefit': 'Disfruta de acceso seguro y conveniente con Google',
+    'settings.emailLoginStatus': 'Estado Actual: Inicio de Sesión por Email',
+    'settings.linkGoogleDesc': 'Vincula tu cuenta de Google para inicio de sesión con un clic',
+    'settings.linking': 'Vinculando...',
+    'settings.linkGoogle': 'Vincular Cuenta de Google',
+
+    // Language Names
+    languageNames: {
+      zh: '中文',
+      en: 'English',
+      ja: '日本語',
+      es: 'Español',
+      fr: 'Français',
+      de: 'Deutsch',
+      ko: '한국어',
+    },
 
     sidebarNew: 'Nuevo Proyecto',
     sidebarHistory: 'Historial',
@@ -1750,6 +1922,49 @@ export const translations = {
     settingsSaved: 'Paramètres sauvegardés',
     settingsSaveError: 'Échec de la sauvegarde des paramètres',
 
+    // Settings - Cloud Sync
+    'settings.localOnlyTitle': 'Paramètres sauvegardés localement uniquement',
+    'settings.localOnlyDesc': 'Connectez-vous pour activer la synchronisation cloud',
+    'settings.syncing': 'Synchronisation',
+    'settings.cloudSyncEnabled': 'Synchronisation cloud activée',
+    'settings.syncFailed': 'Échec de la synchronisation',
+    'settings.cloudSync': 'Synchronisation cloud',
+    'settings.lastSynced': 'Dernière synchronisation: ',
+    'settings.syncNowAria': 'Synchroniser les paramètres vers le cloud maintenant',
+    'settings.syncNow': 'Synchroniser Maintenant',
+    'settings.autoSyncDesc': 'Les paramètres sont automatiquement synchronisés vers le cloud',
+    'settings.syncSuccess': 'Paramètres synchronisés vers le cloud',
+    'settings.syncErrorRetry': 'Échec de la synchronisation, réessayez',
+
+    // Settings - Unlock Features
+    'settings.unlockTitle': 'Déverrouiller Toutes les Fonctionnalités',
+    'settings.unlockDesc': 'Connectez-vous pour profiter de plus de fonctionnalités',
+    'settings.featureUnlimitedStorage': 'Stockage cloud illimité',
+    'settings.featureSecureSync': 'Synchronisation sécurisée des données',
+    'settings.featurePremium': 'Fonctionnalités premium',
+    'settings.featureMoreGenerations': 'Plus de générations',
+    'settings.signInNow': 'Se Connecter Maintenant',
+
+    // Settings - Account & Security
+    'settings.accountTitle': 'Compte et Sécurité',
+    'settings.googleConnected': 'Compte Google Connecté',
+    'settings.googleBenefit': 'Profitez d\'un accès sécurisé et pratique avec Google',
+    'settings.emailLoginStatus': 'Statut Actuel: Connexion par Email',
+    'settings.linkGoogleDesc': 'Liez votre compte Google pour une connexion en un clic',
+    'settings.linking': 'Liaison en cours...',
+    'settings.linkGoogle': 'Lier le Compte Google',
+
+    // Language Names
+    languageNames: {
+      zh: '中文',
+      en: 'English',
+      ja: '日本語',
+      es: 'Español',
+      fr: 'Français',
+      de: 'Deutsch',
+      ko: '한국어',
+    },
+
     sidebarNew: 'Nouveau Projet',
     sidebarHistory: 'Historique',
     sidebarSettings: 'Paramètres',
@@ -2131,6 +2346,49 @@ export const translations = {
     settingsAutoDetect: 'Automatische Erkennung',
     settingsSaved: 'Einstellungen gespeichert',
     settingsSaveError: 'Fehler beim Speichern der Einstellungen',
+
+    // Settings - Cloud Sync
+    'settings.localOnlyTitle': 'Einstellungen nur lokal gespeichert',
+    'settings.localOnlyDesc': 'Melden Sie sich an, um Cloud-Synchronisation zu aktivieren',
+    'settings.syncing': 'Synchronisieren',
+    'settings.cloudSyncEnabled': 'Cloud-Synchronisation aktiviert',
+    'settings.syncFailed': 'Synchronisation fehlgeschlagen',
+    'settings.cloudSync': 'Cloud-Synchronisation',
+    'settings.lastSynced': 'Zuletzt synchronisiert: ',
+    'settings.syncNowAria': 'Einstellungen jetzt zur Cloud synchronisieren',
+    'settings.syncNow': 'Jetzt Synchronisieren',
+    'settings.autoSyncDesc': 'Einstellungen werden automatisch zur Cloud synchronisiert',
+    'settings.syncSuccess': 'Einstellungen zur Cloud synchronisiert',
+    'settings.syncErrorRetry': 'Synchronisation fehlgeschlagen, bitte erneut versuchen',
+
+    // Settings - Unlock Features
+    'settings.unlockTitle': 'Alle Funktionen Freischalten',
+    'settings.unlockDesc': 'Melden Sie sich an, um mehr Funktionen zu genießen',
+    'settings.featureUnlimitedStorage': 'Unbegrenzter Cloud-Speicher',
+    'settings.featureSecureSync': 'Sichere Datensynchronisation',
+    'settings.featurePremium': 'Premium-Funktionen',
+    'settings.featureMoreGenerations': 'Mehr Generierungen',
+    'settings.signInNow': 'Jetzt Anmelden',
+
+    // Settings - Account & Security
+    'settings.accountTitle': 'Konto & Sicherheit',
+    'settings.googleConnected': 'Google-Konto Verbunden',
+    'settings.googleBenefit': 'Genießen Sie sicheren und bequemen Zugriff mit Google',
+    'settings.emailLoginStatus': 'Aktueller Status: E-Mail-Anmeldung',
+    'settings.linkGoogleDesc': 'Verknüpfen Sie Ihr Google-Konto für One-Click-Anmeldung',
+    'settings.linking': 'Verknüpfung...',
+    'settings.linkGoogle': 'Google-Konto Verknüpfen',
+
+    // Language Names
+    languageNames: {
+      zh: '中文',
+      en: 'English',
+      ja: '日本語',
+      es: 'Español',
+      fr: 'Français',
+      de: 'Deutsch',
+      ko: '한국어',
+    },
 
     sidebarNew: 'Neues Projekt',
     sidebarHistory: 'Verlauf',

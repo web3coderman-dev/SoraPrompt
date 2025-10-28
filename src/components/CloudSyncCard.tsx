@@ -1,5 +1,6 @@
 import { Cloud, CloudOff, CheckCircle, XCircle, RefreshCw } from 'lucide-react';
 import { Button } from './ui';
+import { useLanguage } from '../contexts/LanguageContext';
 import type { SyncStatus } from '../lib/settingsSync';
 
 interface CloudSyncCardProps {
@@ -21,20 +22,18 @@ export function CloudSyncCard({
   language,
   onManualSync,
 }: CloudSyncCardProps) {
+  const { t } = useLanguage();
   if (!user) {
     return (
       <div className="mb-6 bg-state-warning/10 border-2 border-state-warning/30 rounded-lg p-4">
         <div className="flex items-center gap-3 mb-2">
           <CloudOff className="w-5 h-5 text-state-warning" />
           <p className="text-sm font-medium text-text-primary">
-            {language === 'zh' ? '设置仅保存在本地' : 'Settings saved locally only'}
+            {t['settings.localOnlyTitle']}
           </p>
         </div>
         <p className="text-xs text-text-secondary">
-          {language === 'zh'
-            ? '登录以启用云端同步，跨设备保持设置一致'
-            : 'Sign in to enable cloud sync and keep settings consistent across devices'
-          }
+          {t['settings.localOnlyDesc']}
         </p>
       </div>
     );
@@ -53,7 +52,7 @@ export function CloudSyncCard({
             <div
               className="animate-spin rounded-full h-5 w-5 border-2 border-neon border-t-transparent"
               role="status"
-              aria-label={language === 'zh' ? '正在同步' : 'Syncing'}
+              aria-label={t['settings.syncing']}
             />
           ) : syncStatus === 'success' ? (
             <CheckCircle className="w-5 h-5 text-state-ok" />
@@ -65,17 +64,17 @@ export function CloudSyncCard({
           <div>
             <p className="text-sm font-medium text-text-primary">
               {syncStatus === 'syncing' || syncing
-                ? (language === 'zh' ? '正在同步...' : 'Syncing...')
+                ? t['settings.syncing']
                 : syncStatus === 'success'
-                ? (language === 'zh' ? '云端同步已启用' : 'Cloud sync enabled')
+                ? t['settings.cloudSyncEnabled']
                 : syncStatus === 'error'
-                ? (language === 'zh' ? '同步失败' : 'Sync failed')
-                : (language === 'zh' ? '云端同步' : 'Cloud sync')
+                ? t['settings.syncFailed']
+                : t['settings.cloudSync']
               }
             </p>
             {lastSynced && !syncing && syncStatus !== 'error' && (
               <p className="text-xs text-text-secondary mt-0.5">
-                {language === 'zh' ? '上次同步: ' : 'Last synced: '}
+                {t['settings.lastSynced']}
                 {lastSynced.toLocaleTimeString(language === 'zh' ? 'zh-CN' : 'en-US')}
               </p>
             )}
@@ -90,17 +89,14 @@ export function CloudSyncCard({
           variant="secondary"
           size="sm"
           icon={RefreshCw}
-          aria-label={language === 'zh' ? '立即同步设置到云端' : 'Sync settings to cloud now'}
+          aria-label={t['settings.syncNowAria']}
           aria-busy={syncing}
         >
-          {language === 'zh' ? '立即同步' : 'Sync Now'}
+          {t['settings.syncNow']}
         </Button>
       </div>
       <p className="text-xs text-text-secondary mt-2">
-        {language === 'zh'
-          ? '设置修改后自动同步到云端，可跨设备访问'
-          : 'Settings are automatically synced to cloud and accessible across devices'
-        }
+        {t['settings.autoSyncDesc']}
       </p>
     </div>
   );

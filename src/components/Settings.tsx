@@ -13,14 +13,14 @@ import { Button, OptionButton, GoogleIcon } from './ui';
 import { CloudSyncCard } from './CloudSyncCard';
 import { FeatureCard } from './FeatureCard';
 
-const interfaceLanguages: { code: Language; name: string }[] = [
-  { code: 'zh', name: '中文' },
-  { code: 'en', name: 'English' },
-  { code: 'ja', name: '日本語' },
-  { code: 'es', name: 'Español' },
-  { code: 'fr', name: 'Français' },
-  { code: 'de', name: 'Deutsch' },
-  { code: 'ko', name: '한국어' },
+const getInterfaceLanguages = (t: any): { code: Language; name: string }[] => [
+  { code: 'zh', name: t.languageNames.zh },
+  { code: 'en', name: t.languageNames.en },
+  { code: 'ja', name: t.languageNames.ja },
+  { code: 'es', name: t.languageNames.es },
+  { code: 'fr', name: t.languageNames.fr },
+  { code: 'de', name: t.languageNames.de },
+  { code: 'ko', name: t.languageNames.ko },
 ];
 
 const getOutputLanguages = (): { code: SupportedLanguage }[] => [
@@ -80,7 +80,7 @@ export default function Settings() {
         }
 
         if (!success) {
-          setSyncError(language === 'zh' ? '同步失败' : 'Sync failed');
+          setSyncError(t['settings.syncFailed']);
         }
         setSyncing(false);
       }
@@ -122,15 +122,15 @@ export default function Settings() {
       setLastSynced(new Date());
       window.dispatchEvent(new CustomEvent('show-toast', {
         detail: {
-          message: language === 'zh' ? '设置已同步到云端' : 'Settings synced to cloud',
+          message: t['settings.syncSuccess'],
           type: 'success'
         }
       }));
     } else {
-      setSyncError(result.error || (language === 'zh' ? '同步失败' : 'Sync failed'));
+      setSyncError(result.error || t['settings.syncFailed']);
       window.dispatchEvent(new CustomEvent('show-toast', {
         detail: {
-          message: language === 'zh' ? '同步失败，请稍后重试' : 'Sync failed, please try again',
+          message: t['settings.syncErrorRetry'],
           type: 'error'
         }
       }));
@@ -182,7 +182,7 @@ export default function Settings() {
         <div className="bg-scene-fill rounded-xl shadow-depth-md border border-keyLight/20 p-6">
           <h3 className="text-xl font-semibold font-display text-text-primary mb-4">{t.settingsLanguage}</h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {interfaceLanguages.map((lang) => (
+            {getInterfaceLanguages(t).map((lang) => (
               <OptionButton
                 key={lang.code}
                 onClick={() => handleLanguageChange(lang.code)}
@@ -250,10 +250,10 @@ export default function Settings() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold font-display text-text-primary">
-                      {language === 'zh' ? '解锁完整功能' : 'Unlock Full Features'}
+                      {t['settings.unlockTitle']}
                     </h3>
                     <p className="text-sm text-text-secondary">
-                      {language === 'zh' ? '登录以享受更多功能' : 'Sign in to enjoy more features'}
+                      {t['settings.unlockDesc']}
                     </p>
                   </div>
                 </div>
@@ -263,22 +263,22 @@ export default function Settings() {
                 <FeatureCard
                   icon={Cloud}
                   iconColor="text-keyLight"
-                  text={language === 'zh' ? '无限云端存储' : 'Unlimited cloud storage'}
+                  text={t['settings.featureUnlimitedStorage']}
                 />
                 <FeatureCard
                   icon={Shield}
                   iconColor="text-state-ok"
-                  text={language === 'zh' ? '数据安全同步' : 'Secure data sync'}
+                  text={t['settings.featureSecureSync']}
                 />
                 <FeatureCard
                   icon={Crown}
                   iconColor="text-neon"
-                  text={language === 'zh' ? '高级功能访问' : 'Premium features'}
+                  text={t['settings.featurePremium']}
                 />
                 <FeatureCard
                   icon={Check}
                   iconColor="text-state-ok"
-                  text={language === 'zh' ? '更多生成次数' : 'More generations'}
+                  text={t['settings.featureMoreGenerations']}
                 />
               </div>
 
@@ -291,7 +291,7 @@ export default function Settings() {
                 className="group"
               >
                 <span className="group-hover:scale-110 transition-transform duration-200">
-                  {language === 'zh' ? '立即登录' : 'Sign In Now'}
+                  {t['settings.signInNow']}
                 </span>
               </Button>
             </div>
@@ -303,7 +303,7 @@ export default function Settings() {
             <div className="flex items-center gap-2 mb-4">
               <Shield className="w-6 h-6 text-keyLight" />
               <h3 className="text-xl font-semibold font-display text-text-primary">
-                {language === 'zh' ? '账号与安全' : 'Account & Security'}
+                {t['settings.accountTitle']}
               </h3>
             </div>
 
@@ -313,7 +313,7 @@ export default function Settings() {
                   <Check className="w-5 h-5 text-state-ok flex-shrink-0 mt-0.5" />
                   <div className="flex-1">
                     <p className="text-sm font-medium text-text-primary">
-                      {language === 'zh' ? 'Google 账号已关联' : 'Google Account Connected'}
+                      {t['settings.googleConnected']}
                     </p>
                     <p className="text-xs text-text-secondary mt-1">
                       {user.email}
@@ -323,10 +323,7 @@ export default function Settings() {
                 <div className="flex items-center gap-2 text-sm text-text-secondary">
                   <GoogleIcon className="w-5 h-5" />
                   <span>
-                    {language === 'zh'
-                      ? '使用 Google 账号登录可享受安全便捷的体验'
-                      : 'Enjoy secure and convenient access with Google'
-                    }
+                    {t['settings.googleBenefit']}
                   </span>
                 </div>
               </div>
@@ -334,17 +331,14 @@ export default function Settings() {
               <div className="space-y-4">
                 <div className="p-4 bg-keyLight/10 border border-keyLight/30 rounded-lg">
                   <p className="text-sm font-medium text-text-primary mb-1">
-                    {language === 'zh' ? '当前状态：邮箱登录' : 'Current Status: Email Login'}
+                    {t['settings.emailLoginStatus']}
                   </p>
                   <p className="text-xs text-text-secondary">
                     {user?.email}
                   </p>
                 </div>
                 <p className="text-sm text-text-secondary">
-                  {language === 'zh'
-                    ? '关联 Google 账号以启用一键登录和云端数据同步'
-                    : 'Link your Google account for one-click sign-in and cloud sync'
-                  }
+                  {t['settings.linkGoogleDesc']}
                 </p>
                 <Button
                   onClick={handleLinkGoogle}
@@ -357,8 +351,8 @@ export default function Settings() {
                   <GoogleIcon className="w-5 h-5" />
                   <span>
                     {linking
-                      ? (language === 'zh' ? '关联中...' : 'Linking...')
-                      : (language === 'zh' ? '关联 Google 账号' : 'Link Google Account')
+                      ? t['settings.linking']
+                      : t['settings.linkGoogle']
                     }
                   </span>
                 </Button>
@@ -374,7 +368,7 @@ export default function Settings() {
             <button
               onClick={() => setShowLoginPrompt(false)}
               className="absolute -top-2 -right-2 w-8 h-8 bg-scene-fill rounded-full shadow-depth-lg flex items-center justify-center text-text-secondary hover:text-text-primary z-10 border-2 border-keyLight/20 hover:border-keyLight/40 transition-all duration-200"
-              aria-label={language === 'zh' ? '关闭' : 'Close'}
+              aria-label={t.closeModal}
             >
               <X className="w-4 h-4" />
             </button>
