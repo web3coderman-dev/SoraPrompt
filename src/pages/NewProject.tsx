@@ -135,13 +135,13 @@ export default function NewProject() {
             </div>
           </header>
 
-          {isGuest && <GuestUsageCard />}
-          {user && <UsageCounter />}
-
           <PromptInput
             onGenerate={handleGenerate}
             isGenerating={isGenerating}
           />
+
+          {isGuest && <GuestUsageCard />}
+          {user && <UsageCounter />}
 
           {currentPrompt && (
             <PromptResult

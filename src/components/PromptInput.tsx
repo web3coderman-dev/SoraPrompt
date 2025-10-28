@@ -71,18 +71,6 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
       </CardBody>
 
       <CardFooter className="flex flex-col sm:flex-row gap-3">
-        <div className="relative w-full sm:w-1/2">
-          <Button
-            variant="director"
-            icon={user ? Clapperboard : Lock}
-            onClick={() => handleSubmit('director')}
-            disabled={!input.trim() || isLoading}
-            fullWidth
-          >
-            {t.directorMode}
-          </Button>
-        </div>
-
         <div className="w-full sm:w-1/2">
           <Button
             variant="take"
@@ -93,6 +81,18 @@ export default function PromptInput({ onGenerate, isLoading, initialValue }: Pro
             fullWidth
           >
             {t.quickGenerate}
+          </Button>
+        </div>
+
+        <div className="relative w-full sm:w-1/2">
+          <Button
+            variant="director"
+            icon={user ? Clapperboard : Lock}
+            onClick={() => handleSubmit('director')}
+            disabled={!input.trim() || isLoading}
+            fullWidth
+          >
+            {t.directorMode}
           </Button>
         </div>
       </CardFooter>
