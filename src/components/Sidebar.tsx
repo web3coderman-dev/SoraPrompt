@@ -82,7 +82,8 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
           sidebarCollapsed ? 'w-20' : 'w-64'
         }`}
         style={{
-          transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s ease-in-out',
+          minWidth: sidebarCollapsed ? '5rem' : '16rem',
+          transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1), min-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s ease-in-out',
         }}
         onMouseEnter={() => setIsSidebarHovered(true)}
         onMouseLeave={() => setIsSidebarHovered(false)}
@@ -90,7 +91,15 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
         <SidebarHeader isHovered={isSidebarHovered} />
 
         {/* Navigation */}
-        <nav className="flex-1 p-4 space-y-2 overflow-y-auto overflow-x-hidden">
+        <nav
+          className="flex-1 p-4 overflow-y-auto overflow-x-hidden"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'nowrap',
+            gap: '0.5rem',
+          }}
+        >
           {menuItems.map((item) => (
             <NavLinkItem
               key={item.path}

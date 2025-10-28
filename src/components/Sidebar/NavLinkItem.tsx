@@ -18,7 +18,7 @@ export default function NavLinkItem({ to, icon: Icon, label, onClick, collapsed 
       className={({ isActive }) => `
         group relative
         w-full flex items-center rounded-lg
-        border font-medium
+        border font-medium flex-shrink-0
         ${collapsed ? 'justify-center px-3 py-3' : 'gap-3 px-4 py-3'}
         ${
           isActive
@@ -27,6 +27,10 @@ export default function NavLinkItem({ to, icon: Icon, label, onClick, collapsed 
         }
       `}
       style={{
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'nowrap',
+        minHeight: '44px',
         transition: 'padding 0.3s cubic-bezier(0.4, 0, 0.2, 1), gap 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s, border-color 0.2s, color 0.2s',
       }}
     >
@@ -37,11 +41,14 @@ export default function NavLinkItem({ to, icon: Icon, label, onClick, collapsed 
         }}
       />
       <span
-        className="truncate flex-1 text-left whitespace-nowrap"
+        className="truncate text-left whitespace-nowrap"
         style={{
+          display: collapsed ? 'none' : 'block',
+          flex: collapsed ? '0 0 0' : '1 1 auto',
           opacity: collapsed ? 0 : 1,
           width: collapsed ? 0 : 'auto',
-          transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          overflow: 'hidden',
+          transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), flex 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         }}
       >
         {label}
