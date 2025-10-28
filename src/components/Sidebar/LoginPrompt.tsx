@@ -28,13 +28,19 @@ export default function LoginPrompt({ onLogin }: LoginPromptProps) {
   }
 
   return (
-    <div className="p-4">
+    <div className="p-4 overflow-hidden">
       <Button
         onClick={onLogin}
         variant="take"
         size="lg"
         icon={LogIn}
         fullWidth
+        style={{
+          opacity: sidebarCollapsed ? 0 : 1,
+          height: sidebarCollapsed ? 0 : 'auto',
+          padding: sidebarCollapsed ? 0 : undefined,
+          transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), height 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        }}
       >
         {t.freeRegister || t.signInSignUp}
       </Button>

@@ -76,18 +76,21 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-screen bg-scene-fill border-r border-keyLight/20 z-modal transition-all duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 h-screen bg-scene-fill border-r border-keyLight/20 z-modal ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0 lg:sticky flex flex-col ${
           sidebarCollapsed ? 'w-20' : 'w-64'
         }`}
+        style={{
+          transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s ease-in-out',
+        }}
         onMouseEnter={() => setIsSidebarHovered(true)}
         onMouseLeave={() => setIsSidebarHovered(false)}
       >
         <SidebarHeader isHovered={isSidebarHovered} />
 
         {/* Navigation */}
-        <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+        <nav className="flex-1 p-4 space-y-2 overflow-y-auto overflow-x-hidden">
           {menuItems.map((item) => (
             <NavLinkItem
               key={item.path}
