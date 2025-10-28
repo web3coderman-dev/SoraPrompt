@@ -6,15 +6,15 @@ export default {
     extend: {
       colors: {
         scene: {
-          bg: 'rgb(var(--color-scene-bg) / <alpha-value>)',
-          background: 'rgb(var(--color-scene-bg) / <alpha-value>)',
-          fill: 'rgb(var(--color-scene-fill) / <alpha-value>)',
-          fillLight: 'rgb(var(--color-scene-fillLight) / <alpha-value>)',
+          bg: '#0B0D12',
+          background: '#0B0D12',
+          fill: '#141821',
+          fillLight: '#1A1F2E',
         },
         border: {
-          subtle: 'rgb(var(--color-border-subtle) / <alpha-value>)',
-          default: 'rgb(var(--color-border-default) / <alpha-value>)',
-          strong: 'rgb(var(--color-border-strong) / <alpha-value>)',
+          subtle: 'rgba(58, 108, 255, 0.1)',
+          default: 'rgba(58, 108, 255, 0.2)',
+          strong: 'rgba(58, 108, 255, 0.4)',
         },
         keyLight: {
           DEFAULT: '#3A6CFF',
@@ -62,15 +62,15 @@ export default {
           info: '#64B5F6',
         },
         text: {
-          primary: 'rgb(var(--color-text-primary) / <alpha-value>)',
-          secondary: 'rgb(var(--color-text-secondary) / <alpha-value>)',
-          tertiary: 'rgb(var(--color-text-tertiary) / <alpha-value>)',
-          disabled: 'rgb(var(--color-text-disabled) / <alpha-value>)',
+          primary: '#FFFFFF',
+          secondary: '#A0A8B8',
+          tertiary: '#6B7280',
+          disabled: '#4B5563',
         },
         overlay: {
-          light: 'rgb(var(--color-overlay-light) / <alpha-value>)',
-          medium: 'rgb(var(--color-overlay-medium) / <alpha-value>)',
-          heavy: 'rgb(var(--color-overlay-heavy) / <alpha-value>)',
+          light: 'rgba(0, 0, 0, 0.4)',
+          medium: 'rgba(0, 0, 0, 0.6)',
+          heavy: 'rgba(0, 0, 0, 0.8)',
         },
         primary: {
           50: '#EBF0FF',
