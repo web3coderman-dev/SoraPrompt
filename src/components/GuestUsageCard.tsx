@@ -29,7 +29,7 @@ export function GuestUsageCard() {
                   {t['guestMode.title'] || 'Guest Mode'}
                 </span>
                 <span className="px-2 py-0.5 text-xs font-medium bg-neon/10 text-neon border border-neon/20 rounded-full">
-                  TRIAL
+                  {t['guestMode.trial'] || 'TRIAL'}
                 </span>
               </div>
               <p className="text-xs text-text-tertiary mt-0.5">
