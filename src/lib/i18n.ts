@@ -334,6 +334,7 @@ export const translations = {
     },
 
     'footer.company': 'SoraPrompt Studio',
+    'footer.slogan': '让你的创意，变成 Sora 短视频爆款',
     'footer.tagline': '专业的 AI 视频提示词生成工具，为 Sora 和其他 AI 视频工具打造电影级提示词',
     'footer.legal': '法律条款',
     'footer.product': '产品',
@@ -676,6 +677,7 @@ export const translations = {
     },
 
     'footer.company': 'SoraPrompt Studio',
+    'footer.slogan': 'Turn your ideas into viral Sora videos',
     'footer.tagline': 'Professional AI-powered video prompt generator for Sora and other AI video tools.',
     'footer.legal': 'Legal',
     'footer.product': 'Product',
