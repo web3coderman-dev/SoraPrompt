@@ -23,16 +23,20 @@ export default function SidebarHeader({ isHovered = false }: SidebarHeaderProps)
           <Logo size={32} className="flex-shrink-0" />
         </button>
 
-        {/* Desktop: Logo only */}
-        <div className="hidden lg:flex items-center justify-center">
+        {/* Desktop: Logo - hidden on hover */}
+        <div
+          className={`hidden lg:flex items-center justify-center transition-all duration-300 ${
+            isHovered ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+          }`}
+        >
           <Logo size={32} className="flex-shrink-0" />
         </div>
 
-        {/* Desktop: Hover button */}
+        {/* Desktop: Hover button - appears on hover */}
         <button
           onClick={toggleSidebar}
-          className={`hidden lg:flex items-center justify-center w-7 h-7 rounded-md text-text-secondary hover:text-text-primary hover:bg-scene-fillLight/80 backdrop-blur-sm transition-all duration-300 absolute right-2 top-1/2 -translate-y-1/2 shadow-sm ${
-            isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2 pointer-events-none'
+          className={`hidden lg:flex items-center justify-center w-10 h-10 rounded-md text-text-secondary hover:text-text-primary hover:bg-scene-fillLight/80 backdrop-blur-sm transition-all duration-300 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 shadow-sm ${
+            isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'
           }`}
           title={t.expandSidebar || 'Expand Sidebar'}
           style={{
@@ -40,7 +44,7 @@ export default function SidebarHeader({ isHovered = false }: SidebarHeaderProps)
             transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
-          <PanelLeft className="w-4 h-4" />
+          <PanelLeft className="w-5 h-5" />
         </button>
       </div>
     );
