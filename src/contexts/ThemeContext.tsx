@@ -21,22 +21,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const root = window.document.documentElement;
-
-    console.log('[ThemeContext] Applying theme:', theme);
-    console.log('[ThemeContext] Before - classList:', root.classList.toString());
-
     root.classList.remove('light', 'dark');
     root.classList.add(theme);
     root.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
-
-    console.log('[ThemeContext] After - classList:', root.classList.toString());
-    console.log('[ThemeContext] CSS var --color-scene-bg:',
-      getComputedStyle(root).getPropertyValue('--color-scene-bg'));
-
-    window.dispatchEvent(new CustomEvent('settings-changed', {
-      detail: { type: 'theme', value: theme }
-    }));
   }, [theme]);
 
   useEffect(() => {
