@@ -1,3 +1,5 @@
+import { shouldTrackEvent } from './analyticsFilter';
+
 export interface AnalyticsEvent {
   event: string;
   timestamp: number;
@@ -40,6 +42,11 @@ function saveAnalyticsEvent(event: AnalyticsEvent): void {
 }
 
 export function trackEvent(eventName: string, properties?: Record<string, any>): void {
+  if (!shouldTrackEvent()) {
+    console.log('🔧 Dev mode: Skipping analytics event:', eventName);
+    return;
+  }
+
   const event: AnalyticsEvent = {
     event: eventName,
     timestamp: Date.now(),
