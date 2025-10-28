@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Twitter, Github, MessageCircle } from 'lucide-react';
+import { Logo } from './ui/Logo';
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -48,9 +49,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand Column */}
           <div>
-            <h3 className="text-sm font-medium text-text-primary mb-3">
-              {t['footer.company'] || 'SoraPrompt Studio'}
-            </h3>
+            <div className="flex items-center gap-2 mb-3">
+              <Logo size={20} variant="favicon" className="flex-shrink-0" />
+              <h3 className="text-sm font-medium text-text-primary">
+                {t['footer.company'] || 'SoraPrompt Studio'}
+              </h3>
+            </div>
             <p className="text-sm text-text-secondary leading-relaxed max-w-[280px]">
               {t['footer.slogan'] || '让你的创意，变成Sora爆款'}
             </p>
