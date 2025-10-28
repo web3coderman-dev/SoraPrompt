@@ -146,7 +146,7 @@ export default function Dashboard() {
       setCurrentPrompt(prompt);
     } catch (error) {
       console.error('Error generating prompt:', error);
-      alert(t.language === 'zh' ? '生成失败，请重试' : 'Generation failed, please retry');
+      alert(t['dialogs.generationFailed'] || 'Generation failed, please retry');
     } finally {
       setIsGenerating(false);
     }
@@ -181,7 +181,7 @@ export default function Dashboard() {
       setCurrentPrompt(updatedPrompt);
     } catch (error) {
       console.error('Error improving prompt:', error);
-      alert(t.language === 'zh' ? '改进失败，请重试' : 'Improvement failed, please retry');
+      alert(t['dialogs.improvementFailed'] || 'Improvement failed, please retry');
     } finally {
       setIsImproving(false);
     }
@@ -200,7 +200,7 @@ export default function Dashboard() {
       setExplanation(explanation);
     } catch (error) {
       console.error('Error explaining prompt:', error);
-      alert(t.language === 'zh' ? '解释失败，请重试' : 'Explanation failed, please retry');
+      alert(t['dialogs.explanationFailed'] || 'Explanation failed, please retry');
     }
   };
 
@@ -233,7 +233,7 @@ export default function Dashboard() {
       setCurrentPrompt(updatedPrompt);
     } catch (error) {
       console.error('Error changing language:', error);
-      alert(t.language === 'zh' ? '语言切换失败，请重试' : 'Language change failed, please retry');
+      alert(t['dialogs.languageChangeFailed'] || 'Language change failed, please retry');
     } finally {
       setIsChangingLanguage(false);
     }

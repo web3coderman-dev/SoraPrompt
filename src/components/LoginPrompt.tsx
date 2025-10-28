@@ -25,18 +25,16 @@ export function LoginPrompt({
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   const defaultBenefits = [
-    language === 'zh' ? '无限云端存储历史记录' : 'Unlimited cloud history storage',
-    language === 'zh' ? '每日免费生成次数' : 'Daily free generations',
-    language === 'zh' ? '解锁 Director 模式' : 'Unlock Director mode',
-    language === 'zh' ? '数据安全同步' : 'Secure data sync',
+    t['loginPrompt.benefit1'] || 'Unlimited cloud history storage',
+    t['loginPrompt.benefit2'] || 'Daily free generations',
+    t['loginPrompt.benefit3'] || 'Unlock Director mode',
+    t['loginPrompt.benefit4'] || 'Secure data sync',
   ];
 
   const benefitIcons = [Clapperboard, Palette, Sparkles, Rocket];
 
-  const displayTitle = title || (language === 'zh' ? '登录以解锁完整功能' : 'Sign in to unlock full features');
-  const displayMessage = message || (language === 'zh'
-    ? '登录后可享受云端存储、更多生成次数和高级功能'
-    : 'Sign in to enjoy cloud storage, more generations, and premium features');
+  const displayTitle = title || t['loginPrompt.title'] || 'Sign in to unlock full features';
+  const displayMessage = message || t['loginPrompt.message'] || 'Sign in to enjoy cloud storage, more generations, and premium features';
   const displayBenefits = benefits || defaultBenefits;
 
   const handleLoginClick = () => {

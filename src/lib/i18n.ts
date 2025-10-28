@@ -326,6 +326,20 @@ export const translations = {
     upgradeModalCTA: '升级至 {{tier}}',
     upgradeModalLearnMore: '了解 {{tier}}',
 
+    // Login Prompt - General
+    'loginPrompt.title': '登录以解锁完整功能',
+    'loginPrompt.message': '登录后可享受云端存储、更多生成次数和高级功能',
+    'loginPrompt.benefit1': '无限云端存储历史记录',
+    'loginPrompt.benefit2': '每日免费生成次数',
+    'loginPrompt.benefit3': '解锁 Director 模式',
+    'loginPrompt.benefit4': '数据安全同步',
+
+    // Dialogs - Alerts & Toasts
+    'dialogs.generationFailed': '生成失败，请重试',
+    'dialogs.improvementFailed': '改进失败，请重试',
+    'dialogs.explanationFailed': '解释失败，请重试',
+    'dialogs.languageChangeFailed': '语言切换失败，请重试',
+
     usageToday: '今日已用',
     usageMonth: '本月已用',
     usageRemaining: '剩余 {{count}} 次',
@@ -818,6 +832,20 @@ export const translations = {
     upgradeModalCTA: 'Upgrade to {{tier}}',
     upgradeModalLearnMore: 'Learn about {{tier}}',
 
+    // Login Prompt - General
+    'loginPrompt.title': 'Sign in to unlock full features',
+    'loginPrompt.message': 'Sign in to enjoy cloud storage, more generations, and premium features',
+    'loginPrompt.benefit1': 'Unlimited cloud history storage',
+    'loginPrompt.benefit2': 'Daily free generations',
+    'loginPrompt.benefit3': 'Unlock Director mode',
+    'loginPrompt.benefit4': 'Secure data sync',
+
+    // Dialogs - Alerts & Toasts
+    'dialogs.generationFailed': 'Generation failed, please retry',
+    'dialogs.improvementFailed': 'Improvement failed, please retry',
+    'dialogs.explanationFailed': 'Explanation failed, please retry',
+    'dialogs.languageChangeFailed': 'Language change failed, please retry',
+
     usageToday: 'Used Today',
     usageMonth: 'Used This Month',
     usageRemaining: '{{count}} remaining',
@@ -1229,6 +1257,20 @@ export const translations = {
     upgradeModalBenefit4: 'プレミアム{{tier}}バッジ',
     upgradeModalCTA: '{{tier}}にアップグレード',
     upgradeModalLearnMore: '{{tier}}について詳しく',
+
+    // Login Prompt - General
+    'loginPrompt.title': '完全な機能を解除するにはログイン',
+    'loginPrompt.message': 'ログインすると、クラウドストレージ、より多くの生成、プレミアム機能をお楽しみいただけます',
+    'loginPrompt.benefit1': '無制限のクラウド履歴ストレージ',
+    'loginPrompt.benefit2': '毎日の無料生成',
+    'loginPrompt.benefit3': 'ディレクターモードを解除',
+    'loginPrompt.benefit4': '安全なデータ同期',
+
+    // Dialogs - Alerts & Toasts
+    'dialogs.generationFailed': '生成に失敗しました。もう一度お試しください',
+    'dialogs.improvementFailed': '改善に失敗しました。もう一度お試しください',
+    'dialogs.explanationFailed': '説明に失敗しました。もう一度お試しください',
+    'dialogs.languageChangeFailed': '言語変更に失敗しました。もう一度お試しください',
 
     usageToday: '本日使用',
     usageMonth: '今月使用',
@@ -1668,6 +1710,20 @@ export const translations = {
     upgradeModalCTA: 'Mejorar a {{tier}}',
     upgradeModalLearnMore: 'Más sobre {{tier}}',
 
+    // Login Prompt - General
+    'loginPrompt.title': 'Inicia sesión para desbloquear funciones completas',
+    'loginPrompt.message': 'Inicia sesión para disfrutar almacenamiento en la nube, más generaciones y funciones premium',
+    'loginPrompt.benefit1': 'Almacenamiento ilimitado de historial en la nube',
+    'loginPrompt.benefit2': 'Generaciones diarias gratuitas',
+    'loginPrompt.benefit3': 'Desbloquear modo Director',
+    'loginPrompt.benefit4': 'Sincronización segura de datos',
+
+    // Dialogs - Alerts & Toasts
+    'dialogs.generationFailed': 'Generación fallida, intenta de nuevo',
+    'dialogs.improvementFailed': 'Mejora fallida, intenta de nuevo',
+    'dialogs.explanationFailed': 'Explicación fallida, intenta de nuevo',
+    'dialogs.languageChangeFailed': 'Cambio de idioma fallido, intenta de nuevo',
+
     usageToday: 'Usado Hoy',
     usageMonth: 'Usado Este Mes',
     usageRemaining: '{{count}} restantes',
@@ -2092,6 +2148,20 @@ export const translations = {
     upgradeModalBenefit4: 'Badge premium {{tier}}',
     upgradeModalCTA: 'Passer à {{tier}}',
     upgradeModalLearnMore: 'En savoir plus sur {{tier}}',
+
+    // Login Prompt - General
+    'loginPrompt.title': 'Connectez-vous pour déverrouiller toutes les fonctionnalités',
+    'loginPrompt.message': 'Connectez-vous pour profiter du stockage cloud, de plus de générations et de fonctionnalités premium',
+    'loginPrompt.benefit1': 'Stockage illimité de l\'historique cloud',
+    'loginPrompt.benefit2': 'Générations quotidiennes gratuites',
+    'loginPrompt.benefit3': 'Déverrouiller le mode Réalisateur',
+    'loginPrompt.benefit4': 'Synchronisation sécurisée des données',
+
+    // Dialogs - Alerts & Toasts
+    'dialogs.generationFailed': 'Génération échouée, réessayez',
+    'dialogs.improvementFailed': 'Amélioration échouée, réessayez',
+    'dialogs.explanationFailed': 'Explication échouée, réessayez',
+    'dialogs.languageChangeFailed': 'Changement de langue échoué, réessayez',
 
     usageToday: 'Utilisé Aujourd\'hui',
     usageMonth: 'Utilisé Ce Mois',
@@ -2518,6 +2588,20 @@ export const translations = {
     upgradeModalCTA: 'Zu {{tier}} Upgraden',
     upgradeModalLearnMore: 'Mehr über {{tier}}',
 
+    // Login Prompt - General
+    'loginPrompt.title': 'Melden Sie sich an, um alle Funktionen freizuschalten',
+    'loginPrompt.message': 'Melden Sie sich an, um Cloud-Speicher, mehr Generierungen und Premium-Funktionen zu genießen',
+    'loginPrompt.benefit1': 'Unbegrenzter Cloud-Verlaufsspeicher',
+    'loginPrompt.benefit2': 'Tägliche kostenlose Generierungen',
+    'loginPrompt.benefit3': 'Regisseur-Modus freischalten',
+    'loginPrompt.benefit4': 'Sichere Datensynchronisation',
+
+    // Dialogs - Alerts & Toasts
+    'dialogs.generationFailed': 'Generierung fehlgeschlagen, bitte erneut versuchen',
+    'dialogs.improvementFailed': 'Verbesserung fehlgeschlagen, bitte erneut versuchen',
+    'dialogs.explanationFailed': 'Erklärung fehlgeschlagen, bitte erneut versuchen',
+    'dialogs.languageChangeFailed': 'Sprachwechsel fehlgeschlagen, bitte erneut versuchen',
+
     usageToday: 'Heute Verwendet',
     usageMonth: 'Diesen Monat Verwendet',
     usageRemaining: '{{count}} verbleibend',
@@ -2943,6 +3027,20 @@ export const translations = {
     upgradeModalBenefit4: '프리미엄 {{tier}} 배지',
     upgradeModalCTA: '{{tier}}로 업그레이드',
     upgradeModalLearnMore: '{{tier}}에 대해 알아보기',
+
+    // Login Prompt - General
+    'loginPrompt.title': '모든 기능을 잠금 해제하려면 로그인하세요',
+    'loginPrompt.message': '로그인하여 클라우드 저장소, 더 많은 생성 횟수, 프리미엄 기능을 즐기세요',
+    'loginPrompt.benefit1': '무제한 클라우드 기록 저장소',
+    'loginPrompt.benefit2': '매일 무료 생성',
+    'loginPrompt.benefit3': '디렉터 모드 잠금 해제',
+    'loginPrompt.benefit4': '안전한 데이터 동기화',
+
+    // Dialogs - Alerts & Toasts
+    'dialogs.generationFailed': '생성 실패, 다시 시도하세요',
+    'dialogs.improvementFailed': '개선 실패, 다시 시도하세요',
+    'dialogs.explanationFailed': '설명 실패, 다시 시도하세요',
+    'dialogs.languageChangeFailed': '언어 변경 실패, 다시 시도하세요',
 
     usageToday: '오늘 사용',
     usageMonth: '이번 달 사용',
