@@ -114,7 +114,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Copyright */}
             <p className="text-xs text-text-tertiary">
-              © {currentYear} {t['footer.copyright'] || 'SoraPrompt Studio. All rights reserved.'}
+              {t['footer.copyright'] || `© ${currentYear} SoraPrompt Studio. All rights reserved.`}
             </p>
 
             {/* Social Icons */}
