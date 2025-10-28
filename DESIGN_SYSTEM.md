@@ -209,6 +209,332 @@ gradient-studio: linear-gradient(180deg, #0B0D12 0%, #141821 100%)
 
 ---
 
+### Theme Modes（主题模式）
+
+SoraPrompt Studio 支持两种视觉主题，以适应不同环境和用户偏好：
+
+- **Dark Theme（暗夜片场）** - 默认主题，深色背景，专业电影片场氛围
+- **Light Theme（日光片场）** - 备选主题，浅色背景，明亮清新的工作环境
+
+两种主题共享相同的品牌色（Key Light、Rim Light、Neon）和设计语言，仅调整背景、文字和边框色值以确保可读性和对比度。
+
+---
+
+### Dark Theme（暗夜片场）— 默认主题
+
+#### Scene Colors（场景色）
+片场基础色调，营造暗夜摄影棚氛围
+
+| Token | Value | Usage | Example |
+|-------|-------|-------|---------|
+| `color.scene.background` | `#0B0D12` | 主背景（暗色片场地面） | 页面底色、侧边栏 |
+| `color.scene.fill` | `#141821` | 填充色（布景板） | 卡片背景、面板 |
+| `color.scene.fillLight` | `#1A1F2E` | 亮填充（补光区域） | 悬停状态、选中区域 |
+
+#### Text Colors（文字色）
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `color.text.primary` | `#FFFFFF` | 主要文字（剧本标题、导演指令） |
+| `color.text.secondary` | `#A0A8B8` | 次要文字（场记信息、时间码） |
+| `color.text.tertiary` | `#6B7280` | 辅助文字（备注、提示） |
+| `color.text.disabled` | `#4B5563` | 禁用文字（未激活设备） |
+
+#### Border & Overlay（边框与遮罩）
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `color.border.subtle` | `rgba(58, 108, 255, 0.1)` | 微妙分隔线 |
+| `color.border.default` | `rgba(58, 108, 255, 0.2)` | 标准边框 |
+| `color.border.strong` | `rgba(58, 108, 255, 0.4)` | 强调边框 |
+| `color.overlay.light` | `rgba(0, 0, 0, 0.4)` | 轻遮罩（模态框背景） |
+| `color.overlay.medium` | `rgba(0, 0, 0, 0.6)` | 中遮罩（聚焦模式） |
+| `color.overlay.heavy` | `rgba(0, 0, 0, 0.8)` | 重遮罩（全屏预览） |
+
+---
+
+### Light Theme（日光片场）— 备选主题
+
+#### Scene Colors（场景色）
+明亮工作环境，日光片场氛围
+
+| Token | Value | Usage | Example |
+|-------|-------|-------|---------|
+| `color.scene.background` | `#FFFFFF` | 主背景（白色片场地面） | 页面底色、侧边栏 |
+| `color.scene.fill` | `#F8F9FA` | 填充色（浅灰布景板） | 卡片背景、面板 |
+| `color.scene.fillLight` | `#F1F3F5` | 暗填充（阴影区域） | 悬停状态、选中区域 |
+
+**视觉效果：** 明亮的片场环境，柔和光线，清晰可读的内容层次
+
+```css
+/* 示例：主容器 Light 模式 */
+.studio-container.light {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8F9FA 100%);
+}
+```
+
+#### Text Colors（文字色）
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `color.text.primary` | `#1A1D23` | 主要文字（剧本标题、导演指令） |
+| `color.text.secondary` | `#4A5568` | 次要文字（场记信息、时间码） |
+| `color.text.tertiary` | `#718096` | 辅助文字（备注、提示） |
+| `color.text.disabled` | `#A0AEC0` | 禁用文字（未激活设备） |
+
+#### Border & Overlay（边框与遮罩）
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `color.border.subtle` | `rgba(0, 0, 0, 0.06)` | 微妙分隔线 |
+| `color.border.default` | `rgba(0, 0, 0, 0.1)` | 标准边框 |
+| `color.border.strong` | `rgba(58, 108, 255, 0.3)` | 强调边框（保持品牌色） |
+| `color.overlay.light` | `rgba(0, 0, 0, 0.3)` | 轻遮罩（模态框背景） |
+| `color.overlay.medium` | `rgba(0, 0, 0, 0.5)` | 中遮罩（聚焦模式） |
+| `color.overlay.heavy` | `rgba(0, 0, 0, 0.7)` | 重遮罩（全屏预览） |
+
+---
+
+### Shared Colors（共享颜色）— 两种主题通用
+
+以下颜色在 Dark 和 Light 主题中保持一致，确保品牌识别度和视觉连续性：
+
+#### Light Colors（灯光色）
+专业布光系统，基于三点照明原理
+
+| Token | Value | Usage | Metaphor |
+|-------|-------|-------|----------|
+| `color.light.key` | `#3A6CFF` | 主光源（Key Light） | 品牌主色、主按钮、链接 |
+| `color.light.rim` | `#E4A24D` | 边缘光（Rim Light） | 强调边框、温暖氛围 |
+| `color.light.neon` | `#8A60FF` | 霓虹光（Neon FX） | AI 能量、特效、动画 |
+| `color.light.fill` | `#2A3441` | 补光（Fill Light - Dark 专用） | 次要元素、禁用状态 |
+| `color.light.fillLight` | `#E8ECEF` | 补光（Fill Light - Light 专用） | 次要元素、禁用状态 |
+
+**三点照明示意：**
+```
+     Key Light (蓝)
+         ▼
+    ┌─────────┐
+    │  主体   │ ← Rim Light (金)
+    └─────────┘
+         ▲
+    Fill Light (灰)
+```
+
+**使用场景：**
+- **Key Light（蓝色）：** 导演的主要工作区（Prompt 编辑器、主按钮）
+- **Rim Light（金色）：** 高级功能提示、成功状态、预览区边缘
+- **Neon（紫色）：** AI 正在工作、渲染状态、魔法时刻
+
+```css
+/* 示例：主按钮（导演喊 Action）- 两种主题通用 */
+.button-take {
+  background: linear-gradient(135deg, #3A6CFF 0%, #5C89FF 100%);
+  box-shadow: 0 0 24px rgba(58, 108, 255, 0.3);
+}
+
+/* 示例：AI 渲染中 - 两种主题通用 */
+.rendering-glow {
+  border: 2px solid #8A60FF;
+  box-shadow: 0 0 32px rgba(138, 96, 255, 0.5);
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+```
+
+#### State Colors（状态色）
+清晰的状态反馈，符合电影制作流程
+
+| Token | Value | Usage | Cinema Metaphor |
+|-------|-------|-------|-----------------|
+| `color.state.ok` | `#45E0A2` | 成功/就绪 | 绿灯（Green Light - 开拍） |
+| `color.state.error` | `#FF5E5E` | 错误/阻塞 | 红灯（Red Light - 停机） |
+| `color.state.warning` | `#FFB74D` | 警告/注意 | 黄灯（Amber Light - 准备） |
+| `color.state.info` | `#64B5F6` | 信息/提示 | 蓝灯（Blue Screen - 后期） |
+
+**状态语义：**
+```
+🟢 Green Light   → "Scene is ready"（场景就绪）
+🔴 Red Light     → "Cut! Something's wrong"（停！有问题）
+🟡 Amber Light   → "Stand by..."（准备中...）
+🔵 Blue Light    → "In post-production"（后期处理）
+```
+
+---
+
+### Theme-Specific Shadows（主题特定阴影）
+
+#### Dark Theme Shadows
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `shadow.light` | `0 0 24px rgba(58, 108, 255, 0.2)` | Key Light 柔光 |
+| `shadow.key` | `0 8px 32px rgba(58, 108, 255, 0.3)` | 主光源投射 |
+| `shadow.rim` | `0 4px 16px rgba(228, 162, 77, 0.25)` | 边缘光晕 |
+| `shadow.neon` | `0 0 20px rgba(138, 96, 255, 0.4)` | 霓虹发光 |
+| `shadow.depth.sm` | `0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)` | 微景深 |
+| `shadow.depth.md` | `0 4px 6px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.06)` | 中景深 |
+| `shadow.depth.lg` | `0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05)` | 深景深 |
+
+#### Light Theme Shadows
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `shadow.light` | `0 0 24px rgba(58, 108, 255, 0.15)` | Key Light 柔光 |
+| `shadow.key` | `0 8px 32px rgba(58, 108, 255, 0.2)` | 主光源投射 |
+| `shadow.rim` | `0 4px 16px rgba(228, 162, 77, 0.2)` | 边缘光晕 |
+| `shadow.neon` | `0 0 20px rgba(138, 96, 255, 0.3)` | 霓虹发光 |
+| `shadow.depth.sm` | `0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.12)` | 微景深 |
+| `shadow.depth.md` | `0 4px 6px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.03)` | 中景深 |
+| `shadow.depth.lg` | `0 10px 15px rgba(0,0,0,0.05), 0 4px 6px rgba(0,0,0,0.025)` | 深景深 |
+
+---
+
+### Theme Implementation（主题实现）
+
+#### CSS Variables Approach
+
+使用 CSS 变量实现主题切换：
+
+```css
+/* 根节点定义 Dark 主题（默认） */
+:root,
+:root[data-theme="dark"] {
+  /* Scene Colors */
+  --color-scene-background: #0B0D12;
+  --color-scene-fill: #141821;
+  --color-scene-fill-light: #1A1F2E;
+
+  /* Text Colors */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #A0A8B8;
+  --color-text-tertiary: #6B7280;
+  --color-text-disabled: #4B5563;
+
+  /* Border & Overlay */
+  --color-border-subtle: rgba(58, 108, 255, 0.1);
+  --color-border-default: rgba(58, 108, 255, 0.2);
+  --color-border-strong: rgba(58, 108, 255, 0.4);
+  --color-overlay-light: rgba(0, 0, 0, 0.4);
+  --color-overlay-medium: rgba(0, 0, 0, 0.6);
+  --color-overlay-heavy: rgba(0, 0, 0, 0.8);
+
+  /* Shadows */
+  --shadow-light: 0 0 24px rgba(58, 108, 255, 0.2);
+  --shadow-key: 0 8px 32px rgba(58, 108, 255, 0.3);
+  --shadow-depth-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+/* Light 主题 */
+:root[data-theme="light"] {
+  /* Scene Colors */
+  --color-scene-background: #FFFFFF;
+  --color-scene-fill: #F8F9FA;
+  --color-scene-fill-light: #F1F3F5;
+
+  /* Text Colors */
+  --color-text-primary: #1A1D23;
+  --color-text-secondary: #4A5568;
+  --color-text-tertiary: #718096;
+  --color-text-disabled: #A0AEC0;
+
+  /* Border & Overlay */
+  --color-border-subtle: rgba(0, 0, 0, 0.06);
+  --color-border-default: rgba(0, 0, 0, 0.1);
+  --color-border-strong: rgba(58, 108, 255, 0.3);
+  --color-overlay-light: rgba(0, 0, 0, 0.3);
+  --color-overlay-medium: rgba(0, 0, 0, 0.5);
+  --color-overlay-heavy: rgba(0, 0, 0, 0.7);
+
+  /* Shadows */
+  --shadow-light: 0 0 24px rgba(58, 108, 255, 0.15);
+  --shadow-key: 0 8px 32px rgba(58, 108, 255, 0.2);
+  --shadow-depth-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.12);
+}
+
+/* 共享颜色（两种主题通用） */
+:root {
+  /* Light Colors */
+  --color-light-key: #3A6CFF;
+  --color-light-rim: #E4A24D;
+  --color-light-neon: #8A60FF;
+
+  /* State Colors */
+  --color-state-ok: #45E0A2;
+  --color-state-error: #FF5E5E;
+  --color-state-warning: #FFB74D;
+  --color-state-info: #64B5F6;
+}
+```
+
+#### Tailwind Configuration
+
+在 `tailwind.config.js` 中使用 `darkMode: 'class'` 实现主题切换：
+
+```javascript
+module.exports = {
+  darkMode: 'class', // 使用 class 策略
+  theme: {
+    extend: {
+      colors: {
+        scene: {
+          background: 'rgb(var(--color-scene-background) / <alpha-value>)',
+          fill: 'rgb(var(--color-scene-fill) / <alpha-value>)',
+          fillLight: 'rgb(var(--color-scene-fill-light) / <alpha-value>)',
+        },
+        // ... 其他颜色
+      },
+    },
+  },
+};
+```
+
+#### React Theme Context
+
+```typescript
+// src/contexts/ThemeContext.tsx
+import { createContext, useContext, useEffect, useState } from 'react';
+
+type Theme = 'dark' | 'light';
+
+const ThemeContext = createContext<{
+  theme: Theme;
+  toggleTheme: () => void;
+}>({
+  theme: 'dark',
+  toggleTheme: () => {},
+});
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState<Theme>('dark');
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.setAttribute('data-theme', theme);
+
+    // Tailwind dark mode class
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+export const useTheme = () => useContext(ThemeContext);
+```
+
+---
+
 ## 📝 Typography System
 
 ### Font Family（字体族）
