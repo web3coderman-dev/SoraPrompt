@@ -2,31 +2,31 @@ import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { Logo } from '../components/ui/Logo';
+import { LegalLayout } from '../components/layouts/LegalLayout';
 
 export default function Terms() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-sceneBackground text-text-primary">
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <div className="mb-8">
-          <Button
-            variant="ghost"
-            onClick={() => navigate('/')}
-            className="mb-4"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            返回首页
-          </Button>
+    <LegalLayout>
+      <div className="mb-8">
+        <Button
+          variant="ghost"
+          onClick={() => navigate('/')}
+          className="mb-4"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          返回首页
+        </Button>
 
-          <div className="flex items-center gap-3 mb-4">
-            <Logo size={48} />
-            <h1 className="text-4xl font-bold font-display">服务条款</h1>
-          </div>
-          <p className="text-text-secondary">最后更新：2025年1月</p>
+        <div className="flex items-center gap-3 mb-4">
+          <Logo size={48} />
+          <h1 className="text-4xl font-bold font-display text-text-primary">服务条款</h1>
         </div>
+        <p className="text-text-secondary">最后更新：2025年1月</p>
+      </div>
 
-        <div className="space-y-8 bg-sceneFill rounded-2xl p-8 border border-borderSubtle">
+      <div className="space-y-8 bg-sceneFill rounded-2xl p-8 border border-borderSubtle">
           <section>
             <h2 className="text-2xl font-bold mb-4">1. 服务说明</h2>
             <div className="text-text-secondary space-y-3">
@@ -242,14 +242,13 @@ export default function Terms() {
               如果您不同意这些条款，请不要使用我们的服务。
             </p>
           </section>
-        </div>
-
-        <div className="mt-8 text-center">
-          <Button variant="director" onClick={() => navigate('/')}>
-            返回首页
-          </Button>
-        </div>
       </div>
-    </div>
+
+      <div className="mt-8 text-center">
+        <Button variant="director" onClick={() => navigate('/')}>
+          返回首页
+        </Button>
+      </div>
+    </LegalLayout>
   );
 }
