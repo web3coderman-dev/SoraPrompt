@@ -2772,6 +2772,49 @@ export const translations = {
     settingsSaved: '설정이 저장되었습니다',
     settingsSaveError: '설정 저장에 실패했습니다',
 
+    // Settings - Cloud Sync
+    'settings.localOnlyTitle': '설정이 로컬에만 저장됨',
+    'settings.localOnlyDesc': '클라우드 동기화를 활성화하려면 로그인하세요',
+    'settings.syncing': '동기화 중',
+    'settings.cloudSyncEnabled': '클라우드 동기화 활성화됨',
+    'settings.syncFailed': '동기화 실패',
+    'settings.cloudSync': '클라우드 동기화',
+    'settings.lastSynced': '마지막 동기화: ',
+    'settings.syncNowAria': '지금 설정을 클라우드에 동기화',
+    'settings.syncNow': '지금 동기화',
+    'settings.autoSyncDesc': '설정이 자동으로 클라우드에 동기화됩니다',
+    'settings.syncSuccess': '설정이 클라우드에 동기화되었습니다',
+    'settings.syncErrorRetry': '동기화 실패, 다시 시도해 주세요',
+
+    // Settings - Unlock Features
+    'settings.unlockTitle': '모든 기능 잠금 해제',
+    'settings.unlockDesc': '더 많은 기능을 즐기려면 로그인하세요',
+    'settings.featureUnlimitedStorage': '무제한 클라우드 저장소',
+    'settings.featureSecureSync': '안전한 데이터 동기화',
+    'settings.featurePremium': '프리미엄 기능',
+    'settings.featureMoreGenerations': '더 많은 생성 횟수',
+    'settings.signInNow': '지금 로그인',
+
+    // Settings - Account & Security
+    'settings.accountTitle': '계정 및 보안',
+    'settings.googleConnected': 'Google 계정 연결됨',
+    'settings.googleBenefit': 'Google로 안전하고 편리한 액세스를 즐기세요',
+    'settings.emailLoginStatus': '현재 상태: 이메일 로그인',
+    'settings.linkGoogleDesc': '원클릭 로그인을 위해 Google 계정을 연결하세요',
+    'settings.linking': '연결 중...',
+    'settings.linkGoogle': 'Google 계정 연결',
+
+    // Language Names
+    languageNames: {
+      zh: '中文',
+      en: 'English',
+      ja: '日本語',
+      es: 'Español',
+      fr: 'Français',
+      de: 'Deutsch',
+      ko: '한국어',
+    },
+
     sidebarNew: '새 프로젝트',
     sidebarHistory: '기록',
     sidebarSettings: '설정',
