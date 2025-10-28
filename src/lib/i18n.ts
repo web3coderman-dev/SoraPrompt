@@ -1141,7 +1141,7 @@ export const translations = {
     'footer.terms': '利用規約',
     'footer.privacy': 'プライバシーポリシー',
     'footer.docs': 'ドキュメント',
-    'footer.copyright': '© 2025 SoraPrompt Studio. All rights reserved.',
+    'footer.copyright': '© 2025 SoraPrompt Studio. 無断転載禁止。',
 
     'terms.title': '利用規約',
     'terms.lastUpdated': '最終更新：2025年1月',
@@ -2578,7 +2578,7 @@ export const translations = {
     'footer.terms': '서비스 약관',
     'footer.privacy': '개인정보 처리방침',
     'footer.docs': '문서',
-    'footer.copyright': '© 2025 SoraPrompt Studio. All rights reserved.',
+    'footer.copyright': '© 2025 SoraPrompt Studio. 모든 권리 보유.',
 
     'terms.title': '서비스 약관',
     'terms.section1.title': '1. 서비스 설명',
