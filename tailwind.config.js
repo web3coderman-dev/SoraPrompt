@@ -156,7 +156,7 @@ export default {
           '100%': { opacity: '1' },
         },
         cameraPan: {
-          '0%': { transform: 'translateX(-10px)', opacity: '0' },
+          '0%': { transform: 'translateX(-100%)', opacity: '0' },
           '100%': { transform: 'translateX(0)', opacity: '1' },
         },
         lightBlink: {
@@ -199,6 +199,15 @@ export default {
       },
       backdropBlur: {
         xs: '2px',
+      },
+      zIndex: {
+        base: '0',
+        scene: '10',
+        panel: '20',
+        overlay: '30',
+        hud: '40',
+        modal: '50',
+        toast: '60',
       },
     },
   },

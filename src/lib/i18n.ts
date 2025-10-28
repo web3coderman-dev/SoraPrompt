@@ -99,6 +99,9 @@ export const translations = {
     sidebarNew: '新建项目',
     sidebarHistory: '历史记录',
     sidebarSettings: '设置',
+    sceneNew: '新场景',
+    sceneTakes: '拍摄记录',
+    sceneStudio: '片场设置',
     sidebarVersion: 'v0.1 MVP',
     sidebarPowered: '由 GPT-5 驱动',
 
@@ -442,6 +445,9 @@ export const translations = {
     sidebarNew: 'New Project',
     sidebarHistory: 'History',
     sidebarSettings: 'Settings',
+    sceneNew: 'New Scene',
+    sceneTakes: 'Takes',
+    sceneStudio: 'Studio',
     sidebarVersion: 'v0.1 MVP',
     sidebarPowered: 'Powered by GPT-5',
 

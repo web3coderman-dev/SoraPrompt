@@ -34,9 +34,10 @@ const variantClasses: Record<ButtonVariant, string> = {
              text-white font-display shadow-key
              transition-all duration-300 ease-in-out
              animate-render-pulse`,
-  scene: `bg-scene-fill border border-rimLight/30 hover:border-rimLight/50
-          hover:bg-scene-fillLight text-text-primary hover:text-rimLight
-          transition-all duration-300 ease-in-out`,
+  scene: `bg-scene-fillLight border border-keyLight/10
+          hover:bg-scene-fillLight/80 hover:border-keyLight/20
+          text-text-secondary hover:text-text-primary font-medium
+          transition-all duration-200 ease-in-out`,
   rim: `bg-gradient-to-r from-rimLight-500 to-rimLight-600
         hover:from-rimLight-600 hover:to-rimLight-700
         text-white shadow-rim
