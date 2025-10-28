@@ -168,8 +168,28 @@ export default function LoginModal({ onClose, context }: LoginModalProps) {
           </button>
         </div>
 
-        <div className="text-center text-sm text-text-tertiary">
-          <p>{t.privacyPolicy}</p>
+        <div className="text-center text-sm text-text-tertiary px-4">
+          <p>
+            {t['auth.terms.byContinuing'] || 'By continuing, you agree to our'}{' '}
+            <a
+              href="/terms"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-keyLight hover:text-keyLight/80 transition-colors duration-300 underline underline-offset-2"
+            >
+              {t['auth.terms.termsOfService'] || 'Terms of Service'}
+            </a>
+            {' '}{t['auth.terms.and'] || 'and'}{' '}
+            <a
+              href="/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-keyLight hover:text-keyLight/80 transition-colors duration-300 underline underline-offset-2"
+            >
+              {t['auth.terms.privacyPolicy'] || 'Privacy Policy'}
+            </a>
+            .
+          </p>
         </div>
       </div>
     </Modal>

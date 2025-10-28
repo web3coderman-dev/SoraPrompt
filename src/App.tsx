@@ -4,6 +4,8 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import { SubscriptionProvider } from './contexts/SubscriptionContext';
 import AuthCallback from './pages/AuthCallback';
 import Dashboard from './pages/Dashboard';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 import { ToastContainer } from './components/Toast';
 import { Loader2 } from 'lucide-react';
 
@@ -22,6 +24,8 @@ function AppRoutes() {
     <Routes>
       <Route path="/auth/callback" element={<AuthCallback />} />
       <Route path="/" element={<Dashboard />} />
+      <Route path="/privacy" element={<Privacy />} />
+      <Route path="/terms" element={<Terms />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
