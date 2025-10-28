@@ -87,12 +87,12 @@ export function SubscriptionPlans() {
       setUpgrading(true);
       try {
         await upgradeSubscription(tier);
-        const message = language === 'zh' ? '已切换到免费套餐' : 'Switched to free plan';
+        const message = t.subscriptionSwitchedToFree;
         window.dispatchEvent(new CustomEvent('show-toast', {
           detail: { message, type: 'success' }
         }));
       } catch (error) {
-        const message = language === 'zh' ? '切换失败，请重试' : 'Failed to switch plan';
+        const message = t.subscriptionSwitchFailed;
         window.dispatchEvent(new CustomEvent('show-toast', {
           detail: { message, type: 'error' }
         }));
@@ -110,7 +110,7 @@ export function SubscriptionPlans() {
       await StripeService.redirectToCheckout(priceId, planType);
     } catch (error) {
       console.error('Payment error:', error);
-      const message = language === 'zh' ? '支付处理失败，请重试' : 'Payment processing failed, please retry';
+      const message = t.subscriptionPaymentFailed;
       window.dispatchEvent(new CustomEvent('show-toast', {
         detail: { message, type: 'error' }
       }));
@@ -126,7 +126,7 @@ export function SubscriptionPlans() {
       await StripeService.redirectToPortal();
     } catch (error) {
       console.error('Portal error:', error);
-      const message = language === 'zh' ? '无法打开订阅管理页面' : 'Could not open subscription portal';
+      const message = t.subscriptionPortalFailed;
       window.dispatchEvent(new CustomEvent('show-toast', {
         detail: { message, type: 'error' }
       }));
@@ -155,14 +155,14 @@ export function SubscriptionPlans() {
     const canceled = params.get('canceled');
 
     if (sessionId) {
-      const message = language === 'zh' ? '支付成功！您的订阅已激活' : 'Payment successful! Your subscription is now active';
+      const message = t.subscriptionPaymentSuccess;
       window.dispatchEvent(new CustomEvent('show-toast', {
         detail: { message, type: 'success' }
       }));
       refreshSubscription();
       window.history.replaceState({}, '', '/dashboard');
     } else if (canceled) {
-      const message = language === 'zh' ? '支付已取消' : 'Payment canceled';
+      const message = t.subscriptionPaymentCanceled;
       window.dispatchEvent(new CustomEvent('show-toast', {
         detail: { message, type: 'info' }
       }));
@@ -198,14 +198,12 @@ export function SubscriptionPlans() {
                   className="gap-2"
                 >
                   <CreditCard className="w-4 h-4" />
-                  {language === 'zh' ? '管理订阅' : 'Manage Subscription'}
+                  {t.subscriptionManageBilling}
                 </Button>
               )}
             </span>
           ) : (
-            language === 'zh'
-              ? '查看所有订阅套餐，选择最适合您的方案'
-              : 'View all subscription plans and choose the one that fits you best'
+            t.subscriptionSubtitle
           )}
         </p>
       </div>
@@ -219,7 +217,7 @@ export function SubscriptionPlans() {
               {plan.popular && (
                 <div className="absolute -top-0 left-1/2 -translate-x-1/2 z-20">
                   <span className="bg-gradient-to-r from-rimLight to-[#D68722] text-white px-4 py-1 rounded-full text-sm font-semibold shadow-rim">
-                    {language === 'zh' ? '最受欢迎' : 'Most Popular'}
+                    {t.subscriptionPopularTag}
                   </span>
                 </div>
               )}
@@ -281,12 +279,12 @@ export function SubscriptionPlans() {
                     {processingPayment && !isCurrentPlan ? (
                       <>
                         <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent" />
-                        {language === 'zh' ? '处理中...' : 'Processing...'}
+                        {t.subscriptionProcessing}
                       </>
                     ) : (
                       <>
                         {!isCurrentPlan && <CreditCard className="w-4 h-4" />}
-                        {isCurrentPlan ? t.subscriptionCurrent : (language === 'zh' ? '订阅支付' : 'Subscribe & Pay')}
+                        {isCurrentPlan ? t.subscriptionCurrent : t.subscriptionSubscribeAndPay}
                       </>
                     )}
                   </Button>
@@ -301,12 +299,12 @@ export function SubscriptionPlans() {
                     {processingPayment && !isCurrentPlan ? (
                       <>
                         <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent" />
-                        {language === 'zh' ? '处理中...' : 'Processing...'}
+                        {t.subscriptionProcessing}
                       </>
                     ) : (
                       <>
                         {!isCurrentPlan && <CreditCard className="w-4 h-4" />}
-                        {isCurrentPlan ? t.subscriptionCurrent : (language === 'zh' ? '订阅支付' : 'Subscribe & Pay')}
+                        {isCurrentPlan ? t.subscriptionCurrent : t.subscriptionSubscribeAndPay}
                       </>
                     )}
                   </Button>
@@ -327,11 +325,9 @@ export function SubscriptionPlans() {
         <LoginModal
           onClose={handleLoginClose}
           context={{
-            title: language === 'zh' ? '登录以继续订阅' : 'Sign in to continue',
+            title: t.subscriptionLoginToSubscribe,
             message: targetTier
-              ? (language === 'zh'
-                ? `登录后即可订阅 ${getTierName(targetTier)} 方案`
-                : `Sign in to subscribe to the ${getTierName(targetTier)} plan`)
+              ? t.subscriptionLoginMessage.replace('{{plan}}', getTierName(targetTier))
               : undefined
           }}
         />
