@@ -340,6 +340,31 @@ export const translations = {
     'dialogs.explanationFailed': '解释失败，请重试',
     'dialogs.languageChangeFailed': '语言切换失败，请重试',
 
+    // Conflict Resolution Modal
+    'conflict.title': '设置冲突',
+    'conflict.description': '检测到本地设置与云端设置不同，请选择要使用的版本。',
+    'conflict.cloudSettings': '云端设置',
+    'conflict.localSettings': '本地设置',
+    'conflict.interfaceLanguage': '界面语言',
+    'conflict.outputLanguage': '输出语言',
+    'conflict.theme': '主题',
+    'conflict.useCloud': '使用云端设置',
+    'conflict.useLocal': '使用本地设置',
+
+    // Language Names
+    'lang.chinese': '中文',
+    'lang.english': '英文',
+    'lang.japanese': '日文',
+    'lang.spanish': '西班牙文',
+    'lang.french': '法文',
+    'lang.german': '德文',
+    'lang.korean': '韩文',
+    'lang.autoDetect': '自动检测',
+
+    // Theme
+    'theme.light': '浅色',
+    'theme.dark': '深色',
+
     usageToday: '今日已用',
     usageMonth: '本月已用',
     usageRemaining: '剩余 {{count}} 次',
@@ -846,6 +871,31 @@ export const translations = {
     'dialogs.explanationFailed': 'Explanation failed, please retry',
     'dialogs.languageChangeFailed': 'Language change failed, please retry',
 
+    // Conflict Resolution Modal
+    'conflict.title': 'Settings Conflict',
+    'conflict.description': 'Your local settings differ from cloud settings. Please choose which version to use.',
+    'conflict.cloudSettings': 'Cloud Settings',
+    'conflict.localSettings': 'Local Settings',
+    'conflict.interfaceLanguage': 'Interface Language',
+    'conflict.outputLanguage': 'Output Language',
+    'conflict.theme': 'Theme',
+    'conflict.useCloud': 'Use Cloud Settings',
+    'conflict.useLocal': 'Use Local Settings',
+
+    // Language Names
+    'lang.chinese': 'Chinese',
+    'lang.english': 'English',
+    'lang.japanese': 'Japanese',
+    'lang.spanish': 'Spanish',
+    'lang.french': 'French',
+    'lang.german': 'German',
+    'lang.korean': 'Korean',
+    'lang.autoDetect': 'Auto Detect',
+
+    // Theme
+    'theme.light': 'Light',
+    'theme.dark': 'Dark',
+
     usageToday: 'Used Today',
     usageMonth: 'Used This Month',
     usageRemaining: '{{count}} remaining',
@@ -1271,6 +1321,31 @@ export const translations = {
     'dialogs.improvementFailed': '改善に失敗しました。もう一度お試しください',
     'dialogs.explanationFailed': '説明に失敗しました。もう一度お試しください',
     'dialogs.languageChangeFailed': '言語変更に失敗しました。もう一度お試しください',
+
+    // Conflict Resolution Modal
+    'conflict.title': '設定の競合',
+    'conflict.description': 'ローカル設定とクラウド設定が異なります。使用するバージョンを選択してください。',
+    'conflict.cloudSettings': 'クラウド設定',
+    'conflict.localSettings': 'ローカル設定',
+    'conflict.interfaceLanguage': 'インターフェース言語',
+    'conflict.outputLanguage': '出力言語',
+    'conflict.theme': 'テーマ',
+    'conflict.useCloud': 'クラウド設定を使用',
+    'conflict.useLocal': 'ローカル設定を使用',
+
+    // Language Names
+    'lang.chinese': '中国語',
+    'lang.english': '英語',
+    'lang.japanese': '日本語',
+    'lang.spanish': 'スペイン語',
+    'lang.french': 'フランス語',
+    'lang.german': 'ドイツ語',
+    'lang.korean': '韓国語',
+    'lang.autoDetect': '自動検出',
+
+    // Theme
+    'theme.light': 'ライト',
+    'theme.dark': 'ダーク',
 
     usageToday: '本日使用',
     usageMonth: '今月使用',
@@ -1724,6 +1799,31 @@ export const translations = {
     'dialogs.explanationFailed': 'Explicación fallida, intenta de nuevo',
     'dialogs.languageChangeFailed': 'Cambio de idioma fallido, intenta de nuevo',
 
+    // Conflict Resolution Modal
+    'conflict.title': 'Conflicto de Configuración',
+    'conflict.description': 'Su configuración local difiere de la configuración de la nube. Elija qué versión usar.',
+    'conflict.cloudSettings': 'Configuración de la Nube',
+    'conflict.localSettings': 'Configuración Local',
+    'conflict.interfaceLanguage': 'Idioma de la Interfaz',
+    'conflict.outputLanguage': 'Idioma de Salida',
+    'conflict.theme': 'Tema',
+    'conflict.useCloud': 'Usar Configuración de la Nube',
+    'conflict.useLocal': 'Usar Configuración Local',
+
+    // Language Names
+    'lang.chinese': 'Chino',
+    'lang.english': 'Inglés',
+    'lang.japanese': 'Japonés',
+    'lang.spanish': 'Español',
+    'lang.french': 'Francés',
+    'lang.german': 'Alemán',
+    'lang.korean': 'Coreano',
+    'lang.autoDetect': 'Detección Automática',
+
+    // Theme
+    'theme.light': 'Claro',
+    'theme.dark': 'Oscuro',
+
     usageToday: 'Usado Hoy',
     usageMonth: 'Usado Este Mes',
     usageRemaining: '{{count}} restantes',
@@ -2162,6 +2262,31 @@ export const translations = {
     'dialogs.improvementFailed': 'Amélioration échouée, réessayez',
     'dialogs.explanationFailed': 'Explication échouée, réessayez',
     'dialogs.languageChangeFailed': 'Changement de langue échoué, réessayez',
+
+    // Conflict Resolution Modal
+    'conflict.title': 'Conflit de Paramètres',
+    'conflict.description': 'Vos paramètres locaux diffèrent des paramètres cloud. Veuillez choisir quelle version utiliser.',
+    'conflict.cloudSettings': 'Paramètres Cloud',
+    'conflict.localSettings': 'Paramètres Locaux',
+    'conflict.interfaceLanguage': 'Langue de l\'Interface',
+    'conflict.outputLanguage': 'Langue de Sortie',
+    'conflict.theme': 'Thème',
+    'conflict.useCloud': 'Utiliser Paramètres Cloud',
+    'conflict.useLocal': 'Utiliser Paramètres Locaux',
+
+    // Language Names
+    'lang.chinese': 'Chinois',
+    'lang.english': 'Anglais',
+    'lang.japanese': 'Japonais',
+    'lang.spanish': 'Espagnol',
+    'lang.french': 'Français',
+    'lang.german': 'Allemand',
+    'lang.korean': 'Coréen',
+    'lang.autoDetect': 'Détection Automatique',
+
+    // Theme
+    'theme.light': 'Clair',
+    'theme.dark': 'Sombre',
 
     usageToday: 'Utilisé Aujourd\'hui',
     usageMonth: 'Utilisé Ce Mois',
@@ -2602,6 +2727,31 @@ export const translations = {
     'dialogs.explanationFailed': 'Erklärung fehlgeschlagen, bitte erneut versuchen',
     'dialogs.languageChangeFailed': 'Sprachwechsel fehlgeschlagen, bitte erneut versuchen',
 
+    // Conflict Resolution Modal
+    'conflict.title': 'Einstellungskonflikt',
+    'conflict.description': 'Ihre lokalen Einstellungen unterscheiden sich von den Cloud-Einstellungen. Bitte wählen Sie, welche Version verwendet werden soll.',
+    'conflict.cloudSettings': 'Cloud-Einstellungen',
+    'conflict.localSettings': 'Lokale Einstellungen',
+    'conflict.interfaceLanguage': 'Oberflächensprache',
+    'conflict.outputLanguage': 'Ausgabesprache',
+    'conflict.theme': 'Design',
+    'conflict.useCloud': 'Cloud-Einstellungen Verwenden',
+    'conflict.useLocal': 'Lokale Einstellungen Verwenden',
+
+    // Language Names
+    'lang.chinese': 'Chinesisch',
+    'lang.english': 'Englisch',
+    'lang.japanese': 'Japanisch',
+    'lang.spanish': 'Spanisch',
+    'lang.french': 'Französisch',
+    'lang.german': 'Deutsch',
+    'lang.korean': 'Koreanisch',
+    'lang.autoDetect': 'Automatische Erkennung',
+
+    // Theme
+    'theme.light': 'Hell',
+    'theme.dark': 'Dunkel',
+
     usageToday: 'Heute Verwendet',
     usageMonth: 'Diesen Monat Verwendet',
     usageRemaining: '{{count}} verbleibend',
@@ -3041,6 +3191,31 @@ export const translations = {
     'dialogs.improvementFailed': '개선 실패, 다시 시도하세요',
     'dialogs.explanationFailed': '설명 실패, 다시 시도하세요',
     'dialogs.languageChangeFailed': '언어 변경 실패, 다시 시도하세요',
+
+    // Conflict Resolution Modal
+    'conflict.title': '설정 충돌',
+    'conflict.description': '로컬 설정과 클라우드 설정이 다릅니다. 사용할 버전을 선택하세요.',
+    'conflict.cloudSettings': '클라우드 설정',
+    'conflict.localSettings': '로컬 설정',
+    'conflict.interfaceLanguage': '인터페이스 언어',
+    'conflict.outputLanguage': '출력 언어',
+    'conflict.theme': '테마',
+    'conflict.useCloud': '클라우드 설정 사용',
+    'conflict.useLocal': '로컬 설정 사용',
+
+    // Language Names
+    'lang.chinese': '중국어',
+    'lang.english': '영어',
+    'lang.japanese': '일본어',
+    'lang.spanish': '스페인어',
+    'lang.french': '프랑스어',
+    'lang.german': '독일어',
+    'lang.korean': '한국어',
+    'lang.autoDetect': '자동 감지',
+
+    // Theme
+    'theme.light': '라이트',
+    'theme.dark': '다크',
 
     usageToday: '오늘 사용',
     usageMonth: '이번 달 사용',

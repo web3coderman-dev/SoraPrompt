@@ -19,26 +19,26 @@ export function ConflictResolutionModal({
   onResolve,
   onCancel,
 }: ConflictResolutionModalProps) {
-  const { language } = useLanguage();
+  const { t } = useLanguage();
 
   const getLanguageDisplay = (lang: string) => {
     const map: Record<string, string> = {
-      'zh': language === 'zh' ? '中文' : 'Chinese',
-      'en': language === 'zh' ? '英文' : 'English',
-      'ja': language === 'zh' ? '日文' : 'Japanese',
-      'es': language === 'zh' ? '西班牙文' : 'Spanish',
-      'fr': language === 'zh' ? '法文' : 'French',
-      'de': language === 'zh' ? '德文' : 'German',
-      'ko': language === 'zh' ? '韩文' : 'Korean',
-      'auto': language === 'zh' ? '自动检测' : 'Auto Detect',
+      'zh': t['lang.chinese'] || 'Chinese',
+      'en': t['lang.english'] || 'English',
+      'ja': t['lang.japanese'] || 'Japanese',
+      'es': t['lang.spanish'] || 'Spanish',
+      'fr': t['lang.french'] || 'French',
+      'de': t['lang.german'] || 'German',
+      'ko': t['lang.korean'] || 'Korean',
+      'auto': t['lang.autoDetect'] || 'Auto Detect',
     };
     return map[lang] || lang;
   };
 
   const getThemeDisplay = (theme: string) => {
     return theme === 'light'
-      ? (language === 'zh' ? '浅色' : 'Light')
-      : (language === 'zh' ? '深色' : 'Dark');
+      ? (t['theme.light'] || 'Light')
+      : (t['theme.dark'] || 'Dark');
   };
 
   return (
@@ -50,12 +50,10 @@ export function ConflictResolutionModal({
           </div>
           <div>
             <h2 className="text-2xl font-bold text-text-primary mb-2">
-              {language === 'zh' ? '设置冲突' : 'Settings Conflict'}
+              {t['conflict.title'] || 'Settings Conflict'}
             </h2>
             <p className="text-text-secondary">
-              {language === 'zh'
-                ? '检测到本地设置与云端设置不同，请选择要使用的版本。'
-                : 'Your local settings differ from cloud settings. Please choose which version to use.'}
+              {t['conflict.description'] || 'Your local settings differ from cloud settings. Please choose which version to use.'}
             </p>
           </div>
         </div>
@@ -65,13 +63,13 @@ export function ConflictResolutionModal({
             <div className="flex items-center gap-2 mb-4">
               <Cloud className="w-5 h-5 text-state-info" />
               <h3 className="font-semibold text-state-info">
-                {language === 'zh' ? '云端设置' : 'Cloud Settings'}
+                {t['conflict.cloudSettings'] || 'Cloud Settings'}
               </h3>
             </div>
             <div className="space-y-3 text-sm">
               <div>
                 <p className="text-text-secondary mb-1">
-                  {language === 'zh' ? '界面语言' : 'Interface Language'}
+                  {t['conflict.interfaceLanguage'] || 'Interface Language'}
                 </p>
                 <p className="font-medium text-text-primary">
                   {getLanguageDisplay(cloudSettings.interface_language)}
@@ -79,7 +77,7 @@ export function ConflictResolutionModal({
               </div>
               <div>
                 <p className="text-text-secondary mb-1">
-                  {language === 'zh' ? '输出语言' : 'Output Language'}
+                  {t['conflict.outputLanguage'] || 'Output Language'}
                 </p>
                 <p className="font-medium text-text-primary">
                   {getLanguageDisplay(cloudSettings.output_language)}
@@ -87,7 +85,7 @@ export function ConflictResolutionModal({
               </div>
               <div>
                 <p className="text-text-secondary mb-1">
-                  {language === 'zh' ? '主题' : 'Theme'}
+                  {t['conflict.theme'] || 'Theme'}
                 </p>
                 <p className="font-medium text-text-primary">
                   {getThemeDisplay(cloudSettings.theme)}
@@ -100,13 +98,13 @@ export function ConflictResolutionModal({
             <div className="flex items-center gap-2 mb-4">
               <HardDrive className="w-5 h-5 text-text-secondary" />
               <h3 className="font-semibold text-text-primary">
-                {language === 'zh' ? '本地设置' : 'Local Settings'}
+                {t['conflict.localSettings'] || 'Local Settings'}
               </h3>
             </div>
             <div className="space-y-3 text-sm">
               <div>
                 <p className="text-text-secondary mb-1">
-                  {language === 'zh' ? '界面语言' : 'Interface Language'}
+                  {t['conflict.interfaceLanguage'] || 'Interface Language'}
                 </p>
                 <p className="font-medium text-text-primary">
                   {getLanguageDisplay(localSettings.interface_language)}
@@ -114,7 +112,7 @@ export function ConflictResolutionModal({
               </div>
               <div>
                 <p className="text-text-secondary mb-1">
-                  {language === 'zh' ? '输出语言' : 'Output Language'}
+                  {t['conflict.outputLanguage'] || 'Output Language'}
                 </p>
                 <p className="font-medium text-text-primary">
                   {getLanguageDisplay(localSettings.output_language)}
@@ -122,7 +120,7 @@ export function ConflictResolutionModal({
               </div>
               <div>
                 <p className="text-text-secondary mb-1">
-                  {language === 'zh' ? '主题' : 'Theme'}
+                  {t['conflict.theme'] || 'Theme'}
                 </p>
                 <p className="font-medium text-text-primary">
                   {getThemeDisplay(localSettings.theme)}
@@ -138,7 +136,7 @@ export function ConflictResolutionModal({
             className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
           >
             <Cloud className="w-5 h-5 mr-2" />
-            {language === 'zh' ? '使用云端设置' : 'Use Cloud Settings'}
+            {t['conflict.useCloud'] || 'Use Cloud Settings'}
           </Button>
           <Button
             onClick={() => onResolve(false)}
@@ -146,7 +144,7 @@ export function ConflictResolutionModal({
             className="flex-1"
           >
             <HardDrive className="w-5 h-5 mr-2" />
-            {language === 'zh' ? '使用本地设置' : 'Use Local Settings'}
+            {t['conflict.useLocal'] || 'Use Local Settings'}
           </Button>
         </div>
 
