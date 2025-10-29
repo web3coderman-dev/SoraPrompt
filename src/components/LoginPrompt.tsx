@@ -51,24 +51,53 @@ export function LoginPrompt({
   if (variant === 'compact') {
     return (
       <>
-        <div className="bg-scene-fill border border-keyLight/20 rounded-lg p-4 shadow-depth-md">
-          <div className="flex items-center justify-between gap-4">
+        <div className="bg-scene-fill border border-keyLight/20 rounded-xl p-6 shadow-depth-md hover:shadow-depth-lg hover:border-keyLight/30 transition-all duration-300">
+          <div className="space-y-5">
+            {/* Header: Icon + Title */}
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-keyLight rounded-full flex items-center justify-center flex-shrink-0">
-                <LogIn className="w-5 h-5 text-white" />
+              <div className="relative">
+                <div className="absolute inset-0 bg-keyLight/20 rounded-xl blur-md" />
+                <div className="relative w-12 h-12 bg-gradient-to-br from-keyLight to-neon rounded-xl flex items-center justify-center shadow-key">
+                  <LogIn className="w-6 h-6 text-white" />
+                </div>
               </div>
-              <div>
-                <p className="font-semibold text-text-primary">{displayTitle}</p>
-                <p className="text-sm text-text-secondary">{displayMessage}</p>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold font-display text-text-primary tracking-wide">
+                  {displayTitle}
+                </h3>
               </div>
             </div>
-            <Button
-              onClick={handleLoginClick}
-              variant="director"
-              className="flex-shrink-0"
-            >
-              {t.signIn || 'Sign In'}
-            </Button>
+
+            {/* Description */}
+            <p className="text-sm text-text-secondary leading-relaxed pl-15">
+              {displayMessage}
+            </p>
+
+            {/* Action Button */}
+            <div className="pt-1">
+              <Button
+                onClick={handleLoginClick}
+                variant="director"
+                size="lg"
+                fullWidth
+                className="shadow-key hover:shadow-key-lg"
+              >
+                <LogIn className="w-5 h-5 mr-2" />
+                {t.signIn || 'Sign In'}
+              </Button>
+            </div>
+
+            {/* Helper Text */}
+            {showBenefits && (
+              <div className="flex items-start gap-2 px-3 py-2 bg-keyLight/5 border border-keyLight/10 rounded-lg">
+                <Shield className="w-4 h-4 text-keyLight flex-shrink-0 mt-0.5" />
+                <p className="text-xs text-text-tertiary leading-relaxed">
+                  {language === 'zh'
+                    ? '未登录用户的历史记录存储在本地浏览器中，最多保存 10 条。登录后享受无限云端存储。'
+                    : 'Guest history is stored locally (max 10 records). Sign in for unlimited cloud storage.'}
+                </p>
+              </div>
+            )}
           </div>
         </div>
         {showLoginModal && <LoginModal onClose={handleLoginClose} />}
