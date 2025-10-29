@@ -10,6 +10,7 @@ import SettingsPage from './pages/SettingsPage';
 import SubscriptionPage from './pages/SubscriptionPage';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
+import DocsPage from './pages/DocsPage';
 import NotFound from './pages/NotFound';
 import { ToastContainer } from './components/Toast';
 import { ScrollToTop } from './components/ScrollToTop';
@@ -31,6 +32,7 @@ function AppRoutes() {
       <Route path="/auth/callback" element={<AuthCallback />} />
       <Route path="/privacy" element={<Privacy />} />
       <Route path="/terms" element={<Terms />} />
+      <Route path="/docs" element={<DocsPage />} />
 
       <Route element={<AppLayout />}>
         <Route path="/" element={<Navigate to="/new" replace />} />

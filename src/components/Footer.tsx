@@ -13,7 +13,7 @@ export default function Footer() {
   ];
 
   const productLinks = [
-    { label: t['footer.docs'] || 'Documentation', path: '/docs', external: true },
+    { label: t['footer.docs'] || 'Documentation', path: '/docs', external: false },
   ];
 
   const socialLinks = [

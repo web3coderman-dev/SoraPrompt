@@ -464,6 +464,12 @@ export const translations = {
     'footer.docs': '产品文档',
     'footer.copyright': '© 2025 SoraPrompt Studio. 保留所有权利。',
 
+    'docs.title': '产品文档',
+    'docs.quickStart': '快速开始',
+    'docs.features': '功能说明',
+    'docs.faq': '常见问题',
+    'docs.changelog': '更新日志',
+
     'terms.title': '服务条款',
     'terms.lastUpdated': '最后更新：2025年10月',
     'terms.section1.title': '1. 服务描述',
@@ -995,6 +1001,12 @@ export const translations = {
     'footer.privacy': 'Privacy Policy',
     'footer.docs': 'Documentation',
     'footer.copyright': '© 2025 SoraPrompt Studio. All rights reserved.',
+
+    'docs.title': 'Product Documentation',
+    'docs.quickStart': 'Quick Start',
+    'docs.features': 'Features',
+    'docs.faq': 'FAQ',
+    'docs.changelog': 'Changelog',
 
     'terms.title': 'Terms of Service',
     'terms.lastUpdated': 'Last updated: October 2025',
