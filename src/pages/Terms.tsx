@@ -11,11 +11,11 @@ export default function Terms() {
 
   return (
     <LegalLayout>
-      <div className="mb-8">
+      <div className="mb-6">
         <Button
-          variant="ghost"
+          variant="secondary"
           onClick={() => navigate('/')}
-          className="mb-4"
+          className="mb-6"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           {t.notFoundBackHome}
@@ -23,22 +23,22 @@ export default function Terms() {
 
         <div className="flex items-center gap-3 mb-4">
           <Logo size={48} />
-          <h1 className="text-4xl font-bold font-display text-text-primary">{t['terms.title']}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold font-display text-text-primary">{t['terms.title']}</h1>
         </div>
-        <p className="text-text-secondary">{t['terms.lastUpdated'] || 'Last updated: January 2025'}</p>
+        <p className="text-sm text-text-secondary">{t['terms.lastUpdated'] || 'Last updated: January 2025'}</p>
       </div>
 
-      <div className="space-y-8 bg-sceneFill rounded-2xl p-8 border border-borderSubtle">
+      <div className="space-y-8 bg-scene-fill rounded-2xl p-6 md:p-8 border border-border-subtle shadow-depth-sm">
           <section>
-            <h2 className="text-2xl font-bold mb-4">{t['terms.section1.title']}</h2>
-            <div className="text-text-secondary space-y-3">
+            <h2 className="text-xl md:text-2xl font-bold mb-4 text-text-primary">{t['terms.section1.title']}</h2>
+            <div className="text-sm md:text-base text-text-secondary space-y-3 leading-relaxed">
               <p>{t['terms.section1.content']}</p>
             </div>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-4">{t['terms.section2.title']}</h2>
-            <div className="text-text-secondary space-y-3">
+            <h2 className="text-xl md:text-2xl font-bold mb-4 text-text-primary">{t['terms.section2.title']}</h2>
+            <div className="text-sm md:text-base text-text-secondary space-y-3 leading-relaxed">
               <p>{t['terms.section2.intro']}</p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>{t['terms.section2.item1']}</li>
@@ -51,8 +51,8 @@ export default function Terms() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-4">{t['terms.section3.title']}</h2>
-            <div className="text-text-secondary space-y-3">
+            <h2 className="text-xl md:text-2xl font-bold mb-4 text-text-primary">{t['terms.section3.title']}</h2>
+            <div className="text-sm md:text-base text-text-secondary space-y-3 leading-relaxed">
               <p>{t['terms.section3.intro']}</p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>{t['terms.section3.item1']}</li>
@@ -67,10 +67,10 @@ export default function Terms() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-4">{t['terms.section4.title']}</h2>
-            <div className="text-text-secondary space-y-3">
+            <h2 className="text-xl md:text-2xl font-bold mb-4 text-text-primary">{t['terms.section4.title']}</h2>
+            <div className="text-sm md:text-base text-text-secondary space-y-3 leading-relaxed">
               <p>
-                <strong>{t['terms.section4.userContent']}</strong>
+                <strong className="text-text-primary">{t['terms.section4.userContent']}</strong>
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>{t['terms.section4.item1']}</li>
@@ -78,7 +78,7 @@ export default function Terms() {
                 <li>{t['terms.section4.item3']}</li>
               </ul>
               <p className="mt-3">
-                <strong>{t['terms.section4.generatedContent']}</strong>
+                <strong className="text-text-primary">{t['terms.section4.generatedContent']}</strong>
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>{t['terms.section4.item4']}</li>
@@ -89,8 +89,8 @@ export default function Terms() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-4">{t['terms.section5.title']}</h2>
-            <div className="text-text-secondary space-y-3">
+            <h2 className="text-xl md:text-2xl font-bold mb-4 text-text-primary">{t['terms.section5.title']}</h2>
+            <div className="text-sm md:text-base text-text-secondary space-y-3 leading-relaxed">
               <p>{t['terms.section5.intro']}</p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>{t['terms.section5.item1']}</li>
@@ -103,7 +103,7 @@ export default function Terms() {
       </div>
 
       <div className="mt-8 text-center">
-        <Button variant="director" onClick={() => navigate('/')}>
+        <Button variant="director" size="lg" onClick={() => navigate('/')}>
           {t.notFoundBackHome}
         </Button>
       </div>

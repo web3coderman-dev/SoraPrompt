@@ -8,7 +8,7 @@ interface LegalLayoutProps {
 
 export function LegalLayout({ children }: LegalLayoutProps) {
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-scene-bg via-scene-fill to-scene-fillLight">
+    <div className="flex min-h-screen bg-gradient-to-br from-scene-background via-scene-fill to-scene-background">
       <Sidebar
         isOpen={false}
         onToggle={() => {}}
@@ -17,8 +17,8 @@ export function LegalLayout({ children }: LegalLayoutProps) {
       />
 
       <div className="flex-1 flex flex-col overflow-x-hidden">
-        <main className="flex-1 p-6 md:p-8 lg:p-12 pb-20">
-          <div className="max-w-5xl mx-auto">
+        <main className="flex-1 px-4 sm:px-6 md:px-8 lg:px-12 py-8 md:py-10 lg:py-12 pb-20">
+          <div className="max-w-4xl mx-auto">
             {children}
           </div>
         </main>
