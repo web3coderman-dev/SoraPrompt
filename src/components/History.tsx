@@ -148,7 +148,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
 
   if (loading) {
     return (
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full">
         <LoadingState message={t.historyLoading} />
       </div>
     );
@@ -156,7 +156,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
 
   if (error) {
     return (
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full">
         <div className="bg-state-error/10 border border-state-error/30 rounded-xl p-6 text-center">
           <p className="text-state-error mb-4">{error}</p>
           <Button
@@ -173,7 +173,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
 
   if (prompts.length === 0) {
     return (
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full">
         <EmptyState
           icon={Clock}
           title={t.historyEmpty}
@@ -193,7 +193,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
   }
 
   return (
-    <div className="max-w-7xl mx-auto overflow-hidden">
+    <div className="w-full overflow-hidden">
       {(isLocalNearLimit || isLocalAtLimit) && (
         <div className="mb-6 p-4 bg-state-warning/10 border-2 border-state-warning/30 rounded-xl">
           <div className="flex items-start gap-3">

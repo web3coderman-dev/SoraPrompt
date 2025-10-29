@@ -180,7 +180,7 @@ export function SubscriptionPlans() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="w-full">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold font-display text-text-primary mb-4">{t.subscriptionTitle}</h2>
         <p className="text-lg text-text-secondary">
