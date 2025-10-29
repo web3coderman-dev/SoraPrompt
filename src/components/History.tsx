@@ -221,7 +221,7 @@ export default function History({ onSelectPrompt }: HistoryProps) {
         </div>
       )}
 
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
         <h2 className="text-3xl md:text-4xl font-bold font-display text-text-primary">{t.historyTitle}</h2>
         <Badge
           variant={user ? 'info' : 'secondary'}

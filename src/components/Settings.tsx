@@ -164,7 +164,7 @@ export default function Settings() {
 
   return (
     <div className="w-full">
-      <div className="flex items-center gap-3 mb-8">
+      <div className="flex items-center gap-3 mb-10">
         <SettingsIcon className="w-8 h-8 text-keyLight" />
         <h2 className="text-3xl md:text-4xl font-bold font-display text-text-primary">{t.settingsTitle}</h2>
       </div>
