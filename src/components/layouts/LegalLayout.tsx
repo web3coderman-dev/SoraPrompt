@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import Sidebar from '../Sidebar';
-import Footer from '../Footer';
+import { MinimalFooter } from '../MinimalFooter';
 
 interface LegalLayoutProps {
   children: ReactNode;
@@ -17,12 +17,12 @@ export function LegalLayout({ children }: LegalLayoutProps) {
       />
 
       <div className="flex-1 flex flex-col overflow-x-hidden">
-        <main className="flex-1 px-4 sm:px-6 md:px-8 lg:px-12 py-8 md:py-10 lg:py-12 pb-20">
+        <main className="flex-1 px-4 sm:px-6 md:px-8 lg:px-12 py-8 md:py-10 lg:py-12">
           <div className="max-w-4xl mx-auto">
             {children}
           </div>
         </main>
-        <Footer />
+        <MinimalFooter />
       </div>
     </div>
   );
