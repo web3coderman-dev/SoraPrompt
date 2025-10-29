@@ -465,7 +465,7 @@ export const translations = {
     'footer.copyright': '© 2025 SoraPrompt Studio. 保留所有权利。',
 
     'terms.title': '服务条款',
-    'terms.lastUpdated': '最后更新：2025年1月',
+    'terms.lastUpdated': '最后更新：2025年10月',
     'terms.section1.title': '1. 服务描述',
     'terms.section1.content': 'SoraPrompt Studio 是一款 AI 驱动的提示词生成工具，帮助用户为 Sora 视频生成创建专业提示词。使用本服务即表示您同意遵守这些条款。',
     'terms.section2.title': '2. 用户账户',
@@ -501,7 +501,7 @@ export const translations = {
     'terms.section5.item4': '我们保留随时更改价格的权利，但会提前通知您',
 
     'privacy.title': '隐私政策',
-    'privacy.lastUpdated': '最后更新：2025年1月',
+    'privacy.lastUpdated': '最后更新：2025年10月',
     'privacy.section1.title': '1. 信息收集',
     'privacy.section1.intro': '在使用 SoraPrompt Studio 时，我们可能收集以下信息：',
     'privacy.section1.item1': '账户信息：通过 Google OAuth 提供的基本资料（电子邮件、姓名、头像）',
@@ -997,7 +997,7 @@ export const translations = {
     'footer.copyright': '© 2025 SoraPrompt Studio. All rights reserved.',
 
     'terms.title': 'Terms of Service',
-    'terms.lastUpdated': 'Last updated: January 2025',
+    'terms.lastUpdated': 'Last updated: October 2025',
     'terms.section1.title': '1. Service Description',
     'terms.section1.content': 'SoraPrompt Studio is an AI-powered prompt generation tool that helps users create professional prompts for Sora video generation. By using this service, you agree to comply with these terms.',
     'terms.section2.title': '2. User Accounts',
@@ -1033,7 +1033,7 @@ export const translations = {
     'terms.section5.item4': 'We reserve the right to change prices at any time, but will notify you in advance',
 
     'privacy.title': 'Privacy Policy',
-    'privacy.lastUpdated': 'Last updated: January 2025',
+    'privacy.lastUpdated': 'Last updated: October 2025',
     'privacy.section1.title': '1. Information Collection',
     'privacy.section1.intro': 'When using SoraPrompt Studio, we may collect the following information:',
     'privacy.section1.item1': 'Account Information: Basic profile provided via Google OAuth (email, name, avatar)',
@@ -1467,7 +1467,7 @@ export const translations = {
     'footer.copyright': '© 2025 SoraPrompt Studio. 無断転載禁止。',
 
     'terms.title': '利用規約',
-    'terms.lastUpdated': '最終更新：2025年1月',
+    'terms.lastUpdated': '最終更新：2025年10月',
     'terms.section1.title': '1. サービス説明',
     'terms.section1.content': 'SoraPrompt StudioはAI駆動型プロンプト生成ツールで、ユーザーがSora動画生成のためのプロフェッショナルなプロンプトを作成するのを支援します。本サービスの利用により、これらの規約に同意したものとみなされます。',
     'terms.section2.title': '2. ユーザーアカウント',
@@ -1503,7 +1503,7 @@ export const translations = {
     'terms.section5.item4': '当社はいつでも価格を変更する権利を留保しますが、事前に通知します',
 
     'privacy.title': 'プライバシーポリシー',
-    'privacy.lastUpdated': '最終更新：2025年1月',
+    'privacy.lastUpdated': '最終更新：2025年10月',
     'privacy.section1.title': '1. 情報収集',
     'privacy.section1.intro': 'SoraPrompt Studioを使用する際、以下の情報を収集する場合があります：',
     'privacy.section1.item1': 'アカウント情報：Google OAuthを通じて提供される基本プロフィール（メール、名前、アバター）',
@@ -1937,7 +1937,7 @@ export const translations = {
     'footer.copyright': '© 2025 SoraPrompt Studio. Todos los derechos reservados.',
 
     'terms.title': 'Términos de Servicio',
-    'terms.lastUpdated': 'Última actualización: Enero 2025',
+    'terms.lastUpdated': 'Última actualización: Octubre 2025',
     'terms.section1.title': '1. Descripción del Servicio',
     'terms.section1.content': 'SoraPrompt Studio es una herramienta de generación de prompts impulsada por IA que ayuda a los usuarios a crear prompts profesionales para la generación de videos de Sora. Al utilizar este servicio, usted acepta cumplir con estos términos.',
     'terms.section2.title': '2. Cuentas de Usuario',
@@ -1973,7 +1973,7 @@ export const translations = {
     'terms.section5.item4': 'Nos reservamos el derecho de cambiar los precios en cualquier momento, pero le notificaremos con anticipación',
 
     'privacy.title': 'Política de Privacidad',
-    'privacy.lastUpdated': 'Última actualización: Enero 2025',
+    'privacy.lastUpdated': 'Última actualización: Octubre 2025',
     'privacy.section1.title': '1. Recopilación de Información',
     'privacy.section1.intro': 'Al utilizar SoraPrompt Studio, podemos recopilar la siguiente información:',
     'privacy.section1.item1': 'Información de cuenta: perfil básico proporcionado a través de Google OAuth (correo electrónico, nombre, avatar)',
@@ -2407,7 +2407,7 @@ export const translations = {
     'footer.copyright': '© 2025 SoraPrompt Studio. Tous droits réservés.',
 
     'terms.title': 'Conditions de Service',
-    'terms.lastUpdated': 'Dernière mise à jour : Janvier 2025',
+    'terms.lastUpdated': 'Dernière mise à jour : Octobre 2025',
     'terms.section1.title': '1. Description du Service',
     'terms.section1.content': 'SoraPrompt Studio est un outil de génération de prompts alimenté par l\'IA qui aide les utilisateurs à créer des prompts professionnels pour la génération de vidéos Sora. En utilisant ce service, vous acceptez de vous conformer à ces conditions.',
     'terms.section2.title': '2. Comptes Utilisateur',
@@ -2443,7 +2443,7 @@ export const translations = {
     'terms.section5.item4': 'Nous nous réservons le droit de modifier les prix à tout moment, mais nous vous en informerons à l\'avance',
 
     'privacy.title': 'Politique de Confidentialité',
-    'privacy.lastUpdated': 'Dernière mise à jour : Janvier 2025',
+    'privacy.lastUpdated': 'Dernière mise à jour : Octobre 2025',
     'privacy.section1.title': '1. Collecte d\'Informations',
     'privacy.section1.intro': 'Lors de l\'utilisation de SoraPrompt Studio, nous pouvons collecter les informations suivantes :',
     'privacy.section1.item1': 'Informations de compte : profil de base fourni via Google OAuth (e-mail, nom, avatar)',
@@ -2877,7 +2877,7 @@ export const translations = {
     'footer.copyright': '© 2025 SoraPrompt Studio. Alle Rechte vorbehalten.',
 
     'terms.title': 'Nutzungsbedingungen',
-    'terms.lastUpdated': 'Letzte Aktualisierung: Januar 2025',
+    'terms.lastUpdated': 'Letzte Aktualisierung: Oktober 2025',
     'terms.section1.title': '1. Servicebeschreibung',
     'terms.section1.content': 'SoraPrompt Studio ist ein KI-gestütztes Prompt-Generierungstool, das Benutzern hilft, professionelle Prompts für die Sora-Videogenerierung zu erstellen. Durch die Nutzung dieses Dienstes stimmen Sie zu, diese Bedingungen einzuhalten.',
     'terms.section2.title': '2. Benutzerkonten',
@@ -2913,7 +2913,7 @@ export const translations = {
     'terms.section5.item4': 'Wir behalten uns das Recht vor, die Preise jederzeit zu ändern, werden Sie jedoch im Voraus informieren',
 
     'privacy.title': 'Datenschutzrichtlinie',
-    'privacy.lastUpdated': 'Letzte Aktualisierung: Januar 2025',
+    'privacy.lastUpdated': 'Letzte Aktualisierung: Oktober 2025',
     'privacy.section1.title': '1. Informationserfassung',
     'privacy.section1.intro': 'Bei der Nutzung von SoraPrompt Studio können wir folgende Informationen sammeln:',
     'privacy.section1.item1': 'Kontoinformationen: Basisprofil über Google OAuth bereitgestellt (E-Mail, Name, Avatar)',

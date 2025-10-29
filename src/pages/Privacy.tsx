@@ -12,7 +12,7 @@ export default function Privacy() {
           <Logo size={48} />
           <h1 className="text-3xl md:text-4xl font-bold font-display text-text-primary">{t['privacy.title']}</h1>
         </div>
-        <p className="text-sm text-text-secondary">{t['privacy.lastUpdated'] || 'Last updated: January 2025'}</p>
+        <p className="text-sm text-text-secondary">{t['privacy.lastUpdated'] || 'Last updated: October 2025'}</p>
       </div>
 
       <div className="space-y-8 bg-scene-fill rounded-2xl p-6 md:p-8 border border-border-subtle shadow-depth-sm">
