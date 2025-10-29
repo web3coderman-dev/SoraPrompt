@@ -1,11 +1,10 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Twitter, Github, MessageCircle } from 'lucide-react';
 import { Logo } from './ui/Logo';
 
 export default function Footer() {
   const { t } = useLanguage();
-  const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
 
   const legalLinks = [
@@ -38,10 +37,6 @@ export default function Footer() {
     },
   ];
 
-  const handleInternalLink = (path: string) => {
-    navigate(path);
-  };
-
   return (
     <footer className="border-t border-border-subtle bg-scene-background mt-auto">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-10 pb-12">
@@ -68,13 +63,13 @@ export default function Footer() {
             <ul className="space-y-2">
               {legalLinks.map((link) => (
                 <li key={link.path}>
-                  <button
-                    onClick={() => handleInternalLink(link.path)}
-                    className="text-sm text-text-secondary hover:text-keyLight transition-colors duration-300 ease-smooth text-left"
+                  <Link
+                    to={link.path}
+                    className="text-sm text-text-secondary hover:text-keyLight transition-colors duration-300 ease-smooth block"
                     aria-label={`Navigate to ${link.label}`}
                   >
                     {link.label}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -93,19 +88,19 @@ export default function Footer() {
                       href={link.path}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-text-secondary hover:text-keyLight transition-colors duration-300 ease-smooth"
+                      className="text-sm text-text-secondary hover:text-keyLight transition-colors duration-300 ease-smooth block"
                       aria-label={`Open ${link.label} in new tab`}
                     >
                       {link.label}
                     </a>
                   ) : (
-                    <button
-                      onClick={() => handleInternalLink(link.path)}
-                      className="text-sm text-text-secondary hover:text-keyLight transition-colors duration-300 ease-smooth text-left"
+                    <Link
+                      to={link.path}
+                      className="text-sm text-text-secondary hover:text-keyLight transition-colors duration-300 ease-smooth block"
                       aria-label={`Navigate to ${link.label}`}
                     >
                       {link.label}
-                    </button>
+                    </Link>
                   )}
                 </li>
               ))}

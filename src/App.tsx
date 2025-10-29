@@ -12,6 +12,7 @@ import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import NotFound from './pages/NotFound';
 import { ToastContainer } from './components/Toast';
+import { ScrollToTop } from './components/ScrollToTop';
 import { Loader2 } from 'lucide-react';
 
 function AppRoutes() {
@@ -47,6 +48,7 @@ function AppRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <LanguageProvider>
         <AuthProvider>
           <SubscriptionProvider>
