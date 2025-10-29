@@ -1620,3 +1620,136 @@ export const zIndex = {
 
 *🎬 "Every frame matters. Every pixel tells a story."*
 *— SoraPrompt Design Philosophy*
+
+## 📚 多语言系统规范（i18n System）
+
+### 翻译键命名规范
+
+所有翻译键必须遵循以下命名规范：
+
+```
+模块名.类别.具体内容
+```
+
+**示例：**
+- `docs.title` - 产品文档标题
+- `docs.quickStart` - 快速开始导航
+- `docs.notFoundMessage` - 文档未找到消息
+
+**规则：**
+1. 使用驼峰命名（camelCase）
+2. 使用有意义的语义化名称
+3. 避免缩写（除非是通用缩写如 FAQ）
+4. 所有语言文件必须包含相同的键结构
+
+### 产品文档（Docs）模块要求
+
+**强制要求：**
+
+产品文档（Docs）模块必须在所有支持语言下完全可用，所有静态与动态内容均需匹配对应翻译键，**禁止出现英文 fallback 或原始键名**。
+
+**支持的语言：**
+- 中文（zh）
+- English（en）
+- 日本語（ja）
+- 한국어（ko）
+- Deutsch（de）
+- Français（fr）
+- Español（es）
+
+**文档文件结构：**
+
+```
+public/docs/
+├── zh/
+│   ├── quick-start.md
+│   ├── features.md
+│   ├── faq.md
+│   └── changelog.md
+├── en/
+│   ├── quick-start.md
+│   ├── features.md
+│   ├── faq.md
+│   └── changelog.md
+├── ja/
+│   ├── quick-start.md
+│   ├── features.md
+│   ├── faq.md
+│   └── changelog.md
+... (其他语言相同结构)
+```
+
+**翻译键要求：**
+
+所有组件必须使用 `t['docs.keyName']` 方式调用翻译：
+
+```typescript
+// ✅ 正确
+<h1>{t['docs.title']}</h1>
+<SidebarItem label={t['docs.quickStart']} />
+
+// ❌ 错误
+<h1>Product Documentation</h1>
+<h1>{t.docs.title}</h1>
+```
+
+**Fallback 机制：**
+
+1. UI 文本 fallback：使用默认值
+   ```typescript
+   {t['docs.title'] || 'Product Documentation'}
+   ```
+
+2. Markdown 文档 fallback：自动回退到英文版本
+   ```typescript
+   // 1. 尝试加载当前语言
+   let response = await fetch(`/docs/${lang}/${page}.md`);
+   
+   // 2. 如果失败且不是英文，回退到英文
+   if (!response.ok && lang !== 'en') {
+     response = await fetch(`/docs/en/${page}.md`);
+   }
+   ```
+
+**验证清单：**
+
+在发布前必须验证：
+
+- [ ] 所有 7 种语言的翻译键完整
+- [ ] 所有 7 种语言的文档文件存在
+- [ ] UI 文本在所有语言下正确显示
+- [ ] 文档内容在所有语言下正确渲染
+- [ ] 无 `docs.xxx` 原始键名显示
+- [ ] 无 HTML 源代码显示
+- [ ] Fallback 机制正常工作
+
+**禁止事项：**
+
+- ❌ 硬编码文本（如 `<h1>Product Documentation</h1>`）
+- ❌ 混用命名（如 `doc.quickStart` vs `docs.quickStart`）
+- ❌ 部分语言缺失翻译
+- ❌ 显示原始翻译键（如 `docs.title`）
+- ❌ 文档文件缺失导致显示 HTML 源代码
+
+### 翻译质量要求
+
+1. **准确性**：翻译必须准确传达原意
+2. **一致性**：同一术语在整个应用中保持一致
+3. **本地化**：考虑文化差异，适当调整表达
+4. **专业性**：使用专业术语，避免机器翻译痕迹
+
+### 新增语言流程
+
+添加新语言时必须：
+
+1. 在 `src/lib/i18n.ts` 中添加完整翻译
+2. 创建对应的文档文件夹和所有文档
+3. 更新 `LanguageContext` 支持的语言列表
+4. 测试所有页面和功能
+5. 更新文档说明支持的语言
+
+---
+
+**最后更新：** 2025年10月29日
+**适用范围：** 所有多语言内容
+**强制执行：** 是

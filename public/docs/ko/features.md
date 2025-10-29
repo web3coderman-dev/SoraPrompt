@@ -1,15 +1,86 @@
-# Features
+# 기능
 
-## Core Features
+SoraPrompt Studio는 전문적인 Sora 비디오 프롬프트를 만들기 위한 포괄적이고 강력한 기능 세트를 제공합니다.
 
-- **AI-Powered Generation**: Advanced AI algorithms to transform your ideas
-- **Director Mode**: Professional cinematic language and scene composition
-- **Multi-language Support**: Input and generate in 60+ languages
-- **History Management**: Save and organize all your prompts
-- **Quality Scoring**: Automatic quality assessment for each prompt
+## 핵심 기능
 
-## Coming Soon
+### 1. AI 스마트 생성
 
-- Advanced editing tools
-- Team collaboration features
-- API access for developers
+GPT-4 기술을 기반으로 하는 AI 엔진이 창의적인 아이디어를 이해하고 전문적인 Sora 프롬프트로 변환합니다.
+
+**하이라이트：**
+- 60개 이상의 입력 언어 지원
+- 자동 언어 감지 및 생성
+- 지능형 장면 요소 분석
+- 자동 프롬프트 구조 최적화
+
+### 2. 디렉터 모드
+
+디렉터 모드는 전문 사용자를 위해 설계된 고급 기능입니다。
+
+**포함된 요소：**
+- **카메라 언어**：클로즈업, 미디엄 샷, 와이드 샷 등
+- **카메라 무브먼트**：푸시, 풀, 팬, 틸트, 팔로우 샷
+- **조명 설정**：키 라이트, 필 라이트, 림 라이트
+- **색상 분위기**：톤 및 채도 권장사항
+- **감정 표현**：장면 분위기 및 리듬 컨트롤
+
+### 3. 프롬프트 개선
+
+프롬프트를 생성한 후 추가로 최적화할 수 있습니다：
+
+- 개선 제안 입력（예: "더 많은 세부 정보 추가"）
+- AI가 원본 프롬프트를 분석하고 최적화
+- 핵심 창의성을 유지하면서 전문성 향상
+
+### 4. 히스토리 관리
+
+**기능：**
+- 생성된 모든 프롬프트 자동 저장
+- 검색 및 필터 지원
+- 생성 시간으로 정렬
+- 빠른 복사 및 재사용
+
+### 5. 다국어 지원
+
+**지원 언어：**
+- 中文（简体）
+- English
+- 日本語
+- Español
+- Français
+- Deutsch
+- 한국어
+
+## 구독 플랜
+
+### 무료 플랜
+- 하루 5회 빠른 생성
+- 기본 프롬프트 생성
+- 히스토리（최근 10개）
+
+### Pro 플랜
+- 무제한 빠른 생성
+- 디렉터 모드 액세스
+- 전체 히스토리
+- 우선 지원
+
+### Studio 플랜
+- 모든 Pro 기능
+- API 액세스
+- 맞춤 서비스
+- 전담 계정 관리자
+
+## 사용 팁
+
+1. **자세한 설명**：입력이 자세할수록 생성되는 프롬프트가 더 정확해집니다
+2. **키워드 사용**：중요한 시각적 요소와 감정적 키워드를 포함하세요
+3. **반복 및 최적화**：만족할 때까지 개선 기능을 여러 번 사용하세요
+4. **점수 확인**：품질 점수에 주의하세요 - 90 이상의 점수를 받은 프롬프트가 가장 효과적입니다
+
+## 곧 출시
+
+- 프롬프트 템플릿 라이브러리
+- 배치 생성
+- 협업 편집
+- 더 많은 커스터마이제이션 옵션

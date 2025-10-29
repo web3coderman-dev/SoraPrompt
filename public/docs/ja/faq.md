@@ -1,24 +1,85 @@
-# FAQ
+# よくある質問
 
-## General Questions
+## アカウント関連
 
-### What is SoraPrompt Studio?
-SoraPrompt Studio is an AI-powered tool that helps you create professional video prompts for Sora and other AI video generation tools.
+### アカウントを作成するには？
+右上の「ログイン」ボタンをクリックし、「登録」を選択します。メールアドレスで登録するか、Googleアカウントで素早くログインできます。
 
-### Is it free?
-We offer a free tier with limited credits. Premium features require a subscription.
+### パスワードを忘れた場合は？
+ログインページの「パスワードを忘れた」をクリックし、登録したメールアドレスを入力してください。パスワードリセットリンクをお送りします。
 
-### What languages are supported?
-We support 60+ languages for both input and output.
+### メールアドレスを変更できますか？
+はい。設定ページに移動し、アカウント情報セクションでメールアドレスを更新してください。
 
-## Technical Questions
+## 使用関連
 
-### How do credits work?
-- Quick Generate: 1 credit per generation
-- Director Mode: 2 credits per generation
+### クレジットとは？どのように取得しますか？
+クレジットはプロンプトを生成するために使用されます。クイック生成は1クレジット、ディレクターモードは2クレジットを使用します。
 
-### Can I export my prompts?
-Yes, all prompts can be exported as text files.
+**クレジット取得方法：**
+- 登録時に20クレジット付与
+- 毎日のチェックインで5クレジット獲得
+- ProまたはStudioに登録してより多くのクレジットを取得
 
-### Is my data secure?
-Yes, all data is encrypted and stored securely. We never sell your data.
+### ディレクターモードとクイック生成の違いは？
+- **クイック生成**：簡潔なプロンプトを作成、迅速な反復に最適
+- **ディレクターモード**：詳細なシーン説明、カメラ言語などを含むプロフェッショナルな映画的言語
+
+### どの言語がサポートされていますか？
+中国語、英語、日本語、韓国語、スペイン語、フランス語、ドイツ語など、60以上の入力言語をサポートしています。システムが入力言語を自動的に検出します。
+
+### 生成したプロンプトを商用利用できますか？
+はい。生成したすべてのプロンプトはあなたのものであり、商用またはさ personal プロジェクトで自由に使用できます。
+
+## 技術的な問題
+
+### 生成が失敗するのはなぜですか？
+可能な理由：
+1. クレジット不足
+2. 入力に機密コンテンツが含まれている
+3. ネットワーク接続の問題
+4. システムメンテナンス
+
+クレジット残高を確認するか、後でもう一度お試しください。
+
+### プロンプトの品質を向上させるには？
+1. より詳細なシーン説明を提供
+2. 主要な視覚要素を含める（色、照明、感情など）
+3. 改善機能を使用して最適化
+4. 高スコアの例を参考にする（90以上のスコア）
+
+### 履歴記録はどのくらい保存されますか？
+- 無料ユーザー：最新10件
+- Proユーザー：永久保存
+- Studioユーザー：永久保存 + クラウドバックアップ
+
+## サブスクリプション関連
+
+### Proにアップグレードするには？
+「サブスクリプション」ページに移動し、ProまたはStudioプランを選択し、支払いを完了すると即座にアップグレードされます。
+
+### サブスクリプションをキャンセルできますか？
+はい、いつでもキャンセルできます。キャンセル後も、現在の請求サイクルの終了までPro機能をお楽しみいただけます。
+
+### どの支払い方法がサポートされていますか？
+現在サポート：
+- クレジットカード（Visa、Mastercard、American Express）
+- Alipay
+- WeChat Pay
+- PayPal
+
+## その他の質問
+
+### サポートに連絡するには？
+- メール：support@soraprompt.studio
+- Discord：[コミュニティに参加](https://discord.gg/soraprompt)
+- ライブチャット（Proユーザー向け）
+
+### 開発者APIはありますか？
+Studioサブスクリプションには APIアクセスが含まれています。詳細はAPIドキュメントを確認するか、営業チームにお問い合わせください。
+
+### データセキュリティはどのように確保されていますか？
+- すべてのデータはSSL暗号化で送信
+- SOC 2準拠サーバーにデータを保存
+- 定期的なバックアップでデータの安全性を確保
+- お客様のデータをモデルトレーニングに使用しません（明示的な同意がない限り）

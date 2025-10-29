@@ -27,10 +27,22 @@ export default function DocsPage() {
         };
 
         const docLang = langMap[language] || 'en';
-        const response = await fetch(`/docs/${docLang}/${page}.md`);
+        let response = await fetch(`/docs/${docLang}/${page}.md`);
+
+        // If the document is not found and the language is not English, try fallback to English
+        if (!response.ok && docLang !== 'en') {
+          console.log(`Document not found for ${docLang}, falling back to English`);
+          response = await fetch(`/docs/en/${page}.md`);
+        }
 
         if (response.ok) {
           const text = await response.text();
+
+          // Check if we're actually loading HTML instead of Markdown (shouldn't happen now)
+          if (text.startsWith('<!doctype') || text.startsWith('<!DOCTYPE')) {
+            throw new Error('Received HTML instead of Markdown');
+          }
+
           setContent(text);
         } else {
           setContent(`# ${t['docs.notFound'] || 'Documentation Not Found'}\n\n${t['docs.notFoundMessage'] || 'Sorry, the requested documentation does not exist.'}`);
