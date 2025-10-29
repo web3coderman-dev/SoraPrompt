@@ -2,70 +2,70 @@
 
 ## v1.2.0 - 28. Oktober 2025
 
-### New Features
-- ✨ Added Product Documentation system
-- 📚 Support for Markdown document rendering
-- 🌐 Multilingual documentation support (7 languages)
-- 🎨 Dark mode adaptation for documentation
+### Neue Funktionen
+- ✨ Produktdokumentationssystem hinzugefügt
+- 📚 Unterstützung für Markdown-Dokumenten-Rendering
+- 🌐 Mehrsprachige Dokumentationsunterstützung (7 Sprachen)
+- 🎨 Dunkelmodus-Anpassung für Dokumentation
 
-### Improvements
-- 🔄 Optimized page routing experience
-- 📱 Improved mobile responsive layout
-- ⚡ Enhanced page loading speed
+### Verbesserungen
+- 🔄 Seitenrouting-Erfahrung optimiert
+- 📱 Mobiles responsives Layout verbessert
+- ⚡ Seitenladegeschwindigkeit erhöht
 
 ## v1.1.0 - 25. Oktober 2025
 
-### New Features
-- 🎭 Launched Director Mode
-- 💳 Integrated Stripe payment system
-- 🔐 Added Google OAuth login
-- 📊 New usage statistics feature
+### Neue Funktionen
+- 🎭 Director-Modus eingeführt
+- 💳 Stripe-Zahlungssystem integriert
+- 🔐 Google OAuth-Anmeldung hinzugefügt
+- 📊 Neue Nutzungsstatistik-Funktion
 
-### Improvements
-- 🎨 Completely upgraded UI design system
-- 🌓 Optimized light/dark theme switching
-- 📝 Improved prompt generation algorithm
-- 🐛 Fixed multiple known issues
+### Verbesserungen
+- 🎨 UI-Designsystem vollständig aktualisiert
+- 🌓 Hell-/Dunkelmodus-Umschaltung optimiert
+- 📝 Prompt-Generierungsalgorithmus verbessert
+- 🐛 Mehrere bekannte Probleme behoben
 
-### Bug Fixes
-- Fixed history loading issues
-- Fixed mobile layout anomalies
-- Fixed page flashing after language switching
+### Fehlerbehebungen
+- Verlaufsladeprobleme behoben
+- Mobile Layout-Anomalien behoben
+- Seitenflackern nach Sprachwechsel behoben
 
 ## v1.0.0 - 15. Oktober 2025
 
-### Initial Release
-- 🎉 SoraPrompt Studio officially launched
-- ⚡ Quick Generate mode
-- 🌍 Multilingual support (7 languages)
-- 💾 History feature
-- 👤 User account system
-- 🎨 Responsive design
+### Erstveröffentlichung
+- 🎉 SoraPrompt Studio offiziell gestartet
+- ⚡ Schnellgenerierungsmodus
+- 🌍 Mehrsprachige Unterstützung (7 Sprachen)
+- 💾 Verlaufsfunktion
+- 👤 Benutzerkontosystem
+- 🎨 Responsives Design
 
-### Core Features
-- AI-powered prompt generation
-- Intelligent language detection
-- Prompt quality scoring
-- Copy and export functionality
+### Kernfunktionen
+- KI-gestützte Prompt-Generierung
+- Intelligente Spracherkennung
+- Prompt-Qualitätsbewertung
+- Kopier- und Exportfunktionalität
 
-## Coming Soon
+## Demnächst
 
-### v1.3.0 (Planned)
-- 📝 Prompt template library
-- 🤝 Collaborative editing
-- 🔄 Batch generation tool
-- 📊 Advanced analytics dashboard
-- 🎯 Personalized recommendations
+### v1.3.0 (Geplant)
+- 📝 Prompt-Vorlagenbibliothek
+- 🤝 Kollaborative Bearbeitung
+- 🔄 Batch-Generierungstool
+- 📊 Erweiterte Analyse-Dashboard
+- 🎯 Personalisierte Empfehlungen
 
-### Future Plans
-- API open platform
+### Zukünftige Pläne
+- API-offene Plattform
 - Mobile App
-- Support for more AI models
-- Enterprise custom solutions
+- Unterstützung für mehr KI-Modelle
+- Unternehmensindividuelle Lösungen
 
 ---
 
-**Stay Updated**
-- Follow us on [Twitter](https://twitter.com/SoraPrompt)
-- Join our [Discord Community](https://discord.gg/soraprompt)
-- Subscribe to email notifications
+**Bleiben Sie auf dem Laufenden**
+- Folgen Sie uns auf [Twitter](https://twitter.com/SoraPrompt)
+- Treten Sie unserer [Discord-Community](https://discord.gg/soraprompt) bei
+- Abonnieren Sie E-Mail-Benachrichtigungen

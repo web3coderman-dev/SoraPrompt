@@ -1,71 +1,71 @@
-# 変경 로그
+# 변경 로그
 
 ## v1.2.0 - 2025년 10월 28일
 
-### New Features
-- ✨ Added Product Documentation system
-- 📚 Support for Markdown document rendering
-- 🌐 Multilingual documentation support (7 languages)
-- 🎨 Dark mode adaptation for documentation
+### 새로운 기능
+- ✨ 제품 문서 시스템 추가
+- 📚 Markdown 문서 렌더링 지원
+- 🌐 다국어 문서 지원（7개 언어）
+- 🎨 문서용 다크 모드 적응
 
-### Improvements
-- 🔄 Optimized page routing experience
-- 📱 Improved mobile responsive layout
-- ⚡ Enhanced page loading speed
+### 개선 사항
+- 🔄 페이지 라우팅 경험 최적화
+- 📱 모바일 반응형 레이아웃 개선
+- ⚡ 페이지 로딩 속도 향상
 
 ## v1.1.0 - 2025년 10월 25일
 
-### New Features
-- 🎭 Launched Director Mode
-- 💳 Integrated Stripe payment system
-- 🔐 Added Google OAuth login
-- 📊 New usage statistics feature
+### 새로운 기능
+- 🎭 디렉터 모드 출시
+- 💳 Stripe 결제 시스템 통합
+- 🔐 Google OAuth 로그인 추가
+- 📊 새로운 사용 통계 기능
 
-### Improvements
-- 🎨 Completely upgraded UI design system
-- 🌓 Optimized light/dark theme switching
-- 📝 Improved prompt generation algorithm
-- 🐛 Fixed multiple known issues
+### 개선 사항
+- 🎨 UI 디자인 시스템 완전 업그레이드
+- 🌓 라이트/다크 테마 전환 최적화
+- 📝 프롬프트 생성 알고리즘 개선
+- 🐛 여러 알려진 문제 수정
 
-### Bug Fixes
-- Fixed history loading issues
-- Fixed mobile layout anomalies
-- Fixed page flashing after language switching
+### 버그 수정
+- 히스토리 로딩 문제 수정
+- 모바일 레이아웃 이상 수정
+- 언어 전환 후 페이지 깜빡임 수정
 
 ## v1.0.0 - 2025년 10월 15일
 
-### Initial Release
-- 🎉 SoraPrompt Studio officially launched
-- ⚡ Quick Generate mode
-- 🌍 Multilingual support (7 languages)
-- 💾 History feature
-- 👤 User account system
-- 🎨 Responsive design
+### 최초 릴리스
+- 🎉 SoraPrompt Studio 공식 출시
+- ⚡ 빠른 생성 모드
+- 🌍 다국어 지원（7개 언어）
+- 💾 히스토리 기능
+- 👤 사용자 계정 시스템
+- 🎨 반응형 디자인
 
-### Core Features
-- AI-powered prompt generation
-- Intelligent language detection
-- Prompt quality scoring
-- Copy and export functionality
+### 핵심 기능
+- AI 기반 프롬프트 생성
+- 지능형 언어 감지
+- 프롬프트 품질 점수 매기기
+- 복사 및 내보내기 기능
 
-## Coming Soon
+## 곧 출시 예정
 
-### v1.3.0 (Planned)
-- 📝 Prompt template library
-- 🤝 Collaborative editing
-- 🔄 Batch generation tool
-- 📊 Advanced analytics dashboard
-- 🎯 Personalized recommendations
+### v1.3.0（계획 중）
+- 📝 프롬프트 템플릿 라이브러리
+- 🤝 협업 편집
+- 🔄 일괄 생성 도구
+- 📊 고급 분석 대시보드
+- 🎯 개인화된 추천
 
-### Future Plans
-- API open platform
-- Mobile App
-- Support for more AI models
-- Enterprise custom solutions
+### 향후 계획
+- API 오픈 플랫폼
+- 모바일 앱
+- 더 많은 AI 모델 지원
+- 기업용 맞춤 솔루션
 
 ---
 
-**Stay Updated**
-- Follow us on [Twitter](https://twitter.com/SoraPrompt)
-- Join our [Discord Community](https://discord.gg/soraprompt)
-- Subscribe to email notifications
+**최신 정보 받기**
+- [Twitter](https://twitter.com/SoraPrompt)에서 팔로우
+- [Discord 커뮤니티](https://discord.gg/soraprompt)에 참여
+- 이메일 알림 구독

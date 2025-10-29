@@ -2,70 +2,70 @@
 
 ## v1.2.0 - 2025年10月28日
 
-### New Features
-- ✨ Added Product Documentation system
-- 📚 Support for Markdown document rendering
-- 🌐 Multilingual documentation support (7 languages)
-- 🎨 Dark mode adaptation for documentation
+### 新機能
+- ✨ 製品ドキュメントシステムを追加
+- 📚 Markdownドキュメントレンダリングをサポート
+- 🌐 多言語ドキュメントサポート（7言語）
+- 🎨 ドキュメント用のダークモード対応
 
-### Improvements
-- 🔄 Optimized page routing experience
-- 📱 Improved mobile responsive layout
-- ⚡ Enhanced page loading speed
+### 改善
+- 🔄 ページルーティング体験を最適化
+- 📱 モバイルレスポンシブレイアウトを改善
+- ⚡ ページ読み込み速度を向上
 
 ## v1.1.0 - 2025年10月25日
 
-### New Features
-- 🎭 Launched Director Mode
-- 💳 Integrated Stripe payment system
-- 🔐 Added Google OAuth login
-- 📊 New usage statistics feature
+### 新機能
+- 🎭 ディレクターモードをリリース
+- 💳 Stripe決済システムを統合
+- 🔐 Googleアカウントログインを追加
+- 📊 新しい使用統計機能
 
-### Improvements
-- 🎨 Completely upgraded UI design system
-- 🌓 Optimized light/dark theme switching
-- 📝 Improved prompt generation algorithm
-- 🐛 Fixed multiple known issues
+### 改善
+- 🎨 UIデザインシステムを完全にアップグレード
+- 🌓 ライト/ダークテーマ切り替えを最適化
+- 📝 プロンプト生成アルゴリズムを改善
+- 🐛 複数の既知の問題を修正
 
-### Bug Fixes
-- Fixed history loading issues
-- Fixed mobile layout anomalies
-- Fixed page flashing after language switching
+### バグ修正
+- 履歴読み込みの問題を修正
+- モバイルレイアウトの異常を修正
+- 言語切り替え後のページフラッシュを修正
 
 ## v1.0.0 - 2025年10月15日
 
-### Initial Release
-- 🎉 SoraPrompt Studio officially launched
-- ⚡ Quick Generate mode
-- 🌍 Multilingual support (7 languages)
-- 💾 History feature
-- 👤 User account system
-- 🎨 Responsive design
+### 初回リリース
+- 🎉 SoraPrompt Studio正式リリース
+- ⚡ クイック生成モード
+- 🌍 多言語サポート（7言語）
+- 💾 履歴機能
+- 👤 ユーザーアカウントシステム
+- 🎨 レスポンシブデザイン
 
-### Core Features
-- AI-powered prompt generation
-- Intelligent language detection
-- Prompt quality scoring
-- Copy and export functionality
+### コア機能
+- AI駆動のプロンプト生成
+- インテリジェントな言語検出
+- プロンプト品質スコアリング
+- コピーとエクスポート機能
 
-## Coming Soon
+## 近日公開
 
-### v1.3.0 (Planned)
-- 📝 Prompt template library
-- 🤝 Collaborative editing
-- 🔄 Batch generation tool
-- 📊 Advanced analytics dashboard
-- 🎯 Personalized recommendations
+### v1.3.0（予定）
+- 📝 プロンプトテンプレートライブラリ
+- 🤝 協調編集
+- 🔄 バッチ生成ツール
+- 📊 高度な分析ダッシュボード
+- 🎯 パーソナライズされた推奨事項
 
-### Future Plans
-- API open platform
-- Mobile App
-- Support for more AI models
-- Enterprise custom solutions
+### 将来の計画
+- APIオープンプラットフォーム
+- モバイルアプリ
+- より多くのAIモデルのサポート
+- エンタープライズカスタムソリューション
 
 ---
 
-**Stay Updated**
-- Follow us on [Twitter](https://twitter.com/SoraPrompt)
-- Join our [Discord Community](https://discord.gg/soraprompt)
-- Subscribe to email notifications
+**最新情報を入手**
+- [Twitter](https://twitter.com/SoraPrompt)でフォロー
+- [Discordコミュニティ](https://discord.gg/soraprompt)に参加
+- メール通知を購読
