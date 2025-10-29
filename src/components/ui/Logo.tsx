@@ -30,7 +30,7 @@ export function Logo({ size = 32, className = '', variant = 'default', showBackg
       <img
         src={logoSrc}
         alt="SoraPrompt Studio Logo"
-        className={`w-full h-full object-contain ${isDark ? 'brightness-110' : 'brightness-100'}`}
+        className="w-full h-full object-contain"
       />
     </div>
   );
