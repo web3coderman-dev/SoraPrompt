@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabase';
 import { PromptStorage } from '../lib/promptStorage';
 import { SettingsSync } from '../lib/settingsSync';
 import { clearGuestUsage } from '../lib/guestUsage';
+import { getOAuthRedirectUrl } from '../lib/domainRedirect';
 
 interface UserProfile {
   id: string;
@@ -151,10 +152,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signInWithGoogle = async () => {
     try {
+      const redirectUrl = getOAuthRedirectUrl();
+      console.log('OAuth redirect URL:', redirectUrl);
+
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo: redirectUrl,
           queryParams: {
             access_type: 'offline',
             prompt: 'consent',

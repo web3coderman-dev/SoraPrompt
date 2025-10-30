@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { Loader2, AlertCircle } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { isBoltDomain, getCustomDomainUrl } from '../lib/domainRedirect';
 
 export default function AuthCallback() {
   const navigate = useNavigate();
@@ -19,7 +20,17 @@ export default function AuthCallback() {
         }
 
         if (data.session) {
-          navigate('/', { replace: true });
+          // Check if we're on bolt.host domain
+          if (isBoltDomain()) {
+            console.log('Auth successful on Bolt domain, redirecting to custom domain...');
+            const targetPath = '/home';
+            const customUrl = getCustomDomainUrl(targetPath);
+            // Use window.location.replace to redirect to custom domain
+            window.location.replace(customUrl);
+          } else {
+            // Already on custom domain, use React Router navigation
+            navigate('/home', { replace: true });
+          }
         } else {
           throw new Error('No session found');
         }
@@ -31,7 +42,11 @@ export default function AuthCallback() {
             : 'Authorization failed, please try again'
         );
         setTimeout(() => {
-          navigate('/login', { replace: true });
+          if (isBoltDomain()) {
+            window.location.replace(getCustomDomainUrl('/login'));
+          } else {
+            navigate('/login', { replace: true });
+          }
         }, 3000);
       }
     };
