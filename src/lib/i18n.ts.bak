@@ -560,18 +560,18 @@ export const translations = {
 
     email: 'Email',
     password: 'Password',
-    signIn: 'Log In',
+    signIn: 'Sign In',
     signUp: 'Sign Up',
     alreadyHaveAccount: 'Already have an account?',
     dontHaveAccount: "Don't have an account?",
     orContinueWith: 'Or continue with',
     emailPlaceholder: 'Enter your email',
     passwordPlaceholder: 'Enter your password',
-    signInWithEmail: 'Log in with email',
+    signInWithEmail: 'Sign in with email',
     signUpWithEmail: 'Sign up with email',
     passwordMinLength: 'Password must be at least 6 characters',
     invalidEmail: 'Please enter a valid email address',
-    signInError: 'Log in failed, please check your email and password',
+    signInError: 'Sign in failed, please check your email and password',
     signUpError: 'Sign up failed, this email may already be registered',
     signUpSuccess: 'Sign up successful! Signing in...',
     tagMVP: 'v0.1 MVP',
@@ -643,9 +643,9 @@ export const translations = {
 
     historyAlertFullTitle: 'Local storage is full!',
     historyAlertNearFullTitle: 'Local storage almost full',
-    historyAlertFullMessage: 'Your local storage has reached its limit (10 records). New records will overwrite the oldest ones. Log in to save all history to the cloud!',
-    historyAlertNearFullMessage: 'You\'ve used {{count}}/10 local records. Log in for unlimited cloud storage!',
-    historySignInUnlock: 'Log In to Unlock',
+    historyAlertFullMessage: 'Your local storage has reached its limit (10 records). New records will overwrite the oldest ones. Sign in to save all history to the cloud!',
+    historyAlertNearFullMessage: 'You\'ve used {{count}}/10 local records. Sign in for unlimited cloud storage!',
+    historySignInUnlock: 'Sign In to Unlock',
     historyResultCount: 'results',
     historyRetry: 'Retry',
     historyClose: 'Close',
@@ -660,7 +660,7 @@ export const translations = {
 
     // Settings - Cloud Sync
     'settings.localOnlyTitle': 'Settings saved locally only',
-    'settings.localOnlyDesc': 'Log in to enable cloud sync and keep settings consistent across devices',
+    'settings.localOnlyDesc': 'Sign in to enable cloud sync and keep settings consistent across devices',
     'settings.syncing': 'Syncing',
     'settings.cloudSyncEnabled': 'Cloud sync enabled',
     'settings.syncFailed': 'Sync failed',
@@ -674,12 +674,12 @@ export const translations = {
 
     // Settings - Unlock Features
     'settings.unlockTitle': 'Unlock Full Features',
-    'settings.unlockDesc': 'Log in to enjoy more features',
+    'settings.unlockDesc': 'Sign in to enjoy more features',
     'settings.featureUnlimitedStorage': 'Unlimited cloud storage',
     'settings.featureSecureSync': 'Secure data sync',
     'settings.featurePremium': 'Premium features',
     'settings.featureMoreGenerations': 'More generations',
-    'settings.signInNow': 'Log In Now',
+    'settings.signInNow': 'Sign In Now',
 
     // Settings - Account & Security
     'settings.accountTitle': 'Account & Security',
@@ -719,7 +719,7 @@ export const translations = {
 
     signingOut: 'Signing out...',
     signOut: 'Sign Out',
-    signInSignUp: 'Log In / Sign Up',
+    signInSignUp: 'Sign In / Sign Up',
     freeRegister: 'Free Register',
     freeRegisterHint: 'Register for 5 free daily generations!',
     continueWithGoogle: 'Continue with Google',
@@ -743,7 +743,7 @@ export const translations = {
     storageLocalLimit: 'Local ({{count}}/10)',
     storageGuestTip: '💡 Tip: History for guest users is saved locally in your browser, limited to 10 items.',
 
-    accountBenefit: 'Log in with Google for a secure and convenient experience',
+    accountBenefit: 'Sign in with Google for a secure and convenient experience',
     accountFeatureUnlimited: 'Unlimited history storage',
     accountFeatureSync: 'Sync across devices',
     accountFeaturePrivacy: 'Cloud backup, protect your privacy',
@@ -759,14 +759,14 @@ export const translations = {
 
     closeModal: 'Close',
 
-    loginPromptDirectorTitle: 'Log in to use Director Mode',
+    loginPromptDirectorTitle: 'Sign in to use Director Mode',
     loginPromptDirectorMessage: 'Director Mode provides detailed descriptions and storyboard scripts to help you create more professional video content',
     loginPromptBenefit1: 'Full Prompt + Storyboard Script',
     loginPromptBenefit2: 'More professional video descriptions',
     loginPromptBenefit3: 'Higher quality output',
     loginPromptBenefit4: 'Unlock more premium features',
 
-    'auth.login.title': 'Log in to continue',
+    'auth.login.title': 'Sign in to continue',
     'auth.register.title': 'Create your account',
     'auth.loginFailed': 'Login failed, please try again',
     'auth.processing': 'Processing...',
@@ -865,8 +865,8 @@ export const translations = {
     subscriptionPortalFailed: 'Could not open subscription portal',
     subscriptionPaymentSuccess: 'Payment successful! Your subscription is now active',
     subscriptionPaymentCanceled: 'Payment canceled',
-    subscriptionLoginToSubscribe: 'Log in to continue',
-    subscriptionLoginMessage: 'Log in to subscribe to the {{plan}} plan',
+    subscriptionLoginToSubscribe: 'Sign in to continue',
+    subscriptionLoginMessage: 'Sign in to subscribe to the {{plan}} plan',
 
     upgradeModalTitle: 'Upgrade to Continue Creating',
     upgradeModalCreditsOut: 'Used {{used}}/{{total}} today',
@@ -881,8 +881,8 @@ export const translations = {
     upgradeModalLearnMore: 'Learn about {{tier}}',
 
     // Login Prompt - General
-    'loginPrompt.title': 'Log in to unlock full features',
-    'loginPrompt.message': 'Log in to enjoy cloud storage, more generations, and premium features',
+    'loginPrompt.title': 'Sign in to unlock full features',
+    'loginPrompt.message': 'Sign in to enjoy cloud storage, more generations, and premium features',
     'loginPrompt.benefit1': 'Unlimited cloud history storage',
     'loginPrompt.benefit2': 'Daily free generations',
     'loginPrompt.benefit3': 'Unlock Director mode',
@@ -933,7 +933,7 @@ export const translations = {
 
     guestUsageTip: 'Friendly Reminder',
     guestUsageTip1: 'Guest or free users can generate 3 Sora Prompts daily;',
-    guestUsageTip2: 'Director mode provides full version + storyboard script. Log in to unlock.',
+    guestUsageTip2: 'Director mode provides full version + storyboard script. Sign in to unlock.',
 
     notFoundTitle: 'Page Not Found',
     notFoundDescription: 'The page you are looking for does not exist or has been moved.',
