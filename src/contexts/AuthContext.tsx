@@ -5,6 +5,7 @@ import { PromptStorage } from '../lib/promptStorage';
 import { SettingsSync } from '../lib/settingsSync';
 import { clearGuestUsage } from '../lib/guestUsage';
 import { getOAuthRedirectUrl } from '../lib/domainRedirect';
+import { useLanguage } from './LanguageContext';
 
 interface UserProfile {
   id: string;
@@ -31,6 +32,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const { t } = useLanguage();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -81,16 +83,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (migratedCount > 0) {
           window.dispatchEvent(new CustomEvent('prompts-migrated', { detail: { count: migratedCount } }));
 
-          const message = `Successfully synced ${migratedCount} ${migratedCount === 1 ? 'record' : 'records'} to cloud!`;
-          const messageZh = `已成功同步 ${migratedCount} 条记录到云端！`;
-
-          const userLang = localStorage.getItem('language') || 'en';
-          const displayMessage = userLang === 'zh' ? messageZh : message;
+          // Use i18n translation with count interpolation
+          const message = migratedCount === 1
+            ? t['toast.promptSynced']
+            : t['toast.promptsSynced'].replace('{count}', migratedCount.toString());
 
           setTimeout(() => {
             const event = new CustomEvent('show-toast', {
               detail: {
-                message: displayMessage,
+                message,
                 type: 'success'
               }
             });
@@ -110,29 +111,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           }
         }));
       } else if (syncResult.synced) {
-        const userLang = localStorage.getItem('language') || 'en';
-        const syncMessage = syncResult.usedCloud
-          ? (userLang === 'zh' ? '设置已从云端恢复' : 'Settings restored from cloud')
-          : (userLang === 'zh' ? '本地设置已上传到云端' : 'Local settings uploaded to cloud');
+        // Check if we've already shown the sync toast in this session
+        const sessionKey = `settings-sync-shown-${userId}`;
+        const alreadyShown = sessionStorage.getItem(sessionKey);
 
-        setTimeout(() => {
-          const event = new CustomEvent('show-toast', {
-            detail: {
-              message: syncMessage,
-              type: syncResult.usedCloud ? 'info' : 'success'
-            }
-          });
-          window.dispatchEvent(event);
+        if (!alreadyShown) {
+          // Use i18n translations
+          const syncMessage = syncResult.usedCloud
+            ? t['toast.settingsRestoredFromCloud']
+            : t['toast.settingsUploadedToCloud'];
 
+          setTimeout(() => {
+            const event = new CustomEvent('show-toast', {
+              detail: {
+                message: syncMessage,
+                type: syncResult.usedCloud ? 'info' : 'success'
+              }
+            });
+            window.dispatchEvent(event);
+
+            window.dispatchEvent(new CustomEvent('settings-synced', {
+              detail: syncResult.settings
+            }));
+          }, 1000);
+
+          // Mark as shown in this session
+          sessionStorage.setItem(sessionKey, 'true');
+        } else {
+          // Still dispatch settings-synced event without toast
           window.dispatchEvent(new CustomEvent('settings-synced', {
             detail: syncResult.settings
           }));
-        }, 1000);
+        }
       } else if (syncResult.error) {
-        const userLang = localStorage.getItem('language') || 'en';
-        const errorMessage = userLang === 'zh'
-          ? '设置同步失败'
-          : 'Failed to sync settings';
+        // Use i18n translation for error
+        const errorMessage = t['toast.settingsSyncFailed'];
 
         setTimeout(() => {
           window.dispatchEvent(new CustomEvent('show-toast', {

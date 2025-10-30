@@ -341,6 +341,13 @@ export const translations = {
     'dialogs.explanationFailed': '解释失败，请重试',
     'dialogs.languageChangeFailed': '语言切换失败，请重试',
 
+    // Toast Messages - Settings Sync
+    'toast.settingsRestoredFromCloud': '设置已从云端恢复',
+    'toast.settingsUploadedToCloud': '本地设置已上传到云端',
+    'toast.settingsSyncFailed': '设置同步失败',
+    'toast.promptsSynced': '已成功同步 {count} 条记录到云端',
+    'toast.promptSynced': '已成功同步 1 条记录到云端',
+
     // Conflict Resolution Modal
     'conflict.title': '设置冲突',
     'conflict.description': '检测到本地设置与云端设置不同，请选择要使用的版本。',
@@ -885,6 +892,13 @@ export const translations = {
     'dialogs.generationFailed': 'Generation failed, please retry',
     'dialogs.improvementFailed': 'Improvement failed, please retry',
     'dialogs.explanationFailed': 'Explanation failed, please retry',
+
+    // Toast Messages - Settings Sync
+    'toast.settingsRestoredFromCloud': 'Settings restored from cloud',
+    'toast.settingsUploadedToCloud': 'Local settings uploaded to cloud',
+    'toast.settingsSyncFailed': 'Settings sync failed',
+    'toast.promptsSynced': 'Successfully synced {count} records to cloud',
+    'toast.promptSynced': 'Successfully synced 1 record to cloud',
     'dialogs.languageChangeFailed': 'Language change failed, please retry',
 
     // Conflict Resolution Modal
@@ -1351,6 +1365,13 @@ export const translations = {
     'dialogs.improvementFailed': '改善に失敗しました。もう一度お試しください',
     'dialogs.explanationFailed': '説明に失敗しました。もう一度お試しください',
     'dialogs.languageChangeFailed': '言語変更に失敗しました。もう一度お試しください',
+
+    // Toast Messages - Settings Sync
+    'toast.settingsRestoredFromCloud': '設定がクラウドから復元されました',
+    'toast.settingsUploadedToCloud': 'ローカル設定がクラウドにアップロードされました',
+    'toast.settingsSyncFailed': '設定の同期に失敗しました',
+    'toast.promptsSynced': '{count} 件のレコードをクラウドに同期しました',
+    'toast.promptSynced': '1 件のレコードをクラウドに同期しました',
 
     // Conflict Resolution Modal
     'conflict.title': '設定の競合',
@@ -1846,6 +1867,13 @@ export const translations = {
     // Dialogs - Alerts & Toasts
     'dialogs.generationFailed': 'Generación fallida, intenta de nuevo',
     'dialogs.improvementFailed': 'Mejora fallida, intenta de nuevo',
+
+    // Toast Messages - Settings Sync
+    'toast.settingsRestoredFromCloud': 'Configuración restaurada desde la nube',
+    'toast.settingsUploadedToCloud': 'Configuración local subida a la nube',
+    'toast.settingsSyncFailed': 'Error al sincronizar configuración',
+    'toast.promptsSynced': 'Se sincronizaron {count} registros con la nube',
+    'toast.promptSynced': 'Se sincronizó 1 registro con la nube',
     'dialogs.explanationFailed': 'Explicación fallida, intenta de nuevo',
     'dialogs.languageChangeFailed': 'Cambio de idioma fallido, intenta de nuevo',
 
@@ -2333,6 +2361,13 @@ export const translations = {
     'dialogs.explanationFailed': 'Explication échouée, réessayez',
     'dialogs.languageChangeFailed': 'Changement de langue échoué, réessayez',
 
+    // Toast Messages - Settings Sync
+    'toast.settingsRestoredFromCloud': 'Paramètres restaurés depuis le cloud',
+    'toast.settingsUploadedToCloud': 'Paramètres locaux téléchargés vers le cloud',
+    'toast.settingsSyncFailed': 'Échec de la synchronisation des paramètres',
+    'toast.promptsSynced': '{count} enregistrements synchronisés vers le cloud',
+    'toast.promptSynced': '1 enregistrement synchronisé vers le cloud',
+
     // Conflict Resolution Modal
     'conflict.title': 'Conflit de Paramètres',
     'conflict.description': 'Vos paramètres locaux diffèrent des paramètres cloud. Veuillez choisir quelle version utiliser.',
@@ -2816,6 +2851,13 @@ export const translations = {
     'dialogs.improvementFailed': 'Verbesserung fehlgeschlagen, bitte erneut versuchen',
     'dialogs.explanationFailed': 'Erklärung fehlgeschlagen, bitte erneut versuchen',
     'dialogs.languageChangeFailed': 'Sprachwechsel fehlgeschlagen, bitte erneut versuchen',
+
+    // Toast Messages - Settings Sync
+    'toast.settingsRestoredFromCloud': 'Einstellungen aus der Cloud wiederhergestellt',
+    'toast.settingsUploadedToCloud': 'Lokale Einstellungen in die Cloud hochgeladen',
+    'toast.settingsSyncFailed': 'Synchronisierung der Einstellungen fehlgeschlagen',
+    'toast.promptsSynced': '{count} Datensätze mit der Cloud synchronisiert',
+    'toast.promptSynced': '1 Datensatz mit der Cloud synchronisiert',
 
     // Conflict Resolution Modal
     'conflict.title': 'Einstellungskonflikt',
@@ -3301,6 +3343,13 @@ export const translations = {
     'dialogs.improvementFailed': '개선 실패, 다시 시도하세요',
     'dialogs.explanationFailed': '설명 실패, 다시 시도하세요',
     'dialogs.languageChangeFailed': '언어 변경 실패, 다시 시도하세요',
+
+    // Toast Messages - Settings Sync
+    'toast.settingsRestoredFromCloud': '클라우드에서 설정이 복원되었습니다',
+    'toast.settingsUploadedToCloud': '로컬 설정이 클라우드에 업로드되었습니다',
+    'toast.settingsSyncFailed': '설정 동기화에 실패했습니다',
+    'toast.promptsSynced': '{count}개의 기록이 클라우드에 동기화되었습니다',
+    'toast.promptSynced': '1개의 기록이 클라우드에 동기화되었습니다',
 
     // Conflict Resolution Modal
     'conflict.title': '설정 충돌',

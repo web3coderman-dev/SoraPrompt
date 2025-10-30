@@ -8,7 +8,7 @@ interface ToastProps {
   onClose: () => void;
 }
 
-export function Toast({ message, type = 'info', duration = 5000, onClose }: ToastProps) {
+export function Toast({ message, type = 'info', duration = 3000, onClose }: ToastProps) {
   useEffect(() => {
     if (duration > 0) {
       const timer = setTimeout(onClose, duration);
@@ -69,8 +69,15 @@ export function ToastContainer() {
       const customEvent = event as CustomEvent<{ message: string; type?: 'success' | 'error' | 'info' | 'warning' }>;
       const { message, type = 'info' } = customEvent.detail;
 
-      const id = Date.now().toString();
-      setToasts(prev => [...prev, { id, message, type }]);
+      // Prevent duplicate toasts with the same message
+      setToasts(prev => {
+        const isDuplicate = prev.some(toast => toast.message === message && toast.type === type);
+        if (isDuplicate) {
+          return prev;
+        }
+        const id = Date.now().toString();
+        return [...prev, { id, message, type }];
+      });
     };
 
     window.addEventListener('show-toast', handleShowToast);
