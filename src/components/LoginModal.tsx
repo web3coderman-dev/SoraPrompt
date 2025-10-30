@@ -138,8 +138,10 @@ export default function LoginModal({ onClose, context }: LoginModalProps) {
           onClick={handleGoogleLogin}
           disabled={loading}
         >
-          <GoogleIcon className="w-5 h-5" />
-          {t.continueWithGoogle}
+          <div className="flex items-center justify-center gap-2.5">
+            <GoogleIcon className="w-5 h-5 flex-shrink-0" />
+            <span>{t.continueWithGoogle}</span>
+          </div>
         </Button>
 
         <Divider text={t.orContinueWith || 'Or continue with'} />
