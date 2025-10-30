@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { Home, Film } from 'lucide-react';
+import { Home } from 'lucide-react';
 import { Button } from '../components/ui/Button';
+import { Logo } from '../components/ui/Logo';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function NotFound() {
@@ -12,7 +13,7 @@ export default function NotFound() {
       <div className="text-center px-4 max-w-2xl">
         <div className="mb-8 relative">
           <div className="w-32 h-32 mx-auto rounded-full bg-keyLight/10 flex items-center justify-center border-2 border-keyLight/20 relative overflow-hidden">
-            <Film className="w-16 h-16 text-keyLight animate-render-pulse" />
+            <Logo size={64} variant="simple" />
             <div className="absolute inset-0 bg-keyLight/5 animate-light-blink" />
           </div>
         </div>
