@@ -1137,6 +1137,62 @@ Prompt 编写区
 
 ## 🎙️ Brand Language
 
+### Logo System（标志系统）
+
+#### Logo Specifications
+
+The SoraPrompt Studio logo is a vector SVG file that adapts seamlessly to both light and dark themes.
+
+**Logo Files:**
+- Main Logo: `/soraprompt-logo.svg` - Full brand logo with text
+- Simple Variant: `/soraprompt-logo-simple.svg` - Simplified icon version
+- Favicon: `/soraprompt-favicon.svg` - Browser icon version
+
+**Logo Properties:**
+- Format: SVG (vector, scalable)
+- Background: Transparent
+- Theme Compatibility: Works in both light and dark modes
+- File Location: `/public/` directory for production
+
+**Usage Guidelines:**
+```tsx
+import { Logo } from '@/components/ui/Logo';
+
+// Default usage (32px)
+<Logo />
+
+// Custom size
+<Logo size={48} />
+
+// Simple variant
+<Logo variant="simple" />
+
+// Favicon variant
+<Logo variant="favicon" />
+
+// With background
+<Logo showBackground={true} />
+```
+
+**Size Recommendations:**
+- Sidebar/Header: 32px
+- Footer: 28px
+- Login/Modal: 40-48px
+- Favicon: 16px, 32px
+- Social Media: 512x512px
+
+**Spacing:**
+- Minimum clear space around logo: Equal to logo height × 0.25
+- Never stretch or distort the logo
+- Maintain original aspect ratio
+
+**Color:**
+- Logo adapts automatically to theme context
+- Inherits theme-appropriate colors from design system
+- No color modifications needed - built into SVG
+
+---
+
 ### Voice & Tone（语音与语气）
 
 #### 1. Director's Voice（导演语气）
