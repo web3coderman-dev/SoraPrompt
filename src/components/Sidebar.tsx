@@ -27,7 +27,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
     {
       icon: Sparkles,
       label: t.sidebarNew,
-      path: '/new',
+      path: '/home',
     },
     {
       icon: History,

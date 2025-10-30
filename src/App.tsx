@@ -35,8 +35,8 @@ function AppRoutes() {
       <Route path="/docs" element={<DocsPage />} />
 
       <Route element={<AppLayout />}>
-        <Route path="/" element={<Navigate to="/new" replace />} />
-        <Route path="/new" element={<NewProject />} />
+        <Route path="/" element={<Navigate to="/home" replace />} />
+        <Route path="/home" element={<NewProject />} />
         <Route path="/history" element={<HistoryPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/subscription" element={<SubscriptionPage />} />
