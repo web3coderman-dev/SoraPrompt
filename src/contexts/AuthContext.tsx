@@ -152,7 +152,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signInWithGoogle = async () => {
     try {
-      const redirectUrl = getOAuthRedirectUrl();
+      // Use current origin for OAuth callback since Bolt manages Supabase
+      // Our code will handle domain redirect after callback
+      const redirectUrl = `${window.location.origin}/auth/callback`;
       console.log('OAuth redirect URL:', redirectUrl);
 
       const { error } = await supabase.auth.signInWithOAuth({
