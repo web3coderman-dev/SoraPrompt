@@ -20,7 +20,7 @@ export default function SidebarHeader({ isHovered = false }: SidebarHeaderProps)
           className="lg:hidden w-full flex items-center justify-center py-2 active:scale-95 transition-transform"
           title={t.expandSidebar || 'Expand Sidebar'}
         >
-          <Logo size={32} className="flex-shrink-0" />
+          <Logo size={40} className="flex-shrink-0" />
         </button>
 
         {/* Desktop: Logo - hidden on hover */}
@@ -29,7 +29,7 @@ export default function SidebarHeader({ isHovered = false }: SidebarHeaderProps)
             isHovered ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
           }`}
         >
-          <Logo size={32} className="flex-shrink-0" />
+          <Logo size={40} className="flex-shrink-0" />
         </div>
 
         {/* Desktop: Hover button - appears on hover */}
@@ -53,7 +53,7 @@ export default function SidebarHeader({ isHovered = false }: SidebarHeaderProps)
   return (
     <div className="p-6 border-b border-keyLight/20 transition-all duration-300">
       <div className="flex items-center gap-3 min-w-0">
-        <Logo size={32} className="flex-shrink-0" />
+        <Logo size={40} className="flex-shrink-0" />
         <h2 className="text-xl font-bold font-display text-text-primary whitespace-nowrap flex-1">
           SoraPrompt
         </h2>
