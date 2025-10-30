@@ -1,3 +1,5 @@
+> **注意**: 此文档为历史归档，仅供参考。最新信息请查看 `design-system.md`。
+
 # 🎬 SoraPrompt Design System 合规性审查报告
 
 **审查日期：** 2025-10-27
