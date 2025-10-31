@@ -6,7 +6,7 @@ import { Button } from './ui/Button';
 import { SubscriptionBadge } from './SubscriptionBadge';
 import LoginModal from './LoginModal';
 import { useState, useEffect } from 'react';
-import { StripeService, STRIPE_PRICE_IDS } from '../lib/stripe';
+import { PaymentService } from '../lib/payments';
 
 export function SubscriptionPlans() {
   const { t, language } = useLanguage();
@@ -105,10 +105,7 @@ export function SubscriptionPlans() {
 
     setProcessingPayment(true);
     try {
-      const priceId = tier === 'creator' ? STRIPE_PRICE_IDS.pro_monthly : STRIPE_PRICE_IDS.director_monthly;
-      const planType = tier === 'creator' ? 'pro' : 'director';
-
-      await StripeService.redirectToCheckout(priceId, planType);
+      await PaymentService.redirectToCheckout(tier, 'monthly');
     } catch (error) {
       console.error('Payment error:', error);
       const message = t.subscriptionPaymentFailed;
@@ -124,7 +121,7 @@ export function SubscriptionPlans() {
 
     try {
       setProcessingPayment(true);
-      await StripeService.redirectToPortal();
+      await PaymentService.redirectToPortal();
     } catch (error) {
       console.error('Portal error:', error);
       const message = t.subscriptionPortalFailed;
