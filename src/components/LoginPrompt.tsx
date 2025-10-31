@@ -51,54 +51,37 @@ export function LoginPrompt({
   if (variant === 'compact') {
     return (
       <>
-        <div className="bg-scene-fill border border-keyLight/20 rounded-xl p-6 shadow-depth-md hover:shadow-depth-lg hover:border-keyLight/30 transition-all duration-300">
-          <div className="space-y-5">
-            {/* Header: Icon + Title */}
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                <div className="absolute inset-0 bg-keyLight/20 rounded-xl blur-md" />
-                <div className="relative w-12 h-12 bg-gradient-to-br from-keyLight to-neon rounded-xl flex items-center justify-center shadow-key">
-                  <LogIn className="w-6 h-6 text-white" />
-                </div>
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-bold font-display text-text-primary tracking-wide">
-                  {displayTitle}
-                </h3>
-              </div>
-            </div>
+        <div className="space-y-4 w-full">
+          {/* Action Button */}
+          <Button
+            onClick={handleLoginClick}
+            variant="director"
+            size="lg"
+            fullWidth
+            className="shadow-key hover:shadow-key-lg"
+          >
+            <LogIn className="w-5 h-5" />
+            {t.signIn || 'Sign In'}
+          </Button>
 
-            {/* Description */}
-            <p className="text-sm text-text-secondary leading-relaxed pl-15">
-              {displayMessage}
+          {/* Helper Text */}
+          {showBenefits && (
+            <p className="text-sm text-text-tertiary text-center leading-relaxed">
+              {language === 'zh'
+                ? '未登录用户的历史记录仅保存在本地浏览器中，最多保存 10 条。'
+                : language === 'ja'
+                ? 'ゲストユーザーの履歴はブラウザに保存されます（最大10件）。'
+                : language === 'ko'
+                ? '게스트 사용자의 기록은 브라우저에 저장됩니다(최대 10개).'
+                : language === 'es'
+                ? 'El historial de invitados se guarda localmente (máximo 10 registros).'
+                : language === 'fr'
+                ? 'L\'historique des invités est stocké localement (max 10 enregistrements).'
+                : language === 'de'
+                ? 'Der Gastverlauf wird lokal gespeichert (max. 10 Einträge).'
+                : 'Guest history is stored locally (max 10 records).'}
             </p>
-
-            {/* Action Button */}
-            <div className="pt-1">
-              <Button
-                onClick={handleLoginClick}
-                variant="director"
-                size="lg"
-                fullWidth
-                className="shadow-key hover:shadow-key-lg"
-              >
-                <LogIn className="w-5 h-5 mr-2" />
-                {t.signIn || 'Sign In'}
-              </Button>
-            </div>
-
-            {/* Helper Text */}
-            {showBenefits && (
-              <div className="flex items-start gap-2 px-3 py-2 bg-keyLight/5 border border-keyLight/10 rounded-lg">
-                <Shield className="w-4 h-4 text-keyLight flex-shrink-0 mt-0.5" />
-                <p className="text-xs text-text-tertiary leading-relaxed">
-                  {language === 'zh'
-                    ? '未登录用户的历史记录存储在本地浏览器中，最多保存 10 条。登录后享受无限云端存储。'
-                    : 'Guest history is stored locally (max 10 records). Sign in for unlimited cloud storage.'}
-                </p>
-              </div>
-            )}
-          </div>
+          )}
         </div>
         {showLoginModal && <LoginModal onClose={handleLoginClose} />}
       </>
