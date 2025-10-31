@@ -57,10 +57,10 @@ export function LoginPrompt({
             onClick={handleLoginClick}
             variant="director"
             size="lg"
+            icon={LogIn}
             fullWidth
             className="shadow-key hover:shadow-key-lg"
           >
-            <LogIn className="w-5 h-5" />
             {t.signIn || 'Sign In'}
           </Button>
 
@@ -98,6 +98,7 @@ export function LoginPrompt({
             onClick={handleLoginClick}
             size="sm"
             variant="director"
+            icon={LogIn}
             className="flex-shrink-0"
           >
             {t.signIn || 'Sign In'}
@@ -140,9 +141,9 @@ export function LoginPrompt({
             onClick={handleLoginClick}
             variant="director"
             size="lg"
+            icon={LogIn}
             className="shadow-key"
           >
-            <LogIn className="w-5 h-5 mr-2" />
             {t.signIn || 'Sign In'}
           </Button>
 
