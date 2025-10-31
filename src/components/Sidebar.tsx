@@ -83,6 +83,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
         }`}
         style={{
           minWidth: sidebarCollapsed ? '5rem' : '16rem',
+          backgroundColor: 'rgb(var(--color-scene-fill))',
           transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1), min-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s ease-in-out',
         }}
         onMouseEnter={() => setIsSidebarHovered(true)}

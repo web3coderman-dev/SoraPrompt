@@ -11,6 +11,10 @@ export default {
           fill: 'rgb(var(--color-scene-fill) / <alpha-value>)',
           fillLight: 'rgb(var(--color-scene-fillLight) / <alpha-value>)',
         },
+        sidebar: {
+          light: '#F8F9FA',
+          dark: '#141821',
+        },
         border: {
           subtle: 'var(--color-border-subtle)',
           default: 'var(--color-border-default)',
